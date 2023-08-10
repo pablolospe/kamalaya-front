@@ -8,6 +8,14 @@ const usuarioDetalle = async (id) => {
 function agregarPuntosANumero(numero) {
   return numero.toLocaleString('es-ES');
 }
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getUTCDate().toString().padStart(2, '0');
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+    const year = date.getUTCFullYear();
+
+    return `${day}-${month}-${year}`;
+};
 
 async function Usuario({ params }) {
   const { id } = params;
@@ -25,20 +33,18 @@ async function Usuario({ params }) {
         Dirección: {u?.calle} {u?.numero}, {u?.localidad}, {u?.provincia},{' '}
         {u.pais} ({u?.codigoPostal}).
       </div>
+
+      <div>Tiene auto: {u?.tieneAuto ? 'Si' : 'No' }</div>
+      <div>Tiene experiencia en cuidados paliativos: { u?.experienciaCP === true ? 'Si' : 'No' }</div>
       <div>DNI: {agregarPuntosANumero(u?.dni)}</div>
       <div>Rol: {u?.rol}</div>
-      <div></div>
-      <br />
-      <hr />
-      
-      
-      "codigoPostal": "1625", "hashPassword": null, "rol_usuario": null,
-      "telefonoEmergencia": "66666666", "nombreContactoEmergencia": "Roberto
-      Enfermero", "genero": "M", "profesion_oficio_ocupacion": "Doctor,
-      especialidad: cardiología", "hobbies_habilidades": "electricista",
-      "fechaDeNacimiento": "1984-11-07", "fechaAlta": "2020-06-21", "fechaBaja":
-      "2025-06-21", "tieneAuto": true, "experienciaCP": true, "createdAt":
-      "2023-08-10T16:43:01.161Z", "updatedAt": "2023-08-10T16:43:01.161Z"
+      <div>Género: {u?.genero}</div>
+      <div>Fecha de nacimiento: {formatDate(u?.fechaDeNacimiento)}</div>
+      <div>Ocupación: {u?.profesion_oficio_ocupacion}</div>
+      <div>Fecha de alta: {u?.fechaAlta}</div>
+      {u?.fechaBaja === null ? <div>Fecha de baja: {u?.fechaAlta}</div> : <div>Se encuentra activo</div>}
+      <div>Teléfono de emergencia: {u?.telefonoEmergencia} ({u?.nombreContactoEmergencia})</div>
+
     </div>
   );
 }
