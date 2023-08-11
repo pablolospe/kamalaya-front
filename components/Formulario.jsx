@@ -35,18 +35,18 @@ const Formulario = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        // const response = await fetch('http://localhost:8000/usuarios', {
-              const response = await fetch('https://kamalaya.onrender.com/usuarios', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+      // const response = await fetch('http://localhost:8000/usuarios', {
+      const response = await fetch('https://kamalaya.onrender.com/usuarios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-            if (response.ok) {
-          router.push('/')
-        alert("Formulario enviado exitosamente")
+      if (response.ok) {
+        router.push('/');
+        alert('Formulario enviado exitosamente');
         console.log('Datos enviados exitosamente');
         // Puedes redirigir o mostrar un mensaje de éxito aquí
       } else {
@@ -55,9 +55,9 @@ const Formulario = () => {
     } catch (error) {
       console.error('Error:', error);
     }
-};
+  };
 
-const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
 
@@ -65,9 +65,9 @@ const handleChange = (e) => {
       ...prevData,
       [name]: newValue,
     }));
-};
+  };
 
-console.log(formData);
+  console.log(formData);
   //   quiero que me agregues estilo con tailwind SOLO en esta porcion de codigo, y que sea responsive. Quiero un estilo sobrio.
   return (
     <form
@@ -241,15 +241,18 @@ console.log(formData);
         />
       </label>
 
-      <label>
+      <label className="block mb-2">
         Género:
-        <input
-          type="text"
+        <select
           name="genero"
           value={formData.genero}
           onChange={handleChange}
           className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
+        >
+          <option value="M">Masculino</option>
+          <option value="F">Femenino</option>
+          <option value="otro">Otro</option>
+        </select>
       </label>
 
       <label>
