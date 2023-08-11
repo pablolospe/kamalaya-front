@@ -11,7 +11,7 @@ async function Voluntarios() {
   const usuario = await usuarios();
   
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col gap-3'>
     {console.log(usuario)}
       {usuario?.map(u=>(
       <Link href={`/voluntarios/${u.usuario_id}`}>
