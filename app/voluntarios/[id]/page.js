@@ -5,8 +5,8 @@ const usuarioDetalle = async (id) => {
     res.json()
   );
 };
-function agregarPuntosANumero(numero) {
-  return numero.toLocaleString('es-ES');
+function formatearNumero(numero) {
+  return numero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -31,18 +31,19 @@ async function Usuario({ params }) {
       <div>Email: {u?.email}</div>
       <div>
         Dirección: {u?.calle} {u?.numero}, {u?.localidad}, {u?.provincia},{' '}
-        {u.pais} ({u?.codigoPostal}).
+        ({u?.codigoPostal}).
       </div>
 
       <div>Tiene auto: {u?.tieneAuto ? 'Si' : 'No' }</div>
       <div>Tiene experiencia en cuidados paliativos: { u?.experienciaCP === true ? 'Si' : 'No' }</div>
-      <div>DNI: {agregarPuntosANumero(u?.dni)}</div>
-      <div>Rol: {u?.rol}</div>
+      <div>DNI: {formatearNumero(u?.dni)}</div>
+      {/* <div>DNI: {u?.dni}</div> */}
+      <div>Rol: {u?.rol_usuario}</div>
       <div>Género: {u?.genero}</div>
       <div>Fecha de nacimiento: {formatDate(u?.fechaDeNacimiento)}</div>
       <div>Ocupación: {u?.profesion_oficio_ocupacion}</div>
       <div>Fecha de alta: {u?.fechaAlta}</div>
-      {u?.fechaBaja === null ? <div>Fecha de baja: {u?.fechaAlta}</div> : <div>Se encuentra activo</div>}
+      {u?.fechaBaja !== null ? <div>Fecha de baja: {u?.fechaBaja}</div> : <div>Se encuentra activo</div>}
       <div>Teléfono de emergencia: {u?.telefonoEmergencia} ({u?.nombreContactoEmergencia})</div>
 
     </div>

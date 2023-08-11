@@ -2,7 +2,7 @@ import React from 'react'
 
 
 const usuarios = async () => {
-    return fetch('https://kamalaya.onrender.com/usuarios', {
+    return await fetch('https://kamalaya.onrender.com/usuarios', {
     }).then((res) => res.json());
   };
   
@@ -12,7 +12,7 @@ const usuario = await usuarios();
   return (
     <ul>
         {
-            data.map(u =>
+            usuario.map(u =>
                 <li>u.nombre</li>
             )
         }

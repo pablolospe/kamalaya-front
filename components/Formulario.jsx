@@ -27,7 +27,7 @@ const Formulario = () => {
     hobbies_habilidades: 'asd',
     fechaDeNacimiento: '1970-01-02',
     fechaAlta: '1970-01-02',
-    fechaBaja: '1970-01-02',
+    fechaBaja: null,
     tieneAuto: false,
     experienciaCP: false,
   });
@@ -45,7 +45,7 @@ const Formulario = () => {
             });
 
             if (response.ok) {
-          router.push('/voluntarios')
+          router.push('/')
         alert("Formulario enviado exitosamente")
         console.log('Datos enviados exitosamente');
         // Puedes redirigir o mostrar un mensaje de éxito aquí
@@ -296,7 +296,7 @@ console.log(formData);
         />
       </label>
 
-      <label>
+      {/* <label>
         Fecha de Baja:
         <input
           type="date"
@@ -305,7 +305,7 @@ console.log(formData);
           onChange={handleChange}
           className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
         />
-      </label>
+      </label> */}
 
       <label>
         Tiene Auto:
@@ -319,7 +319,7 @@ console.log(formData);
       </label>
 
       <label>
-        Experiencia en Control Parental:
+        Experiencia en cuidados paliativos:
         <input
           type="checkbox"
           name="experienciaCP"
