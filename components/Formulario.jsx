@@ -72,43 +72,34 @@ const Formulario = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-6 bg-gray-100 rounded-lg shadow-md"
+      className="flex flex-col mx-auto p-6 bg-gray-100 rounded-lg shadow-md"
     >
-      {/* Campo Nombre */}
-      <label className="block mb-2">
-        Nombre:
-        <input
-          type="text"
-          name="nombre"
-          value={formData.nombre}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
+      <div className="flex flex-row justify-evenly">
+        <label className="block mb-2">
+          Nombre:
+          <input
+            type="text"
+            name="nombre"
+            value={formData.nombre}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
-      {/* Campo Apellido */}
-      <label className="block mb-2">
-        Apellido:
-        <input
-          type="text"
-          name="apellido"
-          value={formData.apellido}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
+        {/* Campo Apellido */}
+        <label className="block mb-2">
+          Apellido:
+          <input
+            type="text"
+            name="apellido"
+            value={formData.apellido}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+      </div>
 
-      <label>
-        DNI:
-        <input
-          type="number"
-          name="dni"
-          value={formData.dni}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
+      <h3 className="font-bold text-lg text-center">Información de contacto</h3>
       <label>
         Email:
         <input
@@ -141,120 +132,150 @@ const Formulario = () => {
           className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
         />
       </label>
+      <h3 className="font-bold text-xl text-center">Domicilio</h3>
+      <div className="flex flex-row justify-evenly">
+        <label>
+          Calle:
+          <input
+            type="text"
+            name="calle"
+            value={formData.calle}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
-      <label>
-        Calle:
-        <input
-          type="text"
-          name="calle"
-          value={formData.calle}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
+        <label>
+          Número:
+          <input
+            type="text"
+            name="numero"
+            value={formData.numero}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+      </div>
+      <div className="flex flex-row justify-evenly">
+        <label>
+          Localidad:
+          <input
+            type="text"
+            name="localidad"
+            value={formData.localidad}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
-      <label>
-        Número:
-        <input
-          type="text"
-          name="numero"
-          value={formData.numero}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
+        <label>
+          Provincia:
+          <input
+            type="text"
+            name="provincia"
+            value={formData.provincia}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+      </div>
+      <div className="flex flex-row justify-evenly">
+        <label>
+          País:
+          <input
+            type="text"
+            name="pais"
+            value={formData.pais}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
-      <label>
-        Localidad:
-        <input
-          type="text"
-          name="localidad"
-          value={formData.localidad}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
-      <label>
-        Provincia:
-        <input
-          type="text"
-          name="provincia"
-          value={formData.provincia}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
-      <label>
-        País:
-        <input
-          type="text"
-          name="pais"
-          value={formData.pais}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
-      <label>
-        Código Postal:
-        <input
-          type="text"
-          name="codigoPostal"
-          value={formData.codigoPostal}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
+        <label>
+          Código Postal:
+          <input
+            type="text"
+            name="codigoPostal"
+            value={formData.codigoPostal}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+      </div>
       <label>
         Rol de Usuario:
-        <input
+        <select
           type="text"
           name="rol_usuario"
           value={formData.rol_usuario}
           onChange={handleChange}
           className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
-      <label>
-        Teléfono de Emergencia:
-        <input
-          type="tel"
-          name="telefonoEmergencia"
-          value={formData.telefonoEmergencia}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
-      <label>
-        Nombre de Contacto de Emergencia:
-        <input
-          type="text"
-          name="nombreContactoEmergencia"
-          value={formData.nombreContactoEmergencia}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
-      <label className="block mb-2">
-        Género:
-        <select
-          name="genero"
-          value={formData.genero}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
         >
-          <option value="M">Masculino</option>
-          <option value="F">Femenino</option>
-          <option value="otro">Otro</option>
+          <option value="M">Admin</option>
+          <option value="F">User</option>
         </select>
       </label>
+      <div className='flex flex-row justify-between'>
+        <label>
+          Teléfono de Emergencia:
+          <input
+            type="tel"
+            name="telefonoEmergencia"
+            value={formData.telefonoEmergencia}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
+        <label>
+          Nombre de Contacto de Emergencia:
+          <input
+            type="text"
+            name="nombreContactoEmergencia"
+            value={formData.nombreContactoEmergencia}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+      </div>
+      <h3 className="font-bold text-lg text-center">Información personal</h3>
+      <div className="flex flex-row justify-center align-middle gap-2">
+        <label>
+          DNI:
+          <input
+            type="number"
+            name="dni"
+            value={formData.dni}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+
+        <label>
+          Fecha de Nacimiento:
+          <input
+            type="date"
+            name="fechaDeNacimiento"
+            value={formData.fechaDeNacimiento}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+
+        <label className="block mb-2">
+          Género:
+          <select
+            name="genero"
+            value={formData.genero}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          >
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+            <option value="otro">Otro</option>
+          </select>
+        </label>
+      </div>
       <label>
         Profesión/Oficio/Ocupación:
         <input
@@ -278,17 +299,6 @@ const Formulario = () => {
       </label>
 
       <label>
-        Fecha de Nacimiento:
-        <input
-          type="date"
-          name="fechaDeNacimiento"
-          value={formData.fechaDeNacimiento}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
-      <label>
         Fecha de Alta:
         <input
           type="date"
@@ -298,17 +308,6 @@ const Formulario = () => {
           className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
         />
       </label>
-
-      {/* <label>
-        Fecha de Baja:
-        <input
-          type="date"
-          name="fechaBaja"
-          value={formData.fechaBaja}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label> */}
 
       <label>
         Tiene Auto:

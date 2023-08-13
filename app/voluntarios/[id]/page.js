@@ -1,20 +1,10 @@
 import React from 'react';
+import { formatearNumero, formatearFecha } from '@/utils/formats';
 
 const usuarioDetalle = async (id) => {
-  return fetch(`https://kamalaya.onrender.com/usuarios/${id}`, {}).then((res) =>
+  return fetch(`https://kamalaya.onrender.com/usuarios/${id}`, { cache: 'no-store' }).then((res) =>
     res.json()
   );
-};
-function formatearNumero(numero) {
-  return numero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
-const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getUTCDate().toString().padStart(2, '0');
-    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-    const year = date.getUTCFullYear();
-
-    return `${day}-${month}-${year}`;
 };
 
 async function Usuario({ params }) {
@@ -37,19 +27,19 @@ async function Usuario({ params }) {
         <div>DNI: {formatearNumero(u?.dni)}</div>
         <div>Rol: {u?.rol_usuario}</div>
         <div>Género: {u?.genero}</div>
-        <div>Fecha de nacimiento: {formatDate(u?.fechaDeNacimiento)}</div>
+        <div>Fecha de nacimiento: {formatearFecha(u?.fechaDeNacimiento)}</div>
         <div>Ocupación: {u?.profesion_oficio_ocupacion}</div>
-        <div>Fecha de alta: {u?.fechaAlta}</div>
-        {u?.fechaBaja !== null ? (
-          <div>Fecha de baja: {u?.fechaBaja}</div>
-        ) : (
+        <div>Fecha de alta: {formatearFecha(u?.fechaAlta)}</div>
+        {/* {u?.fechaBaja !== null ? (
           <div>Se encuentra activo</div>
-        )}
-        <div>
+          ) : ( */}
+          <div>Fecha de baja: {formatearFecha(u?.fechaBaja)}</div>
+        {/* )}
+        <div> */}
           Teléfono de emergencia: {u?.telefonoEmergencia} ({u?.nombreContactoEmergencia})
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 export default Usuario;
