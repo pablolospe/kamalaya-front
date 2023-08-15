@@ -10,21 +10,21 @@ const Formulario = () => {
     apellido: 'asd',
     dni: '123123123',
     email: 'asd@asd.asd',
-    telefono: 'asd',
-    telefono2: 'asd',
-    calle: 'asd',
-    numero: 'asd',
+    telefono: '112345678',
+    telefono2: '112345679',
+    calle: 'Siempreviva',
+    numero: '1234',
     localidad: 'asd',
-    provincia: 'asd',
+    provincia: 'Buenos Aires',
     hashPassword: null,
-    pais: 'asd',
-    codigoPostal: 'asd',
+    pais: 'Argentina',
+    codigoPostal: '****',
     rol_usuario: 'Admin',
-    telefonoEmergencia: 'asd',
-    nombreContactoEmergencia: 'asd',
+    telefonoEmergencia: '1199887766',
+    nombreContactoEmergencia: 'Juan Perez',
     genero: 'M',
-    profesion_oficio_ocupacion: 'asd',
-    hobbies_habilidades: 'asd',
+    profesion_oficio_ocupacion: '...',
+    hobbies_habilidades: '...',
     fechaDeNacimiento: '1970-01-02',
     fechaAlta: '1970-01-02',
     fechaBaja: null,
@@ -67,40 +67,42 @@ const Formulario = () => {
     }));
   };
 
-  console.log(formData);
-  //   quiero que me agregues estilo con tailwind SOLO en esta porcion de codigo, y que sea responsive. Quiero un estilo sobrio.
+  // console.log(formData);
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md"
+      className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md"
     >
       <h3 className="m-2 font-bold text-md text-center">
         Información personal
       </h3>
 
-      <div className="flex flex-col md:flex-row md:justify-evenly p-4 shadow-lg rounded-lg">
-        <label className="block mb-2">
-          Nombre:
-          <input
-            type="text"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
-        </label>
+      <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg">
+        <div className="flex flex-col gap-6 md:flex-row justify-evenly">
+          <label >
+            Nombre/s:
+            <input
+              type="text"
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
 
-        <label className="block mb-2">
-          Apellido:
-          <input
-            type="text"
-            name="apellido"
-            value={formData.apellido}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
-        </label>
-        <div className="flex flex-col md:flex-row gap-2">
+          <label >
+            Apellido/s:
+            <input
+              type="text"
+              name="apellido"
+              value={formData.apellido}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+        </div>
+        <div className="flex flex-col gap-6 md:flex-row justify-evenly">
           <label>
             DNI:
             <input
@@ -137,7 +139,8 @@ const Formulario = () => {
             </select>
           </label>
         </div>
-        <div>
+
+        <div className="flex flex-col gap-6 md:flex-row justify-between">
           <label>
             Profesión/Oficio/Ocupación:
             <input
@@ -165,7 +168,7 @@ const Formulario = () => {
       <h3 className="mt-4 font-bold text-md text-center">
         Información de contacto
       </h3>
-      <div className="p-4 shadow-lg rounded-lg">
+      <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
         <label>
           Email:
           <input
@@ -201,8 +204,8 @@ const Formulario = () => {
       </div>
 
       <h3 className="mt-4 font-bold text-md text-center">Domicilio</h3>
-      <div className="p-4 shadow-lg rounded-lg">
-        <div className="flex flex-col ">
+      <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg">
+        <div className="flex flex-col md:flex-row justify-between gap-6">
           <label>
             Calle:
             <input
@@ -225,7 +228,8 @@ const Formulario = () => {
             />
           </label>
         </div>
-        <div className="flex flex-col ">
+
+        <div className="flex flex-col md:flex-row justify-between gap-6">
           <label>
             Localidad:
             <input
@@ -249,7 +253,7 @@ const Formulario = () => {
           </label>
         </div>
 
-        <div className="flex flex-col ">
+        <div className="flex flex-col md:flex-row justify-between gap-6">
           <label>
             País:
             <input
@@ -274,12 +278,10 @@ const Formulario = () => {
         </div>
       </div>
 
-     
-
       <h3 className="mt-4 font-bold text-md text-center">
         Ante una emergencia
       </h3>
-      <div className="flex flex-col justify-between p-4 shadow-lg rounded-lg">
+      <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
         <label>
           Teléfono de Emergencia:
           <input
@@ -303,59 +305,56 @@ const Formulario = () => {
         </label>
       </div>
 
-      <h3 className="mt-4 font-bold text-md text-center">
-        En Kamalaya
-      </h3>
-      <div className="flex flex-col justify-between p-4 shadow-lg rounded-lg">
-      <label>
-        Rol de Usuario:
-        <select
-          type="text"
-          name="rol_usuario"
-          value={formData.rol_usuario}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        >
-          <option value="Admin">Admin</option>
-          <option value="User">User</option>
-        </select>
-      </label>
+      <h3 className="mt-4 font-bold text-md text-center">En Kamalaya</h3>
+      <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
+        <label>
+          Rol de Usuario:
+          <select
+            type="text"
+            name="rol_usuario"
+            value={formData.rol_usuario}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          >
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+          </select>
+        </label>
 
-      <label>
-        Fecha de Alta:
-        <input
-          type="date"
-          name="fechaAlta"
-          value={formData.fechaAlta}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
+        <label>
+          Fecha de Alta:
+          <input
+            type="date"
+            name="fechaAlta"
+            value={formData.fechaAlta}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
-      <label>
-        Tiene Auto:
-        <input
-          type="checkbox"
-          name="tieneAuto"
-          checked={formData.tieneAuto}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
+        <label>
+          Tiene Auto:
+          <input
+            type="checkbox"
+            name="tieneAuto"
+            checked={formData.tieneAuto}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
-      <label>
-        Tiene experiencia en cuidados paliativos:
-        <input
-          type="checkbox"
-          name="experienciaCP"
-          checked={formData.experienciaCP}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
+        <label>
+          Tiene experiencia en cuidados paliativos:
+          <input
+            type="checkbox"
+            name="experienciaCP"
+            checked={formData.experienciaCP}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
       </div>
 
-      {/* Repite esto para todos los campos restantes */}
       <button
         type="submit"
         className="w-full mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
