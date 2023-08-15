@@ -74,6 +74,7 @@ const Formulario = () => {
       onSubmit={handleSubmit}
       className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md"
     >
+      <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">Ingreso de voluntario</h2>
       <h3 className="m-2 font-bold text-md text-center">
         Información personal
       </h3>
@@ -268,7 +269,7 @@ const Formulario = () => {
           <label>
             Código Postal:
             <input
-              type="text"
+              type="number"
               name="codigoPostal"
               value={formData.codigoPostal}
               onChange={handleChange}
