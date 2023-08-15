@@ -3,7 +3,7 @@ import React from 'react'
 
 function Ingreso() {
   return (
-    <div className='ml-32 mt-12'>
+    <div className='mt-20 m-12'>
       <Formulario />
     </div>
   )

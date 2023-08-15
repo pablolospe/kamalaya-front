@@ -72,9 +72,13 @@ const Formulario = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col mx-auto p-6 bg-gray-100 rounded-lg shadow-md"
+      className="flex flex-col md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md"
     >
-      <div className="flex flex-row justify-evenly">
+      <h3 className="m-2 font-bold text-md text-center">
+        Información personal
+      </h3>
+
+      <div className="flex flex-col md:flex-row md:justify-evenly p-4 shadow-lg rounded-lg">
         <label className="block mb-2">
           Nombre:
           <input
@@ -86,7 +90,6 @@ const Formulario = () => {
           />
         </label>
 
-        {/* Campo Apellido */}
         <label className="block mb-2">
           Apellido:
           <input
@@ -97,125 +100,186 @@ const Formulario = () => {
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
         </label>
+        <div className="flex flex-col md:flex-row gap-2">
+          <label>
+            DNI:
+            <input
+              type="number"
+              name="dni"
+              value={formData.dni}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+
+          <label>
+            Fecha de Nacimiento:
+            <input
+              type="date"
+              name="fechaDeNacimiento"
+              value={formData.fechaDeNacimiento}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+
+          <label className="block mb-2">
+            Género:
+            <select
+              name="genero"
+              value={formData.genero}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            >
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+              <option value="otro">Otro</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            Profesión/Oficio/Ocupación:
+            <input
+              type="text"
+              name="profesion_oficio_ocupacion"
+              value={formData.profesion_oficio_ocupacion}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+
+          <label>
+            Hobbies/Habilidades:
+            <input
+              type="text"
+              name="hobbies_habilidades"
+              value={formData.hobbies_habilidades}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+        </div>
       </div>
 
-      <h3 className="font-bold text-lg text-center">Información de contacto</h3>
-      <label>
-        Email:
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
-      <label>
-        Teléfono:
-        <input
-          type="tel"
-          name="telefono"
-          value={formData.telefono}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
-      <label>
-        Teléfono 2:
-        <input
-          type="tel"
-          name="telefono2"
-          value={formData.telefono2}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-      <h3 className="font-bold text-xl text-center">Domicilio</h3>
-      <div className="flex flex-row justify-evenly">
+      <h3 className="mt-4 font-bold text-md text-center">
+        Información de contacto
+      </h3>
+      <div className="p-4 shadow-lg rounded-lg">
         <label>
-          Calle:
+          Email:
           <input
-            type="text"
-            name="calle"
-            value={formData.calle}
+            type="email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
         </label>
 
         <label>
-          Número:
+          Teléfono:
           <input
-            type="text"
-            name="numero"
-            value={formData.numero}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
-        </label>
-      </div>
-      <div className="flex flex-row justify-evenly">
-        <label>
-          Localidad:
-          <input
-            type="text"
-            name="localidad"
-            value={formData.localidad}
+            type="number"
+            name="telefono"
+            value={formData.telefono}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
         </label>
 
         <label>
-          Provincia:
+          Teléfono 2:
           <input
-            type="text"
-            name="provincia"
-            value={formData.provincia}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
-        </label>
-      </div>
-      <div className="flex flex-row justify-evenly">
-        <label>
-          País:
-          <input
-            type="text"
-            name="pais"
-            value={formData.pais}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
-        </label>
-
-        <label>
-          Código Postal:
-          <input
-            type="text"
-            name="codigoPostal"
-            value={formData.codigoPostal}
+            type="number"
+            name="telefono2"
+            value={formData.telefono2}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
         </label>
       </div>
-      <label>
-        Rol de Usuario:
-        <select
-          type="text"
-          name="rol_usuario"
-          value={formData.rol_usuario}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        >
-          <option value="M">Admin</option>
-          <option value="F">User</option>
-        </select>
-      </label>
-      <div className='flex flex-row justify-between'>
+
+      <h3 className="mt-4 font-bold text-md text-center">Domicilio</h3>
+      <div className="p-4 shadow-lg rounded-lg">
+        <div className="flex flex-col ">
+          <label>
+            Calle:
+            <input
+              type="text"
+              name="calle"
+              value={formData.calle}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+
+          <label>
+            Número:
+            <input
+              type="text"
+              name="numero"
+              value={formData.numero}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+        </div>
+        <div className="flex flex-col ">
+          <label>
+            Localidad:
+            <input
+              type="text"
+              name="localidad"
+              value={formData.localidad}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+
+          <label>
+            Provincia:
+            <input
+              type="text"
+              name="provincia"
+              value={formData.provincia}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+        </div>
+
+        <div className="flex flex-col ">
+          <label>
+            País:
+            <input
+              type="text"
+              name="pais"
+              value={formData.pais}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+
+          <label>
+            Código Postal:
+            <input
+              type="text"
+              name="codigoPostal"
+              value={formData.codigoPostal}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+        </div>
+      </div>
+
+     
+
+      <h3 className="mt-4 font-bold text-md text-center">
+        Ante una emergencia
+      </h3>
+      <div className="flex flex-col justify-between p-4 shadow-lg rounded-lg">
         <label>
           Teléfono de Emergencia:
           <input
@@ -228,7 +292,7 @@ const Formulario = () => {
         </label>
 
         <label>
-          Nombre de Contacto de Emergencia:
+          Nombre de Contacto:
           <input
             type="text"
             name="nombreContactoEmergencia"
@@ -238,64 +302,23 @@ const Formulario = () => {
           />
         </label>
       </div>
-      <h3 className="font-bold text-lg text-center">Información personal</h3>
-      <div className="flex flex-row justify-center align-middle gap-2">
-        <label>
-          DNI:
-          <input
-            type="number"
-            name="dni"
-            value={formData.dni}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
-        </label>
 
-        <label>
-          Fecha de Nacimiento:
-          <input
-            type="date"
-            name="fechaDeNacimiento"
-            value={formData.fechaDeNacimiento}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
-        </label>
-
-        <label className="block mb-2">
-          Género:
-          <select
-            name="genero"
-            value={formData.genero}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          >
-            <option value="M">Masculino</option>
-            <option value="F">Femenino</option>
-            <option value="otro">Otro</option>
-          </select>
-        </label>
-      </div>
+      <h3 className="mt-4 font-bold text-md text-center">
+        En Kamalaya
+      </h3>
+      <div className="flex flex-col justify-between p-4 shadow-lg rounded-lg">
       <label>
-        Profesión/Oficio/Ocupación:
-        <input
+        Rol de Usuario:
+        <select
           type="text"
-          name="profesion_oficio_ocupacion"
-          value={formData.profesion_oficio_ocupacion}
+          name="rol_usuario"
+          value={formData.rol_usuario}
           onChange={handleChange}
           className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </label>
-
-      <label>
-        Hobbies/Habilidades:
-        <input
-          type="text"
-          name="hobbies_habilidades"
-          value={formData.hobbies_habilidades}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
+        >
+          <option value="Admin">Admin</option>
+          <option value="User">User</option>
+        </select>
       </label>
 
       <label>
@@ -321,7 +344,7 @@ const Formulario = () => {
       </label>
 
       <label>
-        Experiencia en cuidados paliativos:
+        Tiene experiencia en cuidados paliativos:
         <input
           type="checkbox"
           name="experienciaCP"
@@ -330,6 +353,7 @@ const Formulario = () => {
           className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
         />
       </label>
+      </div>
 
       {/* Repite esto para todos los campos restantes */}
       <button
