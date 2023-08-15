@@ -6,13 +6,13 @@ import { useRouter } from 'next/navigation';
 const Formulario = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    nombre: 'asd',
-    apellido: 'asd',
+    nombre: 'Juan',
+    apellido: 'Perez',
     dni: '123123123',
-    email: 'asd@asd.asd',
+    email: 'jp@asd.com',
     telefono: '112345678',
     telefono2: '112345679',
-    calle: 'Siempreviva',
+    calle: 'Av. Siempreviva',
     numero: '1234',
     localidad: 'asd',
     provincia: 'Buenos Aires',
@@ -26,7 +26,7 @@ const Formulario = () => {
     profesion_oficio_ocupacion: '...',
     hobbies_habilidades: '...',
     fechaDeNacimiento: '1970-01-02',
-    fechaAlta: '1970-01-02',
+    fechaAlta: '2023-01-01',
     fechaBaja: null,
     tieneAuto: false,
     experienciaCP: false,
