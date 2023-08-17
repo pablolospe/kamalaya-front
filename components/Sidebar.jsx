@@ -8,7 +8,7 @@ function Sidebar({ children }) {
   return (
     <div className="flex">
       <div className="fixed h-20 w-screen p-4 bg-white border-r-[1px] flex flex-row justify-between">
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row gap-2 items-center">
           <Link href="/">
             <div className="bg-purple-800 text-white p-3 rounded-lg inline-block">
               {/* <RxSketchLogo size={20} /> */}

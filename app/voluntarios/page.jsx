@@ -35,7 +35,7 @@ function Voluntarios() {
     }
 
     fetchData();
-  }, [query]);
+  }, [query, usuarios]);
 
   return (
     <div className="flex flex-col gap-3">
