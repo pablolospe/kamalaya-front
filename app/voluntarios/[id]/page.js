@@ -2,9 +2,9 @@ import React from 'react';
 import { formatearNumero, formatearFecha } from '@/utils/formats';
 
 const usuarioDetalle = async (id) => {
-  return fetch(`https://kamalaya.onrender.com/usuarios/${id}`, { cache: 'no-store' }).then((res) =>
-    res.json()
-  );
+  return fetch(`https://kamalaya.onrender.com/usuarios/${id}`, {
+    cache: 'no-store',
+  }).then((res) => res.json());
 };
 
 async function Usuario({ params }) {
@@ -20,10 +20,13 @@ async function Usuario({ params }) {
         {u?.telefono2 && <div>Teléfono alternativo: {u?.telefono2}</div>}
         <div>Email: {u?.email}</div>
         <div>
-          Dirección: {u?.calle} {u?.numero}, {u?.localidad}, {u?.provincia}, ({u?.codigoPostal})
+          Dirección: {u?.calle} {u?.numero}, {u?.localidad}, {u?.provincia}, (
+          {u?.codigoPostal})
         </div>
         <div>Tiene auto: {u?.tieneAuto ? 'Sí' : 'No'}</div>
-        <div>Experiencia en cuidados paliativos: {u?.experienciaCP ? 'Sí' : 'No'}</div>
+        <div>
+          Experiencia en cuidados paliativos: {u?.experienciaCP ? 'Sí' : 'No'}
+        </div>
         <div>DNI: {formatearNumero(u?.dni)}</div>
         <div>Rol: {u?.rol_usuario}</div>
         <div>Género: {u?.genero}</div>
@@ -33,12 +36,13 @@ async function Usuario({ params }) {
         {/* {u?.fechaBaja !== null ? (
           <div>Se encuentra activo</div>
           ) : ( */}
-          <div>Fecha de baja: {formatearFecha(u?.fechaBaja)}</div>
+        <div>Fecha de baja: {formatearFecha(u?.fechaBaja)}</div>
         {/* )}
         <div> */}
-          Teléfono de emergencia: {u?.telefonoEmergencia} ({u?.nombreContactoEmergencia})
-        </div>
+        Teléfono de emergencia: {u?.telefonoEmergencia} (
+        {u?.nombreContactoEmergencia})
       </div>
+    </div>
     // </div>
   );
 }
