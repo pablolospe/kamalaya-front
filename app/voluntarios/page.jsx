@@ -63,6 +63,17 @@ function Voluntarios() {
             placeholder="Escribe aquí..."
           />
         </div>
+        <div>
+          <label className="block mb-2 text-gray-700">Localidad</label>
+          <input
+            name="localidad"
+            type="text"
+            value={query.localidad}
+            onChange={handleChange}
+            className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+            placeholder="Escribe aquí..."
+          />
+        </div>
         {/* <div>
           <label className="block mb-2 text-gray-700">Tiene Auto</label>
           <input
