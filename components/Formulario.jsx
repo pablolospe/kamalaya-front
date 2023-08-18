@@ -21,7 +21,7 @@ const Formulario = () => {
     codigoPostal: '****',
     rol_usuario: 'Admin',
     telefonoEmergencia: '1199887766',
-    nombreContactoEmergencia: 'Juan Perez',
+    nombreContactoEmergencia: 'Jorge Perez',
     genero: 'M',
     profesion_oficio_ocupacion: '...',
     hobbies_habilidades: '...',
@@ -310,6 +310,7 @@ const Formulario = () => {
       <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
         <label>
           Rol de Usuario:
+          {/* <datalist> */}
           <select
             type="text"
             name="rol_usuario"

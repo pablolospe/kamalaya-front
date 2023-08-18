@@ -39,7 +39,6 @@ function Voluntarios() {
 
   return (
     <div className="flex flex-col gap-3">
-      
       <div className="flex flex-row bg-gray-100 gap-4 p-4 rounded-lg shadow-md">
         <div>
           <label className="block mb-2 text-gray-700">Nombre</label>
@@ -86,39 +85,63 @@ function Voluntarios() {
           />
         </div> */}
       </div>
+      <table>
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="border p-2">Nombre</th>
+            <th className="border p-2">Teléfono</th>
+            <th className="border p-2">Tiene auto</th>
+            <th className="border p-2">Tiene experiencia</th>
+            <th className="border p-2">Disponibilidad</th>
+          </tr>
+        </thead>
 
-      {usuariosData.map((u) => (
+        <tbody>
+          {usuariosData?.map((u) => (
+            <tr
+              key={u.usuario_id}
+              className="text-center border hover:bg-gray-100"
+            >
+              <td>
+                <Link href={`/voluntarios/${u.usuario_id}`}>
+                  <div className="m-1 ">
+                    {u.nombre} {u.apellido} (id:{u.usuario_id})
+                  </div>
+                </Link>
+              </td>
+              <td>
+                <div>
+                  {u.telefono} / {u.telefono2}
+                </div>
+              </td>
+              <td>
+                <div>{u.tieneAuto ? 'si' : 'no'}</div>
+              </td>
+              <td>
+                <div>{u.expreienciaCP ? 'si' : 'no'}</div>
+              </td>
+              <td>
+                <div>
+                  {u?.Disponibilidades.map((d) => (
+                    <span key={d.disponibilidad_id}>
+                      {d.diaSemana}, {d.horaInicio}-{d.horaFin}
+                    </span>
+                  ))}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {/* {usuariosData.map((u) => (
         <Link key={u.usuario_id} href={`/voluntarios/${u.usuario_id}`}>
           <div className="text-violet-600 hover:text-violet-800">
             {u.usuario_id} {u.nombre} {u.apellido}
           </div>
         </Link>
-      ))}
+      ))} */}
     </div>
   );
 }
 
 export default Voluntarios;
-
-// import React from 'react'
-// import Link from 'next/link';
-
-// const usuarios = async () => {
-//   return fetch('https://kamalaya.onrender.com/usuarios', { cache: 'no-store' }).then((res) => res.json());
-// };
-// console.log(usuarios);
-// async function Voluntarios() {
-//   const usuario = await usuarios();
-
-//   return (
-//     <div className='flex flex-col gap-3'>
-//     {console.log(usuario)}
-//       {usuario?.map(u=>(
-//       <Link key={u.usuario_id} href={`/voluntarios/${u.usuario_id}`}>
-//       <div className='text-violet-600 hover:text-violet-800'>{u.usuario_id} {u.nombre} {u.apellido}</div>
-//       </Link>
-//       ))}</div>
-//   )
-// }
-
-// export default Voluntarios
