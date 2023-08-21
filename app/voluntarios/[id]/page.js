@@ -2,7 +2,7 @@ import React from 'react';
 import { formatearNumero, formatearFecha, calcularEdad } from '@/utils/formats';
 
 const usuarioDetalle = async (id) => {
-  return fetch(`https://kamalaya.onrender.com/usuarios/${id}`, {
+  return fetch(`https://kamalaya-dev.fl0.io/usuarios/${id}`, {
     cache: 'no-store',
   }).then((res) => res.json());
 };

@@ -11,32 +11,39 @@ const Formulario = () => {
     dni: '123123123',
     email: 'jp@asd.com',
     telefono: '112345678',
-    telefono2: '112345679',
+    telefono2: '',
     calle: 'Av. Siempreviva',
     numero: '1234',
     localidad: 'asd',
     provincia: 'Buenos Aires',
     hashPassword: null,
     pais: 'Argentina',
-    codigoPostal: '****',
+    codigoPostal: '1643',
     rol_usuario: 'Admin',
     telefonoEmergencia: '1199887766',
-    nombreContactoEmergencia: 'Jorge Perez',
+    nombreContactoEmergencia: 'Jorge Perez (hijo)',
     genero: 'M',
-    profesion_oficio_ocupacion: '...',
-    hobbies_habilidades: '...',
+    profesion_oficio_ocupacion: 'Aviador',
+    hobbies_habilidades: 'Pesca',
     fechaDeNacimiento: '1970-01-02',
     fechaAlta: '2023-01-01',
     fechaBaja: null,
     tieneAuto: false,
     experienciaCP: false,
+    Disponibilidades: [{
+      diaSemana: '',
+      horaInicio:'',
+      horaFin:''
+    }],
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     try {
+      const response = await fetch('https://kamalaya-dev.fl0.io/usuarios', {
       // const response = await fetch('http://localhost:8000/usuarios', {
-      const response = await fetch('https://kamalaya.onrender.com/usuarios', {
+        // const response = await fetch('https://kamalaya.onrender.com/usuarios', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +52,7 @@ const Formulario = () => {
       });
 
       if (response.ok) {
-        router.push('/');
+        router.push('/voluntarios');
         alert('Formulario enviado exitosamente');
         console.log('Datos enviados exitosamente');
         // Puedes redirigir o mostrar un mensaje de éxito aquí
@@ -61,27 +68,34 @@ const Formulario = () => {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
 
+    if (name === 'diaSemana' || name === 'horaInicio' || name === 'horaFin') {
+      setFormData((prevData) => ({
+        ...prevData,
+        Disponibilidades: [ { ...prevData.Disponibilidades[0], [name]: newValue }],
+      }));
+    } else {
     setFormData((prevData) => ({
       ...prevData,
       [name]: newValue,
     }));
+  }
   };
-
-  // console.log(formData);
 
   return (
     <form
       onSubmit={handleSubmit}
       className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md"
     >
-      <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">Ingreso de voluntario</h2>
+      <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
+        Ingreso de voluntario
+      </h2>
       <h3 className="m-2 font-bold text-md text-center">
         Información personal
       </h3>
 
       <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg">
         <div className="flex flex-col gap-6 md:flex-row justify-evenly">
-          <label >
+          <label>
             Nombre/s:
             <input
               type="text"
@@ -92,7 +106,7 @@ const Formulario = () => {
             />
           </label>
 
-          <label >
+          <label>
             Apellido/s:
             <input
               type="text"
@@ -221,7 +235,7 @@ const Formulario = () => {
           <label>
             Número:
             <input
-              type="text"
+              type="number"
               name="numero"
               value={formData.numero}
               onChange={handleChange}
@@ -354,6 +368,82 @@ const Formulario = () => {
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
+        </label>
+      </div>
+
+      <h3 className="mt-4 font-bold text-md text-center">Disponibilidad</h3>
+      <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
+        <label>
+          Dia de la diaSemana
+          <select
+            type="text"
+            name="diaSemana"
+            value={formData.Disponibilidades[0].diaSemana}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          >
+            <option value="Lunes">Lunes</option>
+            <option value="Martes">Martes</option>
+            <option value="Miércoles">Miércoles</option>
+            <option value="Jueves">Jueves</option>
+            <option value="Viernes">Viernes</option>
+            <option value="Sábado">Sábado</option>
+            <option value="Domingo">Domingo</option>
+          </select>
+        </label>
+
+        <label>
+          Desde las
+          <select
+            type="number"
+            name="horaInicio"
+            value={formData.Disponibilidades[0].horaInicio}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          >
+            <option value="0800">08:00</option>
+            <option value="0900">09:00</option>
+            <option value="1000">10:00</option>
+            <option value="1100">11:00</option>
+            <option value="1200">12:00</option>
+            <option value="1300">13:00</option>
+            <option value="1400">14:00</option>
+            <option value="1500">15:00</option>
+            <option value="1600">16:00</option>
+            <option value="1700">17:00</option>
+            <option value="1800">18:00</option>
+            <option value="1900">19:00</option>
+            <option value="2000">20:00</option>
+            <option value="2100">21:00</option>
+            <option value="2200">22:00</option>
+          </select>
+        </label>
+
+        <label>
+          Hasta las
+          <select
+            type="number"
+            name="horaFin"
+            value={formData.Disponibilidades[0].horaFin}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          >
+            <option value="0800">08:00</option>
+            <option value="0900">09:00</option>
+            <option value="1000">10:00</option>
+            <option value="1100">11:00</option>
+            <option value="1200">12:00</option>
+            <option value="1300">13:00</option>
+            <option value="1400">14:00</option>
+            <option value="1500">15:00</option>
+            <option value="1600">16:00</option>
+            <option value="1700">17:00</option>
+            <option value="1800">18:00</option>
+            <option value="1900">19:00</option>
+            <option value="2000">20:00</option>
+            <option value="2100">21:00</option>
+            <option value="2200">22:00</option>
+          </select>
         </label>
       </div>
 
