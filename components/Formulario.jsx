@@ -6,40 +6,42 @@ import { useRouter } from 'next/navigation';
 const Formulario = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    nombre: 'Juan',
-    apellido: 'Perez',
-    dni: '123123123',
-    email: 'jp@asd.com',
-    telefono: '112345678',
-    telefono2: '',
-    calle: 'Av. Siempreviva',
-    numero: '1234',
-    localidad: 'asd',
-    provincia: 'Buenos Aires',
+    nombre: "Juan",
+    apellido: "Perez",
+    dni: "123123123",
+    email: "jp@asd.com",
+    telefono: "112345678",
+    telefono2: "",
+    calle: "Av. Siempreviva",
+    numero: "1234",
+    localidad: "asd",
+    provincia: "Buenos Aires",
     hashPassword: null,
-    pais: 'Argentina',
-    codigoPostal: '1643',
-    rol_usuario: 'Admin',
-    telefonoEmergencia: '1199887766',
-    nombreContactoEmergencia: 'Jorge Perez (hijo)',
-    genero: 'M',
-    profesion_oficio_ocupacion: 'Aviador',
-    hobbies_habilidades: 'Pesca',
-    fechaDeNacimiento: '1970-01-02',
-    fechaAlta: '2023-01-01',
+    pais: "Argentina",
+    codigoPostal: "1643",
+    rol_usuario: "Admin",
+    telefonoEmergencia: "1199887766",
+    nombreContactoEmergencia: "Jorge Perez (hijo)",
+    genero: "M",
+    profesion_oficio_ocupacion: "Aviador",
+    hobbies_habilidades: "Pesca",
+    fechaDeNacimiento: "1970-01-02",
+    fechaAlta: "2023-01-01",
     fechaBaja: null,
     tieneAuto: false,
     experienciaCP: false,
     Disponibilidades: [{
-      diaSemana: '',
-      horaInicio:'',
-      horaFin:''
+      diaSemana: "Lunes",
+      horaInicio:"",
+      horaFin:""
     }],
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const formDataJSON= JSON.stringify(formData)
+    console.log(formDataJSON);
+
     try {
       const response = await fetch('https://kamalaya-dev.fl0.io/usuarios', {
       // const response = await fetch('http://localhost:8000/usuarios', {
@@ -401,21 +403,22 @@ const Formulario = () => {
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           >
-            <option value="0800">08:00</option>
-            <option value="0900">09:00</option>
-            <option value="1000">10:00</option>
-            <option value="1100">11:00</option>
-            <option value="1200">12:00</option>
-            <option value="1300">13:00</option>
-            <option value="1400">14:00</option>
-            <option value="1500">15:00</option>
-            <option value="1600">16:00</option>
-            <option value="1700">17:00</option>
-            <option value="1800">18:00</option>
-            <option value="1900">19:00</option>
-            <option value="2000">20:00</option>
-            <option value="2100">21:00</option>
-            <option value="2200">22:00</option>
+            <option value="">elije hora de inicio</option>
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+            <option value="21:00">21:00</option>
+            <option value="22:00">22:00</option>
           </select>
         </label>
 
@@ -428,30 +431,31 @@ const Formulario = () => {
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           >
-            <option value="0800">08:00</option>
-            <option value="0900">09:00</option>
-            <option value="1000">10:00</option>
-            <option value="1100">11:00</option>
-            <option value="1200">12:00</option>
-            <option value="1300">13:00</option>
-            <option value="1400">14:00</option>
-            <option value="1500">15:00</option>
-            <option value="1600">16:00</option>
-            <option value="1700">17:00</option>
-            <option value="1800">18:00</option>
-            <option value="1900">19:00</option>
-            <option value="2000">20:00</option>
-            <option value="2100">21:00</option>
-            <option value="2200">22:00</option>
+            <option value="">elije hora de finalización</option>
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+            <option value="21:00">21:00</option>
+            <option value="22:00">22:00</option>
           </select>
         </label>
       </div>
 
       <button
         type="submit"
-        className="w-full mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        className="w-40 mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
       >
-        Enviar
+        Enviar formulario
       </button>
     </form>
   );
