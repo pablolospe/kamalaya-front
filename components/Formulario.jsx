@@ -376,7 +376,7 @@ const Formulario = () => {
       <h3 className="mt-4 font-bold text-md text-center">Disponibilidad</h3>
       <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
         <label>
-          Dia de la diaSemana
+          Día de la semana
           <select
             type="text"
             name="diaSemana"
