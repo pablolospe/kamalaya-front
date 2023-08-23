@@ -32,9 +32,9 @@ async function Usuario({ params }) {
             Teléfono: {u?.telefono}
           </div>
 
-          <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
+          {u?.telefono2 && <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
             Teléfono alternativo: {u?.telefono2}
-          </div>
+          </div>}
         </div>
 
         <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg">
@@ -79,7 +79,7 @@ async function Usuario({ params }) {
           </div>
 
           <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-            Tiene Auto: {u?.tieneAuto ? 'Si' : 'No'}
+            Tiene auto: {u?.tieneAuto ? 'Si' : 'No'}
           </div>
 
           <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
