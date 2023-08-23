@@ -142,7 +142,7 @@ function Voluntarios() {
 
         <button 
         onClick={handleBorrarFiltros}
-        className="h-15 p-4 text-xs bg-gray-500 text-white rounded-full hover:bg-gray-600"
+        className="h-14 p-3 text-xs bg-gray-500 text-white rounded-full hover:bg-gray-600"
         >
           Borrar <br></br>filtros
         </button>
