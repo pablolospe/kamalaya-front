@@ -18,7 +18,8 @@ function Voluntarios() {
   const [query, setQuery] = useState({
     nombre: '',
     apellido: '',
-    // tieneAuto: false,
+    tieneAuto: '',
+    experienciaCP: '',
   });
 
   function handleChange(event) {
@@ -34,7 +35,6 @@ function Voluntarios() {
       const usuarioData = await usuarios(query);
       setUsuariosData(usuarioData);
     }
-
     fetchData();
   }, [query, usuarios]);
 
@@ -96,17 +96,35 @@ function Voluntarios() {
             placeholder="hobbies / habilidades..."
           />
         </div>
-        {/* <div>
-          <label className="block mb-2 text-gray-700">Tiene Auto</label>
-          <input
+        <div>
+          <label className="block mb-2 text-gray-700">Tiene Auto?</label>
+          <select
             name="tieneAuto"
-            type="checkbox"
+            type="text"
             value={query.tieneAuto}
-            onChange={()=>{setQuery(!query)}}
+            onChange={handleChange}
             className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder="Escribe aquí..."
-          />
-        </div> */}
+          >
+            <option value="">todos</option>
+            <option value={true}>si</option>
+            <option value={false}>no</option>
+          </select>
+        </div>
+        <div>
+          <label className="block mb-2 text-gray-700">Tiene experiencia CP?</label>
+          <select
+            name="experienciaCP"
+            type="text"
+            value={query.experienciaCP}
+            onChange={handleChange}
+            className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+          >
+            <option value="">todos</option>
+            <option value={true}>si</option>
+            <option value={false}>no</option>
+          </select>
+        </div>
+       
       </div>
       <table>
         <thead>
@@ -134,15 +152,17 @@ function Voluntarios() {
               </td>
               <td className='hidden md:table-cell'>
                 <div>
-                  {u.telefono} / {u.telefono2}
+                  {u.telefono2 ?  (<span>{u.telefono} / {u.telefono2}</span>)  : u.telefono} 
                 </div>
               </td>
               <td className='hidden md:table-cell'>
                 <div>{u.tieneAuto ? 'si' : 'no'}</div>
               </td>
+             
               <td className='hidden md:table-cell'>
-                <div>{u.expreienciaCP ? 'si' : 'no'}</div>
+                <div>{u.experienciaCP === true ? 'si' : "no"}</div>
               </td>
+             
               <td className='hidden md:table-cell'>
                 <div>
                   {u?.Disponibilidades.map((d) => (
