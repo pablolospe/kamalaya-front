@@ -145,9 +145,9 @@ function Voluntarios() {
         className="h-14 p-3 text-xs bg-gray-500 text-white rounded-full hover:bg-gray-600"
         >
           Borrar <br></br>filtros
-        </button>
-       
+        </button> 
       </div>
+
       <table>
         <thead>
           <tr className="bg-gray-100 row-auto">
