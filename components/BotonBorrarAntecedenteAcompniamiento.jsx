@@ -5,10 +5,10 @@ import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import { LuX } from 'react-icons/lu';
 
-function BotonBorrarDisponibilidad(id) {
+function BotonBorrarAntecedenteAcompniamiento(id) {
   const router = useRouter();
 
-  const borrarDisponibilidadHandler = async (e) => {
+  const borrarAcompaniamientoHandler = async (e) => {
     e.preventDefault();
     Swal.fire({
       title: '¿Estás segur@?',
@@ -23,7 +23,7 @@ function BotonBorrarDisponibilidad(id) {
     }).then((result) => {
       if (result.isConfirmed) {
         const response = fetch(
-          `https://kamalaya-dev.fl0.io/disponibilidad/${id.id}`,
+          `https://kamalaya-dev.fl0.io/acompaniamiento/${id.id}`,
           {
             method: 'DELETE',
             headers: {
@@ -32,7 +32,7 @@ function BotonBorrarDisponibilidad(id) {
           }
         );
 
-        Swal.fire('Borrada', 'La disponibilidad ha sido eliminada', 'success').then(
+        Swal.fire('Borrada', 'El antecedente de acompañamiento ha sido eliminada', 'success').then(
           router.refresh()
         );
       }
@@ -40,12 +40,12 @@ function BotonBorrarDisponibilidad(id) {
   };
 
   return (
-    <div className="flex align-middle justify-center text-lg font-bolder bg-red-400 hover:bg-red-500 cursor-pointer p-1 rounded-lg ">
-      <button onClick={(e) => borrarDisponibilidadHandler(e)}>
+    <div className="flex align-middle justify-center text-md bg-red-400 hover:bg-red-500 cursor-pointer p-1 rounded-lg ">
+      <button onClick={(e) => borrarAcompaniamientoHandler(e)}>
         <LuX />
       </button>
     </div>
   );
 }
 
-export default BotonBorrarDisponibilidad;
+export default BotonBorrarAntecedenteAcompniamiento;
