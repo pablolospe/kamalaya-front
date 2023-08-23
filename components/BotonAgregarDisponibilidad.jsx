@@ -6,46 +6,8 @@ import { useRouter } from 'next/navigation';
 
 function BotonAgregarDisponibilidad(id) {
   const router = useRouter();
-  //   const [diaSemana, setDiaSemana] = useState('')
-//   const [horaInicio, setHoraInicio] = useState('')
-//   const [horaFin, setHoraFin] = useState('')
-  
-const handleSubmit = async (e) => {
-  // e.preventDefault();
-  const formDataJSON = JSON.stringify(formData);
-  console.log(formDataJSON);
-
-  try {
-    const response = await fetch(
-      'https://kamalaya-dev.fl0.io/disponibilidad',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-  
-        },
-        
-        body: JSON.stringify(formData),
-      }
-    );
-
-    if (response.ok) {
-      Swal.fire({
-        text: 'Formulario ingresado correctamente',
-        icon: 'success',
-        confirmButtonColor: 'gray',
-        color: 'black',
-      }).then(router.push('/voluntarios'));
-    } else {
-      console.error('Error al enviar los datos');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
-
-
-const disponibilidadHandler = async (e) => {
+ 
+  const disponibilidadHandler = async (e) => {
     e.preventDefault()
     const { value: formData } = await Swal.fire({
       title: 'Agregar disponibilidad',

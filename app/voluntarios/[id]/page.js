@@ -1,6 +1,7 @@
 import React from 'react';
 import { formatearFecha, calcularEdad } from '@/utils/formats';
 import BotonAgregarDisponibilidad from '@/components/BotonAgregarDisponibilidad';
+import BotonBorrarDisponibilidad from '@/components/BotonBorrarDisponibilidad';
 
 const usuarioDetalle = async (id) => {
   return fetch(`https://kamalaya-dev.fl0.io/usuarios/${id}`, {
@@ -72,9 +73,12 @@ async function Usuario({ params }) {
           <h3 className="font-bold text-md text-center">Disponibilidad</h3>
           <BotonAgregarDisponibilidad id={id} />
           {u.Disponibilidades.map(d=>
-            <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
+          <>
+            <div className="flex flex-row justify-between w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
               {d.diaSemana}, {d.horaInicio.slice(0, -3)}-{d.horaFin.slice(0, -3)}
+            <BotonBorrarDisponibilidad id={d.disponibilidad_id} />
             </div>
+          </>
             )}
         </div>
 
