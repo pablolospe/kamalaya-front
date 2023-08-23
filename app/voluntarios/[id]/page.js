@@ -3,6 +3,7 @@ import { formatearFecha, calcularEdad } from '@/utils/formats';
 import BotonAgregarDisponibilidad from '@/components/BotonAgregarDisponibilidad';
 import BotonBorrarDisponibilidad from '@/components/BotonBorrarDisponibilidad';
 import BotonBorrarAntecedenteAcompniamiento from '@/components/BotonBorrarAntecedenteAcompniamiento';
+import BotonAgregarAntecedenteDeAcompaniamiento from '@/components/BotonAgregarAntecedenteDeAcompaniamiento';
 
 const usuarioDetalle = async (id) => {
   return fetch(`https://kamalaya-dev.fl0.io/usuarios/${id}`, {
@@ -71,7 +72,7 @@ async function Usuario({ params }) {
             <h3 className="font-bold text-md text-center">
               Antecedentes de acompañamiento
             </h3>
-            <button id={id} />
+            <BotonAgregarAntecedenteDeAcompaniamiento id={id} />
           </div>
 
           {u.AntecedenteDeAcompaniamientos.map((a) => (

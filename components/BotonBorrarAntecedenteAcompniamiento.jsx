@@ -32,7 +32,8 @@ function BotonBorrarAntecedenteAcompniamiento(id) {
           }
         );
 
-        Swal.fire('Borrada', 'El antecedente de acompañamiento ha sido eliminada', 'success').then(
+        Swal.fire({title:'Borrado', text:'El antecedente de acompañamiento ha sido eliminado', 
+        icon:'success', confirmButtonColor: '#3085d6',}).then(
           router.refresh()
         );
       }
