@@ -18,9 +18,24 @@ function Voluntarios() {
   const [query, setQuery] = useState({
     nombre: '',
     apellido: '',
+    localidad: '',
+    profesion_oficio_ocupacion: '',
+    hobbies_habilidades: '',
     tieneAuto: '',
     experienciaCP: '',
   });
+
+  function handleBorrarFiltros(){
+    setQuery({
+      nombre: '',
+      apellido: '',
+      localidad: '',
+      profesion_oficio_ocupacion: '',
+      hobbies_habilidades: '',
+      tieneAuto: '',
+      experienciaCP: '',
+    })
+  }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -53,7 +68,6 @@ function Voluntarios() {
           />
         </div>
         <div>
-          {/* <label className="block mb-2 text-gray-700">Apellido</label> */}
           <input
             name="apellido"
             type="text"
@@ -110,6 +124,7 @@ function Voluntarios() {
             <option value={false}>no</option>
           </select>
         </div>
+        
         <div>
           <label className="block mb-2 text-gray-700">Tiene experiencia CP?</label>
           <select
@@ -124,6 +139,13 @@ function Voluntarios() {
             <option value={false}>no</option>
           </select>
         </div>
+
+        <button 
+        onClick={handleBorrarFiltros}
+        className="h-15 p-4 text-xs bg-gray-500 text-white rounded-full hover:bg-gray-600"
+        >
+          Borrar <br></br>filtros
+        </button>
        
       </div>
       <table>
@@ -176,13 +198,7 @@ function Voluntarios() {
           ))}
         </tbody>
       </table>
-      {/* {usuariosData.map((u) => (
-        <Link key={u.usuario_id} href={`/voluntarios/${u.usuario_id}`}>
-          <div className="text-violet-600 hover:text-violet-800">
-            {u.usuario_id} {u.nombre} {u.apellido}
-          </div>
-        </Link>
-      ))} */}
+
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 const Formulario = () => {
   const router = useRouter();
@@ -32,8 +33,8 @@ const Formulario = () => {
     experienciaCP: false,
     Disponibilidades: [{
       diaSemana: "Lunes",
-      horaInicio:"",
-      horaFin:""
+      horaInicio:"08:00",
+      horaFin:"12:00"
     }],
   });
 
@@ -54,10 +55,17 @@ const Formulario = () => {
       });
 
       if (response.ok) {
-        router.push('/voluntarios');
-        alert('Formulario enviado exitosamente');
+
+        Swal.fire({
+          
+          text: 'Formulario ingresado correctamente',
+          icon: 'success',
+          confirmButtonColor: 'gray',
+          color: 'black',
+        }).then(router.push('/voluntarios'))
+        
         console.log('Datos enviados exitosamente');
-        // Puedes redirigir o mostrar un mensaje de éxito aquí
+        
       } else {
         console.error('Error al enviar los datos');
       }
@@ -349,27 +357,26 @@ const Formulario = () => {
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
         </label>
-
-        <label>
-          Tiene Auto:
+        <label className="inline-block mr-2">
           <input
             type="checkbox"
             name="tieneAuto"
             checked={formData.tieneAuto}
             onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
+            className="inline-block align-middle mr-2 border rounded-md p-2 focus:ring focus:ring-blue-300"
+            />
+            Tiene Auto?
         </label>
 
         <label>
-          Tiene experiencia en cuidados paliativos:
           <input
             type="checkbox"
             name="experienciaCP"
             checked={formData.experienciaCP}
             onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
+            className="inline-block align-middle mr-2 border rounded-md p-2 focus:ring focus:ring-blue-300"
+            />
+            Tiene experiencia en CP?
         </label>
       </div>
 
