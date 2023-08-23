@@ -70,14 +70,14 @@ async function Usuario({ params }) {
         </div>
 
         <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
-          <div className='flex flex-row gap-2 items-center justify-center'>
+          <div className='flex flex-row gap-3 items-center justify-center'>
             <h3 className="font-bold text-md text-center">Disponibilidad</h3>
             <BotonAgregarDisponibilidad id={id} />
           </div>
 
           {u.Disponibilidades.map(d=>
           <>
-            <div className="flex flex-row justify-between w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
+            <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
               {d.diaSemana}, {d.horaInicio.slice(0, -3)}-{d.horaFin.slice(0, -3)}
             <BotonBorrarDisponibilidad id={d.disponibilidad_id} />
             </div>

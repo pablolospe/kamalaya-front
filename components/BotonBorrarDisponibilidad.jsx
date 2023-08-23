@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
+import { LuX } from 'react-icons/lu';
 
 function BotonBorrarDisponibilidad(id) {
   const router = useRouter();
@@ -10,13 +11,15 @@ function BotonBorrarDisponibilidad(id) {
   const borrarDisponibilidadHandler = async (e) => {
       e.preventDefault()
       Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: '¿Estás segur@?',
+        text: "Esta acción no se puede revertir",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        // confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: '¡Borrar!',
+        cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
 
@@ -43,8 +46,9 @@ function BotonBorrarDisponibilidad(id) {
     
 
   return (
-    <div className="w-7 h-7 text-md text-center bg-red-500 text-white rounded-full hover:bg-gray-600">
-      <button onClick={(e)=>(borrarDisponibilidadHandler(e))}>x</button>
+    <div 
+    className="flex align-middle justify-center text-lg font-bolder bg-red-400 hover:bg-red-500 cursor-pointer p-1 rounded-lg ">
+      <button onClick={(e)=>(borrarDisponibilidadHandler(e))}><LuX /></button>
     </div>
   );
 }

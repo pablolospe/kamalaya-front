@@ -3,15 +3,18 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
+import { LuPlus } from 'react-icons/lu';
 
 function BotonAgregarDisponibilidad(id) {
   const router = useRouter();
- 
+
   const disponibilidadHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const { value: formData } = await Swal.fire({
       title: 'Agregar disponibilidad',
       showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
       html:
         '<label for="diaSemana">Día de la semana:</label>' +
         '<select id="diaSemana" class="swal2-input">' +
@@ -22,7 +25,8 @@ function BotonAgregarDisponibilidad(id) {
         '<option value="Viernes">Viernes</option>' +
         '<option value="Sábado">Sábado</option>' +
         '<option value="Domingo">Domingo</option>' +
-        '</select>' + '<br/>' +
+        '</select>' +
+        '<br/>' +
         '<label for="horaInicio">Hora de inicio:</label>' +
         '<select id="horaInicio" class="swal2-input">' +
         '<option value="08:00">08:00</option>' +
@@ -38,7 +42,8 @@ function BotonAgregarDisponibilidad(id) {
         '<option value="18:00">18:00</option>' +
         '<option value="19:00">19:00</option>' +
         '<option value="20:00">20:00</option>' +
-        '</select>' + '<br/>' +
+        '</select>' +
+        '<br/>' +
         '<label for="horaFin">Hora de fin:</label>' +
         '<select id="horaFin" class="swal2-input">' +
         '<option value="08:00">08:00</option>' +
@@ -65,42 +70,47 @@ function BotonAgregarDisponibilidad(id) {
         };
       },
     });
-  
+
     if (formData) {
-        // const formDataJSON = JSON.stringify(formData);
-        
-        const response = await fetch(
-          'https://kamalaya-dev.fl0.io/disponibilidad',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          }
-          );
+      // const formDataJSON = JSON.stringify(formData);
 
-          if (response.ok) {
-            Swal.fire({
-              text: 'Formulario ingresado correctamente',
-              icon: 'success',
-              confirmButtonColor: 'gray',
-              color: 'black',
-            }).then(router.refresh());
-          } else {
-            console.error('Error al enviar los datos');
-          }
+      const response = await fetch(
+        'https://kamalaya-dev.fl0.io/disponibilidad',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
-          console.log('Formulario:', response);
+      if (response.ok) {
+        Swal.fire({
+          text: 'Formulario ingresado correctamente',
+          icon: 'success',
+          confirmButtonColor: 'gray',
+          color: 'black',
+        }).then(router.refresh());
+      } else {
+        console.error('Error al enviar los datos');
+      }
+
+      console.log('Formulario:', response);
       // Aquí puedes hacer algo con los valores seleccionados, como enviarlos a una API
-      Swal.fire(`Nueva disponibilidad el ${formData.diaSemana} de ${formData.horaInicio} a ${formData.horaFin}`);
+      Swal.fire(
+        `Nueva disponibilidad el ${formData.diaSemana} de ${formData.horaInicio} a ${formData.horaFin}`
+      );
     }
   };
-  
 
   return (
-    <div className="w-7 h-7 text-md text-center bg-gray-500 text-white rounded-full hover:bg-gray-600">
-      <button onClick={(e)=>(disponibilidadHandler(e))}>+</button>
+    <div 
+    className="flex align-middle justify-center text-xl font-bolder bg-gray-200 hover:bg-gray-300 cursor-pointer p-2 rounded-lg ">
+    
+      <button onClick={(e) => disponibilidadHandler(e)}>
+        <LuPlus />
+      </button>
     </div>
   );
 }

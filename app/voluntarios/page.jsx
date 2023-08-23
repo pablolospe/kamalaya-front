@@ -1,11 +1,12 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { LuUser } from 'react-icons/lu';
 
 const usuarios = async (query) => {
   const queryString = new URLSearchParams(query).toString();
   const url = `https://kamalaya-dev.fl0.io/usuarios${
-  // const url = `https://kamalaya.onrender.com/usuarios${
+    // const url = `https://kamalaya.onrender.com/usuarios${
     queryString ? `?${queryString}` : ''
   }`;
   const response = await fetch(url, { cache: 'no-store' });
@@ -25,7 +26,7 @@ function Voluntarios() {
     experienciaCP: '',
   });
 
-  function handleBorrarFiltros(){
+  function handleBorrarFiltros() {
     setQuery({
       nombre: '',
       apellido: '',
@@ -34,7 +35,7 @@ function Voluntarios() {
       hobbies_habilidades: '',
       tieneAuto: '',
       experienciaCP: '',
-    })
+    });
   }
 
   function handleChange(event) {
@@ -55,7 +56,7 @@ function Voluntarios() {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly bg-gray-100 gap-4 p-4 rounded-lg shadow-md">
+      <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-4 p-4 rounded-lg shadow-md">
         <div>
           {/* <label className="block mb-2 text-gray-700">Nombre</label> */}
           <input
@@ -110,29 +111,38 @@ function Voluntarios() {
             placeholder="hobbies / habilidades..."
           />
         </div>
-        <div>
-          <label className="block mb-2 text-gray-700">Tiene Auto?</label>
+        
+        <div className="flex items-center">
+          <label htmlFor="tieneAuto" className="text-xs text-gray-800 mr-2">
+            Tiene Auto?
+          </label>
           <select
             name="tieneAuto"
-            type="text"
             value={query.tieneAuto}
             onChange={handleChange}
-            className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+            id="tieneAuto"
           >
-            <option value="">todos</option>
-            <option value={true}>si</option>
-            <option value={false}>no</option>
+            <option value="">Todos</option>
+            <option value={true}>Si tiene auto</option>
+            <option value={false}>No tiene auto</option>
           </select>
         </div>
-        
-        <div>
-          <label className="block mb-2 text-gray-700">Tiene experiencia CP?</label>
+
+
+
+
+        <div className="flex items-center">
+          <label htmlFor="experienciaCP" className="text-xs text-gray-800 mr-2">
+            Tiene experiencia en cuidados paliativos?
+          </label>
           <select
             name="experienciaCP"
             type="text"
             value={query.experienciaCP}
             onChange={handleChange}
-            className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+            id="experienciaCP"
           >
             <option value="">todos</option>
             <option value={true}>si</option>
@@ -140,12 +150,12 @@ function Voluntarios() {
           </select>
         </div>
 
-        <button 
-        onClick={handleBorrarFiltros}
-        className="h-14 p-3 text-xs bg-gray-500 text-white rounded-full hover:bg-gray-600"
+        <button
+          onClick={handleBorrarFiltros}
+          className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
         >
           Borrar <br></br>filtros
-        </button> 
+        </button>
       </div>
 
       <table>
@@ -154,7 +164,9 @@ function Voluntarios() {
             <th className="border p-2">Nombre</th>
             <th className="hidden md:table-cell border p-2">Teléfono</th>
             <th className="hidden md:table-cell border p-2">Tiene auto</th>
-            <th className="hidden md:table-cell border p-2">Tiene experiencia</th>
+            <th className="hidden md:table-cell border p-2">
+              Tiene experiencia
+            </th>
             <th className="hidden md:table-cell border p-2">Disponibilidad</th>
           </tr>
         </thead>
@@ -167,29 +179,39 @@ function Voluntarios() {
             >
               <td>
                 <Link href={`/voluntarios/${u.usuario_id}`}>
-                  <div className="ml-3 my-1 text-left">
-                    {u.nombre} {u.apellido} (id:{u.usuario_id})
+                  <div className="flex flex-row justify-evenly items-center ml-3 my-1 text-left">
+                    <div className="bg-gray-200 hover:bg-gray-300 cursor-pointer p-3 gap-3 rounded-lg flex flex-row">
+                      <LuUser size={20} />
+                    {u.nombre} {u.apellido} ({u.usuario_id})
+                    </div>
                   </div>
                 </Link>
               </td>
-              <td className='hidden md:table-cell'>
+              <td className="hidden md:table-cell">
                 <div>
-                  {u.telefono2 ?  (<span>{u.telefono} / {u.telefono2}</span>)  : u.telefono} 
+                  {u.telefono2 ? (
+                    <span>
+                      {u.telefono} / {u.telefono2}
+                    </span>
+                  ) : (
+                    u.telefono
+                  )}
                 </div>
               </td>
-              <td className='hidden md:table-cell'>
+              <td className="hidden md:table-cell">
                 <div>{u.tieneAuto ? 'si' : 'no'}</div>
               </td>
-             
-              <td className='hidden md:table-cell'>
-                <div>{u.experienciaCP === true ? 'si' : "no"}</div>
+
+              <td className="hidden md:table-cell">
+                <div>{u.experienciaCP === true ? 'si' : 'no'}</div>
               </td>
-             
-              <td className='hidden md:table-cell'>
+
+              <td className="hidden md:table-cell">
                 <div>
                   {u?.Disponibilidades.map((d) => (
                     <span key={d.disponibilidad_id}>
-                      {d.diaSemana}, {d.horaInicio.slice(0, -3)}-{d.horaFin.slice(0, -3)}
+                      {d.diaSemana}, {d.horaInicio.slice(0, -3)}-
+                      {d.horaFin.slice(0, -3)}
                     </span>
                   ))}
                 </div>
@@ -198,7 +220,6 @@ function Voluntarios() {
           ))}
         </tbody>
       </table>
-
     </div>
   );
 }
