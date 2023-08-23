@@ -1,5 +1,6 @@
 import React from 'react';
-import { formatearNumero, formatearFecha, calcularEdad } from '@/utils/formats';
+import { formatearFecha, calcularEdad } from '@/utils/formats';
+import BotonAgregarDisponibilidad from '@/components/BotonAgregarDisponibilidad';
 
 const usuarioDetalle = async (id) => {
   return fetch(`https://kamalaya-dev.fl0.io/usuarios/${id}`, {
@@ -10,6 +11,7 @@ const usuarioDetalle = async (id) => {
 async function Usuario({ params }) {
   const { id } = params;
   const u = await usuarioDetalle(id);
+
   return (
     <div
     // className="p-4 border rounded-lg shadow-md"
@@ -43,11 +45,6 @@ async function Usuario({ params }) {
             <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
               Calle: {u?.calle} {u?.numero}
             </div>
-            {/* 
-            <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-              Número: 
-            </div>
-          </div> */}
 
             <div className="flex flex-col md:flex-row justify-between gap-6">
               <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
@@ -69,6 +66,16 @@ async function Usuario({ params }) {
             Teléfono de Emergencia: {u?.telefonoEmergencia} (
             {u?.nombreContactoEmergencia})
           </div>
+        </div>
+
+        <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
+          <h3 className="font-bold text-md text-center">Disponibilidad</h3>
+          <BotonAgregarDisponibilidad id={id} />
+          {u.Disponibilidades.map(d=>
+            <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
+              {d.diaSemana}, {d.horaInicio.slice(0, -3)}-{d.horaFin.slice(0, -3)}
+            </div>
+            )}
         </div>
 
         <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
@@ -115,7 +122,7 @@ async function Usuario({ params }) {
               {/* className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300" */}
             </div>
 
-            <div className="flex flex-col md:flex-row justify-between">
+            <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
               Hobbies/Habilidades: {u?.hobbies_habilidades}
               {/* className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300" */}
             </div>
@@ -123,38 +130,7 @@ async function Usuario({ params }) {
         </div>
 
       </div>
-{/* 
-      <div className="mb-2 text-lg font-semibold">
-        {u?.nombre} {u?.apellido}
-      </div>
-      <div className="text-gray-600">
-        <div>Teléfono: {u?.telefono}</div>
-        {u?.telefono2 && <div>Teléfono alternativo: {u?.telefono2}</div>}
-        <div>Email: {u?.email}</div>
-        <div>
-          Dirección: {u?.calle} {u?.numero}, {u?.localidad}, {u?.provincia}, (
-          {u?.codigoPostal})
-        </div>
-        <div>Tiene auto: {u?.tieneAuto ? 'Sí' : 'No'}</div>
-        <div>
-          Experiencia en cuidados paliativos: {u?.experienciaCP ? 'Sí' : 'No'}
-        </div>
-        <div>DNI: {formatearNumero(u?.dni)}</div>
-        <div>Rol: {u?.rol_usuario}</div>
-        <div>Género: {u?.genero}</div>
-        <div>Fecha de nacimiento: {formatearFecha(u?.fechaDeNacimiento)}</div>
-        <div>Ocupación: {u?.profesion_oficio_ocupacion}</div>
-        <div>Fecha de alta: {formatearFecha(u?.fechaAlta)}</div>
-        {u?.fechaBaja !== null ? (
-          <div>Se encuentra activo</div>
-          ) : (
-        <div>Fecha de baja: {formatearFecha(u?.fechaBaja)}</div>
-        )}
-        <div> 
-        Teléfono de emergencia: {u?.telefonoEmergencia} (
-        {u?.nombreContactoEmergencia})
-      </div>
-    </div> */}
+
      </div>
   );
 }
