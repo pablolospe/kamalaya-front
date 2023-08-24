@@ -19,8 +19,8 @@ const usuarios = async (query) => {
     }
   }
 
-  const url = `http://localhost:8000/usuarios${
-      // const url = `https://kamalaya-dev.fl0.io/usuarios${
+  // const url = `http://localhost:8000/usuarios${
+  const url = `https://kamalaya-dev.fl0.io/usuarios${
     queryString ? `?${queryString}` : ''
   }`;
   console.log(queryString);
