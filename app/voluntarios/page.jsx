@@ -4,18 +4,33 @@ import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
 
 const usuarios = async (query) => {
-  const queryString = new URLSearchParams(query).toString();
-  const url = `https://kamalaya-dev.fl0.io/usuarios${
-    // const url = `https://kamalaya.onrender.com/usuarios${
+  const queryString = new URLSearchParams();
+
+
+  for (const key in query) {
+    if (Array.isArray(query[key])) {
+      query[key].forEach(value => {
+        queryString.append(`${key}[]`, value);
+      })
+    } else {
+      if (query[key] !== '') {
+        queryString.append(key, query[key]);
+      }
+    }
+  }
+
+  const url = `http://localhost:8000/usuarios${
+      // const url = `https://kamalaya-dev.fl0.io/usuarios${
     queryString ? `?${queryString}` : ''
   }`;
+  console.log(queryString);
   const response = await fetch(url, { cache: 'no-store' });
   return response.json();
 };
 
 function Voluntarios() {
   const [usuariosData, setUsuariosData] = useState([]);
-
+  
   const [query, setQuery] = useState({
     nombre: '',
     apellido: '',
@@ -24,7 +39,9 @@ function Voluntarios() {
     hobbies_habilidades: '',
     tieneAuto: '',
     experienciaCP: '',
+    diaSemana:[]
   });
+  console.log(query);
 
   function handleBorrarFiltros() {
     setQuery({
@@ -35,6 +52,7 @@ function Voluntarios() {
       hobbies_habilidades: '',
       tieneAuto: '',
       experienciaCP: '',
+      diaSemana:[]
     });
   }
 
@@ -46,6 +64,18 @@ function Voluntarios() {
     }));
   }
 
+  function handleDiaSemanaChange(event) {
+    const selectedDay = event.target.value;
+    const updatedDays = query.diaSemana.includes(selectedDay)
+      ? query.diaSemana.filter(day => day !== selectedDay)
+      : [...query.diaSemana, selectedDay];
+  
+    setQuery(prevState => ({
+      ...prevState,
+      diaSemana: updatedDays
+    }));
+  }
+  
   useEffect(() => {
     async function fetchData() {
       const usuarioData = await usuarios(query);
@@ -111,6 +141,78 @@ function Voluntarios() {
             placeholder="hobbies / habilidades..."
           />
         </div>
+
+                
+        <div>
+          <label className="block text-gray-700">Disponibilidad</label>
+          <div className="flex gap-3">
+            <label>
+              <input
+                type="checkbox"
+                value="lunes"
+                checked={query.diaSemana.includes('lunes')}
+                onChange={handleDiaSemanaChange}
+              />
+              Lunes
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="martes"
+                checked={query.diaSemana.includes('martes')}
+                onChange={handleDiaSemanaChange}
+              />
+              Martes
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="miercoles"
+                checked={query.diaSemana.includes('miercoles')}
+                onChange={handleDiaSemanaChange}
+              />
+              Miércoles
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="jueves"
+                checked={query.diaSemana.includes('jueves')}
+                onChange={handleDiaSemanaChange}
+              />
+              Jueves
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="viernes"
+                checked={query.diaSemana.includes('viernes')}
+                onChange={handleDiaSemanaChange}
+              />
+              viernes
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="sabado"
+                checked={query.diaSemana.includes('sabado')}
+                onChange={handleDiaSemanaChange}
+              />
+              Sábado
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="domingo"
+                checked={query.diaSemana.includes('domingo')}
+                onChange={handleDiaSemanaChange}
+              />
+              Domingo
+            </label>
+            {/* Repite lo mismo para los otros días de la semana */}
+          </div>
+        </div>
+
         
         <div className="flex items-center">
           <label htmlFor="tieneAuto" className="text-xs text-gray-800 mr-2">
@@ -128,9 +230,6 @@ function Voluntarios() {
             <option value={false}>No tiene auto</option>
           </select>
         </div>
-
-
-
 
         <div className="flex items-center">
           <label htmlFor="experienciaCP" className="text-xs text-gray-800 mr-2">
@@ -210,8 +309,9 @@ function Voluntarios() {
                 <div>
                   {u?.Disponibilidades.map((d) => (
                     <span key={d.disponibilidad_id}>
-                      {d.diaSemana}, {d.horaInicio.slice(0, -3)}-
-                      {d.horaFin.slice(0, -3)}
+                      {d.diaSemana} {}
+                      {/* {d.horaInicio.slice(0, -3)}-
+                      {d.horaFin.slice(0, -3)} */}
                     </span>
                   ))}
                 </div>

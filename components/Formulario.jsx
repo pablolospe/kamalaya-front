@@ -32,7 +32,7 @@ const Formulario = () => {
     tieneAuto: false,
     experienciaCP: false,
     Disponibilidades: [{
-      diaSemana: "Lunes",
+      diaSemana: "lunes",
       horaInicio:"08:00",
       horaFin:"12:00"
     }],
@@ -391,13 +391,13 @@ const Formulario = () => {
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           >
-            <option value="Lunes">Lunes</option>
-            <option value="Martes">Martes</option>
-            <option value="Miércoles">Miércoles</option>
-            <option value="Jueves">Jueves</option>
-            <option value="Viernes">Viernes</option>
-            <option value="Sábado">Sábado</option>
-            <option value="Domingo">Domingo</option>
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes</option>
+            <option value="miercoles">Miércoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
           </select>
         </label>
 

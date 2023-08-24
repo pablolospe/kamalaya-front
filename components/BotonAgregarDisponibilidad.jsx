@@ -18,13 +18,13 @@ function BotonAgregarDisponibilidad(id) {
       html:
         '<label for="diaSemana">Día de la semana:</label>' +
         '<select id="diaSemana" class="swal2-input">' +
-        '<option value="Lunes">Lunes</option>' +
-        '<option value="Martes">Martes</option>' +
-        '<option value="Miércoles">Miércoles</option>' +
-        '<option value="Jueves">Jueves</option>' +
-        '<option value="Viernes">Viernes</option>' +
-        '<option value="Sábado">Sábado</option>' +
-        '<option value="Domingo">Domingo</option>' +
+        '<option value="lunes">Lunes</option>' +
+        '<option value="martes">Martes</option>' +
+        '<option value="miercoles">Miércoles</option>' +
+        '<option value="jueves">Jueves</option>' +
+        '<option value="viernes">Viernes</option>' +
+        '<option value="sabado">Sábado</option>' +
+        '<option value="domingo">Domingo</option>' +
         '</select>' +
         '<br/>' +
         '<label for="horaInicio">Hora de inicio:</label>' +
