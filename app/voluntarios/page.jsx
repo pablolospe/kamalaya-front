@@ -153,17 +153,17 @@ function Voluntarios() {
         </div>
 
                 
-        <div>
-          <label className="block text-gray-700">Disponibilidad</label>
-          <div className="flex gap-3">
+        <div className='bg-white rounded-md shadow-sm p-2 border border-gray-300'>
+          <label className="block mb-1 text-gray-400">Disponibilidad</label>
+          <div className="flex flex-wrap first-letter:gap-3 gap-3">
             <label>
               <input
                 type="checkbox"
                 value="lunes"
                 checked={query.diaSemana.includes('lunes')}
                 onChange={handleDiaSemanaChange}
-              />
-              Lunes
+              /> 
+              Lunes 
             </label>
             <label>
               <input
@@ -171,7 +171,7 @@ function Voluntarios() {
                 value="martes"
                 checked={query.diaSemana.includes('martes')}
                 onChange={handleDiaSemanaChange}
-              />
+              /> 
               Martes
             </label>
             <label>
@@ -180,7 +180,7 @@ function Voluntarios() {
                 value="miercoles"
                 checked={query.diaSemana.includes('miercoles')}
                 onChange={handleDiaSemanaChange}
-              />
+              /> 
               Miércoles
             </label>
             <label>
@@ -189,7 +189,7 @@ function Voluntarios() {
                 value="jueves"
                 checked={query.diaSemana.includes('jueves')}
                 onChange={handleDiaSemanaChange}
-              />
+              /> 
               Jueves
             </label>
             <label>
@@ -198,8 +198,8 @@ function Voluntarios() {
                 value="viernes"
                 checked={query.diaSemana.includes('viernes')}
                 onChange={handleDiaSemanaChange}
-              />
-              viernes
+              /> 
+              Viernes
             </label>
             <label>
               <input
@@ -207,7 +207,7 @@ function Voluntarios() {
                 value="sabado"
                 checked={query.diaSemana.includes('sabado')}
                 onChange={handleDiaSemanaChange}
-              />
+              /> 
               Sábado
             </label>
             <label>
@@ -216,7 +216,7 @@ function Voluntarios() {
                 value="domingo"
                 checked={query.diaSemana.includes('domingo')}
                 onChange={handleDiaSemanaChange}
-              />
+              /> 
               Domingo
             </label>
             {/* Repite lo mismo para los otros días de la semana */}
