@@ -3,6 +3,16 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
 
+const DiaSemanaEnum = {
+  lunes: 'Lunes',
+  martes: 'Martes',
+  miercoles: 'Miércoles',
+  jueves: 'Jueves',
+  viernes: 'Viernes',
+  sabado: 'Sábado',
+  domingo: 'Domingo',
+};
+
 const usuarios = async (query) => {
   const queryString = new URLSearchParams();
 
@@ -309,9 +319,9 @@ function Voluntarios() {
                 <div>
                   {u?.Disponibilidades.map((d) => (
                     <span key={d.disponibilidad_id}>
-                      {d.diaSemana} {}
-                      {/* {d.horaInicio.slice(0, -3)}-
-                      {d.horaFin.slice(0, -3)} */}
+                      {DiaSemanaEnum[d.diaSemana]} &nbsp;
+                      {d.horaInicio.slice(0, -3)}-
+                      {d.horaFin.slice(0, -3)} <br/>
                     </span>
                   ))}
                 </div>
