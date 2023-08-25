@@ -11,7 +11,7 @@ function Sidebar({ children }) {
       <div className="fixed h-20 w-screen p-4 bg-white flex flex-row justify-between">
         <div className="flex flex-row gap-2 items-center ">
           <Link href="/">
-            <div className="bg-gray-200 text-black text-xs text-center py-2 px-4 rounded-lg inline-block">  
+            <div className="bg-gray-200 text-black text-xs text-center py-2 px-4 rounded-lg inline-block hover:bg-gray-300 shadow-2xl">  
               <Image
                 src="/logoKamalaya.svg"
                 width={150}
