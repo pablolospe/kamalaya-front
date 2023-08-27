@@ -24,6 +24,7 @@ function BotonBorrarAntecedenteAcompniamiento(id) {
       if (result.isConfirmed) {
         const response = fetch(
           `https://kamalaya-dev.fl0.io/acompaniamiento/${id.id}`,
+          // `http://localhost:8000/acompaniamiento/${id.id}`,
           {
             method: 'DELETE',
             headers: {

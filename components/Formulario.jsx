@@ -44,9 +44,9 @@ const Formulario = () => {
     console.log(formDataJSON);
 
     try {
-      const response = await fetch('https://kamalaya-dev.fl0.io/usuarios', {
-      // const response = await fetch('http://localhost:8000/usuarios', {
-        // const response = await fetch('https://kamalaya.onrender.com/usuarios', {
+      const response = await fetch('https://kamalaya-dev.fl0.io/voluntarios', {
+      // const response = await fetch('http://localhost:8000/voluntarios', {
+        // const response = await fetch('https://kamalaya.onrender.com/voluntarios', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -63,7 +63,7 @@ function BotonAgregarDisponibilidad(id) {
       focusConfirm: false,
       preConfirm: () => {
         return {
-          usuario_id: id.id,
+          voluntario_id: id.id,
           diaSemana: document.getElementById('diaSemana').value,
           horaInicio: document.getElementById('horaInicio').value,
           horaFin: document.getElementById('horaFin').value,
@@ -76,6 +76,7 @@ function BotonAgregarDisponibilidad(id) {
 
       const response = await fetch(
         'https://kamalaya-dev.fl0.io/disponibilidad',
+        // 'http://localhost:8000/disponibilidad',
         {
           method: 'POST',
           headers: {

@@ -38,7 +38,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
       focusConfirm: false,
       preConfirm: () => {
         return {
-          usuario_id: id.id,
+          voluntario_id: id.id,
           institucion: document.getElementById('institucion').value,
           tareasRealizadas: document.getElementById('tareasRealizadas').value,
           detalles: document.getElementById('detalles').value,
@@ -53,6 +53,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
 
       const response = await fetch(
         'https://kamalaya-dev.fl0.io/acompaniamiento',
+        // 'http://localhost:8000/acompaniamiento',
         {
           method: 'POST',
           headers: {

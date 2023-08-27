@@ -5,21 +5,24 @@ import BotonBorrarDisponibilidad from '@/components/BotonBorrarDisponibilidad';
 import BotonBorrarAntecedenteAcompniamiento from '@/components/BotonBorrarAntecedenteAcompniamiento';
 import BotonAgregarAntecedenteDeAcompaniamiento from '@/components/BotonAgregarAntecedenteDeAcompaniamiento';
 
-const usuarioDetalle = async (id) => {
-  return fetch(`https://kamalaya-dev.fl0.io/usuarios/${id}`, {
+const voluntarioDetalle = async (id) => {
+  return fetch(`https://kamalaya-dev.fl0.io/voluntarios/${id}`, {
+  // return fetch(`http://localhost:8000/voluntarios/${id}`, {
     cache: 'no-store',
   }).then((res) => res.json());
 };
 
-async function Usuario({ params }) {
+async function Voluntario({ params }) {
   const { id } = params;
-  const u = await usuarioDetalle(id);
+  const v = await voluntarioDetalle(id);
+  console.log(id);
+  console.log(v);
 
   return (
     <div>
       <div className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
         <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
-          {u?.nombre} {u?.apellido}
+          {v?.nombre} {v?.apellido}
         </h2>
 
         <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
@@ -27,16 +30,16 @@ async function Usuario({ params }) {
             Información de contacto
           </h3>
           <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-            Email: {u?.email}
+            Email: {v?.email}
           </div>
 
           <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-            Teléfono: {u?.telefono}
+            Teléfono: {v?.telefono}
           </div>
 
-          {u?.telefono2 && (
+          {v?.telefono2 && (
             <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-              Teléfono alternativo: {u?.telefono2}
+              Teléfono alternativo: {v?.telefono2}
             </div>
           )}
         </div>
@@ -45,8 +48,8 @@ async function Usuario({ params }) {
         <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
           <h3 className="font-bold text-md text-center">Ante una emergencia</h3>
           <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-            Teléfono de Emergencia: {u?.telefonoEmergencia} (
-            {u?.nombreContactoEmergencia})
+            Teléfono de Emergencia: {v?.telefonoEmergencia} (
+            {v?.nombreContactoEmergencia})
           </div>
         </div>
 
@@ -56,7 +59,7 @@ async function Usuario({ params }) {
             <BotonAgregarDisponibilidad id={id} />
           </div>
 
-          {u.Disponibilidades.map((d) => (
+          {v.Disponibilidades.map((d) => (
             <>
               <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
                 {d.diaSemana}, {d.horaInicio.slice(0, -3)}-
@@ -75,7 +78,7 @@ async function Usuario({ params }) {
             <BotonAgregarAntecedenteDeAcompaniamiento id={id} />
           </div>
 
-          {u.AntecedenteDeAcompaniamientos.map((a) => (
+          {v.AntecedenteDeAcompaniamientos.map((a) => (
             <div className="flex flex-col gap-2 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
               <div className="flex justify-end">
                 <BotonBorrarAntecedenteAcompniamiento
@@ -103,16 +106,16 @@ async function Usuario({ params }) {
           <h3 className="font-bold text-md text-center">En Kamalaya</h3>
 
           <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-            Fecha de alta: {formatearFecha(u?.fechaAlta)}
+            Fecha de alta: {formatearFecha(v?.fechaAlta)}
           </div>
 
           <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-            Tiene auto: {u?.tieneAuto ? 'Si' : 'No'}
+            Tiene auto: {v?.tieneAuto ? 'Si' : 'No'}
           </div>
 
           <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
             Tiene experiencia en cuidados paliativos:{' '}
-            {u?.experienciaCP ? 'Si' : 'No'}
+            {v?.experienciaCP ? 'Si' : 'No'}
           </div>
         </div>
 
@@ -122,32 +125,32 @@ async function Usuario({ params }) {
           </h3>
           <div className="flex flex-col md:flex-row justify-evenly">
             <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-              DNI: {u?.dni}
+              DNI: {v?.dni}
             </div>
 
             <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
               Género:{' '}
-              {u?.genero === 'M'
+              {v?.genero === 'M'
                 ? 'Masculino'
-                : u?.genero === 'F'
+                : v?.genero === 'F'
                 ? 'Femenino'
                 : 'otro'}
             </div>
           </div>
 
             <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-              Fecha de Nacimiento: {formatearFecha(u?.fechaDeNacimiento)} (
-              {calcularEdad(u?.fechaDeNacimiento)} años)
+              Fecha de Nacimiento: {formatearFecha(v?.fechaDeNacimiento)} (
+              {calcularEdad(v?.fechaDeNacimiento)} años)
             </div>
 
           <div className="flex flex-col md:flex-row justify-between">
             <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-              Profesión/Oficio/Ocupación: {u?.profesion_oficio_ocupacion}
+              Profesión/Oficio/Ocupación: {v?.profesion_oficio_ocupacion}
               {/* className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300" */}
             </div>
 
             <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-              Hobbies/Habilidades: {u?.hobbies_habilidades}
+              Hobbies/Habilidades: {v?.hobbies_habilidades}
               {/* className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300" */}
             </div>
           </div>
@@ -157,16 +160,16 @@ async function Usuario({ params }) {
           <h3 className="font-bold text-md text-center">Domicilio</h3>
           <div className="flex flex-col md:flex-row justify-between gap-6">
             <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-              Calle: {u?.calle} {u?.numero}
+              Calle: {v?.calle} {v?.numero}
             </div>
 
             <div className="flex flex-col md:flex-row justify-between gap-6">
               <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-                Localidad: {u?.localidad}
+                Localidad: {v?.localidad}
               </div>
 
               <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-                {u?.provincia}, {u?.pais}({u?.codigoPostal})
+                {v?.provincia}, {v?.pais}({v?.codigoPostal})
               </div>
             </div>
           </div>
@@ -175,4 +178,4 @@ async function Usuario({ params }) {
     </div>
   );
 }
-export default Usuario;
+export default Voluntario;

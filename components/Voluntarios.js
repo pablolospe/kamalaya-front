@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import UsuariosTabla from '@/components/UsuariosTabla';
-import { fetchUsuarios } from './Api'
+import VoluntariosTabla from '@/components/VoluntariosTabla';
+import { fetchVoluntarios } from './Api'
 // const usuarios = async (query) => {
 //   const queryString = new URLSearchParams(query).toString();
 //   const url = `https://kamalaya.onrender.com/usuarios${
@@ -13,7 +13,7 @@ import { fetchUsuarios } from './Api'
 // };
 
 function Voluntarios() {
-  const [usuariosData, setUsuariosData] = useState([]);
+  const [voluntariosData, setVoluntariosData] = useState([]);
 
   const [query, setQuery] = useState({
     nombre: '',
@@ -31,8 +31,8 @@ function Voluntarios() {
 
   useEffect(() => {
      async function fetchData() {
-      const usuarioData = await fetchUsuarios(query);
-      setUsuariosData(usuarioData);
+      const voluntarioData = await fetchVoluntarios(query);
+      setVoluntariosData(voluntarioData);
     }
     fetchData();
   }, [query]);
@@ -76,14 +76,8 @@ function Voluntarios() {
         </div>
        
       </div>
-      <UsuariosTabla usuariosData={usuariosData}/>
-      {/* {usuariosData.map((u) => (
-        <Link key={u.usuario_id} href={`/voluntarios/${u.usuario_id}`}>
-          <div className="text-violet-600 hover:text-violet-800">
-            {u.usuario_id} {u.nombre} {u.apellido}
-          </div>
-        </Link>
-      ))} */}
+      <VoluntariosTabla usuariosData={voluntariosData}/>
+     
     </div>
   );
 }

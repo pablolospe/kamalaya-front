@@ -13,7 +13,7 @@ const DiaSemanaEnum = {
   domingo: 'Domingo',
 };
 
-const usuarios = async (query) => {
+const voluntarios = async (query) => {
   const queryString = new URLSearchParams();
 
 
@@ -29,8 +29,8 @@ const usuarios = async (query) => {
     }
   }
 
-  // const url = `http://localhost:8000/usuarios${
-  const url = `https://kamalaya-dev.fl0.io/usuarios${
+  // const url = `http://localhost:8000/voluntarios${
+  const url = `https://kamalaya-dev.fl0.io/voluntarios${
     queryString ? `?${queryString}` : ''
   }`;
   console.log(queryString);
@@ -39,7 +39,7 @@ const usuarios = async (query) => {
 };
 
 function Voluntarios() {
-  const [usuariosData, setUsuariosData] = useState([]);
+  const [voluntariosData, setVoluntariosData] = useState([]);
   
   const [query, setQuery] = useState({
     nombre: '',
@@ -88,11 +88,11 @@ function Voluntarios() {
   
   useEffect(() => {
     async function fetchData() {
-      const usuarioData = await usuarios(query);
-      setUsuariosData(usuarioData);
+      const voluntarioData = await voluntarios(query);
+      setVoluntariosData(voluntarioData);
     }
     fetchData();
-  }, [query, usuarios]);
+  }, [query, voluntarios]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -281,43 +281,43 @@ function Voluntarios() {
         </thead>
 
         <tbody>
-          {usuariosData?.map((u) => (
+          {voluntariosData?.map((v) => (
             <tr
-              key={u.usuario_id}
+              key={v.voluntario_id}
               className="text-center border hover:bg-gray-100"
             >
               <td>
-                <Link href={`/voluntarios/${u.usuario_id}`}>
+                <Link href={`/voluntarios/${v.voluntario_id}`}>
                   <div className="flex flex-row justify-evenly items-center ml-3 my-1 text-left">
                     <div className="bg-gray-200 hover:bg-gray-300 cursor-pointer p-3 gap-3 rounded-lg flex flex-row">
                       <LuUser size={20} />
-                    {u.nombre} {u.apellido} ({u.usuario_id})
+                    {v.nombre} {v.apellido} ({v.voluntario_id})
                     </div>
                   </div>
                 </Link>
               </td>
               <td className="hidden md:table-cell">
                 <div>
-                  {u.telefono2 ? (
+                  {v.telefono2 ? (
                     <span>
-                      {u.telefono} / {u.telefono2}
+                      {v.telefono} / {v.telefono2}
                     </span>
                   ) : (
-                    u.telefono
+                    v.telefono
                   )}
                 </div>
               </td>
               <td className="hidden md:table-cell">
-                <div>{u.tieneAuto ? 'si' : 'no'}</div>
+                <div>{v.tieneAuto ? 'si' : 'no'}</div>
               </td>
 
               <td className="hidden md:table-cell">
-                <div>{u.experienciaCP === true ? 'si' : 'no'}</div>
+                <div>{v.experienciaCP === true ? 'si' : 'no'}</div>
               </td>
 
               <td className="hidden md:table-cell">
                 <div>
-                  {u?.Disponibilidades.map((d) => (
+                  {v?.Disponibilidades.map((d) => (
                     <span key={d.disponibilidad_id}>
                       {DiaSemanaEnum[d.diaSemana]} &nbsp;
                       {d.horaInicio.slice(0, -3)}-
