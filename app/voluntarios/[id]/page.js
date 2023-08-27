@@ -62,8 +62,8 @@ async function Voluntario({ params }) {
           {v.Disponibilidades.map((d) => (
             <>
               <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-                {d.diaSemana}, {d.horaInicio.slice(0, -3)}-
-                {d.horaFin.slice(0, -3)}
+                {d.diaSemana}, {d.horaInicio}-
+                {d.horaFin}
                 <BotonBorrarDisponibilidad id={d.disponibilidad_id} />
               </div>
             </>
