@@ -2,9 +2,10 @@
 
 import { LuPlus } from 'react-icons/lu';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 function BotonAgregarAntecedenteDeAcompaniamiento(id) {
-
+  const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false); // Estado para controlar la apertura/cierre del modal
   const [formData, setFormData] = useState({
     voluntario_id: id.id,
@@ -43,7 +44,8 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
       });
 
       if (response.ok) {
-        toggleModal();
+        toggleModal()
+        router.refresh();
         console.log('Datos enviados exitosamente');
         
       } else {
@@ -87,7 +89,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="fixed inset-0 bg-gray-800 opacity-70"></div>
-          <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+          <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5 max-h-[95%] max-w-[95%] overflow-y-auto" >
           {/* <!-- Modal header --> */}
             <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -112,6 +114,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                   <input 
                     type="text"
                     name="institucion"
+                    required
                     value={formData.institucion}
                     onChange={handleChange}
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
@@ -126,6 +129,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                   <input 
                     type="text"
                     name="tareasRealizadas"
+                    required
                     value={formData.tareasRealizadas}
                     onChange={handleChange}
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
@@ -139,6 +143,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                     for="fechaInicio">Fecha de inicio:</label> 
                   <input
                     name="fechaInicio"
+                    required
                     value={formData.fechaInicio}
                     onChange={handleChange}
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
@@ -151,6 +156,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                     for="fechaFin">Fecha de fin:</label> 
                   <input 
                     name="fechaFin"
+                    required
                     value={formData.fechaFin}
                     onChange={handleChange}
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
@@ -164,7 +170,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                     name="detalles"
                     value={formData.detalles}
                     onChange={handleChange}
-                    id="detalles" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"
+                    id="detalles" rows="2" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Describe los detalles aquí"
                     ></textarea>                    
                 </div>
                 

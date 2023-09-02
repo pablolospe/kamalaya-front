@@ -44,7 +44,6 @@ async function Voluntario({ params }) {
           )}
         </div>
 
-
         <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
           <h3 className="font-bold text-md text-center">Ante una emergencia</h3>
           <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
@@ -91,9 +90,10 @@ async function Voluntario({ params }) {
               <div className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
                 Tareas realizadas: {a.tareasRealizadas}
               </div>
+              {a.detalles &&
               <div className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
                 Comentario: {a.detalles}
-              </div>
+              </div>}
               <div className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
                 Duración: Desde el {formatearFecha(a.fechaInicio)} hasta el{' '}
                 {formatearFecha(a.fechaFin)}
