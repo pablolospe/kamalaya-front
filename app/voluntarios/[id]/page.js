@@ -4,6 +4,7 @@ import BotonAgregarDisponibilidad from '@/components/BotonAgregarDisponibilidad'
 import BotonBorrarDisponibilidad from '@/components/BotonBorrarDisponibilidad';
 import BotonBorrarAntecedenteAcompniamiento from '@/components/BotonBorrarAntecedenteAcompniamiento';
 import BotonAgregarAntecedenteDeAcompaniamiento from '@/components/BotonAgregarAntecedenteDeAcompaniamiento';
+import BotonAgregarDisponibilidad2 from '@/components/BotonAgregarDisponibilidad2';
 
 const voluntarioDetalle = async (id) => {
   return fetch(`https://kamalaya-dev.fl0.io/voluntarios/${id}`, {
@@ -56,6 +57,7 @@ async function Voluntario({ params }) {
           <div className="flex flex-row gap-3 items-center justify-center">
             <h3 className="font-bold text-md text-center">Disponibilidad</h3>
             <BotonAgregarDisponibilidad id={id} />
+            {/* <BotonAgregarDisponibilidad2 id={id} /> */}
           </div>
 
           {v.Disponibilidades.map((d) => (
