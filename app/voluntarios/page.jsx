@@ -33,7 +33,7 @@ const voluntarios = async (query) => {
   const url = `https://kamalaya-dev.fl0.io/voluntarios${
     queryString ? `?${queryString}` : ''
   }`;
-  console.log(queryString);
+  // console.log(queryString);
   const response = await fetch(url, { cache: 'no-store' });
   return response.json();
 };
@@ -284,15 +284,15 @@ function Voluntarios() {
           {voluntariosData?.map((v) => (
             <tr
               key={v.voluntario_id}
-              className="text-center border hover:bg-gray-100"
+              className="text-center bg-gray-100 hover:bg-gray-200"
             >
               <td>
                 <Link href={`/voluntarios/${v.voluntario_id}`}>
-                  <div className="flex flex-row justify-evenly items-center ml-3 my-1 text-left">
-                    <div className="bg-gray-200 hover:bg-gray-300 cursor-pointer p-3 gap-3 rounded-lg flex flex-row">
+                  <div className="flex flex-row items-center ml-3 my-1 text-left">
+                    <div className="bg-gray-300 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
                       <LuUser size={20} />
-                    {v.nombre} {v.apellido} ({v.voluntario_id})
                     </div>
+                    {v.nombre} {v.apellido} ({v.voluntario_id})
                   </div>
                 </Link>
               </td>
