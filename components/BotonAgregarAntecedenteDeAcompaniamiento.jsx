@@ -95,7 +95,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   Antecedente de acompañamiento                </h3>
                 <button onClick={toggleModal} type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
-                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                     <span className="sr-only">Close modal</span>
                 </button>
             </div>
@@ -108,7 +108,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                 <div>
                   <label 
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    for="institucion"
+                    htmlFor="institucion"
                     >Institución:
                   </label> 
                   <input 
@@ -125,7 +125,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                 <div>
                   <label 
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  for="tareasRealizadas">Tareas:</label> 
+                  htmlFor="tareasRealizadas">Tareas:</label> 
                   <input 
                     type="text"
                     name="tareasRealizadas"
@@ -140,7 +140,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                 <div>
                   <label 
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    for="fechaInicio">Fecha de inicio:</label> 
+                    htmlFor="fechaInicio">Fecha de inicio:</label> 
                   <input
                     name="fechaInicio"
                     required
@@ -153,7 +153,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                 <div>
                   <label 
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    for="fechaFin">Fecha de fin:</label> 
+                    htmlFor="fechaFin">Fecha de fin:</label> 
                   <input 
                     name="fechaFin"
                     required
@@ -165,7 +165,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                 </div>
                 
                 <div className="sm:col-span-2">
-                    <label for="detalles" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Detalles</label>
+                    <label htmlFor="detalles" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Detalles</label>
                     <textarea 
                     name="detalles"
                     value={formData.detalles}
@@ -181,7 +181,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
                 className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 // onClick={(e) => antecedenteAcompaniamiento(e)}
               >
-                <svg className="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                <svg className="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd"></path></svg>
                 Agregar
               </button>
               {/* <button
