@@ -16,6 +16,7 @@ function Sidebar({ children }) {
                 src="/logoKamalaya.svg"
                 width={150}
                 height={150}
+                priority={false}
                 alt="isotipo kamalaya"
               />
               home

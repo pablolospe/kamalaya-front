@@ -21,10 +21,11 @@ async function Voluntario({ params }) {
 
   return (
     <div>
-      <div className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
-        <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
+        <h2 className="m-2 text-lg text-center font-bold text-md p-2 rounded-lg border">
           {v?.nombre} {v?.apellido}
         </h2>
+
+      <div className="flex flex-row flex-wrap justify-evenly items-start md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
 
         <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
           <h3 className="font-bold text-md text-center">
@@ -100,6 +101,49 @@ async function Voluntario({ params }) {
                 Duración: Desde el {formatearFecha(a.fechaInicio)} hasta el{' '}
                 {formatearFecha(a.fechaFin)}
               </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
+          <div className="flex flex-row gap-3 items-center justify-center">
+            <h3 className="font-bold text-md text-center">
+              Antecedentes patologicos del voluntario
+            </h3>
+            {/* <BotonAgregarAntecedenteDeAcompaniamiento id={id} /> */}
+          </div>
+
+          {v.AntecedentePatologicos?.map((a) => (
+            <div className="flex flex-col gap-2 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
+              <div className="flex justify-end">
+                {/* <BotonBorrarAntecedenteAcompniamiento
+                  id={a.antecedente_acompaniamiento_id}
+                /> */}
+              </div>
+              <div className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
+                Tipo de patología: {a?.tipoPatologia}
+              </div>
+              {a.descripcion &&
+              <div className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
+                Descripción: {a.descripcion}
+              </div>}
+              {a.fechaDiagnostico &&
+              <div className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
+                Fecha del diagnostico: {a.fechaDiagnostico}
+              </div>}
+              {a.tratamientoActual &&
+              <div className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
+                Tratamiento actual: {a.tratamientoActual}
+              </div>}
+              {a.alergias &&
+              <div className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
+                Alergias: {a.alergias}
+              </div>}
+              {a.medicacion &&
+              <div className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
+                Medicación: {a.medicacion}
+              </div>}
+             
             </div>
           ))}
         </div>
