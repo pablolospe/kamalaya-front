@@ -5,6 +5,8 @@ import BotonBorrarDisponibilidad from '@/components/BotonBorrarDisponibilidad';
 import BotonBorrarAntecedenteAcompniamiento from '@/components/BotonBorrarAntecedenteAcompniamiento';
 import BotonAgregarAntecedenteDeAcompaniamiento from '@/components/BotonAgregarAntecedenteDeAcompaniamiento';
 import BotonAgregarDisponibilidad2 from '@/components/BotonAgregarDisponibilidad2';
+import BotonAgregarAntecedentePatologico from '@/components/BotonAgregarAntecedentePatologico';
+import BotonBorrarAntecedentePatologico from '@/components/BotonBorrarAntecedentePatologico';
 
 const voluntarioDetalle = async (id) => {
   return fetch(`https://kamalaya-dev.fl0.io/voluntarios/${id}`, {
@@ -165,15 +167,15 @@ async function Voluntario({ params }) {
             <h3 className="font-bold text-md text-center">
               Antecedentes patologicos del voluntario
             </h3>
-            {/* <BotonAgregarAntecedenteDeAcompaniamiento id={id} /> */}
+            <BotonAgregarAntecedentePatologico id={id} />
           </div>
 
           {v.AntecedentePatologicos?.map((a) => (
             <div className="flex flex-col gap-2 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
               <div className="flex justify-end">
-                {/* <BotonBorrarAntecedenteAcompniamiento
-                  id={a.antecedente_acompaniamiento_id}
-                /> */}
+                <BotonBorrarAntecedentePatologico
+                  id={a.antecedente_patologico_id}
+                />
               </div>
               <div className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300">
                 Tipo de patología: {a?.tipoPatologia}
