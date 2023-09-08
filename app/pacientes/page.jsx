@@ -78,10 +78,12 @@ function Pacientes() {
 
   return (
     <div className="flex flex-col gap-2">
-      <h1>PACIENTES</h1>
-      <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-4 p-4 rounded-lg shadow-md">
+      <h1 className='text-center font-semibold text-xl'>PACIENTES</h1>
+
+
+      {/* FILTROS */}
+      {/* <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-4 p-4 rounded-lg shadow-md">
         <div>
-          {/* <label className="block mb-2 text-gray-700">Nombre</label> */}
           <input
             name="nombre"
             type="text"
@@ -102,7 +104,7 @@ function Pacientes() {
           />
         </div>
         <div>
-          {/* <label className="block mb-2 text-gray-700">Localidad</label> */}
+         
           <input
             name="localidad"
             type="text"
@@ -114,7 +116,7 @@ function Pacientes() {
         </div>
         
         <div>
-          {/* <label className="block mb-2 text-gray-700">Hobbies</label> */}
+        
           <input
             name="hobbies"
             type="text"
@@ -131,7 +133,7 @@ function Pacientes() {
         >
           Borrar <br></br>filtros
         </button>
-      </div>
+      </div> */}
 
       <table>
         <thead>
@@ -153,14 +155,14 @@ function Pacientes() {
               className="text-center bg-gray-100 hover:bg-gray-200"
             >
               <td>
-                {/* <Link href={`/pacientes/${v.paciente_id}`}> */}
+                <Link href={`/pacientes/${v.paciente_id}`}>
                   <div className="flex flex-row items-center ml-3 my-1 text-left">
                     <div className="bg-gray-300 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
                       <LuUser size={20} />
                     </div>
                     {v.nombre} {v.apellido} ({v.paciente_id})
                   </div>
-                {/* </Link> */}
+                </Link>
               </td>
               <td className="hidden md:table-cell">
                 <div>
