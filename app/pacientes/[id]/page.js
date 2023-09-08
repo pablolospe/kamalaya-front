@@ -3,8 +3,8 @@ import { formatearFecha, calcularEdad } from '@/utils/formats';
 
 
 const pacienteDetalle = async (id) => {
-  // return fetch(`https://kamalaya-dev.fl0.io/pacientes/${id}`, {
-  return fetch(`http://localhost:8000/pacientes/${id}`, {
+  return fetch(`https://kamalaya-dev.fl0.io/pacientes/${id}`, {
+  // return fetch(`http://localhost:8000/pacientes/${id}`, {
     cache: 'no-store',
   }).then((res) => res.json());
 };

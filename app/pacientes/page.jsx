@@ -19,8 +19,8 @@ const pacientes = async (query) => {
     }
   }
 
-  const url = `http://localhost:8000/paciente${
-  // const url = `https://kamalaya-dev.fl0.io/paciente${
+  // const url = `http://localhost:8000/paciente${
+  const url = `https://kamalaya-dev.fl0.io/paciente${
     queryString ? `?${queryString}` : ''
   }`;
   // console.log(queryString);
