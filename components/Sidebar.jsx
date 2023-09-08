@@ -37,6 +37,17 @@ function Sidebar({ children }) {
               <LuUserPlus size={20} />
             </div>
           </Link>
+          <Link href="/pacientes">
+            <div className="bg-gray-100 hover:bg-gray-200 cursor-pointer my-4 p-3 rounded-lg inline-block">
+              {/* <RxDashboard size={20} /> */}
+              <LuUsers size={20} />
+            </div>
+          </Link>
+          <Link href="/ingreso/paciente">
+            <div className="bg-gray-100 hover:bg-gray-200 cursor-pointer my-4 p-3 rounded-lg inline-block">
+              <LuUserPlus size={20} />
+            </div>
+          </Link>
         </div>
       </div>
       <main className="ml-20 w-full">{children}</main>
