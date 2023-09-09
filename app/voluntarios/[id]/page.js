@@ -75,6 +75,23 @@ async function Voluntario({ params }) {
 
         <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
           <div className="flex flex-row gap-3 items-center justify-center">
+            <h3 className="font-bold text-md text-center">Vacaciones</h3>
+            {/* <BotonAgregarDisponibilidad id={id} /> */}
+          </div>
+
+          {v.Vacaciones.map((v) => (
+            <>
+              <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
+                Desde {formatearFecha(v.fechaInicio)} hasta {formatearFecha(v.fechaFin)}, <br/>
+                {v.detalles},
+                {/* <BotonBorrarDisponibilidad id={d.disponibilidad_id} /> */}
+              </div>
+            </>
+          ))}
+        </div>
+
+        <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
+          <div className="flex flex-row gap-3 items-center justify-center">
             <h3 className="font-bold text-md text-center">
               Antecedentes de acompañamiento
             </h3>
