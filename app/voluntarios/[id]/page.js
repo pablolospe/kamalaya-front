@@ -4,9 +4,10 @@ import BotonAgregarDisponibilidad from '@/components/BotonAgregarDisponibilidad'
 import BotonBorrarDisponibilidad from '@/components/BotonBorrarDisponibilidad';
 import BotonBorrarAntecedenteAcompniamiento from '@/components/BotonBorrarAntecedenteAcompniamiento';
 import BotonAgregarAntecedenteDeAcompaniamiento from '@/components/BotonAgregarAntecedenteDeAcompaniamiento';
-import BotonAgregarDisponibilidad2 from '@/components/BotonAgregarDisponibilidad2';
 import BotonAgregarAntecedentePatologico from '@/components/BotonAgregarAntecedentePatologico';
 import BotonBorrarAntecedentePatologico from '@/components/BotonBorrarAntecedentePatologico';
+import BotonAgregarVacaciones from '@/components/BotonAgregarVacaciones';
+import BotonBorrarVacaciones from '@/components/BotonBorrarVacaciones';
 
 const voluntarioDetalle = async (id) => {
   return fetch(`https://kamalaya-dev.fl0.io/voluntarios/${id}`, {
@@ -76,7 +77,7 @@ async function Voluntario({ params }) {
         <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
           <div className="flex flex-row gap-3 items-center justify-center">
             <h3 className="font-bold text-md text-center">Vacaciones</h3>
-            {/* <BotonAgregarDisponibilidad id={id} /> */}
+            <BotonAgregarVacaciones id={id} />
           </div>
 
           {v.Vacaciones.map((v) => (
@@ -84,7 +85,7 @@ async function Voluntario({ params }) {
               <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
                 Desde {formatearFecha(v.fechaInicio)} hasta {formatearFecha(v.fechaFin)}, <br/>
                 {v.detalles},
-                {/* <BotonBorrarDisponibilidad id={d.disponibilidad_id} /> */}
+                <BotonBorrarVacaciones id={v.vacaciones_id} />
               </div>
             </>
           ))}
