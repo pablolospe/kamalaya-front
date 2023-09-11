@@ -51,7 +51,7 @@ const FormularioPaciente = () => {
           icon: 'success',
           confirmButtonColor: 'gray',
           color: 'black',
-        }).then(router.push('/voluntarios'))
+        }).then(router.push('/pacientes'))
         
         console.log('Datos enviados exitosamente');
         
