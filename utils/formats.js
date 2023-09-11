@@ -24,3 +24,16 @@ export function calcularEdad(dateOfBirth) {
 
   return age;
 }
+
+
+export function fechaActualEntreFechas(fechaInicioStr, fechaFinStr) {
+  const fechaActual = new Date(); // Obtén la fecha actual
+  const fechaActualStr = fechaActual.toISOString().split('T')[0];
+
+  // Convierte las cadenas de fecha en objetos Date
+  const fechaInicio = new Date(fechaInicioStr);
+  const fechaFin = new Date(fechaFinStr);
+// console.log(fechaActualStr, fechaInicioStr, fechaFinStr);
+  // Compara la fecha actual con las fechas de inicio y fin
+  return fechaActualStr >= fechaInicio && fechaActualStr <= fechaFin ? 'Está de vacaciones' : 'No está de vacaciones'
+}

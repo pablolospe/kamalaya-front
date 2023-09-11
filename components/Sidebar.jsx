@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { LuUsers, LuUserPlus } from 'react-icons/lu';
+import { LuUsers, LuUserPlus, LuUser } from 'react-icons/lu';
 
 
 function Sidebar({ children }) {
@@ -40,7 +40,7 @@ function Sidebar({ children }) {
           <Link href="/pacientes">
             <div className="bg-gray-100 hover:bg-gray-200 cursor-pointer my-4 p-3 rounded-lg inline-block">
               {/* <RxDashboard size={20} /> */}
-              <LuUsers size={20} />
+              <LuUser size={20} />
             </div>
           </Link>
           <Link href="/ingreso/paciente">

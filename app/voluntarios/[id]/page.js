@@ -83,8 +83,8 @@ async function Voluntario({ params }) {
           {v.Vacaciones.map((v) => (
             <>
               <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-                Desde {formatearFecha(v.fechaInicio)} hasta {formatearFecha(v.fechaFin)}, <br/>
-                {v.detalles},
+                Desde {formatearFecha(v.fechaInicio)} hasta {formatearFecha(v.fechaFin)} <br/>
+                {v.detalles}
                 <BotonBorrarVacaciones id={v.vacaciones_id} />
               </div>
             </>

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
+import { fechaActualEntreFechas } from '@/utils/formats';
 
 const DiaSemanaEnum = {
   lunes: 'Lunes',
@@ -15,7 +16,6 @@ const DiaSemanaEnum = {
 
 const voluntarios = async (query) => {
   const queryString = new URLSearchParams();
-
 
   for (const key in query) {
     if (Array.isArray(query[key])) {
@@ -33,7 +33,7 @@ const voluntarios = async (query) => {
   const url = `https://kamalaya-dev.fl0.io/voluntarios${
     queryString ? `?${queryString}` : ''
   }`;
-  // console.log(queryString);
+  
   const response = await fetch(url, { cache: 'no-store' });
   return response.json();
 };
@@ -51,7 +51,6 @@ function Voluntarios() {
     experienciaCP: '',
     diaSemana:[]
   });
-  console.log(query);
 
   function handleBorrarFiltros() {
     setQuery({
@@ -276,7 +275,8 @@ function Voluntarios() {
             <th className="hidden md:table-cell border p-2">
               Tiene experiencia
             </th>
-            <th className="hidden md:table-cell border p-2">Disponibilidad</th>
+            <th className="hidden md:table-cell border p-2">Está activo/a?</th>
+            <th className="hidden md:table-cell border p-2">Disponibilidad semanal</th>
           </tr>
         </thead>
 
@@ -313,6 +313,14 @@ function Voluntarios() {
 
               <td className="hidden md:table-cell">
                 <div>{v.experienciaCP === true ? 'si' : 'no'}</div>
+              </td>
+
+              <td className="hidden md:table-cell">
+                <div>
+                {v?.Vacaciones && v.Vacaciones.some(vacacion =>
+                  fechaActualEntreFechas(vacacion.fechaInicio, vacacion.fechaFin)
+                ) ? 'Está de vacaciones' : 'No está de vacaciones'}
+                </div>
               </td>
 
               <td className="hidden md:table-cell">
