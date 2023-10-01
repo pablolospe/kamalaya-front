@@ -23,20 +23,19 @@ function BotonBorrarAntecedenteAcompniamiento(id) {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        const response = fetch(
-          `${URL}/acompaniamiento/${id.id}`,
-          {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const response = fetch(`${URL}/acompaniamiento/${id.id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
-        Swal.fire({title:'Borrado', text:'El antecedente de acompañamiento ha sido eliminado', 
-        icon:'success', confirmButtonColor: '#3085d6',}).then(
-          router.refresh()
-        );
+        Swal.fire({
+          title: 'Borrado',
+          text: 'El antecedente de acompañamiento ha sido eliminado',
+          icon: 'success',
+          confirmButtonColor: '#3085d6',
+        }).then(router.refresh());
       }
     });
   };

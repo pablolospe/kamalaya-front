@@ -23,19 +23,18 @@ function BotonBorrarDisponibilidad(id) {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        const response = fetch(
-          `${URL}/disponibilidad/${id.id}`,
-          {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const response = fetch(`${URL}/disponibilidad/${id.id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
-        Swal.fire('Borrada', 'La disponibilidad ha sido eliminada', 'success').then(
-          router.refresh()
-        );
+        Swal.fire(
+          'Borrada',
+          'La disponibilidad ha sido eliminada',
+          'success'
+        ).then(router.refresh());
       }
     });
   };

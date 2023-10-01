@@ -23,15 +23,12 @@ function BotonBorrarAntecedentePatologico(id) {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        const response = fetch(
-          `${URL}/patologias/${id.id}`,
-          {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const response = fetch(`${URL}/patologias/${id.id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
         Swal.fire('Borrada', 'La patologia ha sido eliminada', 'success').then(
           router.refresh()

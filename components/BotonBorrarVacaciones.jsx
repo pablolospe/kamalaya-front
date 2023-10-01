@@ -23,19 +23,18 @@ function BotonBorrarVacaciones(id) {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        const response = fetch(
-          `${URL}/vacaciones/${id.id}`,
-          {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const response = fetch(`${URL}/vacaciones/${id.id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
-        Swal.fire('Borrada', 'Las Vacaciones ha sido eliminada', 'success').then(
-          router.refresh()
-        );
+        Swal.fire(
+          'Borrada',
+          'Las Vacaciones ha sido eliminada',
+          'success'
+        ).then(router.refresh());
       }
     });
   };
