@@ -3,6 +3,7 @@
 import { LuPlus } from 'react-icons/lu';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { URL } from '@/config';
 
 function BotonAgregarAntecedenteDeAcompaniamiento(id) {
   const router = useRouter();
@@ -33,9 +34,8 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://kamalaya-dev.fl0.io/acompaniamiento', {
-      // const response = await fetch('http://localhost:8000/acompaniamiento', {
-        // const response = await fetch('https://kamalaya.onrender.com/acompaniamiento', {
+      const response = await fetch(`${URL}/acompaniamiento`, {
+     
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

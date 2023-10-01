@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import { LuX } from 'react-icons/lu';
+import { URL } from '@/config';
 
 function BotonBorrarAntecedenteAcompniamiento(id) {
   const router = useRouter();
@@ -23,8 +24,7 @@ function BotonBorrarAntecedenteAcompniamiento(id) {
     }).then((result) => {
       if (result.isConfirmed) {
         const response = fetch(
-          `https://kamalaya-dev.fl0.io/acompaniamiento/${id.id}`,
-          // `http://localhost:8000/acompaniamiento/${id.id}`,
+          `${URL}/acompaniamiento/${id.id}`,
           {
             method: 'DELETE',
             headers: {

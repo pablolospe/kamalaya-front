@@ -1,9 +1,9 @@
 import React from 'react';
 import { formatearFecha, calcularEdad } from '@/utils/formats';
+import { URL } from '@/config';
 
 const pacienteDetalle = async (id) => {
-  return fetch(`https://kamalaya-dev.fl0.io/paciente/${id}`, {
-    // return fetch(`http://localhost:8000/paciente/${id}`, {
+  return fetch(`${URL}/paciente/${id}`, {
     cache: 'no-store',
   }).then((res) => res.json());
 };
@@ -12,7 +12,6 @@ async function Paciente({ params }) {
   const { id } = params;
   const v = await pacienteDetalle(id);
   // console.log(id);
-  // console.log(v);
 
   return (
     <div>

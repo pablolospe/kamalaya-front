@@ -1,7 +1,8 @@
+import { URL } from '@/config';
+
 export async function fetchVoluntarios(query) {
     const queryString = new URLSearchParams(query).toString();
-    const url = `https://kamalaya-dev.fl0.io/voluntarios${
-    // const url = `https://kamalaya.onrender.com/usuarios${
+    const url = `${URL}/voluntarios${
       queryString ? `?${queryString}` : ''
     }`;
     const response = await fetch(url, { cache: 'no-store' });

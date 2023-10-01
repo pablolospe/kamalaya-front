@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
+import { URL } from '@/config';
 
 const pacientes = async (query) => {
   const queryString = new URLSearchParams();
@@ -19,11 +20,10 @@ const pacientes = async (query) => {
     }
   }
 
-  // const url = `http://localhost:8000/paciente${
-  const url = `https://kamalaya-dev.fl0.io/paciente${
+  const url = `${URL}/paciente${
     queryString ? `?${queryString}` : ''
   }`;
-  // console.log(queryString);
+
   const response = await fetch(url, { cache: 'no-store' });
   return response.json();
 };

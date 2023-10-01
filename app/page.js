@@ -36,7 +36,7 @@ export default function Home() {
           src="/fotoFlor.jpg"
           width={650}
           height={650}
-          alt="Foto mano kamalaya"
+          alt="Foto flor kamalaya"
         />
       </div>
     </main>

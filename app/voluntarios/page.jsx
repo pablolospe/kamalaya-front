@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
 import { fechaActualEntreFechas } from '@/utils/formats';
+import { URL } from '@/config';
 
 const DiaSemanaEnum = {
   lunes: 'Lunes',
@@ -29,8 +30,7 @@ const voluntarios = async (query) => {
     }
   }
 
-  // const url = `http://localhost:8000/voluntarios${
-  const url = `https://kamalaya-dev.fl0.io/voluntarios${
+  const url = `${URL}/voluntarios${
     queryString ? `?${queryString}` : ''
   }`;
   

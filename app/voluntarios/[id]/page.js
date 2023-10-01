@@ -8,10 +8,10 @@ import BotonAgregarAntecedentePatologico from '@/components/BotonAgregarAntecede
 import BotonBorrarAntecedentePatologico from '@/components/BotonBorrarAntecedentePatologico';
 import BotonAgregarVacaciones from '@/components/BotonAgregarVacaciones';
 import BotonBorrarVacaciones from '@/components/BotonBorrarVacaciones';
+import { URL } from '@/config';
 
 const voluntarioDetalle = async (id) => {
-  return fetch(`https://kamalaya-dev.fl0.io/voluntarios/${id}`, {
-  // return fetch(`http://localhost:8000/voluntarios/${id}`, {
+  return fetch(`${URL}/voluntarios/${id}`, {
     cache: 'no-store',
   }).then((res) => res.json());
 };

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
+import { URL } from '@/config';
 
 const FormularioPaciente = () => {
   const router = useRouter();

@@ -3,6 +3,7 @@
 import { LuPlus } from 'react-icons/lu';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { URL } from '@/config';
 
 function BotonAgregarVacaciones(id) {
   const router = useRouter();
@@ -31,9 +32,7 @@ function BotonAgregarVacaciones(id) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://kamalaya-dev.fl0.io/vacaciones', {
-      // const response = await fetch('http://localhost:8000/vacaciones', {
-        // const response = await fetch('https://kamalaya.onrender.com/vacaciones', {
+      const response = await fetch(`${URL}/vacaciones`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

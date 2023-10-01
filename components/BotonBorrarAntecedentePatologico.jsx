@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import { LuX } from 'react-icons/lu';
+import { URL } from '@/config';
 
 function BotonBorrarAntecedentePatologico(id) {
   const router = useRouter();
@@ -23,7 +24,7 @@ function BotonBorrarAntecedentePatologico(id) {
     }).then((result) => {
       if (result.isConfirmed) {
         const response = fetch(
-          `https://kamalaya-dev.fl0.io/patologias/${id.id}`,
+          `${URL}/patologias/${id.id}`,
           {
             method: 'DELETE',
             headers: {

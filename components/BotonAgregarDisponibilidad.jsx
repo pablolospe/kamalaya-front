@@ -3,6 +3,7 @@
 import { LuPlus } from 'react-icons/lu';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { URL } from '@/config';
 
 function BotonAgregarDisponibilidad(id) {
   const router = useRouter();
@@ -31,9 +32,7 @@ function BotonAgregarDisponibilidad(id) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://kamalaya-dev.fl0.io/disponibilidad', {
-      // const response = await fetch('http://localhost:8000/disponibilidad', {
-        // const response = await fetch('https://kamalaya.onrender.com/disponibilidad', {
+      const response = await fetch(`${URL}/disponibilidad`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import { LuX } from 'react-icons/lu';
+import { URL } from '@/config';
 
 function BotonBorrarDisponibilidad(id) {
   const router = useRouter();
@@ -23,7 +24,7 @@ function BotonBorrarDisponibilidad(id) {
     }).then((result) => {
       if (result.isConfirmed) {
         const response = fetch(
-          `https://kamalaya-dev.fl0.io/disponibilidad/${id.id}`,
+          `${URL}/disponibilidad/${id.id}`,
           {
             method: 'DELETE',
             headers: {
