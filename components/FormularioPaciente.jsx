@@ -25,7 +25,9 @@ const FormularioPaciente = () => {
     nombreContactoEmergencia: "Roberto Enfermero",
     hobbies: "Tejer croché",
     fechaAlta: "2020-06-21",
-    fechaBaja: null
+    fechaBaja: null,
+    lat:"",
+    lng:""
   });
 
   const handleSubmit = async (e) => {
