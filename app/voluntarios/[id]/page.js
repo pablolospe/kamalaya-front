@@ -24,7 +24,7 @@ async function Voluntario({ params }) {
   console.log(v);
 
   return (
-    <div>
+    <div className="md:mx-40">
       <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
         {v?.nombre} {v?.apellido}
       </h2>
@@ -34,7 +34,7 @@ async function Voluntario({ params }) {
           className={style.details}
           // className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg"
         >
-          <summary className="font-bold text-md">
+          <summary className="font-bold text-md cursor-pointer">
             Información de contacto
           </summary>
           <div className="w-full mt-1 p-1 border rounded-md focus:ring focus:ring-blue-300">
@@ -55,7 +55,9 @@ async function Voluntario({ params }) {
         </details>
 
         <details className={style.details}>
-          <summary className="font-bold text-md">Ante una emergencia</summary>
+          <summary className="font-bold text-md cursor-pointer">
+            Ante una emergencia
+          </summary>
           <div className="w-full mt-1 p-1 border rounded-md focus:ring focus:ring-blue-300">
             <b>Teléfono de Emergencia: </b>
             {v?.telefonoEmergencia} - {v?.nombreContactoEmergencia}
@@ -63,84 +65,79 @@ async function Voluntario({ params }) {
         </details>
 
         <details className={style.details}>
-          <summary className="font-bold text-md">Disponibilidad</summary>
-          {v.Disponibilidades.length === 0 ? (
-            <BotonAgregarDisponibilidad id={id} />
-          ) : (
-            v.Disponibilidades.map((d) => (
-              <>
-                <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-                  {d.diaSemana}, {d.horaInicio}-{d.horaFin}
-                  <BotonBorrarDisponibilidad id={d.disponibilidad_id} />
-                </div>
-                <BotonAgregarDisponibilidad id={id} />
-              </>
-            ))
-          )}
+          <summary className="font-bold text-md cursor-pointer">
+            Disponibilidad
+          </summary>
+          {v.Disponibilidades.map((d) => (
+            <>
+              <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
+                {d.diaSemana}, {d.horaInicio}-{d.horaFin}
+                <BotonBorrarDisponibilidad id={d.disponibilidad_id} />
+              </div>
+            </>
+          ))}
+          <BotonAgregarDisponibilidad id={id} />
         </details>
 
         <details className={style.details}>
-          <summary className="font-bold text-md">Vacaciones</summary>
+          <summary className="font-bold text-md cursor-pointer">
+            Vacaciones
+          </summary>
 
-          {v.Vacaciones.length === 0 ? (
-            <BotonAgregarVacaciones id={id} />
-          ) : (
-            v.Vacaciones.map((v) => (
-              <>
-                <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-                  Desde {formatearFecha(v.fechaInicio)} hasta{' '}
-                  {formatearFecha(v.fechaFin)} <br />
-                  {v.detalles}
-                  <BotonBorrarVacaciones id={v.vacaciones_id} />
-                </div>
-                <BotonAgregarVacaciones id={id} />
-              </>
-            ))
-          )}
+          {v.Vacaciones.map((v) => (
+            <>
+              <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
+                Desde {formatearFecha(v.fechaInicio)} hasta{' '}
+                {formatearFecha(v.fechaFin)} <br />
+                {v.detalles}
+                <BotonBorrarVacaciones id={v.vacaciones_id} />
+              </div>
+            </>
+          ))}
+
+          <BotonAgregarVacaciones id={id} />
         </details>
 
         <details className={style.details}>
-          <summary className="font-bold text-md">
+          <summary className="font-bold text-md cursor-pointer">
             Antecedentes de acompañamiento
           </summary>
 
-          {v.AntecedenteDeAcompaniamientos.length === 0 ? (
-            <BotonAgregarAntecedenteDeAcompaniamiento id={id} />
-          ) : (
-            v.AntecedenteDeAcompaniamientos.map((a) => (
-              <div className="flex flex-col gap-2 mt-1 focus:ring focus:ring-blue-300">
-                <div className="p-2 border rounded-md">
-                  <div className="flex justify-end">
-                    <BotonBorrarAntecedenteAcompniamiento
-                      id={a.antecedente_acompaniamiento_id}
-                    />
-                  </div>
-                  <div className="w-full focus:ring focus:ring-blue-300">
-                    <b>Institución </b>"{a.institucion}"
-                  </div>
-                  <div className="w-full focus:ring focus:ring-blue-300">
-                    <b>Tareas realizadas: </b>
-                    {a.tareasRealizadas}
-                  </div>
-                  {a.detalles && (
-                    <div className="w-full focus:ring focus:ring-blue-300">
-                      <b>Comentario: </b>
-                      {a.detalles}
-                    </div>
-                  )}
-                  <div className="w-full focus:ring focus:ring-blue-300">
-                    <b>Duración: </b>Desde el {formatearFecha(a.fechaInicio)}{' '}
-                    hasta el {formatearFecha(a.fechaFin)}
-                  </div>
+          {v.AntecedenteDeAcompaniamientos.map((a) => (
+            <div className="flex flex-col gap-2 mt-1 focus:ring focus:ring-blue-300">
+              <div className="p-2 border rounded-md">
+                <div className="flex justify-end">
+                  <BotonBorrarAntecedenteAcompniamiento
+                    id={a.antecedente_acompaniamiento_id}
+                  />
                 </div>
-                <BotonAgregarAntecedenteDeAcompaniamiento id={id} />
+                <div className="w-full focus:ring focus:ring-blue-300">
+                  <b>Institución </b>"{a.institucion}"
+                </div>
+                <div className="w-full focus:ring focus:ring-blue-300">
+                  <b>Tareas realizadas: </b>
+                  {a.tareasRealizadas}
+                </div>
+                {a.detalles && (
+                  <div className="w-full focus:ring focus:ring-blue-300">
+                    <b>Comentario: </b>
+                    {a.detalles}
+                  </div>
+                )}
+                <div className="w-full focus:ring focus:ring-blue-300">
+                  <b>Duración: </b>Desde el {formatearFecha(a.fechaInicio)}{' '}
+                  hasta el {formatearFecha(a.fechaFin)}
+                </div>
               </div>
-            ))
-          )}
+            </div>
+          ))}
+          <BotonAgregarAntecedenteDeAcompaniamiento id={id} />
         </details>
 
         <details className={style.details}>
-          <summary className="font-bold text-md">En Kamalaya</summary>
+          <summary className="font-bold text-md cursor-pointer">
+            En Kamalaya
+          </summary>
           <div className="flex flex-col gap-2 mt-1 focus:ring focus:ring-blue-300">
             <div className="p-2 border rounded-md">
               <div className="w-full focus:ring focus:ring-blue-300">
@@ -162,7 +159,9 @@ async function Voluntario({ params }) {
         </details>
 
         <details className={style.details}>
-          <summary className="font-bold text-md">Información personal</summary>
+          <summary className="font-bold text-md cursor-pointer">
+            Información personal
+          </summary>
           <div className="flex flex-col gap-2 mt-1 focus:ring focus:ring-blue-300">
             <div className="p-2 border rounded-md">
               <div className="w-full focus:ring focus:ring-blue-300">
@@ -201,62 +200,60 @@ async function Voluntario({ params }) {
         </details>
 
         <details className={style.details}>
-          <summary className="font-bold text-md">
+          <summary className="font-bold text-md cursor-pointer">
             Antecedentes patologicos del voluntario
           </summary>
 
-          {v.AntecedentePatologicos.length === 0 ? (
-            <BotonAgregarAntecedentePatologico id={id} />
-          ) : (
-            v.AntecedentePatologicos?.map((a) => (
-              <div className="flex flex-col gap-2 mt-1 focus:ring focus:ring-blue-300">
-                <div className="p-2 border rounded-md">
-                  <div className="flex justify-end">
-                    <BotonBorrarAntecedentePatologico
-                      id={a.antecedente_patologico_id}
-                    />
-                  </div>
-
-                  <div className="w-full focus:ring focus:ring-blue-300">
-                    <b>Tipo de patología:</b> {a?.tipoPatologia}
-                  </div>
-                  {a.descripcion && (
-                    <div className="w-full focus:ring focus:ring-blue-300">
-                      <b>Descripción: </b> {a.descripcion}
-                    </div>
-                  )}
-                  {a.fechaDiagnostico && (
-                    <div className="w-full focus:ring focus:ring-blue-300">
-                      <b>Fecha del diagnostico: </b> {a.fechaDiagnostico}
-                    </div>
-                  )}
-                  {a.tratamientoActual && (
-                    <div className="w-full focus:ring focus:ring-blue-300">
-                      <b>Tratamiento actual: </b>
-                      {a.tratamientoActual}
-                    </div>
-                  )}
-                  {a.alergias && (
-                    <div className="w-full focus:ring focus:ring-blue-300">
-                      <b>Alergias: </b>
-                      {a.alergias}
-                    </div>
-                  )}
-                  {a.medicacion && (
-                    <div className="w-full focus:ring focus:ring-blue-300">
-                      <b>Medicación: </b>
-                      {a.medicacion}
-                    </div>
-                  )}
+          {v.AntecedentePatologicos?.map((a) => (
+            <div className="flex flex-col gap-2 mt-1 focus:ring focus:ring-blue-300">
+              <div className="p-2 border rounded-md">
+                <div className="flex justify-end">
+                  <BotonBorrarAntecedentePatologico
+                    id={a.antecedente_patologico_id}
+                  />
                 </div>
-                <BotonAgregarAntecedentePatologico id={id} />
+
+                <div className="w-full focus:ring focus:ring-blue-300">
+                  <b>Tipo de patología:</b> {a?.tipoPatologia}
+                </div>
+                {a.descripcion && (
+                  <div className="w-full focus:ring focus:ring-blue-300">
+                    <b>Descripción: </b> {a.descripcion}
+                  </div>
+                )}
+                {a.fechaDiagnostico && (
+                  <div className="w-full focus:ring focus:ring-blue-300">
+                    <b>Fecha del diagnostico: </b> {a.fechaDiagnostico}
+                  </div>
+                )}
+                {a.tratamientoActual && (
+                  <div className="w-full focus:ring focus:ring-blue-300">
+                    <b>Tratamiento actual: </b>
+                    {a.tratamientoActual}
+                  </div>
+                )}
+                {a.alergias && (
+                  <div className="w-full focus:ring focus:ring-blue-300">
+                    <b>Alergias: </b>
+                    {a.alergias}
+                  </div>
+                )}
+                {a.medicacion && (
+                  <div className="w-full focus:ring focus:ring-blue-300">
+                    <b>Medicación: </b>
+                    {a.medicacion}
+                  </div>
+                )}
               </div>
-            ))
-          )}
+            </div>
+          ))}
+          <BotonAgregarAntecedentePatologico id={id} />
         </details>
 
         <details className={style.details}>
-          <summary className="font-bold text-md">Domicilio</summary>
+          <summary className="font-bold text-md cursor-pointer">
+            Domicilio
+          </summary>
           <div className="flex flex-col gap-2 mt-1 focus:ring focus:ring-blue-300">
             <div className="p-2 border rounded-md">
               <div className="w-full rounded-md focus:ring focus:ring-blue-300">

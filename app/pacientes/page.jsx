@@ -37,7 +37,7 @@ function Pacientes() {
     localidad: '',
     hobbies: '',
   });
-  console.log(query);
+  // console.log(query);
 
   function handleBorrarFiltros() {
     setQuery({
@@ -80,71 +80,11 @@ function Pacientes() {
     <div className="flex flex-col gap-2">
       <h1 className='text-center font-semibold text-xl'>PACIENTES</h1>
 
-
-      {/* FILTROS */}
-      {/* <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-4 p-4 rounded-lg shadow-md">
-        <div>
-          <input
-            name="nombre"
-            type="text"
-            value={query.nombre}
-            onChange={handleChange}
-            className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder="Nombre..."
-          />
-        </div>
-        <div>
-          <input
-            name="apellido"
-            type="text"
-            value={query.apellido}
-            onChange={handleChange}
-            className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder="Apellido..."
-          />
-        </div>
-        <div>
-         
-          <input
-            name="localidad"
-            type="text"
-            value={query.localidad}
-            onChange={handleChange}
-            className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder="Localidad..."
-          />
-        </div>
-        
-        <div>
-        
-          <input
-            name="hobbies"
-            type="text"
-            value={query.hobbies}
-            onChange={handleChange}
-            className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder="hobbies / habilidades..."
-          />
-        </div>
-
-        <button
-          onClick={handleBorrarFiltros}
-          className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
-        >
-          Borrar <br></br>filtros
-        </button>
-      </div> */}
-
       <table>
         <thead>
           <tr className="bg-gray-100 row-auto">
             <th className="border p-2">Nombre</th>
             <th className="hidden md:table-cell border p-2">Teléfono</th>
-            <th className="hidden md:table-cell border p-2">Tiene auto</th>
-            <th className="hidden md:table-cell border p-2">
-              Tiene experiencia
-            </th>
-            <th className="hidden md:table-cell border p-2">Disponibilidad</th>
           </tr>
         </thead>
 
@@ -173,25 +113,6 @@ function Pacientes() {
                   ) : (
                     v.telefono
                   )}
-                </div>
-              </td>
-              <td className="hidden md:table-cell">
-                <div>{v.tieneAuto ? 'si' : 'no'}</div>
-              </td>
-
-              <td className="hidden md:table-cell">
-                <div>{v.experienciaCP === true ? 'si' : 'no'}</div>
-              </td>
-
-              <td className="hidden md:table-cell">
-                <div>
-                  {/* {v?.Disponibilidades.map((d) => (
-                    <span key={d.disponibilidad_id}>
-                      {DiaSemanaEnum[d.diaSemana]} &nbsp;
-                      {d.horaInicio}-
-                      {d.horaFin} <br/>
-                    </span>
-                  ))} */}
                 </div>
               </td>
             </tr>

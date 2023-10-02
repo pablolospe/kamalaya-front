@@ -102,8 +102,8 @@ const Formulario = () => {
         Información personal
       </h3>
 
-      <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg">
-        <div className="flex flex-col gap-6 md:flex-row justify-evenly">
+      {/* <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg"> */}
+      <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
           <label>
             Nombre/s:
             <input
@@ -125,8 +125,8 @@ const Formulario = () => {
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
           </label>
-        </div>
-        <div className="flex flex-col gap-6 md:flex-row justify-evenly">
+     
+     
           <label>
             DNI:
             <input
@@ -162,11 +162,9 @@ const Formulario = () => {
               <option value="otro">Otro</option>
             </select>
           </label>
-        </div>
-
-        <div className="flex flex-col gap-6 md:flex-row justify-between">
+      
           <label>
-            Profesión/Oficio/Ocupación:
+            Profesión/Oficio:
             <input
               type="text"
               name="profesion_oficio_ocupacion"
@@ -187,7 +185,7 @@ const Formulario = () => {
             />
           </label>
         </div>
-      </div>
+      {/* </div> */}
 
       <h3 className="mt-4 font-bold text-md text-center">
         Información de contacto
