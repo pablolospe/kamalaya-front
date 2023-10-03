@@ -8,26 +8,26 @@ import { URL } from '@/config';
 const FormularioPaciente = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    nombre: "Maria",
-    apellido: "Frances",
-    fechaDeNacimiento: "1964-11-07",
-    dni:"98765432",
-    genero: "otro",
-    email: "cf@s.com",
-    telefono:"1232345",
-    calle: "Paraná",
-    numero: "1234",
-    localidad: "Martinez",
-    provincia: "Buenos Aires",
-    pais: "Argentina",
-    codigoPostal: "1640",
-    telefonoEmergencia: "234234",
-    nombreContactoEmergencia: "Roberto Enfermero",
-    hobbies: "Tejer croché",
-    fechaAlta: "2020-06-21",
+    nombre: 'Maria',
+    apellido: 'Frances',
+    fechaDeNacimiento: '1964-11-07',
+    dni: '98765432',
+    genero: 'otro',
+    email: 'cf@s.com',
+    telefono: '1232345',
+    calle: 'Paraná',
+    numero: '1234',
+    localidad: 'Martinez',
+    provincia: 'Buenos Aires',
+    pais: 'Argentina',
+    codigoPostal: '1640',
+    telefonoEmergencia: '234234',
+    nombreContactoEmergencia: 'Roberto Enfermero',
+    hobbies: 'Tejer croché',
+    fechaAlta: '2020-06-21',
     fechaBaja: null,
-    lat:"",
-    lng:""
+    lat: '',
+    lng: '',
   });
 
   const handleSubmit = async (e) => {
@@ -45,7 +45,6 @@ const FormularioPaciente = () => {
       });
 
       if (response.ok) {
-
         Swal.fire({
           
           text: 'Formulario ingresado correctamente',
@@ -64,6 +63,45 @@ const FormularioPaciente = () => {
     }
   };
 
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const direccion = `${formData.calle} ${formData.numero} ${formData.localidad} ${formData.provincia} ${formData.pais}`;
+
+    // Obtener la dirección del formulario
+
+    try {
+      // Hacer una solicitud a la API de Geocodificación de Google Maps
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${direccion}&key=AIzaSyBZXt6a5CJSfGyf9q5ymoWmrzUD_XT66DM`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+
+        if (data.status === 'OK') {
+          // Obtener las coordenadas geográficas (latitud y longitud) de la respuesta
+          const { lat, lng } = data.results[0].geometry.location;
+
+          // Ahora puedes guardar lat y lng en tu base de datos junto con otros datos del formulario
+          setFormData((prevData) => ({
+            ...prevData,
+            lat: lat.toString(),
+            lng: lng.toString(),
+          }));
+          // ...código para guardar los datos en tu base de datos...
+
+          console.log(`Coordenadas: Latitud ${lat}, Longitud ${lng}`);
+        } else {
+          console.error('Error al obtener las coordenadas');
+        }
+      } else {
+        console.error('Error en la solicitud HTTP');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
@@ -71,14 +109,16 @@ const FormularioPaciente = () => {
     if (name === 'diaSemana' || name === 'horaInicio' || name === 'horaFin') {
       setFormData((prevData) => ({
         ...prevData,
-        Disponibilidades: [ { ...prevData.Disponibilidades[0], [name]: newValue }],
+        Disponibilidades: [
+          { ...prevData.Disponibilidades[0], [name]: newValue },
+        ],
       }));
     } else {
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: newValue,
-    }));
-  }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: newValue,
+      }));
+    }
   };
 
   return (
@@ -156,7 +196,6 @@ const FormularioPaciente = () => {
         </div>
 
         <div className="flex flex-col gap-6 md:flex-row justify-between">
-
           <label>
             Hobbies:
             <input
@@ -269,6 +308,7 @@ const FormularioPaciente = () => {
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
           </label>
+          <button className='bg-red-500 border rounded-md' onClick={handleClick}>buscar en el mapa</button>
         </div>
       </div>
 
@@ -301,7 +341,6 @@ const FormularioPaciente = () => {
 
       <h3 className="mt-4 font-bold text-md text-center">En Kamalaya</h3>
       <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
-     
         <label>
           Fecha de Alta:
           <input
@@ -312,9 +351,7 @@ const FormularioPaciente = () => {
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
         </label>
-      
       </div>
-
 
       <button
         type="submit"
