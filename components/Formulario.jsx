@@ -14,14 +14,12 @@ const Formulario = () => {
     email: "jp@asd.com",
     telefono: "112345678",
     telefono2: "",
-    calle: "Av. Siempreviva",
-    numero: "1234",
-    localidad: "asd",
+    calle: "Alvear",
+    numero: "123",
+    localidad: "Martinez",
     provincia: "Buenos Aires",
-    hashPassword: null,
     pais: "Argentina",
     codigoPostal: "1643",
-    rol_usuario: "Admin",
     telefonoEmergencia: "1199887766",
     nombreContactoEmergencia: "Jorge Perez (hijo)",
     genero: "M",
@@ -56,7 +54,7 @@ const Formulario = () => {
       if (response.ok) {
 
         Swal.fire({
-          
+    
           text: 'Formulario ingresado correctamente',
           icon: 'success',
           confirmButtonColor: 'gray',
@@ -329,9 +327,10 @@ const Formulario = () => {
 
       <h3 className="mt-4 font-bold text-md text-center">En Kamalaya</h3>
       <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
+{/*         
         <label>
           Rol de Usuario:
-          {/* <datalist> */}
+          
           <select
             type="text"
             name="rol_usuario"
@@ -342,7 +341,7 @@ const Formulario = () => {
             <option value="Admin">Admin</option>
             <option value="User">User</option>
           </select>
-        </label>
+        </label> */}
 
         <label>
           Fecha de Alta:

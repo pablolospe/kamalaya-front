@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
 import { URL } from '@/config';
+import GoogleMapsView from '@/components/GoogleMapsView';
 
 const pacientes = async (query) => {
   const queryString = new URLSearchParams();
@@ -72,12 +73,15 @@ function Pacientes() {
     async function fetchData() {
       const pacienteData = await pacientes(query);
       setpacientesData(pacienteData);
+      console.log(pacientesData[12]);
     }
     fetchData();
   }, [query, pacientes]);
 
+
   return (
     <div className="flex flex-col gap-2">
+      <GoogleMapsView marker={pacientesData} />
       <h1 className='text-center font-semibold text-xl'>PACIENTES</h1>
 
       <table>
