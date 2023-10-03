@@ -21,7 +21,7 @@ function GoogleMapsView({ marker }) {
         <GoogleMap
           mapContainerStyle={catchontainerStyle}
           center={cordinate}
-          zoom={13}
+          zoom={12}
           options={{ mapId: 'ac334af054810bf1' }}
           mapContainerClassName="map-container"
         >

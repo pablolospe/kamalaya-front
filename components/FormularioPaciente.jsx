@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { URL } from '@/config';
+import GoogleMapsView from './GoogleMapsView';
 
 const FormularioPaciente = () => {
   const router = useRouter();
@@ -310,6 +311,7 @@ const FormularioPaciente = () => {
           </label>
           <button className='bg-red-500 border rounded-md' onClick={handleClick}>buscar en el mapa</button>
         </div>
+          <GoogleMapsView marker={[formData]} />
       </div>
 
       <h3 className="mt-4 font-bold text-md text-center">
