@@ -309,8 +309,8 @@ const FormularioPaciente = () => {
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
           </label>
-          <button className='bg-red-500 border rounded-md' onClick={handleClick}>buscar en el mapa</button>
         </div>
+          <button className='h-min bg-red-400 p-1 border rounded-md hover:bg-red-500 ease-in-out' onClick={handleClick}>buscar en el mapa</button>
           <GoogleMapsView marker={[formData]} />
       </div>
 
