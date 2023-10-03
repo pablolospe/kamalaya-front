@@ -26,13 +26,15 @@ function GoogleMapsView({ marker }) {
           mapContainerClassName="map-container"
         >
           {marker &&
-            marker.map((m) => (
-              <Marker
-                key={m.paciente_id}
-                position={{ lat: Number(m?.lat), lng: Number(m?.lng) }}
-              >
-                {m?.nombre}
-              </Marker>
+            marker.map((m, index) => (
+              <section key={index}>
+                <Marker
+                  
+                  position={{ lat: Number(m?.lat), lng: Number(m?.lng) }}
+                >
+                  {m?.nombre}
+                </Marker>
+              </section>
             ))}
         </GoogleMap>
       </LoadScript>
