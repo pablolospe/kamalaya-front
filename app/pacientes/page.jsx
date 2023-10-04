@@ -5,8 +5,9 @@ import { LuUser } from 'react-icons/lu';
 import { URL } from '@/config';
 import GoogleMapsView from '@/components/GoogleMapsView';
 import style from './page.module.css';
+import { useSession } from 'next-auth/react';
 
-const pacientes = async (query) => {
+const pacientes = async (query, accessToken) => {
   const queryString = new URLSearchParams();
 
   for (const key in query) {
@@ -23,20 +24,24 @@ const pacientes = async (query) => {
 
   const url = `${URL}/paciente${queryString ? `?${queryString}` : ''}`;
 
-  const response = await fetch(url, { cache: 'no-store' });
+  const response = await fetch(url, {
+    cache: 'no-store',
+    headers: {
+      authorization: `bearer ${accessToken}`
+    }
+  });
   return response.json();
 };
 
 function Pacientes() {
-  const [pacientesData, setpacientesData] = useState([]);
-
+  const { data: session } = useSession();
+  const [pacientesData, setPacientesData] = useState([]);
   const [query, setQuery] = useState({
     nombre: '',
     apellido: '',
     localidad: '',
     hobbies: '',
   });
-  // console.log(query);
 
   function handleBorrarFiltros() {
     setQuery({
@@ -55,31 +60,20 @@ function Pacientes() {
     }));
   }
 
-  function handleDiaSemanaChange(event) {
-    const selectedDay = event.target.value;
-    const updatedDays = query.diaSemana.includes(selectedDay)
-      ? query.diaSemana.filter((day) => day !== selectedDay)
-      : [...query.diaSemana, selectedDay];
-
-    setQuery((prevState) => ({
-      ...prevState,
-      diaSemana: updatedDays,
-    }));
-  }
-
   useEffect(() => {
     async function fetchData() {
-      const pacienteData = await pacientes(query);
-      setpacientesData(pacienteData);
-      console.log(pacientesData[12]);
+      if (session) {
+        const pacienteData = await pacientes(query, session.user.accessToken);
+        setPacientesData(pacienteData);
+      }
     }
     fetchData();
-  }, [query, pacientes]);
+  }, [query, session]);
 
   return (
     <div className="flex flex-col gap-2">
       <details className={style.details}>
-        <summary className="ml-1 text-md cursor-pointer">Mapa</summary>
+        <summary className="m-1 text-md cursor-pointer">Mapa</summary>
         <GoogleMapsView marker={pacientesData} />
       </details>
 

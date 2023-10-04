@@ -1,9 +1,10 @@
-'use client'
+// 'use client'
 
 import './globals.css';
 import { Inter } from 'next/font/google';
 import Sidebar from '@/components/Sidebar';
-import {SessionProvider} from 'next-auth/react'
+// import {SessionProvider} from 'next-auth/react'
+import Provider from './Provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +20,7 @@ export default function RootLayout({ children, session }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Kamalaya</title>
       </head>
-      <SessionProvider session={session}>
+      <Provider session={session}>
 
       <body 
       // className={`${inter.className}`}
@@ -27,7 +28,7 @@ export default function RootLayout({ children, session }) {
         <Sidebar />
         {children}
       </body>
-      </SessionProvider>
+      </Provider>
     </html>
   );
 }
