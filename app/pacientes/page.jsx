@@ -8,12 +8,11 @@ import GoogleMapsView from '@/components/GoogleMapsView';
 const pacientes = async (query) => {
   const queryString = new URLSearchParams();
 
-
   for (const key in query) {
     if (Array.isArray(query[key])) {
-      query[key].forEach(value => {
+      query[key].forEach((value) => {
         queryString.append(`${key}[]`, value);
-      })
+      });
     } else {
       if (query[key] !== '') {
         queryString.append(key, query[key]);
@@ -21,9 +20,7 @@ const pacientes = async (query) => {
     }
   }
 
-  const url = `${URL}/paciente${
-    queryString ? `?${queryString}` : ''
-  }`;
+  const url = `${URL}/paciente${queryString ? `?${queryString}` : ''}`;
 
   const response = await fetch(url, { cache: 'no-store' });
   return response.json();
@@ -31,7 +28,7 @@ const pacientes = async (query) => {
 
 function Pacientes() {
   const [pacientesData, setpacientesData] = useState([]);
-  
+
   const [query, setQuery] = useState({
     nombre: '',
     apellido: '',
@@ -60,15 +57,15 @@ function Pacientes() {
   function handleDiaSemanaChange(event) {
     const selectedDay = event.target.value;
     const updatedDays = query.diaSemana.includes(selectedDay)
-      ? query.diaSemana.filter(day => day !== selectedDay)
+      ? query.diaSemana.filter((day) => day !== selectedDay)
       : [...query.diaSemana, selectedDay];
-  
-    setQuery(prevState => ({
+
+    setQuery((prevState) => ({
       ...prevState,
-      diaSemana: updatedDays
+      diaSemana: updatedDays,
     }));
   }
-  
+
   useEffect(() => {
     async function fetchData() {
       const pacienteData = await pacientes(query);
@@ -78,11 +75,14 @@ function Pacientes() {
     fetchData();
   }, [query, pacientes]);
 
-
   return (
     <div className="flex flex-col gap-2">
-      <GoogleMapsView marker={pacientesData} />
-      <h1 className='text-center font-semibold text-xl'>PACIENTES</h1>
+      <details>
+        <summary className="ml-1 text-md cursor-pointer">Mapa</summary>
+        <GoogleMapsView marker={pacientesData} />
+      </details>
+
+      <h1 className="text-center font-semibold text-xl">PACIENTES</h1>
 
       <table>
         <thead>

@@ -29,8 +29,10 @@ function GoogleMapsView({ marker }) {
             marker.map((m, index) => (
               <section key={index}>
                 <Marker
-                  
                   position={{ lat: Number(m?.lat), lng: Number(m?.lng) }}
+                  // cursor={`seeh`}
+                  // icon={``}
+                  label={`${m?.nombre} ${m?.apellido}`}
                 >
                   {m?.nombre}
                 </Marker>

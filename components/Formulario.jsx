@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { URL } from '@/config';
+import GoogleMapsView from './GoogleMapsView';
 
 const Formulario = () => {
   const router = useRouter();
@@ -70,6 +71,45 @@ const Formulario = () => {
       console.error('Error:', error);
     }
   };
+
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const direccion = `${formData.calle} ${formData.numero} ${formData.localidad} ${formData.provincia} ${formData.pais}`;
+
+    try {
+      // Hacer una solicitud a la API de Geocodificación de Google Maps
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${direccion}&key=AIzaSyBZXt6a5CJSfGyf9q5ymoWmrzUD_XT66DM`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+
+        if (data.status === 'OK') {
+          // Obtener las coordenadas geográficas (latitud y longitud) de la respuesta
+          const { lat, lng } = data.results[0].geometry.location;
+
+          // Ahora puedes guardar lat y lng en tu base de datos junto con otros datos del formulario
+          setFormData((prevData) => ({
+            ...prevData,
+            lat: lat.toString(),
+            lng: lng.toString(),
+          }));
+          // ...código para guardar los datos en tu base de datos...
+
+          console.log(`Coordenadas: Latitud ${lat}, Longitud ${lng}`);
+        } else {
+          console.error('Error al obtener las coordenadas');
+        }
+      } else {
+        console.error('Error en la solicitud HTTP');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -296,6 +336,8 @@ const Formulario = () => {
             />
           </label>
         </div>
+          <button className='h-min bg-red-400 p-1 border rounded-md hover:bg-red-500 ease-in-out' onClick={handleClick}>buscar en el mapa</button>
+          <GoogleMapsView marker={[formData]} />
       </div>
 
       <h3 className="mt-4 font-bold text-md text-center">

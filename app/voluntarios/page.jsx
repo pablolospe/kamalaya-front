@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
 import { fechaActualEntreFechas } from '@/utils/formats';
 import { URL } from '@/config';
+import GoogleMapsView from '@/components/GoogleMapsView';
 
 const DiaSemanaEnum = {
   lunes: 'Lunes',
@@ -20,9 +21,9 @@ const voluntarios = async (query) => {
 
   for (const key in query) {
     if (Array.isArray(query[key])) {
-      query[key].forEach(value => {
+      query[key].forEach((value) => {
         queryString.append(`${key}[]`, value);
-      })
+      });
     } else {
       if (query[key] !== '') {
         queryString.append(key, query[key]);
@@ -30,17 +31,15 @@ const voluntarios = async (query) => {
     }
   }
 
-  const url = `${URL}/voluntarios${
-    queryString ? `?${queryString}` : ''
-  }`;
-  
+  const url = `${URL}/voluntarios${queryString ? `?${queryString}` : ''}`;
+
   const response = await fetch(url, { cache: 'no-store' });
   return response.json();
 };
 
 function Voluntarios() {
   const [voluntariosData, setVoluntariosData] = useState([]);
-  
+
   const [query, setQuery] = useState({
     nombre: '',
     apellido: '',
@@ -49,7 +48,7 @@ function Voluntarios() {
     hobbies_habilidades: '',
     tieneAuto: '',
     experienciaCP: '',
-    diaSemana:[]
+    diaSemana: [],
   });
 
   function handleBorrarFiltros() {
@@ -61,7 +60,7 @@ function Voluntarios() {
       hobbies_habilidades: '',
       tieneAuto: '',
       experienciaCP: '',
-      diaSemana:[]
+      diaSemana: [],
     });
   }
 
@@ -76,15 +75,15 @@ function Voluntarios() {
   function handleDiaSemanaChange(event) {
     const selectedDay = event.target.value;
     const updatedDays = query.diaSemana.includes(selectedDay)
-      ? query.diaSemana.filter(day => day !== selectedDay)
+      ? query.diaSemana.filter((day) => day !== selectedDay)
       : [...query.diaSemana, selectedDay];
-  
-    setQuery(prevState => ({
+
+    setQuery((prevState) => ({
       ...prevState,
-      diaSemana: updatedDays
+      diaSemana: updatedDays,
     }));
   }
-  
+
   useEffect(() => {
     async function fetchData() {
       const voluntarioData = await voluntarios(query);
@@ -95,6 +94,10 @@ function Voluntarios() {
 
   return (
     <div className="flex flex-col gap-2">
+      <details>
+        <summary className="ml-1 text-md cursor-pointer">Mapa</summary>
+        <GoogleMapsView marker={voluntariosData} />
+      </details>
       <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-4 p-4 rounded-lg shadow-md">
         <div>
           {/* <label className="block mb-2 text-gray-700">Nombre</label> */}
@@ -151,8 +154,7 @@ function Voluntarios() {
           />
         </div>
 
-                
-        <div className='bg-white rounded-md shadow-sm p-2 border border-gray-300'>
+        <div className="bg-white rounded-md shadow-sm p-2 border border-gray-300">
           <label className="block mb-1 text-gray-400">Disponibilidad</label>
           <div className="flex flex-wrap first-letter:gap-3 gap-3">
             <label>
@@ -161,8 +163,8 @@ function Voluntarios() {
                 value="lunes"
                 checked={query.diaSemana.includes('lunes')}
                 onChange={handleDiaSemanaChange}
-              /> 
-              Lunes 
+              />
+              Lunes
             </label>
             <label>
               <input
@@ -170,7 +172,7 @@ function Voluntarios() {
                 value="martes"
                 checked={query.diaSemana.includes('martes')}
                 onChange={handleDiaSemanaChange}
-              /> 
+              />
               Martes
             </label>
             <label>
@@ -179,7 +181,7 @@ function Voluntarios() {
                 value="miercoles"
                 checked={query.diaSemana.includes('miercoles')}
                 onChange={handleDiaSemanaChange}
-              /> 
+              />
               Miércoles
             </label>
             <label>
@@ -188,7 +190,7 @@ function Voluntarios() {
                 value="jueves"
                 checked={query.diaSemana.includes('jueves')}
                 onChange={handleDiaSemanaChange}
-              /> 
+              />
               Jueves
             </label>
             <label>
@@ -197,7 +199,7 @@ function Voluntarios() {
                 value="viernes"
                 checked={query.diaSemana.includes('viernes')}
                 onChange={handleDiaSemanaChange}
-              /> 
+              />
               Viernes
             </label>
             <label>
@@ -206,7 +208,7 @@ function Voluntarios() {
                 value="sabado"
                 checked={query.diaSemana.includes('sabado')}
                 onChange={handleDiaSemanaChange}
-              /> 
+              />
               Sábado
             </label>
             <label>
@@ -215,14 +217,13 @@ function Voluntarios() {
                 value="domingo"
                 checked={query.diaSemana.includes('domingo')}
                 onChange={handleDiaSemanaChange}
-              /> 
+              />
               Domingo
             </label>
             {/* Repite lo mismo para los otros días de la semana */}
           </div>
         </div>
 
-        
         <div className="flex items-center">
           <label htmlFor="tieneAuto" className="text-xs text-gray-800 mr-2">
             Tiene Auto?
@@ -276,7 +277,9 @@ function Voluntarios() {
               Tiene experiencia
             </th>
             <th className="hidden md:table-cell border p-2">Está activo/a?</th>
-            <th className="hidden md:table-cell border p-2">Disponibilidad semanal</th>
+            <th className="hidden md:table-cell border p-2">
+              Disponibilidad semanal
+            </th>
           </tr>
         </thead>
 
@@ -317,9 +320,15 @@ function Voluntarios() {
 
               <td className="hidden md:table-cell">
                 <div>
-                {v?.Vacaciones && v.Vacaciones.some(vacacion =>
-                  fechaActualEntreFechas(vacacion.fechaInicio, vacacion.fechaFin)
-                ) ? 'Está de vacaciones' : 'No está de vacaciones'}
+                  {v?.Vacaciones &&
+                  v.Vacaciones.some((vacacion) =>
+                    fechaActualEntreFechas(
+                      vacacion.fechaInicio,
+                      vacacion.fechaFin
+                    )
+                  )
+                    ? 'Está de vacaciones'
+                    : 'No está de vacaciones'}
                 </div>
               </td>
 
@@ -328,8 +337,7 @@ function Voluntarios() {
                   {v?.Disponibilidades.map((d) => (
                     <span key={d.disponibilidad_id}>
                       {DiaSemanaEnum[d.diaSemana]} &nbsp;
-                      {d.horaInicio}-
-                      {d.horaFin} <br/>
+                      {d.horaInicio}-{d.horaFin} <br />
                     </span>
                   ))}
                 </div>

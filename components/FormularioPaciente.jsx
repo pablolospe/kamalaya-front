@@ -68,8 +68,6 @@ const FormularioPaciente = () => {
     e.preventDefault();
     const direccion = `${formData.calle} ${formData.numero} ${formData.localidad} ${formData.provincia} ${formData.pais}`;
 
-    // Obtener la dirección del formulario
-
     try {
       // Hacer una solicitud a la API de Geocodificación de Google Maps
       const response = await fetch(
