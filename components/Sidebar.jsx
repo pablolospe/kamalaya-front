@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { LuUsers, LuUserPlus, LuUser } from 'react-icons/lu';
+import AppBar from '@/app/auth/AppBar';
+
 
 
 function Sidebar({ children }) {
@@ -49,6 +51,7 @@ function Sidebar({ children }) {
             </div>
           </Link>
         </div>
+          <AppBar />
       </div>
       <main className="ml-20 w-full">{children}</main>
     </div>
