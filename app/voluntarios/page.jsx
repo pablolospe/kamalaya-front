@@ -5,6 +5,7 @@ import { LuUser } from 'react-icons/lu';
 import { fechaActualEntreFechas } from '@/utils/formats';
 import { URL } from '@/config';
 import GoogleMapsView from '@/components/GoogleMapsView';
+import style from './page.module.css';
 
 const DiaSemanaEnum = {
   lunes: 'Lunes',
@@ -94,7 +95,7 @@ function Voluntarios() {
 
   return (
     <div className="flex flex-col gap-2">
-      <details>
+      <details className={style.details}>
         <summary className="ml-1 text-md cursor-pointer">Mapa</summary>
         <GoogleMapsView marker={voluntariosData} />
       </details>

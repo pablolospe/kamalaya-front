@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
 import { URL } from '@/config';
 import GoogleMapsView from '@/components/GoogleMapsView';
+import style from './page.module.css';
 
 const pacientes = async (query) => {
   const queryString = new URLSearchParams();
@@ -77,7 +78,7 @@ function Pacientes() {
 
   return (
     <div className="flex flex-col gap-2">
-      <details>
+      <details className={style.details}>
         <summary className="ml-1 text-md cursor-pointer">Mapa</summary>
         <GoogleMapsView marker={pacientesData} />
       </details>

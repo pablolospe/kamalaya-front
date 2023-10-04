@@ -10,7 +10,7 @@ function GoogleMapsView({ marker }) {
     borderRadius: '2vh',
     zIndex: '1',
   };
-  const cordinate = { lat: -34.5, lng: -58.56667 };
+  const cordinate = { lat: -34.48, lng: -58.56667 };
 
   return (
     <div>
@@ -21,7 +21,7 @@ function GoogleMapsView({ marker }) {
         <GoogleMap
           mapContainerStyle={catchontainerStyle}
           center={cordinate}
-          zoom={12}
+          zoom={11}
           options={{ mapId: 'ac334af054810bf1' }}
           mapContainerClassName="map-container"
         >
