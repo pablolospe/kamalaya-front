@@ -73,7 +73,7 @@ function Pacientes() {
   return (
     <div className="flex flex-col gap-2">
       <details className={style.details}>
-        <summary className="m-1 text-md cursor-pointer">Mapa</summary>
+        <summary className="ml-1 text-md cursor-pointer">Mapa</summary>
         <GoogleMapsView marker={pacientesData} />
       </details>
 

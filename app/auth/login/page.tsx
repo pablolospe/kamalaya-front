@@ -36,7 +36,7 @@ function LoginPage() {
                         className='w-full p-2 border rounded-md'
                         onChange={(e) => (pass.current = e.target.value)}
                         type='password'
-                        value={'123'}
+                        
                     />
                 </label>
                 <button
