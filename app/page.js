@@ -30,13 +30,13 @@ export default function Home() {
           Algo más
         </button> */}
       </div>
-      <div className="hidden md:block top-20 right-20 max-h-80 ">
+      <div className="hidden md:block self-center rounded-2xl top-20 right-20 max-h-80 p-10 bg-slate-100">
         <Image
-          className='rounded-xl shadow-2xl'
-          src="/fotoFlor.jpg"
-          width={650}
-          height={650}
-          alt="Foto flor kamalaya"
+          className='bg-slate-100'
+          src="/logoKamalaya.svg"
+          width={250}
+          height={250}
+          alt="Foto logo kamalaya"
         />
       </div>
     </main>
@@ -44,3 +44,13 @@ export default function Home() {
 }
 
 // https://www.youtube.com/watch?v=KpGZjrrS3pY
+{/* <div className="bg-gray-200 text-black text-xs text-center py-2 px-4 rounded-lg inline-block hover:bg-gray-300 shadow-2xl">  
+<Image
+  src="/logoKamalaya.svg"
+  width={150}
+  height={150}
+  priority={false}
+  alt="isotipo kamalaya"
+/>
+home
+</div> */}
