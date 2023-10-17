@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
-import { fechaActualEntreFechas } from '@/utils/formats';
+import { fechaActualEntreFechas, formatearNumeroTelefono } from '@/utils/formats';
 import { URL } from '@/config';
 import GoogleMapsView from '@/components/GoogleMapsView';
 import style from './page.module.css';
@@ -304,10 +304,10 @@ function Voluntarios() {
                 <div>
                   {v.telefono2 ? (
                     <span>
-                      {v.telefono} / {v.telefono2}
+                      {formatearNumeroTelefono(v.telefono)} / {formatearNumeroTelefono(v.telefono2)}
                     </span>
                   ) : (
-                    v.telefono
+                    formatearNumeroTelefono(v.telefono)
                   )}
                 </div>
               </td>

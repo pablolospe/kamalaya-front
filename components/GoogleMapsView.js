@@ -1,5 +1,5 @@
 'use client';
-import mapaLayout from '@/app/mapa/layout';
+import mapaLayout from '@/app/(home)/mapa/layout';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import React from 'react';
 

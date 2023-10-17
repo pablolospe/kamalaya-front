@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { LuUsers, LuUserPlus, LuUser } from 'react-icons/lu';
 export default function Home() {
   return (
-    <main className="mt-20 flex flex-row justify-evenly align-center">
-      <div className="flex flex-col gap-10 justify-center">
+    <main className="mt-32 flex flex-col justify-evenly align-center">
+      <div className="flex flex-col items-center md:flex-row font-semibold text-lg gap-10 justify-center">
 
         <Link href="/voluntarios" className="flex flex-row items-center w-40 py-2 px-4 bg-gray-200 rounded-md hover:bg-gray-300 shadow-2xl">
           <span>Ver todos los voluntarios</span>
@@ -30,9 +30,10 @@ export default function Home() {
           Algo más
         </button> */}
       </div>
-      <div className="hidden md:block self-center rounded-2xl top-20 right-20 max-h-80 p-10 bg-slate-100">
+      <div className="hidden md:block self-center rounded-2xl top-20 right-20 max-h-80 p-10 m-20">
         <Image
-          className='bg-slate-100'
+          priority
+          className='bg-white'
           src="/logoKamalaya.svg"
           width={250}
           height={250}

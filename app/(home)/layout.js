@@ -1,10 +1,10 @@
 // 'use client'
 
-import './globals.css';
+import '../globals.css';
 import { Inter } from 'next/font/google';
 import Sidebar from '@/components/Sidebar';
 // import {SessionProvider} from 'next-auth/react'
-import Provider from './Provider';
+import Provider from '../Provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +22,7 @@ export default function RootLayout({ children, session }) {
       </head>
       <Provider session={session}>
         <body>
-          {/* <Sidebar /> */}
+          <Sidebar />
           {children}
         </body>
       </Provider>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatearFecha, calcularEdad } from '@/utils/formats';
+import { formatearFecha, calcularEdad, formatearNumeroTelefono } from '@/utils/formats';
 import BotonAgregarDisponibilidad from '@/components/BotonAgregarDisponibilidad';
 import BotonBorrarDisponibilidad from '@/components/BotonBorrarDisponibilidad';
 import BotonBorrarAntecedenteAcompniamiento from '@/components/BotonBorrarAntecedenteAcompniamiento';
@@ -43,13 +43,13 @@ async function Voluntario({ params }) {
 
           <div className="w-full mt-1 p-1 border rounded-md focus:ring focus:ring-blue-300">
             <b>Teléfono: </b>
-            {v?.telefono}
+            {formatearNumeroTelefono(v?.telefono)}
           </div>
 
           {v?.telefono2 && (
             <div className="w-full mt-1 p-1 border rounded-md focus:ring focus:ring-blue-300">
               <b>Teléfono alternativo: </b>
-              {v?.telefono2}
+              {formatearNumeroTelefono(v?.telefono2)}
             </div>
           )}
         </details>
@@ -60,7 +60,7 @@ async function Voluntario({ params }) {
           </summary>
           <div className="w-full mt-1 p-1 border rounded-md focus:ring focus:ring-blue-300">
             <b>Teléfono de Emergencia: </b>
-            {v?.telefonoEmergencia} - {v?.nombreContactoEmergencia}
+            {formatearNumeroTelefono(v?.telefonoEmergencia)} ({v?.nombreContactoEmergencia})
           </div>
         </details>
 
