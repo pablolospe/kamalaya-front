@@ -7,7 +7,7 @@ function GoogleMapsView({ marker }) {
   const catchontainerStyle = {
     width: '100%',
     height: '40vh',
-    borderRadius: '2vh',
+    borderRadius: '1vh',
     zIndex: '1',
   };
   const cordinate = { lat: -34.48, lng: -58.56667 };

@@ -2,7 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
-import { fechaActualEntreFechas, formatearNumeroTelefono } from '@/utils/formats';
+import {
+  fechaActualEntreFechas,
+  formatearNumeroTelefono,
+} from '@/utils/formats';
 import { URL } from '@/config';
 import GoogleMapsView from '@/components/GoogleMapsView';
 import style from './page.module.css';
@@ -95,10 +98,21 @@ function Voluntarios() {
 
   return (
     <div className="flex flex-col gap-2">
+      {/* //////////////// MAPA //////////////// */}
       <details className={style.details}>
         <summary className="ml-1 text-md cursor-pointer">Mapa</summary>
+        {/* <input
+            name="nombre"
+            type="text"
+            // value={query.nombre}
+            // onChange={handleChange}
+            className="w-full md:w-1/4 md:ml-1 py-2 px-4 my-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+            placeholder="Buscar paciente en el mapa"
+          /> */}
         <GoogleMapsView marker={voluntariosData} />
       </details>
+
+      {/* //////////////// FILTROS //////////////// */}
       <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-4 p-4 rounded-lg shadow-md">
         <div>
           {/* <label className="block mb-2 text-gray-700">Nombre</label> */}
@@ -268,6 +282,8 @@ function Voluntarios() {
         </button>
       </div>
 
+      {/* //////////////// TABLA //////////////// */}
+
       <table>
         <thead>
           <tr className="bg-gray-100 row-auto">
@@ -304,7 +320,8 @@ function Voluntarios() {
                 <div>
                   {v.telefono2 ? (
                     <span>
-                      {formatearNumeroTelefono(v.telefono)} / {formatearNumeroTelefono(v.telefono2)}
+                      {formatearNumeroTelefono(v.telefono)} /{' '}
+                      {formatearNumeroTelefono(v.telefono2)}
                     </span>
                   ) : (
                     formatearNumeroTelefono(v.telefono)
