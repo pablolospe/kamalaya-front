@@ -326,11 +326,11 @@ function Voluntarios() {
               <td className="hidden md:table-cell">
                 <div>
                   {
-                  // v?.fechaBaja && `Se dio de baja ${formatearFecha(v.fechaBaja)}`
+                  // v?.fechaBaja !== null ? `Se dio de baja ${v.fechaBaja}`: null
                   }
                   {v?.Vacaciones && v.Vacaciones.some((vac) =>fechaActualEntreFechas( vac.fechaInicio, vac.fechaFin)
                   ) ? (
-                    <details>
+                    <details className={style.details}>
                       <summary>
                         Inactivo
                       </summary>

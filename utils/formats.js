@@ -47,7 +47,7 @@ export function formatearNumeroTelefono(numero) {
   const longitud = numeroLimpio.length;
 
   // Aplicar el formato (x-xxxx-xxxx)
-  return `${numeroLimpio.slice(0, longitud-8)}-${numeroLimpio.slice(longitud-8, longitud - 4)}-${numeroLimpio.slice(longitud - 4)}`;
+  return `${numeroLimpio.slice(0, longitud-8)} ${numeroLimpio.slice(longitud-8, longitud - 4)}-${numeroLimpio.slice(longitud - 4)}`;
 }
 
 export const DiaSemanaEnum = {

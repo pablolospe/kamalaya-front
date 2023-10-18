@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { formatearFecha, calcularEdad, formatearNumeroTelefono } from '@/utils/formats';
 import BotonAgregarDisponibilidad from '@/components/BotonAgregarDisponibilidad';
 import BotonBorrarDisponibilidad from '@/components/BotonBorrarDisponibilidad';
@@ -26,8 +27,11 @@ async function Voluntario({ params }) {
   return (
     <div className="md:mx-40">
       <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
-        {v?.nombre} {v?.apellido}
-      </h2>
+        {v?.nombre} {v?.apellido} 
+      </h2> 
+      <Link href={`/voluntarios/${v.voluntario_id}/editar`}>
+      <span >editar</span>
+      </Link>
 
       <div className="flex flex-col flex-wrap justify-evenly items-start md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
         <details
@@ -81,7 +85,7 @@ async function Voluntario({ params }) {
 
         <details className={style.details}>
           <summary className="font-bold text-md cursor-pointer">
-            Vacaciones
+            Inactividad
           </summary>
 
           {v.Vacaciones.map((v) => (
