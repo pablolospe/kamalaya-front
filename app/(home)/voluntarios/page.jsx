@@ -2,23 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
-import {
-  fechaActualEntreFechas,
-  formatearNumeroTelefono,
-} from '@/utils/formats';
+import { fechaActualEntreFechas, formatearNumeroTelefono, formatearFecha, DiaSemanaEnum } from '@/utils/formats';
 import { URL } from '@/config';
 import GoogleMapsView from '@/components/GoogleMapsView';
 import style from './page.module.css';
-
-const DiaSemanaEnum = {
-  lunes: 'Lunes',
-  martes: 'Martes',
-  miercoles: 'Miércoles',
-  jueves: 'Jueves',
-  viernes: 'Viernes',
-  sabado: 'Sábado',
-  domingo: 'Domingo',
-};
 
 const voluntarios = async (query) => {
   const queryString = new URLSearchParams();
@@ -338,15 +325,29 @@ function Voluntarios() {
 
               <td className="hidden md:table-cell">
                 <div>
-                  {v?.Vacaciones &&
-                  v.Vacaciones.some((vacacion) =>
-                    fechaActualEntreFechas(
-                      vacacion.fechaInicio,
-                      vacacion.fechaFin
-                    )
-                  )
-                    ? 'Está de vacaciones'
-                    : 'No está de vacaciones'}
+                  {
+                  // v?.fechaBaja && `Se dio de baja ${formatearFecha(v.fechaBaja)}`
+                  }
+                  {v?.Vacaciones && v.Vacaciones.some((vac) =>fechaActualEntreFechas( vac.fechaInicio, vac.fechaFin)
+                  ) ? (
+                    <details>
+                      <summary>
+                        Inactivo
+                      </summary>
+                      <small>
+                        Inactivo hasta el{' '}
+                        {
+                          formatearFecha(v.Vacaciones.find((vac) => fechaActualEntreFechas(vac.fechaInicio, vac.fechaFin)).fechaFin)
+                        }
+                        <br />Motivo:{' '}
+                        {
+                          v.Vacaciones.find((vac) => fechaActualEntreFechas(vac.fechaInicio, vac.fechaFin)).detalles
+                        } 
+                      </small>
+                    </details>
+                  ) : (
+                    'Activo'
+                  )}
                 </div>
               </td>
 

@@ -49,3 +49,13 @@ export function formatearNumeroTelefono(numero) {
   // Aplicar el formato (x-xxxx-xxxx)
   return `${numeroLimpio.slice(0, longitud-8)}-${numeroLimpio.slice(longitud-8, longitud - 4)}-${numeroLimpio.slice(longitud - 4)}`;
 }
+
+export const DiaSemanaEnum = {
+  lunes: 'Lunes',
+  martes: 'Martes',
+  miercoles: 'Miércoles',
+  jueves: 'Jueves',
+  viernes: 'Viernes',
+  sabado: 'Sábado',
+  domingo: 'Domingo',
+};
