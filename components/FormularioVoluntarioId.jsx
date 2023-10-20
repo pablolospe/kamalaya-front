@@ -57,7 +57,7 @@ const FormularioVoluntarioId = ({ v }) => {
           color: 'black',
         }).then(router.push('/voluntarios'));
 
-        console.log('Datos enviados exitosamente');
+        console.log('Datos enviados exitosamente')
       } else {
         console.error('Error al enviar los datos');
       }
@@ -367,7 +367,6 @@ const FormularioVoluntarioId = ({ v }) => {
 
       <h3 className="mt-4 font-bold text-md text-center">En Kamalaya</h3>
       <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
-     
         <label>
           Fecha de Alta:
           <input
@@ -400,7 +399,6 @@ const FormularioVoluntarioId = ({ v }) => {
           Tiene experiencia en CP?
         </label>
       </div>
-
 
       <button
         type="submit"

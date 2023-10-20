@@ -6,29 +6,29 @@ import Swal from 'sweetalert2';
 import { URL } from '@/config';
 import GoogleMapsView from './GoogleMapsView';
 
-const FormularioPacienteId = () => {
+const FormularioPacienteId = ({ v }) => {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    nombre: 'Maria',
-    apellido: 'Frances',
-    fechaDeNacimiento: '1964-11-07',
-    dni: '98765432',
-    genero: 'otro',
-    email: 'cf@s.com',
-    telefono: '1232345',
-    calle: 'Paraná',
-    numero: '1234',
-    localidad: 'Martinez',
-    provincia: 'Buenos Aires',
-    pais: 'Argentina',
-    codigoPostal: '1640',
-    telefonoEmergencia: '234234',
-    nombreContactoEmergencia: 'Roberto Enfermero',
-    hobbies: 'Tejer croché',
-    fechaAlta: '2020-06-21',
-    fechaBaja: null,
-    lat: '',
-    lng: '',
+    nombre: v.nombre,
+    apellido: v.apellido,
+    fechaDeNacimiento: v.fechaDeNacimiento,
+    dni: v.dni,
+    genero: v.genero,
+    email: v.email,
+    telefono: v.telefono,
+    calle: v.calle,
+    numero: v.numero,
+    localidad: v.localidad,
+    provincia: v.provincia,
+    pais: v.pais,
+    codigoPostal: v.codigoPostal,
+    telefonoEmergencia: v.telefonoEmergencia,
+    nombreContactoEmergencia: v.nombreContactoEmergencia,
+    hobbies: v.hobbies,
+    fechaAlta: v.fechaAlta,
+    fechaBaja: v.fechaBaja,
+    lat: v.lat,
+    lng: v.lng,
   });
 
   const handleSubmit = async (e) => {
@@ -37,8 +37,8 @@ const FormularioPacienteId = () => {
     console.log(formDataJSON);
 
     try {
-      const response = await fetch(`${URL}/paciente`, {
-        method: 'POST',
+      const response = await fetch(`${URL}/paciente/${v.paciente_id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -55,7 +55,7 @@ const FormularioPacienteId = () => {
         }).then(router.push('/pacientes'))
         
         console.log('Datos enviados exitosamente');
-        
+        // window.location.reload();
       } else {
         console.error('Error al enviar los datos');
       }
@@ -353,12 +353,12 @@ const FormularioPacienteId = () => {
         </label>
       </div>
 
-      {/* <button
+      <button
         type="submit"
         className="w-40 mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
       >
         Enviar formulario
-      </button> */}
+      </button>
     </form>
   );
 };

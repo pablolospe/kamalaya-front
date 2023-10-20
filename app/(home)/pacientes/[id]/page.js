@@ -1,6 +1,7 @@
 import React from 'react';
-import { formatearFecha, calcularEdad } from '@/utils/formats';
+import { formatearFecha, calcularEdad, formatearNumeroTelefono } from '@/utils/formats';
 import { URL } from '@/config';
+import FormularioPacienteId from '../../../../components/FormularioPacienteId';
 
 const pacienteDetalle = async (id) => {
   return fetch(`${URL}/paciente/${id}`, {
@@ -19,18 +20,23 @@ async function Paciente({ params }) {
         {v?.nombre} {v?.apellido}
       </h2>
 
+      <details>
+        <summary className='cursor-pointer text-right'>editar</summary>
+        <FormularioPacienteId v={v}/>
+      </details>
+
       <div className="flex flex-col items-start md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
         <details className="">
           <summary className="font-bold text-md cursor-pointer">Información de contacto</summary>
           <div>Email: {v?.email}</div>
 
-          <div>Teléfono: {v?.telefono}</div>
+          <div>Teléfono: {formatearNumeroTelefono(v?.telefono)}</div>
         </details>
 
         <details>
           <summary className="font-bold text-md cursor-pointer">Ante una emergencia</summary>
           <div className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-            Teléfono de Emergencia: {v?.telefonoEmergencia} (
+            Teléfono de Emergencia: {formatearNumeroTelefono(v?.telefonoEmergencia)} (
             {v?.nombreContactoEmergencia})
           </div>
         </details>

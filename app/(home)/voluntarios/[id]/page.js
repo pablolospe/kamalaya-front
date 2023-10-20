@@ -27,16 +27,17 @@ async function Voluntario({ params }) {
 
   return (
     <div className="md:mx-40">
-      <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
+      <div className='flex flex-row align-middle justify-between content-center m-2 rounded-lg border p-2' >
+
+      <h2 className="text-lg font-bold">
         {v?.nombre} {v?.apellido} 
       </h2> 
-      {/* <Link href={`/voluntarios/${v.voluntario_id}/editar`}>
-      <span >editar</span>
-      </Link> */}
+    
       <details>
-        <summary>editar</summary>
+        <summary className='cursor-pointer text-right'>editar</summary>
         <FormularioVoluntarioId v={v}/>
       </details>
+      </div>
 
       <div className="flex flex-col flex-wrap justify-evenly items-start md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
         <details
