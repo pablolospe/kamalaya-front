@@ -54,8 +54,8 @@ const FormularioPacienteId = ({ v }) => {
           color: 'black',
         }).then(router.push('/pacientes'))
         
+        window.location.reload();
         console.log('Datos enviados exitosamente');
-        // window.location.reload();
       } else {
         console.error('Error al enviar los datos');
       }
