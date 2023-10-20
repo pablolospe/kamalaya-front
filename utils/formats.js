@@ -2,6 +2,22 @@ export const formatearNumero = (numero) => {
   return numero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
+export function formatearNumeroAHora(hora) {
+  if (typeof hora !== 'string' || isNaN(hora) ) {
+    return 'Formato inválido';
+  }
+
+  const numeroComoCadena = hora.toString();
+  if (numeroComoCadena.length !== 4) {
+    return 'Formato inválido';
+  }
+
+  const horas = numeroComoCadena.substring(0, 2);
+  const minutos = numeroComoCadena.substring(2, 4);
+
+  return `${horas}:${minutos}`;
+}
+
 export const formatearFecha = (dateString) => {
   const date = new Date(dateString);
   const day = date.getUTCDate().toString().padStart(2, '0');

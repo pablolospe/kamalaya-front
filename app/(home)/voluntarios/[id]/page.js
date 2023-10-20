@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { formatearFecha, calcularEdad, formatearNumeroTelefono } from '@/utils/formats';
+import { formatearFecha, calcularEdad, formatearNumeroTelefono, formatearNumeroAHora } from '@/utils/formats';
 import BotonAgregarDisponibilidad from '@/components/BotonAgregarDisponibilidad';
 import BotonBorrarDisponibilidad from '@/components/BotonBorrarDisponibilidad';
 import BotonBorrarAntecedenteAcompniamiento from '@/components/BotonBorrarAntecedenteAcompniamiento';
@@ -80,7 +80,7 @@ async function Voluntario({ params }) {
           {v.Disponibilidades.map((d) => (
             <>
               <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-                {d.diaSemana}, {d.horaInicio}-{d.horaFin}
+                {d.diaSemana}, {formatearNumeroAHora(d.horaInicio)}-{formatearNumeroAHora(d.horaFin)}
                 <BotonBorrarDisponibilidad id={d.disponibilidad_id} />
               </div>
             </>

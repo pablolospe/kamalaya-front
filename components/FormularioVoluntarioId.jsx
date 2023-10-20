@@ -15,6 +15,8 @@ const FormularioVoluntarioId = ({ v }) => {
     email: v.email,
     telefono: v.telefono,
     telefono2: v.telefono2,
+    lat: v.lat,
+    lng: v.lng,
     calle: v.calle,
     numero: v.numero,
     localidad: v.localidad,
