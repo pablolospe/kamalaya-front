@@ -38,7 +38,6 @@ export function fechaActualEntreFechas(fechaInicioStr, fechaFinStr) {
   return fechaActualStr >= fechaInicio && fechaActualStr <= fechaFin ? 'Está de vacaciones' : 'No está de vacaciones'
 }
 
-
 export function formatearNumeroTelefono(numero) {
   // Eliminar cualquier carácter que no sea un dígito
   const numeroLimpio = numero.replace(/\D/g, '');

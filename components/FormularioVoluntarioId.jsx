@@ -6,45 +6,40 @@ import Swal from 'sweetalert2';
 import { URL } from '@/config';
 import GoogleMapsView from './GoogleMapsView';
 
-const FormularioVoluntarioId = () => {
+const FormularioVoluntarioId = ({ v }) => {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    nombre: "Juan",
-    apellido: "Perez",
-    dni: "123123123",
-    email: "jp@asd.com",
-    telefono: "112345678",
-    telefono2: "",
-    calle: "Alvear",
-    numero: "123",
-    localidad: "Martinez",
-    provincia: "Buenos Aires",
-    pais: "Argentina",
-    codigoPostal: "1643",
-    telefonoEmergencia: "1199887766",
-    nombreContactoEmergencia: "Jorge Perez (hijo)",
-    genero: "M",
-    profesion_oficio_ocupacion: "Aviador",
-    hobbies_habilidades: "Pesca",
-    fechaDeNacimiento: "1970-01-02",
-    fechaAlta: "2023-01-01",
-    fechaBaja: null,
-    tieneAuto: false,
-    experienciaCP: false,
-    Disponibilidades: [{
-      diaSemana: "lunes",
-      horaInicio:"08:00",
-      horaFin:"12:00"
-    }],
+    nombre: v.nombre,
+    apellido: v.apellido,
+    dni: v.dni,
+    email: v.email,
+    telefono: v.telefono,
+    telefono2: v.telefono2,
+    calle: v.calle,
+    numero: v.numero,
+    localidad: v.localidad,
+    provincia: v.provincia,
+    pais: v.pais,
+    codigoPostal: v.codigoPostal,
+    telefonoEmergencia: v.telefonoEmergencia,
+    nombreContactoEmergencia: v.nombreContactoEmergencia,
+    genero: v.genero,
+    profesion_oficio_ocupacion: v.profesion_oficio_ocupacion,
+    hobbies_habilidades: v.hobbies_habilidades,
+    fechaDeNacimiento: v.fechaDeNacimiento,
+    fechaAlta: v.fechaAlta,
+    fechaBaja: v.fechaBaja,
+    tieneAuto: v.tieneAuto,
+    experienciaCP: v.experienciaCP,
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formDataJSON= JSON.stringify(formData)
+    const formDataJSON = JSON.stringify(formData);
     console.log(formDataJSON);
 
     try {
-      const response = await fetch(`${URL}/voluntarios`, {
+      const response = await fetch(`${URL}/voluntarios/${v.voluntario_id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -53,17 +48,14 @@ const FormularioVoluntarioId = () => {
       });
 
       if (response.ok) {
-
         Swal.fire({
-    
           text: 'Formulario editado correctamente',
           icon: 'success',
           confirmButtonColor: 'gray',
           color: 'black',
-        }).then(router.push('/voluntarios'))
-        
+        }).then(router.push('/voluntarios'));
+
         console.log('Datos enviados exitosamente');
-        
       } else {
         console.error('Error al enviar los datos');
       }
@@ -71,7 +63,6 @@ const FormularioVoluntarioId = () => {
       console.error('Error:', error);
     }
   };
-
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -110,7 +101,6 @@ const FormularioVoluntarioId = () => {
     }
   };
 
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
@@ -118,14 +108,16 @@ const FormularioVoluntarioId = () => {
     if (name === 'diaSemana' || name === 'horaInicio' || name === 'horaFin') {
       setFormData((prevData) => ({
         ...prevData,
-        Disponibilidades: [ { ...prevData.Disponibilidades[0], [name]: newValue }],
+        Disponibilidades: [
+          { ...prevData.Disponibilidades[0], [name]: newValue },
+        ],
       }));
     } else {
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: newValue,
-    }));
-  }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: newValue,
+      }));
+    }
   };
 
   return (
@@ -142,87 +134,86 @@ const FormularioVoluntarioId = () => {
 
       {/* <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg"> */}
       <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
-          <label>
-            Nombre/s:
-            <input
-              type="text"
-              name="nombre"
-              value={formData.nombre}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
+        <label>
+          Nombre/s:
+          <input
+            type="text"
+            name="nombre"
+            value={formData.nombre}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
-          <label>
-            Apellido/s:
-            <input
-              type="text"
-              name="apellido"
-              value={formData.apellido}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
-     
-     
-          <label>
-            DNI:
-            <input
-              type="number"
-              name="dni"
-              value={formData.dni}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
+        <label>
+          Apellido/s:
+          <input
+            type="text"
+            name="apellido"
+            value={formData.apellido}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
-          <label>
-            Fecha de Nacimiento:
-            <input
-              type="date"
-              name="fechaDeNacimiento"
-              value={formData.fechaDeNacimiento}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
+        <label>
+          DNI:
+          <input
+            type="number"
+            name="dni"
+            value={formData.dni}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
-          <label className="block mb-2">
-            Género:
-            <select
-              name="genero"
-              value={formData.genero}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            >
-              <option value="M">Masculino</option>
-              <option value="F">Femenino</option>
-              <option value="otro">Otro</option>
-            </select>
-          </label>
-      
-          <label>
-            Profesión/Oficio:
-            <input
-              type="text"
-              name="profesion_oficio_ocupacion"
-              value={formData.profesion_oficio_ocupacion}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
+        <label>
+          Fecha de Nacimiento:
+          <input
+            type="date"
+            name="fechaDeNacimiento"
+            value={formData.fechaDeNacimiento}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
-          <label>
-            Hobbies/Habilidades:
-            <input
-              type="text"
-              name="hobbies_habilidades"
-              value={formData.hobbies_habilidades}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
-        </div>
+        <label className="block mb-2">
+          Género:
+          <select
+            name="genero"
+            value={formData.genero}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          >
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+            <option value="otro">Otro</option>
+          </select>
+        </label>
+
+        <label>
+          Profesión/Oficio:
+          <input
+            type="text"
+            name="profesion_oficio_ocupacion"
+            value={formData.profesion_oficio_ocupacion}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+
+        <label>
+          Hobbies/Habilidades:
+          <input
+            type="text"
+            name="hobbies_habilidades"
+            value={formData.hobbies_habilidades}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+      </div>
       {/* </div> */}
 
       <h3 className="mt-4 font-bold text-md text-center">
@@ -336,8 +327,13 @@ const FormularioVoluntarioId = () => {
             />
           </label>
         </div>
-          <button className='h-min bg-red-400 p-1 border rounded-md hover:bg-red-500 ease-in-out' onClick={handleClick}>buscar en el mapa</button>
-          <GoogleMapsView marker={[formData]} />
+        <button
+          className="h-min bg-red-400 p-1 border rounded-md hover:bg-red-500 ease-in-out"
+          onClick={handleClick}
+        >
+          buscar en el mapa
+        </button>
+        <GoogleMapsView marker={[formData]} />
       </div>
 
       <h3 className="mt-4 font-bold text-md text-center">
@@ -369,22 +365,7 @@ const FormularioVoluntarioId = () => {
 
       <h3 className="mt-4 font-bold text-md text-center">En Kamalaya</h3>
       <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
-{/*         
-        <label>
-          Rol de Usuario:
-          
-          <select
-            type="text"
-            name="rol_usuario"
-            value={formData.rol_usuario}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          >
-            <option value="Admin">Admin</option>
-            <option value="User">User</option>
-          </select>
-        </label> */}
-
+     
         <label>
           Fecha de Alta:
           <input
@@ -402,8 +383,8 @@ const FormularioVoluntarioId = () => {
             checked={formData.tieneAuto}
             onChange={handleChange}
             className="inline-block align-middle mr-2 border rounded-md p-2 focus:ring focus:ring-blue-300"
-            />
-            Tiene Auto?
+          />
+          Tiene Auto?
         </label>
 
         <label>
@@ -413,95 +394,18 @@ const FormularioVoluntarioId = () => {
             checked={formData.experienciaCP}
             onChange={handleChange}
             className="inline-block align-middle mr-2 border rounded-md p-2 focus:ring focus:ring-blue-300"
-            />
-            Tiene experiencia en CP?
+          />
+          Tiene experiencia en CP?
         </label>
       </div>
 
-      <h3 className="mt-4 font-bold text-md text-center">Disponibilidad</h3>
-      <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
-        <label>
-          Día de la semana
-          <select
-            type="text"
-            name="diaSemana"
-            value={formData.Disponibilidades[0].diaSemana}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          >
-            <option value="lunes">Lunes</option>
-            <option value="martes">Martes</option>
-            <option value="miercoles">Miércoles</option>
-            <option value="jueves">Jueves</option>
-            <option value="viernes">Viernes</option>
-            <option value="sabado">Sábado</option>
-            <option value="domingo">Domingo</option>
-          </select>
-        </label>
 
-        <label>
-          Desde las
-          <select
-            type="number"
-            name="horaInicio"
-            value={formData.Disponibilidades[0].horaInicio}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          >
-            <option value="">elije hora de inicio</option>
-            <option value="08:00">08:00</option>
-            <option value="09:00">09:00</option>
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <option value="14:00">14:00</option>
-            <option value="15:00">15:00</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-            <option value="18:00">18:00</option>
-            <option value="19:00">19:00</option>
-            <option value="20:00">20:00</option>
-            <option value="21:00">21:00</option>
-            <option value="22:00">22:00</option>
-          </select>
-        </label>
-
-        <label>
-          Hasta las
-          <select
-            type="number"
-            name="horaFin"
-            value={formData.Disponibilidades[0].horaFin}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          >
-            <option value="">elije hora de finalización</option>
-            <option value="08:00">08:00</option>
-            <option value="09:00">09:00</option>
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <option value="14:00">14:00</option>
-            <option value="15:00">15:00</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-            <option value="18:00">18:00</option>
-            <option value="19:00">19:00</option>
-            <option value="20:00">20:00</option>
-            <option value="21:00">21:00</option>
-            <option value="22:00">22:00</option>
-          </select>
-        </label>
-      </div>
-
-      {/* <button
+      <button
         type="submit"
         className="w-40 mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
       >
         Enviar formulario
-      </button> */}
+      </button>
     </form>
   );
 };

@@ -11,6 +11,7 @@ import BotonAgregarVacaciones from '@/components/BotonAgregarVacaciones';
 import BotonBorrarVacaciones from '@/components/BotonBorrarVacaciones';
 import { URL } from '@/config';
 import style from './page.module.css';
+import FormularioVoluntarioId from '@/components/FormularioVoluntarioId';
 
 const voluntarioDetalle = async (id) => {
   return fetch(`${URL}/voluntarios/${id}`, {
@@ -29,9 +30,13 @@ async function Voluntario({ params }) {
       <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
         {v?.nombre} {v?.apellido} 
       </h2> 
-      <Link href={`/voluntarios/${v.voluntario_id}/editar`}>
+      {/* <Link href={`/voluntarios/${v.voluntario_id}/editar`}>
       <span >editar</span>
-      </Link>
+      </Link> */}
+      <details>
+        <summary>editar</summary>
+        <FormularioVoluntarioId v={v}/>
+      </details>
 
       <div className="flex flex-col flex-wrap justify-evenly items-start md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
         <details
