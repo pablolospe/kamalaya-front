@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
 import { fechaActualEntreFechas, formatearNumeroTelefono, formatearFecha, DiaSemanaEnum, formatearNumeroAHora } from '@/utils/formats';
-import { URL } from '@/config';
 import GoogleMapsView from '@/components/GoogleMapsView';
 import style from './page.module.css';
 import { voluntarios } from '@/utils/fetchVoluntarios.js'

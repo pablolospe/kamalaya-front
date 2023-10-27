@@ -43,14 +43,14 @@ function Pacientes() {
     hobbies: '',
   });
 
-  function handleBorrarFiltros() {
-    setQuery({
-      nombre: '',
-      apellido: '',
-      localidad: '',
-      hobbies: '',
-    });
-  }
+  // function handleBorrarFiltros() {
+  //   setQuery({
+  //     nombre: '',
+  //     apellido: '',
+  //     localidad: '',
+  //     hobbies: '',
+  //   });
+  // }
 
   function handleChange(event) {
     const { name, value } = event.target;

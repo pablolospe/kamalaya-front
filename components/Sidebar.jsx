@@ -50,6 +50,11 @@ function Sidebar({ children }) {
               <LuUserPlus size={20} />
             </div>
           </Link>
+          <Link href="/grupos">
+            <div className="bg-gray-100 hover:bg-gray-200 cursor-pointer my-4 p-3 rounded-lg inline-block">
+              <LuUsers size={20} />
+            </div>
+          </Link>
         </div>
           <AppBar />
       </div>
