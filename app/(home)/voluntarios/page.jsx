@@ -6,31 +6,32 @@ import { fechaActualEntreFechas, formatearNumeroTelefono, formatearFecha, DiaSem
 import { URL } from '@/config';
 import GoogleMapsView from '@/components/GoogleMapsView';
 import style from './page.module.css';
+import { voluntarios } from '@/utils/fetchVoluntarios.js'
 
-const voluntarios = async (query) => {
-  const queryString = new URLSearchParams();
+// const voluntarios = async (query) => {
+//   const queryString = new URLSearchParams();
 
-  for (const key in query) {
-    if (Array.isArray(query[key])) {
-      query[key].forEach((value) => {
-        queryString.append(`${key}[]`, value);
-      });
-    } else {
-      if (query[key] !== '') {
-        queryString.append(key, query[key]);
-      }
-    }
-  }
+//   for (const key in query) {
+//     if (Array.isArray(query[key])) {
+//       query[key].forEach((value) => {
+//         queryString.append(`${key}[]`, value);
+//       });
+//     } else {
+//       if (query[key] !== '') {
+//         queryString.append(key, query[key]);
+//       }
+//     }
+//   }
 
-  const url = `${URL}/voluntarios${queryString ? `?${queryString}` : ''}`;
+//   const url = `${URL}/voluntarios${queryString ? `?${queryString}` : ''}`;
 
-  const response = await fetch(url, { cache: 'no-store' });
-  return response.json();
-};
+//   const response = await fetch(url, { cache: 'no-store' });
+//   return response.json();
+// };
 
 function Voluntarios() {
   const [voluntariosData, setVoluntariosData] = useState([]);
-
+  
   const [query, setQuery] = useState({
     nombre: '',
     apellido: '',
@@ -83,26 +84,20 @@ function Voluntarios() {
     fetchData();
   }, [query, voluntarios]);
 
+
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2">    
       {/* //////////////// MAPA //////////////// */}
       <details className={style.details}>
         <summary className="ml-1 text-md cursor-pointer">Mapa</summary>
-        {/* <input
-            name="nombre"
-            type="text"
-            // value={query.nombre}
-            // onChange={handleChange}
-            className="w-full md:w-1/4 md:ml-1 py-2 px-4 my-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder="Buscar paciente en el mapa"
-          /> */}
+
         <GoogleMapsView marker={voluntariosData} />
+
       </details>
 
       {/* //////////////// FILTROS //////////////// */}
       <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-4 p-4 rounded-lg shadow-md">
         <div>
-          {/* <label className="block mb-2 text-gray-700">Nombre</label> */}
           <input
             name="nombre"
             type="text"
@@ -122,8 +117,8 @@ function Voluntarios() {
             placeholder="Apellido..."
           />
         </div>
+
         <div>
-          {/* <label className="block mb-2 text-gray-700">Localidad</label> */}
           <input
             name="localidad"
             type="text"
@@ -133,8 +128,8 @@ function Voluntarios() {
             placeholder="Localidad..."
           />
         </div>
+          
         <div>
-          {/* <label className="block mb-2 text-gray-700">Profesión</label> */}
           <input
             name="profesion_oficio_ocupacion"
             type="text"
@@ -144,8 +139,8 @@ function Voluntarios() {
             placeholder="Profesión / oficio / ocupación..."
           />
         </div>
+          
         <div>
-          {/* <label className="block mb-2 text-gray-700">Hobbies</label> */}
           <input
             name="hobbies_habilidades"
             type="text"
@@ -222,7 +217,6 @@ function Voluntarios() {
               />
               Domingo
             </label>
-            {/* Repite lo mismo para los otros días de la semana */}
           </div>
         </div>
 
