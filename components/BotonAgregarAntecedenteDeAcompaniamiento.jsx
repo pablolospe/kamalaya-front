@@ -56,33 +56,13 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
     }
   };
 
-  // const antecedenteAcompaniamiento = async (e) => {
-  //   e.preventDefault();
-
-  //   // ... Tu lógica para enviar el formulario ...
-
-  //   if (response) {
-  //       const response = await fetch(
-  //       'https://kamalaya-dev.fl0.io/acompaniamiento',
-  //       // 'http://localhost:8000/acompaniamiento',
-  //       {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify(formData),
-  //       }
-  //     );
-      
-
-  //     toggleModal(); // Cierra el modal después de completar la acción
-  //   }
-  // };
-
   return (
-    <div className="flex align-middle justify-center text-xl font-bolder bg-gray-200 hover:bg-gray-300 cursor-pointer p-2 rounded-lg">
+    <>
+
       <button onClick={toggleModal}>
+    <div className="flex align-middle justify-center text-xl font-bolder bg-gray-200 hover:bg-gray-300 cursor-pointer p-2 rounded-lg">
         <LuPlus />
+    </div>
       </button>
 
       {/* Modal */}
@@ -195,7 +175,7 @@ function BotonAgregarAntecedenteDeAcompaniamiento(id) {
         </div>
       )}
       {/* Fin del modal */}
-    </div>
+    </>
   );
 }
 

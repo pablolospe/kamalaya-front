@@ -78,10 +78,10 @@ async function Voluntario({ params }) {
           <summary className="font-bold text-md cursor-pointer">
             Disponibilidad
           </summary>
-          {v.Disponibilidades.map((d) => (
+          {v.Disponibilidades?.map((d) => (
             <>
               <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-                {d.diaSemana}, {formatearNumeroAHora(d.horaInicio)}-{formatearNumeroAHora(d.horaFin)}
+                {d.diaSemana}, {d.horaInicio}-{d.horaFin}
                 <BotonBorrarDisponibilidad id={d.disponibilidad_id} />
               </div>
             </>
@@ -94,7 +94,7 @@ async function Voluntario({ params }) {
             Inactividad
           </summary>
 
-          {v.Vacaciones.map((v) => (
+          {v.Vacaciones?.map((v) => (
             <>
               <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
                 Desde {formatearFecha(v.fechaInicio)} hasta{' '}
@@ -113,7 +113,7 @@ async function Voluntario({ params }) {
             Antecedentes de acompañamiento
           </summary>
 
-          {v.AntecedenteDeAcompaniamientos.map((a) => (
+          {v.AntecedenteDeAcompaniamientos?.map((a) => (
             <div className="flex flex-col gap-2 mt-1 focus:ring focus:ring-blue-300">
               <div className="p-2 border rounded-md">
                 <div className="flex justify-end">

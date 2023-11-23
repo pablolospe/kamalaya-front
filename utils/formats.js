@@ -55,14 +55,19 @@ export function fechaActualEntreFechas(fechaInicioStr, fechaFinStr) {
 }
 
 export function formatearNumeroTelefono(numero) {
-  // Eliminar cualquier carácter que no sea un dígito
-  const numeroLimpio = numero.replace(/\D/g, '');
+  if (typeof(numero)=='string'){
 
-  // Obtener la longitud del número
-  const longitud = numeroLimpio.length;
+    // Eliminar cualquier carácter que no sea un dígito
+    const numeroLimpio = numero.replace(/\D/g, '');
+    
+    // Obtener la longitud del número
+    const longitud = numeroLimpio.length;
 
   // Aplicar el formato (x-xxxx-xxxx)
   return `${numeroLimpio.slice(0, longitud-8)} ${numeroLimpio.slice(longitud-8, longitud - 4)}-${numeroLimpio.slice(longitud - 4)}`;
+} else{
+  return numero
+}
 }
 
 export const DiaSemanaEnum = {

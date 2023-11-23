@@ -349,7 +349,7 @@ function Voluntarios() {
                   {v?.Disponibilidades.map((d) => (
                     <span key={d.disponibilidad_id}>
                       {DiaSemanaEnum[d.diaSemana]} &nbsp;
-                      {formatearNumeroAHora(d.horaInicio)}-{formatearNumeroAHora(d.horaFin)} <br />
+                      {d.horaInicio}-{d.horaFin} <br />
                     </span>
                   ))}
                 </div>
