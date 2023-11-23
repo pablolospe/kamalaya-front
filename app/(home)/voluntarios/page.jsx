@@ -152,68 +152,67 @@ function Voluntarios() {
 
         <div className="bg-white rounded-md shadow-sm p-2 border border-gray-300">
           <label className="block mb-1 text-gray-400">Disponibilidad</label>
-          <div className="flex flex-wrap first-letter:gap-3 gap-3">
-            <label>
+          <div className="flex flex-wrap gap-x-0.5">
               <input
                 type="checkbox"
                 value="lunes"
                 checked={query.diaSemana.includes('lunes')}
                 onChange={handleDiaSemanaChange}
-              />
-              Lunes
-            </label>
-            <label>
+                />
+                <label className='mr-2'>
+                  Lunes</label>
               <input
                 type="checkbox"
                 value="martes"
                 checked={query.diaSemana.includes('martes')}
                 onChange={handleDiaSemanaChange}
               />
+            <label className='mr-2'>
               Martes
             </label>
-            <label>
               <input
                 type="checkbox"
                 value="miercoles"
                 checked={query.diaSemana.includes('miercoles')}
                 onChange={handleDiaSemanaChange}
-              />
+                />
+            <label className='mr-2'>
               Miércoles
             </label>
-            <label>
               <input
                 type="checkbox"
                 value="jueves"
                 checked={query.diaSemana.includes('jueves')}
                 onChange={handleDiaSemanaChange}
               />
+            <label className='mr-2'>
               Jueves
             </label>
-            <label>
               <input
                 type="checkbox"
                 value="viernes"
                 checked={query.diaSemana.includes('viernes')}
                 onChange={handleDiaSemanaChange}
               />
+            <label className='mr-2'>
               Viernes
             </label>
-            <label>
               <input
                 type="checkbox"
                 value="sabado"
                 checked={query.diaSemana.includes('sabado')}
                 onChange={handleDiaSemanaChange}
               />
+            <label className='mr-2'>
               Sábado
             </label>
-            <label>
               <input
                 type="checkbox"
                 value="domingo"
                 checked={query.diaSemana.includes('domingo')}
                 onChange={handleDiaSemanaChange}
               />
+            <label className='mr-2'>
               Domingo
             </label>
           </div>
