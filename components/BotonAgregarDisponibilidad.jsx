@@ -29,7 +29,7 @@ function BotonAgregarDisponibilidad(id) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     try {
       const response = await fetch(`${URL}/disponibilidad`, {
         method: 'POST',

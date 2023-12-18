@@ -6,7 +6,7 @@ import React from 'react';
 
 function AppBar() {
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
 
   return (
     <div className="ml-auto dlex gap-2">

@@ -1,6 +1,6 @@
 import { URL } from '@/config';
 
-export const pacientes = async (query) => {
+export const grupos = async (query) => {
   const queryString = new URLSearchParams();
 
   for (const key in query) {
@@ -15,7 +15,7 @@ export const pacientes = async (query) => {
     }
   }
 
-  const url = `${URL}/paciente${queryString ? `?${queryString}` : ''}`;
+  const url = `${URL}/grupo${queryString ? `?${queryString}` : ''}`;
 
   try {
     const response = await fetch(url, { cache: 'no-store' });
