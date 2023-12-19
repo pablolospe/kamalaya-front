@@ -123,7 +123,8 @@ function Sidebar() {
         
         items-center 
         justify-between 
-        w-full bg-gray-200  ${
+        bg-opacity-70
+        w-full bg-white  ${
           isMenuOpen
             ? 'transition-all duration-500 ease-in h-[12rem]'
             : 'transition-all duration-700 ease-in h-16'
