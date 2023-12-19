@@ -9,11 +9,11 @@ function AppBar() {
   // console.log(session);
 
   return (
-    <div className="ml-auto dlex gap-2">
-      <div className="flex flex-row align-middle content-center items-center gap-2 mt-1 mr-6">
+    <div className="ml-auto dlex gap-2 ">
+      <div className="flex flex-row align-middle content-center items-center gap-2 mt-1 mr-6 bg-gray-300 p-1 rounded">
         <p className="hidden sm:block">{session?.user.nombre} </p>
         <button
-          className="text-xs sm:text-sm text-red-600 border rounded-md p-1"
+          className="text-xs sm:text-sm text-red-600 border rounded-md p-1 bg-gray-100 hover:bg-gray-200"
           onClick={() => signOut({ callbackUrl: '/auth/login' })}
         >
           Sign out
