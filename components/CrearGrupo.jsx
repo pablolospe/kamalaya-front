@@ -1,16 +1,14 @@
 'use client';
 import { URL } from '@/config';
-import Swal from 'sweetalert2';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-// import { useSession } from 'next-auth/react';
 import { voluntarios } from '@/utils/fetchVoluntarios';
 import { pacientes } from '@/utils/fetchPacientes';
-import { grupos } from '@/utils/fetchGrupos';
+import Swal from 'sweetalert2';
 
 function CrearGrupo() {
-  // const { data: session } = useSession();
-  const [gruposData, setGruposData] = useState([]);
+  const [voluntario1, setVoluntario1] = useState('');
+  const [voluntario2, setVoluntario2] = useState('');
   const [pacientesData, setPacientesData] = useState([]);
   const [voluntariosData, setVoluntariosData] = useState([]);
   const [grupo, setGrupo] = useState({
@@ -19,7 +17,7 @@ function CrearGrupo() {
     horaInicio: '',
     horaFin: '',
     paciente_id: '',
-    voluntario_id: [1, 2],
+    voluntario_id: [],
     descripcion: '',
   });
 
@@ -32,18 +30,23 @@ function CrearGrupo() {
   useEffect(() => {
     async function fetchData() {
       // if (session) {
-      const gruposData = await grupos(query);
+      // const gruposData = await grupos(query);
       const pacienteData = await pacientes(query);
       const voluntariosData = await voluntarios(query);
-      setGruposData(gruposData);
+
+      setGrupo((prevGrupo) => ({
+        ...prevGrupo,
+        voluntario_id: [voluntario1, voluntario2],
+      }));
+
+      // setGruposData(gruposData);
       setPacientesData(pacienteData);
       setVoluntariosData(voluntariosData);
       // }
+      console.log(grupo);
     }
     fetchData();
-  }, [query, setGrupo, setVoluntariosData]);
-
-  console.log(gruposData);
+  }, [query, setGrupo, setVoluntariosData, voluntario1, voluntario2]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,6 +65,7 @@ function CrearGrupo() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formDataJSON = JSON.stringify(grupo);
     console.log(formDataJSON);
 
@@ -90,35 +94,84 @@ function CrearGrupo() {
       console.error('Error:', error);
     }
   };
-  // const handleVoluntarioChange = (e) => {
-  //   setGrupo((prevGrupo) => ({
-  //     ...prevGrupo,
-  //     voluntario_id: [...prevGrupo.voluntario_id, e.target.value]
-  //   }));
-  // };
+
+  const handleVoluntario1Change = (e) => {
+    setVoluntario1(Number(e.target.value));
+  };
+
+  const handleVoluntario2Change = (e) => {
+    setVoluntario2(Number(e.target.value));
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mt-32 flex flex-row justify-evenly align-center max-w-xl">
-        <div className=" flex flex-col justify-evenly align-center max-w-xl">
-          <h1>Crear nuevo grupo</h1>
-          <br />
-          <select
-            onChange={handlePacienteChange}
-            name="paciente_id"
-            value={grupo.paciente_id}
-            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-          >
-            <option value=""> Elije un paciente </option>
-            {pacientesData?.map((p) => (
-              <option value={p.paciente_id} key={p.paciente_id}>
-                {p.nombre} {p.apellido}
-              </option>
-            ))}
-          </select>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col align-middle justify-center items-center gap-2"
+    >
+      <h1>Crear nuevo grupo</h1>
+      <div className="mt-8 flex flex-row justify-evenly align-center max-w-xl gap-8">
+        <div className="flex flex-col justify-evenly align-center max-w-xl gap-4">
+          <div>
+            <select
+              onChange={handlePacienteChange}
+              name="paciente_id"
+              value={grupo.paciente_id}
+              className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+            >
+              <option value=""> Elije un paciente </option>
+              {pacientesData?.map((p) => (
+                <option value={p.paciente_id} key={p.paciente_id}>
+                  {p.nombre} {p.apellido}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label
+              className="block text-sm font-medium text-gray-900 dark:text-white"
+              htmlFor="voluntario1"
+            >
+              Voluntario 1
+            </label>
+            <select
+              required
+              onChange={handleVoluntario1Change}
+              value={voluntario1}
+              className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+            >
+              <option value="">Elige un voluntario</option>
+              {voluntariosData?.map((p) => (
+                <option value={p.voluntario_id} key={p.voluntario_id}>
+                  {p.nombre} {p.apellido}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label
+              className="block text-sm font-medium text-gray-900 dark:text-white"
+              htmlFor="voluntario2"
+            >
+              Voluntario 2
+            </label>
+            <select
+              onChange={handleVoluntario2Change}
+              value={voluntario2}
+              className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+            >
+              <option value="">Elige un voluntario</option>
+              {voluntariosData?.map((p) => (
+                <option value={p.voluntario_id} key={p.voluntario_id}>
+                  {p.nombre} {p.apellido}
+                </option>
+              ))}
+            </select>
+          </div>
 
           <label
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block text-sm font-medium text-gray-900 dark:text-white"
             htmlFor="fechaInicio"
           >
             Fecha de inicio:
@@ -133,26 +186,9 @@ function CrearGrupo() {
             id="fechaDeInicio"
           ></input>
 
-          {/* 
-      <label>Elige un voluntario</label>
-      <select
-        onChange={handleVoluntarioChange}
-        value={grupo.voluntario_id}  
-        name=""
-        id=""
-        className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-      >
-          <option> Elije un voluntario </option>
-        {voluntariosData?.map((p) => (
-          <option key={p.voluntario_id}>
-            {p.nombre} {p.apellido}
-          </option>
-        ))}
-      </select> */}
-
           <div>
             <label
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block text-sm font-medium text-gray-900 dark:text-white"
               htmlFor="diaSemana"
             >
               Día de la semana:
@@ -177,7 +213,7 @@ function CrearGrupo() {
 
           <div>
             <label
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block text-sm font-medium text-gray-900 dark:text-white"
               htmlFor="horaInicio"
             >
               Hora de inicio:
@@ -210,7 +246,7 @@ function CrearGrupo() {
 
           <div>
             <label
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block text-sm font-medium text-gray-900 dark:text-white"
               htmlFor="horaFin"
             >
               Hora de fin:
@@ -244,7 +280,7 @@ function CrearGrupo() {
           <div className="sm:col-span-2">
             <label
               htmlFor="descripcion"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block text-sm font-medium text-gray-900 dark:text-white"
             >
               Descripción
             </label>
@@ -262,54 +298,57 @@ function CrearGrupo() {
 
         <div>
           <section>
-            <p>Paciente: {grupo.paciente_id}</p>
+            <p>
+              Paciente:{' '}
+              {
+                pacientesData.find((p) => p.paciente_id === grupo.paciente_id)
+                  ?.nombre
+              }{' '}
+              {
+                pacientesData.find((p) => p.paciente_id === grupo.paciente_id)
+                  ?.apellido
+              }
+            </p>
+            <p>
+              Voluntario 1:{' '}
+              {
+                voluntariosData.find((v) => v.voluntario_id === voluntario1)
+                  ?.nombre
+              }{' '}
+              {
+                voluntariosData.find((v) => v.voluntario_id === voluntario1)
+                  ?.apellido
+              }
+            </p>
+            <p>
+              Voluntario 2:{' '}
+              {
+                voluntariosData.find((v) => v.voluntario_id === voluntario2)
+                  ?.nombre
+              }{' '}
+              {
+                voluntariosData.find((v) => v.voluntario_id === voluntario2)
+                  ?.apellido
+              }
+            </p>
+
             <p>Día de la semana: {grupo.diaSemana}</p>
             <p>Fecha de inicio: {grupo.fechaDeInicio}</p>
             <p>Hora de inicio: {grupo.horaInicio}</p>
             <p>Hora de finalización: {grupo.horaFin}</p>
+            <p>Descripción: {grupo.descripcion}</p>
+          </section>
+
+          <section>
+            <button
+              type="submit"
+              className="w-40 mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            >
+              Enviar formulario
+            </button>
           </section>
         </div>
       </div>
-      <div>
-        <button
-          type="submit"
-          className="w-40 mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        >
-          Enviar formulario
-        </button>
-      </div>
-      <section>
-        <table>
-          <thead>
-            <tr>
-              <th className="border p-2" >ID</th>
-              <th className="border p-2" >Paciente</th>
-              <th className="border p-2" >Voluntario</th>
-              <th className="border p-2" >Fecha de inicio</th>
-              <th className="border p-2" >Hora de inicio</th>
-              <th className="border p-2" >Hora de finalización</th>
-              <th className="border p-2" >Día de la semana</th>
-              <th className="border p-2" >Descripción</th>
-            </tr>
-          </thead>
-          <tbody>
-            {gruposData?.map((g) => (
-              <tr key={g.grupo_id} 
-              className="text-center bg-gray-100 hover:bg-gray-200"
-              >
-                <td className="hidden md:table-cell">{g.grupo_id}</td>
-                <td className="hidden md:table-cell">{g.paciente_id}</td>
-                <td className="hidden md:table-cell">{g?.voluntario_id}</td>
-                <td className="hidden md:table-cell">{g.fechaDeInicio}</td>
-                <td className="hidden md:table-cell">{g.horaInicio}</td>
-                <td className="hidden md:table-cell">{g.horaFin}</td>
-                <td className="hidden md:table-cell">{g.diaSemana}</td>
-                <td className="hidden md:table-cell">{g.descripcion}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
     </form>
   );
 }

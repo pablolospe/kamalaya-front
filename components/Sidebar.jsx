@@ -131,18 +131,26 @@ function Sidebar() {
         }`}
       >
         <div>
+        <div className='hidden lg:flex flex-row gap-2 justify-center items-center'>
           <NextImage
             src="/logoKamalaya.svg"
             alt="isotipo kamalaya"
             width={40}
             height={40}
-            className={`hidden md:block ml-6 transition-transform duration-700 ${
+            className={`ml-6 transition-transform duration-700 ${
               isMenuOpen ? 'translate-y-1' : ''
             }`}
             style={{
               transformOrigin: 'center bottom', // Set transform origin to center bottom
             }}
           />
+
+          <h1
+            className="text-gray-700 font-light text-2xl hover:text-black"
+          >
+            <Link href={'/'}>Kamalaya</Link>
+          </h1>
+        </div>
         </div>
 
         {/* Navegación */}
@@ -192,10 +200,7 @@ function Sidebar() {
           ))}
         </ul>
 
-        <h1 className="hidden lg:block fixed left-32 text-gray-700 font-light text-xl hover:text-black">
-          <Link href={'/'}>Kamalaya</Link>
-        </h1>
-        <div className='hidden md:block'>
+        <div className="hidden md:block">
           <AppBar />
         </div>
       </div>

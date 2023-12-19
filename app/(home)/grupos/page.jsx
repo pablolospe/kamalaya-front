@@ -1,10 +1,18 @@
 import React from 'react'
-import CrearGrupo from '@/components/CrearGrupo'
+import GruposTabla from '@/components/GruposTabla'
+import Link from 'next/link'
 
 function GruposPage() {
   return (
     <div>
-        <CrearGrupo />
+        <Link href={'/grupos/crear'} className="w-40 m-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+        Crear nuevo grupo
+        </Link>
+        <br />
+        <br />
+
+        <GruposTabla />
+        <br />
     </div>
   )
 }
