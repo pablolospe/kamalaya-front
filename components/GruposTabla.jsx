@@ -41,7 +41,8 @@ function GruposTabla() {
               <th className="border p-2" >Hora de finalización</th>
               <th className="border p-2" >Día de la semana</th>
               <th className="border p-2" >Descripción</th>
-              <th className="border p-2" >Borrar</th>
+              <th className="border p-2" >Editar</th>
+              <th className="border p-2" >Activo</th>
             </tr>
           </thead>
 
@@ -62,6 +63,7 @@ function GruposTabla() {
                 <td className="table-cell p-2">{g.diaSemana}</td>
                 <td className="table-cell p-2">{g.descripcion}</td>
                 <td className="table-cell p-2"></td>
+                <td className="table-cell p-2">{g.activo ? "Activo" : "Inactivo"}</td>
               </tr>
             ))}
           </tbody>

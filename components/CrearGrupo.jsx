@@ -30,7 +30,7 @@ function CrearGrupo() {
 
   useEffect(() => {
     async function fetchData() {
-      // if (session) {
+      
       const pacienteData = await pacientes(query);
       const voluntariosData = await voluntarios(query);
 
@@ -62,20 +62,11 @@ function CrearGrupo() {
     const updatedVoluntarioId = [voluntario1, voluntario2, voluntario3].filter(
       (voluntario) => voluntario !== ''
     );
-console.log(voluntario1);
-console.log(updatedVoluntarioId);
 
     const grupoToSubmit = {
       ...grupo,
       voluntario_id: updatedVoluntarioId,
     };
-
-    // const formDataJSON = JSON.stringify(grupoToSubmit);
-  
-    console.log(grupoToSubmit);
-
-      // const formDataJSON = JSON.stringify(grupoToSubmit);
-      
       
       try {
         const response = await fetch(`${URL}/grupo`, {
@@ -103,7 +94,7 @@ console.log(updatedVoluntarioId);
       }
     
   };
-    // };
+    
 
   const handleVoluntario1Change = (e) => {
     setVoluntario1(Number(e.target.value));
