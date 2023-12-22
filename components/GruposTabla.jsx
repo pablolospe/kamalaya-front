@@ -35,6 +35,7 @@ function GruposTabla() {
               <th className="border p-2" >Paciente</th>
               <th className="border p-2" >Voluntario 1</th>
               <th className="border p-2" >Voluntario 2</th>
+              <th className="border p-2" >Voluntario 3</th>
               <th className="border p-2" >Fecha de inicio</th>
               <th className="border p-2" >Hora de inicio</th>
               <th className="border p-2" >Hora de finalización</th>
@@ -53,6 +54,7 @@ function GruposTabla() {
                 <td className="table-cell p-2">{g.Paciente.nombre} {g.Paciente.apellido}</td>
                 <td className="table-cell p-2">{g?.Voluntarios[0]?.nombre} {g.Voluntarios[0]?.apellido}</td>
                 <td className="table-cell p-2">{g?.Voluntarios[1]?.nombre} {g.Voluntarios[1]?.apellido}</td>
+                <td className="table-cell p-2">{g?.Voluntarios[2]?.nombre} {g.Voluntarios[2]?.apellido}</td>
                 
                 <td className="table-cell p-2">{g.fechaDeInicio}</td>
                 <td className="table-cell p-2">{g.horaInicio}</td>

@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 function CrearGrupo() {
   const [voluntario1, setVoluntario1] = useState('');
   const [voluntario2, setVoluntario2] = useState('');
+  const [voluntario3, setVoluntario3] = useState('');
   const [pacientesData, setPacientesData] = useState([]);
   const [voluntariosData, setVoluntariosData] = useState([]);
   const [grupo, setGrupo] = useState({
@@ -30,23 +31,15 @@ function CrearGrupo() {
   useEffect(() => {
     async function fetchData() {
       // if (session) {
-      // const gruposData = await grupos(query);
       const pacienteData = await pacientes(query);
       const voluntariosData = await voluntarios(query);
 
-      setGrupo((prevGrupo) => ({
-        ...prevGrupo,
-        voluntario_id: [voluntario1, voluntario2],
-      }));
-
-      // setGruposData(gruposData);
       setPacientesData(pacienteData);
       setVoluntariosData(voluntariosData);
-      // }
-      console.log(grupo);
+      
     }
     fetchData();
-  }, [query, setGrupo, setVoluntariosData, voluntario1, voluntario2]);
+  }, [query, setVoluntariosData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,34 +59,51 @@ function CrearGrupo() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formDataJSON = JSON.stringify(grupo);
-    console.log(formDataJSON);
+    const updatedVoluntarioId = [voluntario1, voluntario2, voluntario3].filter(
+      (voluntario) => voluntario !== ''
+    );
+console.log(voluntario1);
+console.log(updatedVoluntarioId);
 
-    try {
-      const response = await fetch(`${URL}/grupo`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(grupo),
-      });
+    const grupoToSubmit = {
+      ...grupo,
+      voluntario_id: updatedVoluntarioId,
+    };
 
-      if (response.ok) {
-        Swal.fire({
-          text: 'Formulario ingresado correctamente',
-          icon: 'success',
-          confirmButtonColor: 'gray',
-          color: 'black',
-        }).then(router.push('/grupos'));
+    // const formDataJSON = JSON.stringify(grupoToSubmit);
+  
+    console.log(grupoToSubmit);
 
-        console.log('Datos enviados exitosamente');
-      } else {
-        console.error('Error al enviar los datos');
+      // const formDataJSON = JSON.stringify(grupoToSubmit);
+      
+      
+      try {
+        const response = await fetch(`${URL}/grupo`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(grupoToSubmit),
+        });
+        
+        if (response.ok) {
+          Swal.fire({
+            text: 'Formulario ingresado correctamente',
+            icon: 'success',
+            confirmButtonColor: 'gray',
+            color: 'black',
+          }).then(router.push('/grupos'));
+          
+          console.log('Datos enviados exitosamente');
+        } else {
+          console.error('Error al enviar los datos');
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    
   };
+    // };
 
   const handleVoluntario1Change = (e) => {
     setVoluntario1(Number(e.target.value));
@@ -101,6 +111,10 @@ function CrearGrupo() {
 
   const handleVoluntario2Change = (e) => {
     setVoluntario2(Number(e.target.value));
+  };
+
+  const handleVoluntario3Change = (e) => {
+    setVoluntario3(Number(e.target.value));
   };
 
   return (
@@ -163,6 +177,27 @@ function CrearGrupo() {
               <select
                 onChange={handleVoluntario2Change}
                 value={voluntario2}
+                className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+              >
+                <option value="">Elige un voluntario</option>
+                {voluntariosData?.map((p) => (
+                  <option value={p.voluntario_id} key={p.voluntario_id}>
+                    {p.nombre} {p.apellido}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label
+                className="block text-sm font-medium text-gray-900 dark:text-white"
+                htmlFor="voluntario3"
+              >
+                Voluntario 3
+              </label>
+              <select
+                onChange={handleVoluntario3Change}
+                value={voluntario3}
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
               >
                 <option value="">Elige un voluntario</option>
@@ -333,6 +368,18 @@ function CrearGrupo() {
               }{' '}
               {
                 voluntariosData.find((v) => v.voluntario_id === voluntario2)
+                  ?.apellido
+              }
+            </p>
+
+            <p>
+              Voluntario 3:{' '}
+              {
+                voluntariosData.find((v) => v.voluntario_id === voluntario3)
+                  ?.nombre
+              }{' '}
+              {
+                voluntariosData.find((v) => v.voluntario_id === voluntario3)
                   ?.apellido
               }
             </p>
