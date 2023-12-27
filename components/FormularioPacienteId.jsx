@@ -12,8 +12,8 @@ const FormularioPacienteId = ({ v }) => {
   const [voluntariosData, setVoluntariosData] = useState();
   const [formData, setFormData] = useState({
     voluntario_id: v.voluntario_id || '',
-    fechaAlta: v.fechaAlta,
-    fechaBaja: v.fechaBaja,
+    fechaAlta: v.fechaAlta || '',
+    fechaBaja: v.fechaBaja || '',
     cuidadorPrincipal: v.cuidadorPrincipal,
     telefonoCuidadorPrincipal: v.telefonoCuidadorPrincipal,
     insumosPrestados: v.insumosPrestados,
@@ -21,7 +21,7 @@ const FormularioPacienteId = ({ v }) => {
     nombre: v.nombre,
     apellido: v.apellido,
     genero: v.genero || '',
-    fechaDeNacimiento: v.fechaDeNacimiento,
+    fechaDeNacimiento: v.fechaDeNacimiento || '',
     dni: v.dni,
     email: v.email,
     telefono: v.telefono,
@@ -42,8 +42,8 @@ const FormularioPacienteId = ({ v }) => {
           
     quienDeriva: v.quienDeriva,
     contactoQuienDeriva: v.contactoQuienDeriva,
-    diagnostico: "",
-    fechaDeDiagnostico: "",
+    diagnostico: v.diagnostico,
+    fechaDeDiagnostico: v.fechaDeDiagnostico || '',
     enfermedadActual: v.enfermedadActual,
     ECOGbasal: v.ECOGbasal || '',
     antecedentesEnfermedadesPrevias: v.antecedentesEnfermedadesPrevias,
@@ -140,8 +140,14 @@ const FormularioPacienteId = ({ v }) => {
   };
 
   const handleChange = (e) => {
+    const isVoluntarioField = e.target.name === 'voluntario_id';
+
     const { name, value, type, checked } = e.target;
-    const newValue = type === 'checkbox' ? checked : value;
+    let newValue = type === 'checkbox' ? checked : value;
+    
+    if (isVoluntarioField && newValue) {
+      newValue = Number(newValue);
+    }
 
     if (name === 'diaSemana' || name === 'horaInicio' || name === 'horaFin') {
       setFormData((prevData) => ({
@@ -487,8 +493,7 @@ const FormularioPacienteId = ({ v }) => {
 
         <label>
           Diagnóstico
-          <textarea
-            rows={3}
+          <input
             type="text"
             name="diagnostico"
             value={formData.diagnostico}
@@ -499,9 +504,9 @@ const FormularioPacienteId = ({ v }) => {
 
         <label>
           Fecha del diagnóstico
-          <textarea
-            rows={3}
-            type="text"
+          <input
+            // required
+            type="date"
             name="fechaDeDiagnostico"
             value={formData.fechaDeDiagnostico}
             onChange={handleChange}

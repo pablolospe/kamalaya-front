@@ -49,7 +49,7 @@ async function Paciente({ params }) {
             {v?.genero === 'M' ? 'Masculino' : v?.genero === 'F' ? 'Femenino' : 'otro'}
           </div>
 
-          <div><b>Fecha de Nacimiento: </b> {formatearFecha(v?.fechaDeNacimiento)} </div>
+          <div><b>Fecha de nacimiento: </b> {formatearFecha(v?.fechaDeNacimiento)} </div>
             
           <div> <b>Edad</b> {calcularEdad(v?.fechaDeNacimiento)} años </div>
           
@@ -74,6 +74,8 @@ async function Paciente({ params }) {
      
           <div><b>Quien deriva </b> {v?.quienDeriva}</div>
           <div><b>Contacto de quien deriva (tel, mail) </b> {v?.contactoQuienDeriva}</div>
+          <div><b>Diagnóstico</b> {v?.diagnostico}</div>
+          <div><b>Fecha de diagnóstico: </b> {formatearFecha(v?.fechaDeDiagnostico)} </div>
           <div><b>Equipo de seguimiento</b> {v?.equipoSeguimiento}</div>
           <div><b>Enfermedad actual</b> {v?.enfermedadActual}</div>
           <div><b>ECOG basal</b> {v?.ECOGbasal}</div>

@@ -13,7 +13,7 @@ const FormularioPaciente = () => {
   const [formData, setFormData] = useState({
   voluntario_id: "",
   fechaAlta: "",
-  fechaBaja: null,
+  fechaBaja: "",
   cuidadorPrincipal: "",
   telefonoCuidadorPrincipal: "987654321",
   insumosPrestados: "Pulmotor",
@@ -43,7 +43,7 @@ const FormularioPaciente = () => {
   quienDeriva: "Dr. Perez",
   contactoQuienDeriva: "98765432",
   diagnostico: "",
-  fechaDeDiagnostico: "1920-06-21",
+  fechaDeDiagnostico: "",
   enfermedadActual: "",
   ECOGbasal: "",
   antecedentesEnfermedadesPrevias: "un toco",
