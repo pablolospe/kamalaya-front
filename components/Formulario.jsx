@@ -21,6 +21,8 @@ const Formulario = () => {
     provincia: "Buenos Aires",
     pais: "Argentina",
     codigoPostal: "1643",
+    lat: "-34.488903", 
+    lng: "-58.49910169999999",
     telefonoEmergencia: "1199887766",
     nombreContactoEmergencia: "Jorge Perez (hijo)",
     genero: "M",
@@ -33,8 +35,8 @@ const Formulario = () => {
     experienciaCP: false,
     Disponibilidades: [{
       diaSemana: "lunes",
-      horaInicio:"",
-      horaFin:""
+      horaInicio:"12:00",
+      horaFin:"16:00"
     }],
   });
 
