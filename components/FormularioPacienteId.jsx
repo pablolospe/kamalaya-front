@@ -42,6 +42,8 @@ const FormularioPacienteId = ({ v }) => {
           
     quienDeriva: v.quienDeriva,
     contactoQuienDeriva: v.contactoQuienDeriva,
+    diagnostico: "",
+    fechaDeDiagnostico: "",
     enfermedadActual: v.enfermedadActual,
     ECOGbasal: v.ECOGbasal || '',
     antecedentesEnfermedadesPrevias: v.antecedentesEnfermedadesPrevias,
@@ -477,6 +479,31 @@ const FormularioPacienteId = ({ v }) => {
             type="text"
             name="contactoQuienDeriva"
             value={formData.contactoQuienDeriva}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+
+
+        <label>
+          Diagnóstico
+          <textarea
+            rows={3}
+            type="text"
+            name="diagnostico"
+            value={formData.diagnostico}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+
+        <label>
+          Fecha del diagnóstico
+          <textarea
+            rows={3}
+            type="text"
+            name="fechaDeDiagnostico"
+            value={formData.fechaDeDiagnostico}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />

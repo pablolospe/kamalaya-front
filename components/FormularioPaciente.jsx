@@ -42,6 +42,8 @@ const FormularioPaciente = () => {
         
   quienDeriva: "Dr. Perez",
   contactoQuienDeriva: "98765432",
+  diagnostico: "",
+  fechaDeDiagnostico: "1920-06-21",
   enfermedadActual: "",
   ECOGbasal: "",
   antecedentesEnfermedadesPrevias: "un toco",
@@ -151,23 +153,9 @@ const FormularioPaciente = () => {
     if (isVoluntarioField && newValue) {
       newValue = Number(newValue);
     }
-  
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: newValue,
-    }));
-  };
-
-  const handleChangeBoolean = (e) => {
-    let { value } = e.target;
-    // Comprueba si el valor es 'true' o 'false' (str), si es así, convierte el valor a boolean
-    if (value === 'true') value = true;
-    if (value === 'false') value = false;
-    if (value === '') value = undefined;
-  
-    setFormData((prevData) => ({
-      ...prevData,
-      [e.target.name]: value,
     }));
   };
 
@@ -501,6 +489,28 @@ const FormularioPaciente = () => {
         </label>
 
         <label>
+          Diagnóstico
+          <input
+            type="text"
+            name="diagnostico"
+            value={formData.diagnostico}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+
+        <label>
+          Fecha del diagnóstico
+          <input
+            type="date"
+            name="fechaDeDiagnostico"
+            value={formData.fechaDeDiagnostico}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+
+        <label>
           Enfermedad actual
           <textarea
             rows={3}
@@ -512,7 +522,7 @@ const FormularioPaciente = () => {
           />
         </label>
         <label>
-          ECOG basal HACER SELECT!!!
+          ECOG basal
           <select
             name="ECOGbasal"
             value={formData.ECOGbasal}
