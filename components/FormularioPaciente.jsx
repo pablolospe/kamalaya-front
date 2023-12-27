@@ -48,10 +48,10 @@ const FormularioPaciente = () => {
   medicacionActual: "",
   equipoSeguimiento: "",
         
-  pacienteConoceDiagnostico: undefined,
-  pacienteConocePronostico: undefined,
-  familiaConoceDiagnostico: undefined,
-  familiaConocePronostico: undefined,
+  pacienteConoceDiagnostico: "Falta preguntar",
+  pacienteConocePronostico: "Falta preguntar",
+  familiaConoceDiagnostico: "Falta preguntar",
+  familiaConocePronostico: "Falta preguntar",
   problemasActuales: "",
   recursosDisponibles: "",
   recursosAExplotar: "",
@@ -61,14 +61,12 @@ const FormularioPaciente = () => {
 
   useEffect(() => {
     async function fetchData() {
-    
       const voluntariosData = await voluntarios();
       setVoluntariosData(voluntariosData);
-      
     }
     fetchData();
   }, [setVoluntariosData])
-  console.log(formData);
+  // console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -140,18 +138,13 @@ const FormularioPaciente = () => {
   };
 
   const handleChange = (e) => {
-    const isBooleanField = [
-      'pacienteConoceDiagnostico',
-      'pacienteConocePronostico',
-      'familiaConoceDiagnostico',
-      'familiaConocePronostico',
-    ].includes(e.target.name);
+    
     const isVoluntarioField = e.target.name === 'voluntario_id';
   
     let newValue =
       e.target.type === 'checkbox'
         ? e.target.checked
-        : isBooleanField || isVoluntarioField
+        : isVoluntarioField
         ? e.target.value || undefined
         : e.target.value;
   
@@ -509,7 +502,8 @@ const FormularioPaciente = () => {
 
         <label>
           Enfermedad actual
-          <input
+          <textarea
+            rows={3}
             type="text"
             name="enfermedadActual"
             value={formData.enfermedadActual}
@@ -577,12 +571,12 @@ const FormularioPaciente = () => {
         <select 
           name="pacienteConoceDiagnostico"
           value={formData.pacienteConoceDiagnostico}
-          onChange={handleChangeBoolean}
+          onChange={handleChange}
           className="flex flex-row w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
         >
-          <option value="">Selecciona una opción</option>
-          <option value="true">Si</option>
-          <option value="false">No</option>
+          <option value="Falta preguntar">Falta preguntar</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
         </select>
       </label>
       
@@ -593,12 +587,12 @@ const FormularioPaciente = () => {
         <select 
           name="pacienteConocePronostico"
           value={formData.pacienteConocePronostico}
-          onChange={handleChangeBoolean}
+          onChange={handleChange}
           className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
         >
-          <option value="">Selecciona una opción</option>
-          <option value="true">Si</option>
-          <option value="false">No</option>
+          <option value="Falta preguntar">Falta preguntar</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
         </select>
       </label>
       
@@ -609,12 +603,12 @@ const FormularioPaciente = () => {
         <select 
           name="familiaConoceDiagnostico"
           value={formData.familiaConoceDiagnostico}
-          onChange={handleChangeBoolean}
+          onChange={handleChange}
           className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
         >
-          <option value="">Selecciona una opción</option>
-          <option value="true">Si</option>
-          <option value="false">No</option>
+          <option value="Falta preguntar">Falta preguntar</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
         </select>
       </label>
       
@@ -625,12 +619,12 @@ const FormularioPaciente = () => {
         <select 
           name="familiaConocePronostico"
           value={formData.familiaConocePronostico}
-          onChange={handleChangeBoolean}
+          onChange={handleChange}
           className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
         >
-          <option value="">Selecciona una opción</option>
-          <option value="true">Si</option>
-          <option value="false">No</option>
+          <option value="Falta preguntar">Falta preguntar</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
         </select>
       </label>
 
@@ -667,7 +661,7 @@ const FormularioPaciente = () => {
         <label>
           Familia
           <textarea
-            rows={2}
+            rows={3}
             type="text"
             name="familia"
             value={formData.familia}
