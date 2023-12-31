@@ -530,6 +530,7 @@ const FormularioPaciente = () => {
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           >
             <option value="">Elige un valor</option>
+            <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
