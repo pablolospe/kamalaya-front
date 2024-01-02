@@ -6,30 +6,12 @@ import { fechaActualEntreFechas, formatearNumeroTelefono, formatearFecha, DiaSem
 import GoogleMapsView from '@/components/GoogleMapsView';
 import style from './page.module.css';
 import { voluntarios } from '@/utils/fetchVoluntarios.js'
+import { pacientes } from '@/utils/fetchPacientes.js'
 
-// const voluntarios = async (query) => {
-//   const queryString = new URLSearchParams();
-
-//   for (const key in query) {
-//     if (Array.isArray(query[key])) {
-//       query[key].forEach((value) => {
-//         queryString.append(`${key}[]`, value);
-//       });
-//     } else {
-//       if (query[key] !== '') {
-//         queryString.append(key, query[key]);
-//       }
-//     }
-//   }
-
-//   const url = `${URL}/voluntarios${queryString ? `?${queryString}` : ''}`;
-
-//   const response = await fetch(url, { cache: 'no-store' });
-//   return response.json();
-// };
 
 function Voluntarios() {
   const [voluntariosData, setVoluntariosData] = useState([]);
+  const [showPacientes, setShowPacientes] = useState(false);
   
   const [query, setQuery] = useState({
     nombre: '',
@@ -78,10 +60,19 @@ function Voluntarios() {
   useEffect(() => {
     async function fetchData() {
       const voluntarioData = await voluntarios(query);
-      setVoluntariosData(voluntarioData);
+      let pacienteData = [];
+      
+      if (showPacientes) {
+        pacienteData = await pacientes(query);
+      }
+  
+      const combinedData = voluntarioData.concat(pacienteData);
+  
+      setVoluntariosData(combinedData);
+      console.log(combinedData);
     }
     fetchData();
-  }, [query, voluntarios]);
+  }, [query, voluntarios, pacientes, showPacientes]);
 
 
   return (
@@ -256,8 +247,15 @@ function Voluntarios() {
         <button
           onClick={handleBorrarFiltros}
           className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
-        >
+          >
           Borrar <br></br>filtros
+        </button>
+
+        <button 
+          onClick={() => setShowPacientes(prevShowPacientes => !prevShowPacientes)}
+          className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+        >
+          Ver pacientes
         </button>
       </div>
 
@@ -282,18 +280,20 @@ function Voluntarios() {
         <tbody>
           {voluntariosData?.map((v) => (
             <tr
-              key={v.voluntario_id}
-              className="text-center bg-gray-100 hover:bg-gray-200"
+              key={v.email}
+              className={!v.paciente_id ? "text-center bg-gray-100 hover:bg-gray-200" : "text-center bg-sky-50 hover:bg-gray-200"}
             >
               <td>
-                <Link href={`/voluntarios/${v.voluntario_id}`}>
+
+                <Link href={!v.paciente_id ? `/voluntarios/${v.voluntario_id}`: `/pacientes/${v.paciente_id}`}>
                   <div className="flex flex-row items-center ml-3 my-1 text-left">
                     <div className="bg-gray-300 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
                       <LuUser size={20} />
                     </div>
-                    {v.nombre} {v.apellido} ({v.voluntario_id})
+                    {v.nombre} {v.apellido} ({v.paciente_id ? 'paciente' : 'voluntario'})
                   </div>
                 </Link>
+                
               </td>
               <td className="hidden md:table-cell">
                 <div>
@@ -345,7 +345,7 @@ function Voluntarios() {
 
               <td className="hidden md:table-cell">
                 <div>
-                  {v?.Disponibilidades.map((d) => (
+                  {v?.Disponibilidades?.map((d) => (
                     <span key={d.disponibilidad_id}>
                       {DiaSemanaEnum[d.diaSemana]} &nbsp;
                       {d.horaInicio}-{d.horaFin} <br />
