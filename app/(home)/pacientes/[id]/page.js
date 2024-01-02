@@ -98,6 +98,9 @@ async function Paciente({ params }) {
         <Link href={`/pacientes/${id}/seguimiento`} className="w-40 m-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600">
         Agregar nuevo seguimiento
         </Link>
+        <Link href={`/pacientes/${id}/editar`} className="w-40 m-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+        Editar paciente
+        </Link>
         <br/>
         <br/>
         <SeguimientosTabla id={id}/>
