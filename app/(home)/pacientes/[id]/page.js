@@ -21,11 +21,6 @@ async function Paciente({ params }) {
         {v?.nombre} {v?.apellido}
       </h2>
 
-      <details>
-        <summary className='cursor-pointer text-right'>editar</summary>
-        <FormularioPacienteId v={v}/>
-      </details>
-
       <div className="flex flex-col items-start md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
 
         <details>
@@ -94,16 +89,17 @@ async function Paciente({ params }) {
         </details>
       </div>
 
-        <br/>
-        <Link href={`/pacientes/${id}/seguimiento`} className="w-40 m-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+      <div className='flex flex-row justify-center align-middle m-8 text-center gap-4'>
+        <Link href={`/pacientes/${id}/seguimiento`} className="p-2 w-56 bg-blue-500 text-white rounded-md hover:bg-blue-600">
         Agregar nuevo seguimiento
         </Link>
-        <Link href={`/pacientes/${id}/editar`} className="w-40 m-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+
+        <Link href={`/pacientes/${id}/editar`} className="p-2 w-56 bg-blue-500 text-white rounded-md hover:bg-blue-600">
         Editar paciente
         </Link>
-        <br/>
-        <br/>
-        <SeguimientosTabla id={id}/>
+      </div>
+
+      <SeguimientosTabla id={id}/>
 
     </div>
   );
