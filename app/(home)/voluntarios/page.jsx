@@ -255,7 +255,7 @@ function Voluntarios() {
           onClick={() => setShowPacientes(prevShowPacientes => !prevShowPacientes)}
           className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
         >
-          Ver pacientes
+          {!showPacientes ? 'Ver pacientes': 'Ocultar pacientes'}
         </button>
       </div>
 
@@ -266,10 +266,8 @@ function Voluntarios() {
           <tr className="bg-gray-100 row-auto">
             <th className="border p-2">Nombre</th>
             <th className="hidden md:table-cell border p-2">Teléfono</th>
-            <th className="hidden md:table-cell border p-2">Tiene auto</th>
-            <th className="hidden md:table-cell border p-2">
-              Tiene experiencia
-            </th>
+            {/* <th className="hidden md:table-cell border p-2">Tiene auto</th> */}
+            {/* <th className="hidden md:table-cell border p-2">Tiene experiencia</th> */}
             <th className="hidden md:table-cell border p-2">Está activo/a?</th>
             <th className="hidden md:table-cell border p-2">
               Disponibilidad semanal
@@ -307,13 +305,14 @@ function Voluntarios() {
                   )}
                 </div>
               </td>
-              <td className="hidden md:table-cell">
-                <div>{v.tieneAuto ? 'si' : 'no'}</div>
-              </td>
 
-              <td className="hidden md:table-cell">
+              {/* <td className="hidden md:table-cell">
+                <div>{v.tieneAuto ? 'si' : 'no'}</div>
+              </td> */}
+
+              {/* <td className="hidden md:table-cell">
                 <div>{v.experienciaCP === true ? 'si' : 'no'}</div>
-              </td>
+              </td> */}
 
               <td className="hidden md:table-cell">
                 <div>
