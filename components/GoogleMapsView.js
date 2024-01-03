@@ -30,21 +30,37 @@ function GoogleMapsView({ marker }) {
               <section key={index}>
                 <Marker
                   position={{ lat: Number(m?.lat), lng: Number(m?.lng) }}
+                  icon={{
+                    url: m?.paciente_id ? '/wheel_chair_accessible.png' : '/favicon-32x32.png',
+                    scaledSize: new window.google.maps.Size(20, 20),
+                    labelOrigin: new window.google.maps.Point(30, 10),
+                  }}
+                  label={{
+                    text: `${m?.nombre} ${m?.apellido}`,
+                    color: m?.paciente_id ? 'teal' : 'midnightblue',
+                    fontSize: "14px", // you can change the size of the label text here
+                  }}
+                > 
+                  {m?.nombre} 
+                </Marker>
+                {/* <Marker
+                  position={{ lat: Number(m?.lat), lng: Number(m?.lng) }}
                   // cursor={`seeh`}
-                  icon={{ 
-                    labelOrigin: new google.maps.Point(10, -10), 
-                    url: m?.paciente_id ?
-                    '/wheel_chair_accessible.png'
-                    : '/favicon-32x32.png'
-                    // scaledSize: !m?.paciente_id && new window.google.maps.Size(50, 50), 
+                  icon={{
+                    labelOrigin: new google.maps.Point(10, -10),
+                    url: m?.paciente_id
+                      ? '/wheel_chair_accessible.png'
+                      : '/favicon-32x32.png',
+                    // scaledSize: !m?.paciente_id && new window.google.maps.Size(50, 50),
                   }}
                   // type={'info'}
-                  label={{text:`${m?.nombre} ${m?.apellido}`,
-                    color: m?.paciente_id ? 'teal' : 'midnightblue'
-                }}
+                  label={{
+                    text: `${m?.nombre} ${m?.apellido}`,
+                    color: m?.paciente_id ? 'teal' : 'midnightblue',
+                  }}
                 >
                   {m?.nombre}
-                </Marker>
+                </Marker> */}
               </section>
             ))}
         </GoogleMap>
