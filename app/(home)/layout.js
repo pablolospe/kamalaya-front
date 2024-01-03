@@ -1,9 +1,6 @@
-// 'use client'
 
-// import '../globals.css';
 import { Inter } from 'next/font/google';
 import Sidebar from '@/components/Sidebar';
-// import {SessionProvider} from 'next-auth/react'
 import Provider from '../Provider';
 
 const inter = Inter({ subsets: ['latin'] });
