@@ -28,7 +28,7 @@ function LoginPage() {
                     <input
                         className='w-full p-2 border rounded-md'
                         onChange={(e) => (email.current = e.target.value)}
-                        value={'p@x.l'}
+                        // value={''}
                     />
                 </label>
                 <label htmlFor="pass">Password:  &nbsp;
