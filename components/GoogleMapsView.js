@@ -32,13 +32,13 @@ function GoogleMapsView({ marker }) {
                   position={{ lat: Number(m?.lat), lng: Number(m?.lng) }}
                   icon={{
                     url: m?.paciente_id ? '/wheel_chair_accessible.png' : '/favicon-32x32.png',
-                    scaledSize: new window.google.maps.Size(20, 20),
-                    labelOrigin: new window.google.maps.Point(30, 10),
+                    // scaledSize: new window.google.maps.Size(20, 20),
+                    // labelOrigin: new window.google.maps.Point(30, 10),
                   }}
                   label={{
                     text: `${m?.nombre} ${m?.apellido}`,
                     color: m?.paciente_id ? 'teal' : 'midnightblue',
-                    fontSize: "14px", // you can change the size of the label text here
+                    // fontSize: "14px", // you can change the size of the label text here
                   }}
                 > 
                   {m?.nombre} 
