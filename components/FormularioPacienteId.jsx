@@ -15,8 +15,7 @@ const FormularioPacienteId = () => {
   const {id} = useParams()
   const router = useRouter();
   const [voluntariosData, setVoluntariosData] = useState();
-  const [v, setV] = useState()
-  // console.log(v);
+  
   const [formData, setFormData] = useState({
     voluntario_id: '',
     fechaAlta: '',
@@ -66,7 +65,7 @@ const FormularioPacienteId = () => {
     recursosAExplotar: '',
     familia: '',
   });
-
+  
   useEffect(() => {
     async function fetchData() {
       const voluntariosData = await voluntarios();
@@ -83,7 +82,7 @@ const FormularioPacienteId = () => {
     console.log(formDataJSON);
 
     try {
-      const response = await fetch(`${URL}/paciente/${v?.paciente_id}`, {
+      const response = await fetch(`${URL}/paciente/${formData?.paciente_id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -98,9 +97,8 @@ const FormularioPacienteId = () => {
           icon: 'success',
           confirmButtonColor: 'gray',
           color: 'black',
-        }).then(router.push('/pacientes'))
+        }).then(router.push(`/pacientes/${formData?.paciente_id}`))
         
-        window.location.reload();
         console.log('Datos enviados exitosamente');
       } else {
         console.error('Error al enviar los datos');
@@ -539,7 +537,7 @@ const FormularioPacienteId = () => {
           />
         </label>
         <label>
-          ECOG basal HACER SELECT!!!
+          ECOG basal
           <select
             name="ECOGbasal"
             value={formData.ECOGbasal}
