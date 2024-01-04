@@ -23,7 +23,7 @@ const FormularioPaciente = () => {
   genero: "",
   fechaDeNacimiento: "1920-06-21",
   dni: "87654321",
-  email: "asd@asd.asd",
+  email: "",
   telefono: "98765432",
   telefono2: "987654321",
   lat:"-34.4972274",

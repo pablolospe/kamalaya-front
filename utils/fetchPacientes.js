@@ -29,3 +29,31 @@ export const pacientes = async (query) => {
     return null;
   }
 };
+
+
+// const pacientes = async (query, accessToken) => {
+//   const queryString = new URLSearchParams();
+
+//   for (const key in query) {
+//     if (Array.isArray(query[key])) {
+//       query[key].forEach((value) => {
+//         queryString.append(`${key}[]`, value);
+//       });
+//     } else {
+//       if (query[key] !== '') {
+//         queryString.append(key, query[key]);
+//       }
+//     }
+//   }
+
+//   const url = `${URL}/paciente${queryString ? `?${queryString}` : ''}`;
+
+//   const response = await fetch(url, {
+//     cache: 'no-store',
+//     headers: {
+//       authorization: `bearer ${accessToken}`
+//     }
+//   });
+//   return response.json();
+// };
+

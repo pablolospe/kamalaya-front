@@ -66,7 +66,7 @@ function Voluntarios() {
         pacienteData = await pacientes(query);
       }
   
-      const combinedData = voluntarioData.concat(pacienteData);
+      const combinedData = voluntarioData?.concat(pacienteData);
   
       setVoluntariosData(combinedData);
       console.log(combinedData);
