@@ -5,7 +5,6 @@ import type { NextRequest } from 'next/server';
 // This function can be marked `async` if using `await` inside
 export async function middleware(req: NextRequest) {
   const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  console.log({ session });
 
   if (!session) {
     const requestedPage = req.nextUrl.pathname;
@@ -15,7 +14,6 @@ export async function middleware(req: NextRequest) {
 
     return NextResponse.redirect(url);
   }
-
   //   return NextResponse.redirect(new URL('/home', req.url));
   return NextResponse.next();
 }

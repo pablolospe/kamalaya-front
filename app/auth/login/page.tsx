@@ -7,8 +7,6 @@ function LoginPage() {
     const email = useRef("p@x.l");
     const pass = useRef("123");
 
-    // console.log(email);
-
     const onSubmit = async () => {
         const result = await signIn("credentials", {
             email: email.current,

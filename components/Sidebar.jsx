@@ -6,11 +6,7 @@ import Link from 'next/link';
 import NextImage from 'next/image';
 import { useSession } from 'next-auth/react';
 
-const links = [
-  // {
-  //   label: 'Home',
-  //   route: '/',
-  // },
+const linksAdmin = [
   {
     label: 'voluntarios',
     route: '/voluntarios',
@@ -33,11 +29,26 @@ const links = [
   },
 ];
 
-function Sidebar() {
-  const { session, status } = useSession()
-  
+const linksUser = [
+  {
+    label: 'voluntarios',
+    route: '/voluntarios',
+  },
+  {
+    label: 'pacientes',
+    route: '/pacientes',
+  },
+  {
+    label: 'ingreso paciente',
+    route: '/ingreso/paciente',
+  },
+];
 
-  console.log({session, status});
+function Sidebar() {
+  const { data: session, status } = useSession();
+
+  console.log({ session, status });
+  const state = session?.user?.role
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
@@ -72,26 +83,24 @@ function Sidebar() {
         }`}
       >
         <div>
-        <div className='hidden lg:flex flex-row gap-2 justify-center items-center'>
-          <NextImage
-            src="/logoKamalaya.svg"
-            alt="isotipo kamalaya"
-            width={40}
-            height={40}
-            className={`ml-6 transition-transform duration-700 ${
-              isMenuOpen ? 'translate-y-1' : ''
-            }`}
-            style={{
-              transformOrigin: 'center bottom', // Set transform origin to center bottom
-            }}
-          />
+          <div className="hidden lg:flex flex-row gap-2 justify-center items-center">
+            <NextImage
+              src="/logoKamalaya.svg"
+              alt="isotipo kamalaya"
+              width={40}
+              height={40}
+              className={`ml-6 transition-transform duration-700 ${
+                isMenuOpen ? 'translate-y-1' : ''
+              }`}
+              style={{
+                transformOrigin: 'center bottom', // Set transform origin to center bottom
+              }}
+            />
 
-          <h1
-            className="text-gray-700 font-light text-2xl hover:text-black"
-          >
-            <Link href={'/'}>Kamalaya</Link>
-          </h1>
-        </div>
+            <h1 className="text-gray-700 font-light text-2xl hover:text-black">
+              <Link href={'/'}>Kamalaya</Link>
+            </h1>
+          </div>
         </div>
 
         {/* Navegación */}
@@ -123,7 +132,8 @@ function Sidebar() {
             isMenuOpen ? 'flex flex-col gap-4 mr-2' : 'hidden'
           }`}
         >
-          {links.map(({ label, route }) => (
+          {( state === 'Admin' ? linksAdmin : linksUser
+          ).map(({ label, route }) => (
             <li key={route}>
               <Link href={route}>
                 <div
