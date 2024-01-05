@@ -27,6 +27,10 @@ const linksAdmin = [
     label: 'grupos',
     route: '/grupos',
   },
+  {
+    label: 'usuarios',
+    route: '/usuarios',
+  },
 ];
 
 const linksUser = [
