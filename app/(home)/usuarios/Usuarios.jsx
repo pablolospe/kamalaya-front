@@ -26,14 +26,23 @@ function Ususarios() {
 
   return (
     <div className="flex flex-col gap-2">
-      <Link
-        href={`/usuarios/generar`}
-        className="p-2 w-56 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600"
-      >
-        Generar nuevo usuario
-      </Link>
-      {/* <h1 className="text-center font-semibold text-xl">Usuarios</h1> */}
+      <div className="flex flex-row gap-2">
+        <Link
+          href={`/usuarios/generar`}
+          className="p-2 w-56 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600"
+        >
+          Generar nuevo usuario
+        </Link>
 
+        <Link
+          href={`/usuarios/password`}
+          className="p-2 w-56 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600"
+        >
+          Modificar mi contraseña
+        </Link>
+        {/* <h1 className="text-center font-semibold text-xl">Usuarios</h1> */}
+      </div>
+      
       <table>
         <thead>
           <tr className="bg-gray-100 row-auto">
