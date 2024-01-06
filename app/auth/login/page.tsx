@@ -27,6 +27,7 @@ function LoginPage() {
                         className='w-full p-2 border rounded-md'
                         onChange={(e) => (email.current = e.target.value)}
                         // value={''}
+                        placeholder='pablolospennato@gmail.com'
                     />
                 </label>
                 <label htmlFor="pass">Password:  &nbsp;
