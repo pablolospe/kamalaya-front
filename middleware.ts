@@ -3,14 +3,14 @@ import { NextResponse } from 'next/server'
 
 export default withAuth(
   function middleware(req){
-    // if(req.nextUrl.pathname.startsWith("/usuarios") && req.nextauth.token?.role !== "Admin")
-    // return NextResponse.rewrite(new URL("/auth/login?message=Not authorized!", req.url))
+    if(req.nextUrl.pathname.startsWith("/usuarios") && req.nextauth.token?.role !== "Admin")
+    return NextResponse.rewrite(new URL("/auth/login?message=Not authorized!", req.url))
 
     // if(req.nextUrl.pathname.startsWith("/ingreso/voluntario") && req.nextauth.token?.role !== "Admin")
     // return NextResponse.rewrite(new URL("/auth/login?message=Not authorized!", req.url))
   
-    if(req.nextauth.token?.role !== "User")
-    return NextResponse.rewrite(new URL("/auth/login?message=Not authorized!", req.url))
+    // if(req.nextauth.token?.role !== "User")
+    // return NextResponse.rewrite(new URL("/auth/login?message=Not authorized!", req.url))
   },
   {
     callbacks:{
