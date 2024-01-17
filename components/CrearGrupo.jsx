@@ -6,7 +6,7 @@ import { voluntarios } from '@/utils/fetchVoluntarios';
 import { pacientes } from '@/utils/fetchPacientes';
 import Swal from 'sweetalert2';
 
-function CrearGrupo() {
+function CrearGrupo({paciente_id}) {
   const [voluntario1, setVoluntario1] = useState('');
   const [voluntario2, setVoluntario2] = useState('');
   const [voluntario3, setVoluntario3] = useState('');
@@ -30,13 +30,11 @@ function CrearGrupo() {
 
   useEffect(() => {
     async function fetchData() {
-      
       const pacienteData = await pacientes(query);
       const voluntariosData = await voluntarios(query);
 
       setPacientesData(pacienteData);
       setVoluntariosData(voluntariosData);
-      
     }
     fetchData();
   }, [query, setVoluntariosData]);
@@ -67,34 +65,45 @@ function CrearGrupo() {
       ...grupo,
       voluntario_id: updatedVoluntarioId,
     };
-      
-      try {
-        const response = await fetch(`${URL}/grupo`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(grupoToSubmit),
-        });
-        
-        if (response.ok) {
-          Swal.fire({
-            text: 'Formulario ingresado correctamente',
-            icon: 'success',
-            confirmButtonColor: 'gray',
-            color: 'black',
-          }).then(router.push('/grupos'));
-          
-          console.log('Datos enviados exitosamente');
-        } else {
-          console.error('Error al enviar los datos');
+
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Quieres crear este grupo?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'blue',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Sí, ingresar',
+      cancelButtonText: 'No, cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`${URL}/grupo`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(grupoToSubmit),
+          });
+
+          if (response.ok) {
+            Swal.fire({
+              text: 'Grupo creado correctamente',
+              icon: 'success',
+              confirmButtonColor: 'gray',
+              color: 'black',
+            }).then(router.push('/grupos'));
+
+            console.log('Datos enviados exitosamente');
+          } else {
+            console.error('Error al enviar los datos');
+          }
+        } catch (error) {
+          console.error('Error:', error);
         }
-      } catch (error) {
-        console.error('Error:', error);
       }
-    
+    });
   };
-    
 
   const handleVoluntario1Change = (e) => {
     setVoluntario1(Number(e.target.value));

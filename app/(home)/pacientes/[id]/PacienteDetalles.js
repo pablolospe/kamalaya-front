@@ -1,4 +1,3 @@
-import React from 'react';
 import { formatearFecha, calcularEdad } from '@/utils/formats';
 import { URL } from '@/config';
 import Link from 'next/link'
@@ -13,7 +12,7 @@ const pacienteDetalle = async (id) => {
 async function PacienteDetalles({ params }) {
   const { id } = params;
   const v = await pacienteDetalle(id);
-
+console.log(v);
   return (
     <div>
       <h2 className="m-2 text-lg text-center font-bold text-md p-2 rounded-lg border">
@@ -85,6 +84,33 @@ async function PacienteDetalles({ params }) {
             <div><b>La familia conoce el pronóstico?</b> {v?.familiaConocePronostico}</div>
             <div><b>Problemas actuales</b> {v?.problemasActuales}</div>
           </div>
+        </details>
+
+        <details>
+        <summary className="font-bold text-lg text-blue-900 cursor-pointer">Grupo</summary>
+        {v.Grupos[0]
+        ? 
+        <div className="w-full mb-2 ml-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
+          <div><b>Fecha de inicio: </b> {formatearFecha(v.Grupos[0]?.fechaDeInicio)}</div>
+          <div><b>Dia de la semana: </b> {v.Grupos[0]?.diaSemana}</div>
+          <div><b>Hora de inicio: </b> {v.Grupos[0]?.horaInicio}</div>
+          <div><b>Hora de fin: </b> {v.Grupos[0]?.horaFin}</div>
+          <div><b>Descripcion: </b> {v.Grupos[0]?.descripcion}</div>
+          <div><b>Voluntarios: </b> {v.Grupos[0]?.Voluntarios.map(v=> 
+            
+            <span className="p-2 w-56 font-semibold text-blue-500 rounded-md hover:text-blue-800">
+              <Link href={`/voluntarios/${v.voluntario_id}`}>{v.nombre} {v.apellido} </Link>
+            </span>
+          )}</div>
+          
+        </div>
+        : 
+        <div>Este paciente aún no posee grupo. 
+          <span className="p-2 w-56 font-semibold text-blue-500 rounded-md hover:text-blue-800 border-solid ">
+              <Link href={`/grupos/crear`} >Crear nuevo grupo </Link>
+            </span>
+        </div>
+      }
         </details>
       </div>
 
