@@ -67,7 +67,18 @@ function CrearSeguimiento({ params }) {
       ...seguimiento,
       voluntario_id: updatedVoluntarioId,
     };
-
+    
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Quieres ingresar este seguimiento?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'blue',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Sí, ingresar',
+      cancelButtonText: 'No, cancelar'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
     try {
       const response = await fetch(`${URL}/seguimiento`, {
         method: 'POST',
@@ -93,6 +104,8 @@ function CrearSeguimiento({ params }) {
       console.error('Error:', error);
     }
   };
+})
+};
 
   const handleVoluntario1Change = (e) => {
     setVoluntario1(Number(e.target.value));

@@ -6,16 +6,15 @@ import Swal from 'sweetalert2';
 import { URL } from '@/config';
 import GoogleMapsView from './GoogleMapsView';
 import { voluntarios } from '@/utils/fetchVoluntarios';
-import { useParams } from 'next/navigation'
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { fetchPacienteId } from '@/utils/fetchPacienteId'
-
+import { fetchPacienteId } from '@/utils/fetchPacienteId';
 
 const FormularioPacienteId = () => {
-  const {id} = useParams()
+  const { id } = useParams();
   const router = useRouter();
   const [voluntariosData, setVoluntariosData] = useState();
-  
+
   const [formData, setFormData] = useState({
     voluntario_id: '',
     fechaAlta: '',
@@ -23,7 +22,7 @@ const FormularioPacienteId = () => {
     cuidadorPrincipal: '',
     telefonoCuidadorPrincipal: '',
     insumosPrestados: '',
-          
+
     nombre: '',
     apellido: '',
     genero: '',
@@ -40,12 +39,12 @@ const FormularioPacienteId = () => {
     provincia: '',
     pais: '',
     codigoPostal: '',
-        
+
     obraSocial: '',
     ocupacionProfesionHobbie: '',
     situacionEconomica: '',
     situacionHabitacional: '',
-          
+
     quienDeriva: '',
     contactoQuienDeriva: '',
     diagnostico: '',
@@ -55,7 +54,7 @@ const FormularioPacienteId = () => {
     antecedentesEnfermedadesPrevias: '',
     medicacionActual: '',
     equipoSeguimiento: '',
-          
+
     pacienteConoceDiagnostico: '',
     pacienteConocePronostico: '',
     familiaConoceDiagnostico: '',
@@ -65,17 +64,16 @@ const FormularioPacienteId = () => {
     recursosAExplotar: '',
     familia: '',
   });
-  
+
   useEffect(() => {
     async function fetchData() {
       const voluntariosData = await voluntarios();
-      const paciente = await fetchPacienteId(id)
+      const paciente = await fetchPacienteId(id);
       setVoluntariosData(voluntariosData);
-      setFormData(paciente ? paciente: null)
+      setFormData(paciente ? paciente : null);
     }
     fetchData();
-  }, [setVoluntariosData])
-
+  }, [setVoluntariosData]);
 
   if (!formData) {
     // Renderiza algún tipo de indicador de carga, u otro componente
@@ -85,34 +83,49 @@ const FormularioPacienteId = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formDataJSON = JSON.stringify(formData)
-    console.log(formDataJSON);
+    const formDataJSON = JSON.stringify(formData);
+    // console.log(formDataJSON);
 
-    try {
-      const response = await fetch(`${URL}/paciente/${formData?.paciente_id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Quieres actualizar los datos de este paciente?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'blue',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Sí, ingresar',
+      cancelButtonText: 'No, cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(
+            `${URL}/paciente/${formData?.paciente_id}`,
+            {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+            }
+          );
 
-      if (response.ok) {
-        Swal.fire({
-          
-          text: 'Formulario ingresado correctamente',
-          icon: 'success',
-          confirmButtonColor: 'gray',
-          color: 'black',
-        }).then(router.push(`/pacientes/${formData?.paciente_id}`))
-        
-        console.log('Datos enviados exitosamente');
-      } else {
-        console.error('Error al enviar los datos');
+          if (response.ok) {
+            Swal.fire({
+              text: 'Formulario ingresado correctamente',
+              icon: 'success',
+              confirmButtonColor: 'gray',
+              color: 'black',
+            }).then(router.push(`/pacientes/${formData?.paciente_id}`));
+
+            console.log('Datos enviados exitosamente');
+          } else {
+            console.error('Error al enviar los datos');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
       }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    });
   };
 
   const handleClick = async (e) => {
@@ -131,16 +144,11 @@ const FormularioPacienteId = () => {
         if (data.status === 'OK') {
           // Obtener las coordenadas geográficas (latitud y longitud) de la respuesta
           const { lat, lng } = data.results[0].geometry.location;
-
-          // Ahora puedes guardar lat y lng en tu base de datos junto con otros datos del formulario
           setFormData((prevData) => ({
             ...prevData,
             lat: lat.toString(),
             lng: lng.toString(),
           }));
-          // ...código para guardar los datos en tu base de datos...
-
-          console.log(`Coordenadas: Latitud ${lat}, Longitud ${lng}`);
         } else {
           console.error('Error al obtener las coordenadas');
         }
@@ -157,7 +165,7 @@ const FormularioPacienteId = () => {
 
     const { name, value, type, checked } = e.target;
     let newValue = type === 'checkbox' ? checked : value;
-    
+
     if (isVoluntarioField && newValue) {
       newValue = Number(newValue);
     }
@@ -185,8 +193,8 @@ const FormularioPacienteId = () => {
       <Link
         href={`/pacientes/${formData.paciente_id}`}
         className="fixed py-2 px-4 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600 self-end font-semibold"
-      > 
-      &larr;
+      >
+        &larr;
       </Link>
 
       <h3 className="mt-4 font-bold text-md text-center">En Kamalaya</h3>
@@ -213,45 +221,46 @@ const FormularioPacienteId = () => {
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           >
             <option value="">Elige un voluntario</option>
-            {voluntariosData?.map(v=>
-              <option key={v?.voluntario_id} value={v?.voluntario_id}>{v?.nombre} {v?.apellido}</option>
-            )}
+            {voluntariosData?.map((v) => (
+              <option key={v?.voluntario_id} value={v?.voluntario_id}>
+                {v?.nombre} {v?.apellido}
+              </option>
+            ))}
           </select>
         </label>
 
         <label>
-            Cuidador principal
-            <input
-              type="text"
-              name="cuidadorPrincipal"
-              value={formData.cuidadorPrincipal}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
+          Cuidador principal
+          <input
+            type="text"
+            name="cuidadorPrincipal"
+            value={formData.cuidadorPrincipal}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
         <label>
-            Teléfono del cuidador principal
-            <input
-              type="text"
-              name="telefonoCuidadorPrincipal"
-              value={formData.telefonoCuidadorPrincipal}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
+          Teléfono del cuidador principal
+          <input
+            type="text"
+            name="telefonoCuidadorPrincipal"
+            value={formData.telefonoCuidadorPrincipal}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
 
         <label>
-            Insumos prestados
-            <input
-              type="text"
-              name="insumosPrestados"
-              value={formData.insumosPrestados}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
-
+          Insumos prestados
+          <input
+            type="text"
+            name="insumosPrestados"
+            value={formData.insumosPrestados}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
       </div>
 
       <h3 className="m-2 font-bold text-md text-center">
@@ -320,7 +329,7 @@ const FormularioPacienteId = () => {
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
           </label>
-       
+
           <label>
             Email:
             <input
@@ -430,13 +439,16 @@ const FormularioPacienteId = () => {
             />
           </label>
         </div>
-          <button className='h-min bg-red-400 p-1 border rounded-md hover:bg-red-500 ease-in-out' onClick={handleClick}>buscar en el mapa</button>
-          <GoogleMapsView marker={[formData]} />
+        <button
+          className="h-min bg-red-400 p-1 border rounded-md hover:bg-red-500 ease-in-out"
+          onClick={handleClick}
+        >
+          buscar en el mapa
+        </button>
+        <GoogleMapsView marker={[formData]} />
       </div>
 
-      <h3 className="mt-4 font-bold text-md text-center">
-        Recursos
-      </h3>
+      <h3 className="mt-4 font-bold text-md text-center">Recursos</h3>
       <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
         <label>
           Obra social:
@@ -494,9 +506,7 @@ const FormularioPacienteId = () => {
         </label>
       </div>
 
-      <h3 className="mt-4 font-bold text-md text-center">
-        Resumen clínico
-      </h3>
+      <h3 className="mt-4 font-bold text-md text-center">Resumen clínico</h3>
       <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
         <label>
           Quien deriva
@@ -519,7 +529,6 @@ const FormularioPacienteId = () => {
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
         </label>
-
 
         <label>
           Diagnóstico
@@ -602,74 +611,63 @@ const FormularioPacienteId = () => {
         </label>
       </div>
 
-      <h3 className="mt-4 font-bold text-md text-center">
-        Diagnóstico
-      </h3>
+      <h3 className="mt-4 font-bold text-md text-center">Diagnóstico</h3>
       <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
-      
-      <label
-      className="flex flex-row w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300 gap-2"
-      >
-        Paciente conoce el diagnóstico
-        <select 
-          name="pacienteConoceDiagnostico"
-          value={formData.pacienteConoceDiagnostico}
-          onChange={handleChange}
-          className="flex flex-row w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        >
-          <option value="Falta preguntar">Falta preguntar</option>
-          <option value="Si">Si</option>
-          <option value="No">No</option>
-        </select>
-      </label>
-      
-      <label
-      className="flex flex-row w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300 gap-2"
-      >
-        Paciente conoce el pronóstico
-        <select 
-          name="pacienteConocePronostico"
-          value={formData.pacienteConocePronostico}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        >
-          <option value="Falta preguntar">Falta preguntar</option>
-          <option value="Si">Si</option>
-          <option value="No">No</option>
-        </select>
-      </label>
-      
-      <label
-      className="flex flex-row w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300 gap-2"
-      >
-        Familia conoce el diagnostico
-        <select 
-          name="familiaConoceDiagnostico"
-          value={formData.familiaConoceDiagnostico}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        >
-          <option value="Falta preguntar">Falta preguntar</option>
-          <option value="Si">Si</option>
-          <option value="No">No</option>
-        </select>
-      </label>
-      
-      <label
-      className="flex flex-row w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300 gap-2"
-      >
-        Familia conoce el pronóstico
-        <select 
-          name="familiaConocePronostico"
-          value={formData.familiaConocePronostico}
-          onChange={handleChange}
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        >
-          <option value="Falta preguntar">Falta preguntar</option>
-          <option value="Si">Si</option>
-          <option value="No">No</option>
-        </select>
-      </label>
+        <label className="flex flex-row w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300 gap-2">
+          Paciente conoce el diagnóstico
+          <select
+            name="pacienteConoceDiagnostico"
+            value={formData.pacienteConoceDiagnostico}
+            onChange={handleChange}
+            className="flex flex-row w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          >
+            <option value="Falta preguntar">Falta preguntar</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+
+        <label className="flex flex-row w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300 gap-2">
+          Paciente conoce el pronóstico
+          <select
+            name="pacienteConocePronostico"
+            value={formData.pacienteConocePronostico}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          >
+            <option value="Falta preguntar">Falta preguntar</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+
+        <label className="flex flex-row w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300 gap-2">
+          Familia conoce el diagnostico
+          <select
+            name="familiaConoceDiagnostico"
+            value={formData.familiaConoceDiagnostico}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          >
+            <option value="Falta preguntar">Falta preguntar</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+
+        <label className="flex flex-row w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300 gap-2">
+          Familia conoce el pronóstico
+          <select
+            name="familiaConocePronostico"
+            value={formData.familiaConocePronostico}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          >
+            <option value="Falta preguntar">Falta preguntar</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </label>
 
         <label>
           Problemas actuales
@@ -701,10 +699,7 @@ const FormularioPacienteId = () => {
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
         </label>
-      
       </div>
-
-      
 
       <button
         type="submit"
