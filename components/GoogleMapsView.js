@@ -31,7 +31,7 @@ function GoogleMapsView({ marker }) {
                 <Marker
                   position={{ lat: Number(m?.lat), lng: Number(m?.lng) }}
                   icon={{
-                    url: m?.paciente_id ? '/wheel_chair_accessible.png' : '/favicon-32x32.png',
+                    url: m?.paciente_id ? '/green-pin.png' : '/purple-pin.png',
                     // scaledSize: new window.google.maps.Size(20, 20),
                     // labelOrigin: new window.google.maps.Point(30, 10),
                   }}
