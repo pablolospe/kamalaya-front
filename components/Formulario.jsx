@@ -9,11 +9,11 @@ import GoogleMapsView from './GoogleMapsView';
 const Formulario = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    nombre: "Juan",
-    apellido: "Perez",
-    dni: "123123123",
-    email: "jp@asd.com",
-    telefono: "112345678",
+    nombre: "",
+    apellido: "",
+    dni: "",
+    email: "",
+    telefono: "",
     telefono2: "",
     calle: "Alvear",
     numero: "123",
@@ -146,6 +146,7 @@ const Formulario = () => {
           <label>
             Nombre/s:
             <input
+              required
               type="text"
               name="nombre"
               value={formData.nombre}
@@ -157,6 +158,7 @@ const Formulario = () => {
           <label>
             Apellido/s:
             <input
+              required
               type="text"
               name="apellido"
               value={formData.apellido}

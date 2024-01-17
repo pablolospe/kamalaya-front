@@ -17,7 +17,7 @@ const linksAdmin = [
   },
   {
     label: 'ingreso voluntario',
-    route: '/ingreso',
+    route: '/ingreso/voluntario',
   },
   {
     label: 'ingreso paciente',
@@ -136,8 +136,23 @@ function Sidebar() {
             isMenuOpen ? 'flex flex-col gap-4 mr-2 mt-12' : 'hidden'
           }`}
         >
-          {( state === 'Admin' ? linksAdmin : linksUser
-          ).map(({ label, route }) => (
+          { state === 'Admin' && linksAdmin.map(({ label, route }) => (
+            <li key={route}>
+              <Link href={route}>
+                <div
+                  className="text-gray-700 text-center font-light hover:text-black"
+                  style={{
+                    textShadow:
+                      '0 0 10px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.4)',
+                  }}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {label}
+                </div>
+              </Link>
+            </li>
+          ))}
+          { state === 'User' && linksUser.map(({ label, route }) => (
             <li key={route}>
               <Link href={route}>
                 <div
