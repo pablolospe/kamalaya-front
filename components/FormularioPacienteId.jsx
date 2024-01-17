@@ -71,10 +71,17 @@ const FormularioPacienteId = () => {
       const voluntariosData = await voluntarios();
       const paciente = await fetchPacienteId(id)
       setVoluntariosData(voluntariosData);
-      setFormData(paciente)
+      setFormData(paciente ? paciente: null)
     }
     fetchData();
   }, [setVoluntariosData])
+
+
+  if (!formData) {
+    // Renderiza algún tipo de indicador de carga, u otro componente
+    // mientras la información de formData se está cargando
+    return <div>Loading...</div>;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();

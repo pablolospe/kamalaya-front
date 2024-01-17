@@ -6,7 +6,6 @@ import { voluntarios } from '@/utils/fetchVoluntarios';
 import { pacientes } from '@/utils/fetchPacientes';
 import Swal from 'sweetalert2';
 
-
 function CrearSeguimiento({ params }) {
   const { id } = params;
   // console.log(params);
@@ -35,11 +34,9 @@ function CrearSeguimiento({ params }) {
 
   useEffect(() => {
     async function fetchData() {
-            
       const voluntariosData = await voluntarios(query);
 
       setVoluntariosData(voluntariosData);
-      
     }
     fetchData();
   }, [query, setVoluntariosData]);
@@ -70,34 +67,32 @@ function CrearSeguimiento({ params }) {
       ...seguimiento,
       voluntario_id: updatedVoluntarioId,
     };
-      
-      try {
-        const response = await fetch(`${URL}/seguimiento`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(seguimientoToSubmit),
-        });
-        
-        if (response.ok) {
-          Swal.fire({
-            text: 'Seguimiento ingresado correctamente',
-            icon: 'success',
-            confirmButtonColor: 'gray',
-            color: 'black',
-          }).then(router.push(`/pacientes/${id}`));
-          
-          console.log('Datos enviados exitosamente');
-        } else {
-          console.error('Error al enviar los datos');
-        }
-      } catch (error) {
-        console.error('Error:', error);
+
+    try {
+      const response = await fetch(`${URL}/seguimiento`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(seguimientoToSubmit),
+      });
+
+      if (response.ok) {
+        Swal.fire({
+          text: 'Seguimiento ingresado correctamente',
+          icon: 'success',
+          confirmButtonColor: 'gray',
+          color: 'black',
+        }).then(router.push(`/pacientes/${id}`));
+
+        console.log('Datos enviados exitosamente');
+      } else {
+        console.error('Error al enviar los datos');
       }
-    
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
-    
 
   const handleVoluntario1Change = (e) => {
     setVoluntario1(Number(e.target.value));
@@ -123,7 +118,6 @@ function CrearSeguimiento({ params }) {
       <div className="flex flex-col md:flex-row justify-evenly align-center max-w-xl gap-8">
         <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
           <div className="flex flex-col justify-evenly align-center max-w-xl gap-4">
-
             <label
               className="block text-sm font-medium text-gray-900 dark:text-white"
               htmlFor="fechaInicio"
@@ -188,6 +182,7 @@ function CrearSeguimiento({ params }) {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 type="date"
                 id="horaFin"
+                min={seguimiento.horaInicio}
               >
                 <option value="">Seleccione hora de fin</option>
                 <option value="08:00">08:00</option>
@@ -205,8 +200,6 @@ function CrearSeguimiento({ params }) {
                 <option value="20:00">20:00</option>
               </select>
             </div>
-
-
 
             <div>
               <label
@@ -238,6 +231,7 @@ function CrearSeguimiento({ params }) {
                 Evolución
               </label>
               <textarea
+                required
                 name="evolucion"
                 value={seguimiento.evolucion}
                 onChange={handleChange}
@@ -283,7 +277,6 @@ function CrearSeguimiento({ params }) {
                 <option value="5">5</option>
               </select>
             </label>
-
 
             <div>
               <label
@@ -349,73 +342,13 @@ function CrearSeguimiento({ params }) {
               </select>
             </div>
 
-
-          </div>
-        </div>
-
-        <div>
-          <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
-            {/* <p>
-              Paciente:{' '}
-              {
-                pacientesData.find((p) => p.paciente_id === seguimiento.paciente_id)
-                  ?.nombre
-              }{' '}
-              {
-                pacientesData.find((p) => p.paciente_id === seguimiento.paciente_id)
-                  ?.apellido
-              }
-            </p>
-            <p>
-              Voluntario 1:{' '}
-              {
-                voluntariosData.find((v) => v.voluntario_id === voluntario1)
-                  ?.nombre
-              }{' '}
-              {
-                voluntariosData.find((v) => v.voluntario_id === voluntario1)
-                  ?.apellido
-              }
-            </p>
-            <p>
-              Voluntario 2:{' '}
-              {
-                voluntariosData.find((v) => v.voluntario_id === voluntario2)
-                  ?.nombre
-              }{' '}
-              {
-                voluntariosData.find((v) => v.voluntario_id === voluntario2)
-                  ?.apellido
-              }
-            </p>
-
-            <p>
-              Voluntario 3:{' '}
-              {
-                voluntariosData.find((v) => v.voluntario_id === voluntario3)
-                  ?.nombre
-              }{' '}
-              {
-                voluntariosData.find((v) => v.voluntario_id === voluntario3)
-                  ?.apellido
-              }
-            </p>
-
-            <p>Día de la semana: {seguimiento.diaSemana}</p>
-            <p>Fecha de inicio: {seguimiento.fechaDeInicio}</p>
-            <p>Hora de inicio: {seguimiento.horaInicio}</p>
-            <p>Hora de finalización: {seguimiento.horaFin}</p>
-            <p>Descripción: {seguimiento.descripcion}</p> */}
-          </div>
-
-          <section>
             <button
               type="submit"
               className="mt-4 py-2 px-4 w-full bg-blue-500 text-white rounded-md hover:bg-blue-600"
             >
               Enviar formulario
             </button>
-          </section>
+          </div>
         </div>
       </div>
     </form>

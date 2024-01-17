@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { URL } from '@/config';
@@ -9,6 +9,8 @@ import { voluntarios } from '@/utils/fetchVoluntarios';
 
 const FormularioPaciente = () => {
   const router = useRouter();
+  const miElementoRef = useRef(null);
+  const [error, setError] = useState("")
   const [voluntariosData, setVoluntariosData] = useState();
   const [formData, setFormData] = useState({
   voluntario_id: "",
@@ -26,8 +28,10 @@ const FormularioPaciente = () => {
   email: "",
   telefono: "98765432",
   telefono2: "987654321",
-  lat:"-34.4972274",
-  lng:"-58.496132",
+  lat:"",
+  lng:"",
+  // lat:"-34.4972274",
+  // lng:"-58.496132",
   calle:"Paraná",
   numero:"1234",
   localidad:"Martinez",
@@ -36,12 +40,12 @@ const FormularioPaciente = () => {
   codigoPostal: "1640",
       
   obraSocial: "IOMA",
-  ocupacionProfesionHobbie: "Abogada",
-  situacionEconomica: "pobre",
-  situacionHabitacional: "Inquilina",
+  ocupacionProfesionHobbie: "",
+  situacionEconomica: "",
+  situacionHabitacional: "",
         
-  quienDeriva: "Dr. Perez",
-  contactoQuienDeriva: "98765432",
+  quienDeriva: "",
+  contactoQuienDeriva: "",
   diagnostico: "",
   fechaDeDiagnostico: "",
   enfermedadActual: "",
@@ -61,6 +65,11 @@ const FormularioPaciente = () => {
       
   });
 
+  const irAMiElemento = () => {
+    // Utilizar el ref para acceder al nodo DOM y realizar el scroll
+    miElementoRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+
   useEffect(() => {
     async function fetchData() {
       const voluntariosData = await voluntarios();
@@ -72,8 +81,16 @@ const FormularioPaciente = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formDataJSON= JSON.stringify(formData)
-    console.log(formDataJSON);
+
+    if (!formData.lat || !formData.lng) {
+      // Actualizar el estado de error con un mensaje.
+      setError("Por favor, pulse el botón para guardar la ubicación");
+      // Hacer scroll hasta el inicio de la página.
+      // window.scrollTo(0, 0);
+      irAMiElemento()
+      // Detiene la ejecución de la función.
+      return;
+    }
 
     try {
       const response = await fetch(`${URL}/paciente`, {
@@ -107,11 +124,9 @@ const FormularioPaciente = () => {
     const direccion = `${formData.calle} ${formData.numero} ${formData.localidad} ${formData.provincia} ${formData.pais}`;
 
     try {
-      // Hacer una solicitud a la API de Geocodificación de Google Maps
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${direccion}&key=AIzaSyBZXt6a5CJSfGyf9q5ymoWmrzUD_XT66DM`
       );
-
       if (response.ok) {
         const data = await response.json();
 
@@ -125,7 +140,6 @@ const FormularioPaciente = () => {
             lat: lat.toString(),
             lng: lng.toString(),
           }));
-          // ...código para guardar los datos en tu base de datos...
 
           console.log(`Coordenadas: Latitud ${lat}, Longitud ${lng}`);
         } else {
@@ -171,7 +185,7 @@ const FormularioPaciente = () => {
       <h3 className="mt-4 font-bold text-md text-center">En Kamalaya</h3>
       <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
         <label>
-          Fecha de Alta:
+          Fecha de Alta
           <input
             required
             type="date"
@@ -183,7 +197,7 @@ const FormularioPaciente = () => {
         </label>
 
         <label className="block mb-2">
-          Supervisor:
+          Supervisor
           <select
             required
             name="voluntario_id"
@@ -199,7 +213,7 @@ const FormularioPaciente = () => {
         </label>
 
         <label>
-            Cuidador principal
+            Cuidador principal + (vinculo)
             <input
               type="text"
               name="cuidadorPrincipal"
@@ -240,7 +254,7 @@ const FormularioPaciente = () => {
       <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg">
         <div className="flex flex-col gap-6 md:flex-row justify-evenly">
           <label>
-            Nombre/s:
+            Nombre/s
             <input
               type="text"
               name="nombre"
@@ -251,7 +265,7 @@ const FormularioPaciente = () => {
           </label>
 
           <label>
-            Apellido/s:
+            Apellido/s
             <input
               type="text"
               name="apellido"
@@ -262,7 +276,7 @@ const FormularioPaciente = () => {
           </label>
 
           <label className="block mb-2">
-            Género:
+            Género
             <select
               required
               name="genero"
@@ -336,7 +350,7 @@ const FormularioPaciente = () => {
         </div>
       </div>
 
-      <h3 className="mt-4 font-bold text-md text-center">Domicilio</h3>
+      <h3 ref={miElementoRef} className="mt-4 font-bold text-md text-center">Domicilio</h3>
       <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg">
         <div className="flex flex-col md:flex-row justify-between gap-6">
           <label>
@@ -409,7 +423,11 @@ const FormularioPaciente = () => {
             />
           </label>
         </div>
-          <button className='h-min bg-red-400 p-1 border rounded-md hover:bg-red-500 ease-in-out' onClick={handleClick}>buscar en el mapa</button>
+        
+          <button className='h-min bg-red-400 p-1 border rounded-md border-red-700 hover:bg-red-500 ease-in-out' onClick={handleClick}>buscar en el mapa</button>
+          
+          {error && <p className="text-red-500 text-center">☝️{error}</p>}
+
           <GoogleMapsView marker={[formData]} />
       </div>
 
@@ -687,6 +705,7 @@ const FormularioPaciente = () => {
 
       <button
         type="submit"
+        // disabled={!formData.lat || !formData.lng }
         className="w-40 mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
       >
         Enviar formulario
