@@ -22,7 +22,7 @@ export default withAuth(
   
   export const config = {
   //   matcher: [ '/voluntarios/:path*', '/pacientes/:path*', '/ingreso', '/ingreso/paciente'],
-    matcher: ['/mapa', '/pacientes/:path*', '/voluntarios/:path*', '/usuarios/:path*', '/ingreso/:path*',],
+    matcher: ['/mapa', '/pacientes/:path*', '/voluntarios/:path*', '/usuarios/:path*', '/ingreso/:path*', '/grupos/:path*'],
   };
 
 
