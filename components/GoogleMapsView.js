@@ -37,7 +37,7 @@ function GoogleMapsView({ marker }) {
                   }}
                   label={{
                     text: `${m?.nombre} ${m?.apellido}`,
-                    color: m?.paciente_id ? 'teal' : 'midnightblue',
+                    color: m?.paciente_id ? 'green' : 'purple',
                     // fontSize: "14px", // you can change the size of the label text here
                   }}
                 > 

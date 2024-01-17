@@ -101,7 +101,7 @@ function Sidebar() {
               }}
             />
 
-            <h1 className="text-gray-700 font-light text-2xl hover:text-black">
+            <h1 className="text-purple-900 font-light text-3xl hover:text-purple-950">
               <Link href={'/'}>Kamalaya</Link>
             </h1>
           </div>
@@ -133,7 +133,7 @@ function Sidebar() {
 
         <ul
           className={`md:flex md:gap-6 md:mr-12 ${
-            isMenuOpen ? 'flex flex-col gap-4 mr-2' : 'hidden'
+            isMenuOpen ? 'flex flex-col gap-4 mr-2 mt-12' : 'hidden'
           }`}
         >
           {( state === 'Admin' ? linksAdmin : linksUser

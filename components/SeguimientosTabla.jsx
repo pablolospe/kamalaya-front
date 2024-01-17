@@ -23,9 +23,7 @@ function SeguimientosTabla({ id }) {
     fetchData();
   }, [query]);
 
-  console.log(seguimientosData);
-
-
+  // console.log(seguimientosData);
   return (
       <section className="flex flex-col gap-2 overflow-auto">
         <table>

@@ -14,19 +14,19 @@ async function PacienteDetalles({ params }) {
   const v = await pacienteDetalle(id);
 console.log(v);
   return (
-    <div>
-      <h2 className="m-2 text-lg text-center font-bold text-md p-2 rounded-lg border">
+    <div className='flex flex-col'>
+      <h2 className="my-2 w-full md:w-1/2 text-lg text-center self-center font-semibold bg-green-100 text-md p-2 rounded-lg border">
         {v?.nombre} {v?.apellido}
       </h2>
 
-      <div className="flex flex-col items-start md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
+      <div className="flex flex-col md:mx-auto md:w-1/2 p-4 bg-gray-100 rounded-lg shadow-md">
 
         <details>
           <summary 
           className="font-bold text-lg text-blue-900 cursor-pointer"
           >En Kamalaya</summary>
 
-          <div className="w-full mb-2 ml-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
+          <div className="w-full mb-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
             <div><b>Fecha de alta</b> {formatearFecha(v?.fechaAlta)}</div>  
             <div><b>Cuidador principal</b> {v?.cuidadorPrincipal}</div>
             <div><b>Contacto del cuidador principal</b> {v?.telefonoCuidadorPrincipal}</div>
@@ -40,7 +40,7 @@ console.log(v);
         <details>
           <summary className="font-bold text-lg text-blue-900 cursor-pointer">Información personal</summary>
 
-          <div className="w-full mb-2 ml-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
+          <div className="w-full mb-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
             <div><b>Género</b> {' '}
               {v?.genero === 'M' ? 'Masculino' : v?.genero === 'F' ? 'Femenino' : 'otro'}
             </div>
@@ -68,7 +68,7 @@ console.log(v);
 
         <details>
           <summary className="font-bold text-lg text-blue-900 cursor-pointer">Resúmen clínico</summary>
-          <div className="w-full mb-2 ml-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
+          <div className="w-full mb-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
             <div><b>Quien deriva </b> {v?.quienDeriva}</div>
             <div><b>Contacto de {v?.quienDeriva} (tel, mail) </b> {v?.contactoQuienDeriva}</div>
             <div><b>Diagnóstico</b> {v?.diagnostico}</div>
@@ -114,7 +114,7 @@ console.log(v);
         </details>
       </div>
 
-      <div className='flex flex-row justify-center align-middle m-8 text-center gap-4'>
+      <div className='flex flex-col md:flex-row justify-center align-middle m-8 text-center gap-4'>
         <Link href={`/pacientes/${id}/seguimiento`} className="p-2 w-56 bg-blue-500 text-white rounded-md hover:bg-blue-600">
         Agregar nuevo seguimiento
         </Link>

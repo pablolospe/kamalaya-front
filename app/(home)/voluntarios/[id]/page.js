@@ -14,8 +14,8 @@ const voluntarioDetalle = async (id) => {
 async function Voluntario({ params }) {
   const { id } = params;
   const v = await voluntarioDetalle(id);
-  console.log(id);
-  console.log(v);
+  // console.log(id);
+  // console.log(v);
 
   return (
     <div className="md:mx-40">
