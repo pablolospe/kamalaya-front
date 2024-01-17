@@ -18,5 +18,5 @@ export { default as GoogleMapsView } from './GoogleMapsView';
 export { default as GruposTabla } from './GruposTabla';
 export { default as SeguimientosTabla } from './SeguimientosTabla';
 export { default as Sidebar } from './Sidebar';
-export { default as Voluntarios } from './Voluntarios';
-export { default as VoluntariosTabla } from './VoluntariosTabla';
+// export { default as Voluntarios } from './Voluntarios';
+// export { default as VoluntariosTabla } from './VoluntariosTabla';
