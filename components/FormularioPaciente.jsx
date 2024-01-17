@@ -460,6 +460,17 @@ const FormularioPaciente = () => {
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
         </label>
+        <label>
+          Familia
+          <textarea
+            rows={3}
+            type="text"
+            name="familia"
+            value={formData.familia}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
       </div>
 
       <h3 className="mt-4 font-bold text-md text-center">
@@ -669,17 +680,7 @@ const FormularioPaciente = () => {
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
         </label>
-        <label>
-          Familia
-          <textarea
-            rows={3}
-            type="text"
-            name="familia"
-            value={formData.familia}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
-        </label>
+
       </div>
 
       

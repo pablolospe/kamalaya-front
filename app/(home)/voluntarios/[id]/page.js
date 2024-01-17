@@ -1,17 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
 import { formatearFecha, calcularEdad, formatearNumeroTelefono, formatearNumeroAHora } from '@/utils/formats';
-import BotonAgregarDisponibilidad from '@/components/BotonAgregarDisponibilidad';
-import BotonBorrarDisponibilidad from '@/components/BotonBorrarDisponibilidad';
-import BotonBorrarAntecedenteAcompniamiento from '@/components/BotonBorrarAntecedenteAcompniamiento';
-import BotonAgregarAntecedenteDeAcompaniamiento from '@/components/BotonAgregarAntecedenteDeAcompaniamiento';
-import BotonAgregarAntecedentePatologico from '@/components/BotonAgregarAntecedentePatologico';
-import BotonBorrarAntecedentePatologico from '@/components/BotonBorrarAntecedentePatologico';
-import BotonAgregarVacaciones from '@/components/BotonAgregarVacaciones';
-import BotonBorrarVacaciones from '@/components/BotonBorrarVacaciones';
+import {BotonAgregarDisponibilidad, BotonBorrarDisponibilidad, BotonAgregarAntecedenteDeAcompaniamiento, BotonBorrarAntecedenteAcompniamiento, BotonAgregarAntecedentePatologico, BotonBorrarAntecedentePatologico, BotonAgregarVacaciones, BotonBorrarVacaciones, FormularioVoluntarioId} from '@/components';
+// import BotonAgregarDisponibilidad from '@/components/BotonAgregarDisponibilidad';
+// import BotonBorrarDisponibilidad from '@/components/BotonBorrarDisponibilidad';
+// import BotonBorrarAntecedenteAcompniamiento from '@/components/BotonBorrarAntecedenteAcompniamiento';
+// import BotonAgregarAntecedenteDeAcompaniamiento from '@/components/BotonAgregarAntecedenteDeAcompaniamiento';
+// import BotonAgregarAntecedentePatologico from '@/components/BotonAgregarAntecedentePatologico';
+// import BotonBorrarAntecedentePatologico from '@/components/BotonBorrarAntecedentePatologico';
+// import BotonAgregarVacaciones from '@/components/BotonAgregarVacaciones';
+// import BotonBorrarVacaciones from '@/components/BotonBorrarVacaciones';
+// import FormularioVoluntarioId from '@/components/FormularioVoluntarioId';
 import { URL } from '@/config';
 import style from './page.module.css';
-import FormularioVoluntarioId from '@/components/FormularioVoluntarioId';
 
 const voluntarioDetalle = async (id) => {
   return fetch(`${URL}/voluntarios/${id}`, {
