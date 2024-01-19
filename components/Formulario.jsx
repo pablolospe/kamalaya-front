@@ -134,7 +134,7 @@ const Formulario = () => {
       onSubmit={handleSubmit}
       className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md"
     >
-      <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
+      <h2 className="my-2 w-full md:w-1/2 text-lg text-center self-center font-semibold bg-green-100 text-md p-2 rounded-lg border">
         Ingreso de voluntario
       </h2>
       <h3 className="m-2 font-bold text-md text-center">
