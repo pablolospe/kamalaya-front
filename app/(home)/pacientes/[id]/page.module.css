@@ -1,0 +1,9 @@
+.details{
+    transition: all 1s ease-in;
+    max-height: 29px;
+    overflow: hidden;
+}
+.details[open]{
+    max-height: 300px;
+    /* background-color: hsl(0, 0%, 100%); */
+}

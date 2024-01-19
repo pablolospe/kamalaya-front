@@ -264,6 +264,12 @@ async function VoluntarioDetalle({ params }) {
           </div>
         </details>
       </div>
+
+      <div className='flex flex-col md:flex-row justify-center align-middle m-8 text-center gap-4'>
+        <Link href={`/voluntarios/${id}/editar`} className="p-2 w-56 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600">
+        Editar voluntario
+        </Link>
+      </div>
     </div>
   );
 }

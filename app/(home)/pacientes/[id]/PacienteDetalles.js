@@ -2,6 +2,7 @@ import { formatearFecha, calcularEdad } from '@/utils/formats';
 import { URL } from '@/config';
 import Link from 'next/link'
 import SeguimientosTabla from '@/components/SeguimientosTabla'
+import style from './page.module.css';
 
 const pacienteDetalle = async (id) => {
   return fetch(`${URL}/paciente/${id}`, {
@@ -21,7 +22,7 @@ console.log(v);
 
       <div className="flex flex-col md:mx-auto md:w-1/2 p-4 bg-gray-100 rounded-lg shadow-md">
 
-        <details>
+        <details className={style.details}>
           <summary 
           className="font-bold text-lg text-blue-900 cursor-pointer"
           >En Kamalaya</summary>
@@ -37,7 +38,7 @@ console.log(v);
           </div>
         </details>
 
-        <details>
+        <details className={style.details}>
           <summary className="font-bold text-lg text-blue-900 cursor-pointer">Información personal</summary>
 
           <div className="w-full mb-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
@@ -66,7 +67,7 @@ console.log(v);
         </details>
 
 
-        <details>
+        <details className={style.details}>
           <summary className="font-bold text-lg text-blue-900 cursor-pointer">Resúmen clínico</summary>
           <div className="w-full mb-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
             <div><b>Quien deriva </b> {v?.quienDeriva}</div>
@@ -86,11 +87,11 @@ console.log(v);
           </div>
         </details>
 
-        <details>
+        <details className={style.details}>
         <summary className="font-bold text-lg text-blue-900 cursor-pointer">Grupo</summary>
         {v.Grupos[0]
         ? 
-        <div className="w-full mb-2 ml-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
+        <div className="w-full mb-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
           <div><b>Fecha de inicio: </b> {formatearFecha(v.Grupos[0]?.fechaDeInicio)}</div>
           <div><b>Dia de la semana: </b> {v.Grupos[0]?.diaSemana}</div>
           <div><b>Hora de inicio: </b> {v.Grupos[0]?.horaInicio}</div>

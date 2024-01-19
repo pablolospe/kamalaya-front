@@ -1,38 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { URL } from '@/config';
 import GoogleMapsView from './GoogleMapsView';
+import { voluntarioDetalle } from '@/utils/fetchVoluntarioId';
+import { useParams } from 'next/navigation';
 
-const FormularioVoluntarioId = ({ v }) => {
+
+const FormularioVoluntarioId = () => {
+  const { id } = useParams();
+
   const router = useRouter();
   const [formData, setFormData] = useState({
-    nombre: v.nombre,
-    apellido: v.apellido,
-    dni: v.dni,
-    email: v.email,
-    telefono: v.telefono,
-    telefono2: v.telefono2,
-    lat: v.lat,
-    lng: v.lng,
-    calle: v.calle,
-    numero: v.numero,
-    localidad: v.localidad,
-    provincia: v.provincia,
-    pais: v.pais,
-    codigoPostal: v.codigoPostal,
-    telefonoEmergencia: v.telefonoEmergencia,
-    nombreContactoEmergencia: v.nombreContactoEmergencia,
-    genero: v.genero,
-    profesion_oficio_ocupacion: v.profesion_oficio_ocupacion,
-    hobbies_habilidades: v.hobbies_habilidades,
-    fechaDeNacimiento: v.fechaDeNacimiento,
-    fechaAlta: v.fechaAlta,
-    fechaBaja: v.fechaBaja,
-    tieneAuto: v.tieneAuto,
-    experienciaCP: v.experienciaCP,
+    nombre: "",
+    apellido: "",
+    dni: "",
+    email: "",
+    telefono: "",
+    telefono2: "",
+    lat: "",
+    lng: "",
+    calle: "",
+    numero: "",
+    localidad: "",
+    provincia: "",
+    pais: "",
+    codigoPostal: "",
+    telefonoEmergencia: "",
+    nombreContactoEmergencia: "",
+    genero: "",
+    profesion_oficio_ocupacion: "",
+    hobbies_habilidades: "",
+    fechaDeNacimiento: "",
+    fechaAlta: "",
+    fechaBaja: "",
+    tieneAuto: "",
+    experienciaCP: "",
   });
 
   const handleSubmit = async (e) => {
@@ -41,7 +46,7 @@ const FormularioVoluntarioId = ({ v }) => {
     console.log(formDataJSON);
 
     try {
-      const response = await fetch(`${URL}/voluntarios/${v.voluntario_id}`, {
+      const response = await fetch(`${URL}/voluntarios/${formData?.voluntario_id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -65,6 +70,14 @@ const FormularioVoluntarioId = ({ v }) => {
       console.error('Error:', error);
     }
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      const formData = await voluntarioDetalle(id);
+      setFormData(formData);
+    }
+    fetchData();
+  }, [setFormData]);
 
   const handleClick = async (e) => {
     e.preventDefault();
