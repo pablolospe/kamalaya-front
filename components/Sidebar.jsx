@@ -76,13 +76,13 @@ function Sidebar() {
       {/* Línea antes de la barra de navegación */}
       <div
         className={`fixed top-0 z-50 flex 
-        
+        align-center
         items-center 
         justify-between 
-        bg-opacity-70
+        bg-opacity-90
         w-full bg-white  ${
           isMenuOpen
-            ? 'transition-all duration-500 ease-in h-[12rem]'
+            ? 'transition-all duration-500 ease-in h-fit'
             : 'transition-all duration-700 ease-in h-16'
         }`}
       >
@@ -133,7 +133,7 @@ function Sidebar() {
 
         <ul
           className={`md:flex md:gap-6 md:mr-12 ${
-            isMenuOpen ? 'flex flex-col gap-4 mr-2 mt-12' : 'hidden'
+            isMenuOpen ? 'flex flex-col gap-4 mr-2 my-4' : 'hidden'
           }`}
         >
           { state === 'Admin' && linksAdmin.map(({ label, route }) => (

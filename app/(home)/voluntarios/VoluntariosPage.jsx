@@ -245,7 +245,7 @@ function VoluntariosPage() {
             onClick={handleBorrarFiltros}
             className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
           >
-            Borrar <br></br>filtros
+            Borrar <br/> filtros
           </button>
 
           <button
@@ -264,10 +264,10 @@ function VoluntariosPage() {
         <thead>
           <tr className="bg-gray-100 row-auto">
             <th className="border p-2">Nombre</th>
-            <th className="hidden md:table-cell border p-2">Teléfono</th>
-            {/* <th className="hidden md:table-cell border p-2">Tiene auto</th> */}
-            {/* <th className="hidden md:table-cell border p-2">Tiene experiencia</th> */}
-            <th className="hidden md:table-cell border p-2">Está activo/a?</th>
+            <th className="hidden md:table-cell w-80 border p-2">Teléfono</th>
+            <th className="hidden md:table-cell w-4 text-xs border p-2">Tiene auto</th>
+            <th className="hidden md:table-cell w-4 text-xs border p-2">Exp CP</th>
+            <th className="hidden md:table-cell w-40 border p-2">Está activo/a?</th>
             <th className="hidden md:table-cell border p-2">
               Disponibilidad semanal
             </th>
@@ -314,13 +314,13 @@ function VoluntariosPage() {
                 </div>
               </td>
 
-              {/* <td className="hidden md:table-cell">
-                <div>{v.tieneAuto ? 'si' : 'no'}</div>
-              </td> */}
+              <td className="hidden md:table-cell">
+                {!v.paciente_id && <div>{v.tieneAuto ? '✅' : '❌'}</div>}
+              </td>
 
-              {/* <td className="hidden md:table-cell">
-                <div>{v.experienciaCP === true ? 'si' : 'no'}</div>
-              </td> */}
+              <td className="hidden md:table-cell">
+                {!v.paciente_id && <div>{v.experienciaCP === true ? '✅' : '❌'}</div>}
+              </td>
 
               <td className="hidden md:table-cell">
                 <div>
@@ -333,8 +333,9 @@ function VoluntariosPage() {
                   ) ? (
                     <details className={style.details}>
                       <summary>Inactivo</summary>
+                      <div className="bg-white rounded mb-2">
                       <small>
-                        Inactivo hasta el{' '}
+                        hasta el{' '}
                         {formatearFecha(
                           v.Vacaciones.find((vac) =>
                             fechaActualEntreFechas(
@@ -354,6 +355,7 @@ function VoluntariosPage() {
                           ).detalles
                         }
                       </small>
+                      </div>
                     </details>
                   ) : (
                     'Activo'
