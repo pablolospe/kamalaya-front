@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { URL } from '@/config';
 import { useParams } from 'next/navigation';
 import { fetchUsuarioId } from '@/utils/fetchUsuarioId'
+import Link from 'next/link';
 
 const FormularioUsuarioId = () => {
   const router = useRouter();
@@ -151,12 +152,21 @@ const FormularioUsuarioId = () => {
         </div>
       </div>
 
+      <div className="flex flex-row justify-between gap-2">
+
+      <Link href='/usuarios'
+        className="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+        >
+        Cancelar
+      </Link>
+
       <button
         type="submit"
         className="w-40 mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-      >
+        >
         Enviar formulario
       </button>
+      </div>
     </form>
   );
 };

@@ -46,11 +46,11 @@ function Ususarios() {
       <table>
         <thead>
           <tr className="bg-gray-100 row-auto">
-            <th className="border p-2">ID</th>
+            <th className="hidden md:table-cell border p-2">ID</th>
             <th className="border p-2">Nombre</th>
             <th className="hidden md:table-cell border p-2">Email</th>
             <th className="hidden md:table-cell border p-2">Rol</th>
-            <th className="hidden md:table-cell border p-2">Editar</th>
+            <th className="border p-2">Editar</th>
           </tr>
         </thead>
 
@@ -66,7 +66,7 @@ function Ususarios() {
               <td>
                 {/* <Link href={`/pacientes/${v.paciente_id}`}> */}
                 <div className="flex flex-row items-center ml-3 my-1 text-left">
-                  <div className="bg-gray-300 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
+                  <div className="bg-gray-300 p-3 mx-2 gap-3 rounded-lg flex flex-row">
                     <LuUser size={20} />
                   </div>
                   {v.nombre} {v.apellido}
@@ -82,12 +82,12 @@ function Ususarios() {
                 <div>{v.role}</div>
               </td>
 
-              <td className="hidden md:table-cell ">
-                <Link href={`/usuarios/modificar/${v.user_id}`}>
-                  <div className="bg-gray-300 cursor-pointer p-3 gap-3 w-11 rounded-lg">
-                    <LuEdit size={20} />
+              <td className="flex justify-center items-center">
+                  <div className="bg-gray-300 hover:bg-gray-400 cursor-pointer p-3 my-1 gap-3 w-11 rounded-lg self-center">
+                    <Link href={`/usuarios/modificar/${v.user_id}`}>
+                      <LuEdit size={20} />
+                    </Link>
                   </div>
-                </Link>
               </td>
             </tr>
           ))}
