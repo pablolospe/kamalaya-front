@@ -4,40 +4,40 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { URL } from '@/config';
-import GoogleMapsView from './GoogleMapsView';
+import GoogleMapsView from '../../../../../components/GoogleMapsView';
 import { voluntarioDetalle } from '@/utils/fetchVoluntarioId';
 import { useParams } from 'next/navigation';
-
+import Link from 'next/link';
 
 const FormularioVoluntarioId = () => {
   const { id } = useParams();
 
   const router = useRouter();
   const [formData, setFormData] = useState({
-    nombre: "",
-    apellido: "",
-    dni: "",
-    email: "",
-    telefono: "",
-    telefono2: "",
-    lat: "",
-    lng: "",
-    calle: "",
-    numero: "",
-    localidad: "",
-    provincia: "",
-    pais: "",
-    codigoPostal: "",
-    telefonoEmergencia: "",
-    nombreContactoEmergencia: "",
-    genero: "",
-    profesion_oficio_ocupacion: "",
-    hobbies_habilidades: "",
-    fechaDeNacimiento: "",
-    fechaAlta: "",
-    fechaBaja: "",
-    tieneAuto: "",
-    experienciaCP: "",
+    nombre: '',
+    apellido: '',
+    dni: '',
+    email: '',
+    telefono: '',
+    telefono2: '',
+    lat: '',
+    lng: '',
+    calle: '',
+    numero: '',
+    localidad: '',
+    provincia: '',
+    pais: '',
+    codigoPostal: '',
+    telefonoEmergencia: '',
+    nombreContactoEmergencia: '',
+    genero: '',
+    profesion_oficio_ocupacion: '',
+    hobbies_habilidades: '',
+    fechaDeNacimiento: '',
+    fechaAlta: '',
+    fechaBaja: '',
+    tieneAuto: '',
+    experienciaCP: '',
   });
 
   const handleSubmit = async (e) => {
@@ -46,13 +46,16 @@ const FormularioVoluntarioId = () => {
     console.log(formDataJSON);
 
     try {
-      const response = await fetch(`${URL}/voluntarios/${formData?.voluntario_id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${URL}/voluntarios/${formData?.voluntario_id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         Swal.fire({
@@ -62,7 +65,7 @@ const FormularioVoluntarioId = () => {
           color: 'black',
         }).then(router.push('/voluntarios'));
 
-        console.log('Datos enviados exitosamente')
+        console.log('Datos enviados exitosamente');
       } else {
         console.error('Error al enviar los datos');
       }
@@ -140,6 +143,13 @@ const FormularioVoluntarioId = () => {
       onSubmit={handleSubmit}
       className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md"
     >
+      <Link
+        href={`/voluntarios/${formData.voluntario_id}`}
+        className="fixed py-2 px-4 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600 self-end font-semibold"
+      >
+        &larr;
+      </Link>
+
       <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
         Editar datos del voluntario
       </h2>

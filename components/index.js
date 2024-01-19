@@ -13,7 +13,6 @@ export { default as CrearSeguimiento } from './CrearSeguimiento';
 export { default as Formulario } from './Formulario';
 export { default as FormularioPaciente } from './FormularioPaciente';
 export { default as FormularioPacienteId } from './FormularioPacienteId';
-export { default as FormularioVoluntarioId } from './FormularioVoluntarioId';
 export { default as GoogleMapsView } from './GoogleMapsView';
 export { default as GruposTabla } from './GruposTabla';
 export { default as SeguimientosTabla } from './SeguimientosTabla';

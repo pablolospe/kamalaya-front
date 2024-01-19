@@ -1,10 +1,8 @@
-import FormularioVoluntarioId from '@/components/FormularioVoluntarioId'
+import FormularioVoluntarioId from './FormularioVoluntarioId'
 import React from 'react'
 
 function EditarVoluntario() {
   return (
-    // <div>proximamente</div>
-    // <FormularioVoluntarioId/>
     <FormularioVoluntarioId />
   )
 }
