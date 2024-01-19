@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { URL } from '@/config';
-import GoogleMapsView from './GoogleMapsView';
+import GoogleMapsView from '../../../../../components/GoogleMapsView';
 import { voluntarios } from '@/utils/fetchVoluntarios';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';

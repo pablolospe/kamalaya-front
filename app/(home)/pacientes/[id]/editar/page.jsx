@@ -1,10 +1,7 @@
-import FormularioPacienteId from '@/components/FormularioPacienteId'
-import React from 'react'
+import FormularioPacienteId from './FormularioPacienteId';
 
 function EditarPaciente() {
-  return (
-    <FormularioPacienteId />
-  )
+  return <FormularioPacienteId />;
 }
 
-export default EditarPaciente
+export default EditarPaciente;
