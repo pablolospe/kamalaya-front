@@ -9,7 +9,8 @@ function LoginPage() {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 
-    const onSubmit = async () => {
+    const onSubmit = async (e) => {
+        e.preventDefault();
         // Usa el valor actual de los estados email y pass en la llamada a signIn
         const result = await signIn("credentials", {
             email: email,
@@ -20,8 +21,8 @@ function LoginPage() {
     }
 
     return (
-        <div
-            className='flex justify-center items-center h-screen bg-gradient-to-br from-cyan-300 to-sky-600'
+        <form
+            className='flex justify-center items-center h-screen bg-gradient-to-br from-purple-300 to-green-300'
         >
             <div
                 className='px-7 py-4 shadow bg-white rounded-md flex flex-col gap-2'
@@ -44,13 +45,14 @@ function LoginPage() {
                     />
                 </label>
                 <button
-                    className='bg-gradient-to-br from-cyan-300 to-sky-600 border rounded-md p-4'
+                    type='submit'
+                    className='bg-gradient-to-br from-cyan-300 to-sky-600 border rounded-md p-2 mt-2 hover:bg-gradient-to-br hover:to-cyan-300 hover:from-sky-600 '
                     onClick={onSubmit}
                 >
-                    login
+                    Ingresar
                 </button>
             </div>
-        </div>
+        </form>
     )
 }
 
