@@ -15,7 +15,7 @@ function PacientesPage() {
     nombre: '',
     apellido: '',
     localidad: '',
-    hobbies: '',
+    // hobbies: '',
   });
 
   // Definir el estado para el campo de ordenación
@@ -32,6 +32,23 @@ function PacientesPage() {
       setSortOrder('asc');
     }
   };
+
+  function handleBorrarFiltros() {
+    setQuery({
+      nombre: '',
+      apellido: '',
+      localidad: '',
+    });
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setQuery((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  }
+
   
   useEffect(() => {
     async function fetchData() {
@@ -55,9 +72,89 @@ function PacientesPage() {
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-center font-semibold text-xl">PACIENTES</h1>
+
       <details className="bg-gray-100 gap-4 p-4 rounded-lg">
         <summary className="hover:font-semibold cursor-pointer">MAPA</summary>
         <GoogleMapsView marker={pacientesData} />
+      </details>
+
+      <details className="bg-gray-100 gap-4 p-4 rounded-lg">
+        <summary className="hover:font-semibold cursor-pointer">
+          FILTROS
+        </summary>
+        <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-4 p-4 rounded-lg ">
+          <div>
+            <input
+              name="nombre"
+              type="text"
+              value={query.nombre}
+              onChange={handleChange}
+              className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+              placeholder="Nombre..."
+            />
+          </div>
+
+          <div>
+            <input
+              name="apellido"
+              type="text"
+              value={query.apellido}
+              onChange={handleChange}
+              className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+              placeholder="Apellido..."
+            />
+          </div>
+
+          <div>
+            <input
+              name="localidad"
+              type="text"
+              value={query.localidad}
+              onChange={handleChange}
+              className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+              placeholder="Localidad..."
+            />
+          </div>
+
+          {/* <div>
+            <input
+              name="profesion_oficio_ocupacion"
+              type="text"
+              value={query.profesion_oficio_ocupacion}
+              onChange={handleChange}
+              className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+              placeholder="Profesión / oficio / ocupación..."
+            />
+          </div> */}
+
+          {/* <div className="flex flex-col gap-1 text-wrap items-center">
+            <label
+              htmlFor="activo"
+              className="text-xs text-gray-800 mr-2"
+            >
+              Está activo?
+            </label>
+            <select
+              name="activo"
+              type="text"
+              value={query.activo}
+              onChange={handleChange}
+              className="p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+              id="activo"
+            >
+              <option value={true}>si</option>
+              <option value={false}>no</option>
+              <option value="">todos</option>
+            </select>
+          </div> */}
+
+          <button
+            onClick={handleBorrarFiltros}
+            className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+          >
+            Borrar <br/> filtros
+          </button>
+        </div>
       </details>
 
 
@@ -78,12 +175,12 @@ function PacientesPage() {
           {pacientesData?.map((v) => (
             <tr
               key={v.paciente_id}
-              className="text-center bg-gray-100 hover:bg-gray-200"
+              className="text-center bg-green-50 hover:bg-green-100"
             >
               <td>
                 <Link href={`/pacientes/${v.paciente_id}`}>
                   <div className="flex flex-row items-center ml-3 my-1 text-left">
-                    <div className="bg-gray-300 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
+                    <div className="bg-green-200 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
                       <LuUser size={20} />
                     </div>
                     {v.nombre}
