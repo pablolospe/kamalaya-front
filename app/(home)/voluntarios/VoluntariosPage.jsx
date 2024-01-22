@@ -26,6 +26,7 @@ function VoluntariosPage() {
     hobbies_habilidades: '',
     tieneAuto: '',
     experienciaCP: '',
+    activo: true,
     diaSemana: [],
   });
 
@@ -38,6 +39,7 @@ function VoluntariosPage() {
       hobbies_habilidades: '',
       tieneAuto: '',
       experienciaCP: '',
+      activo: true,
       diaSemana: [],
     });
   }
@@ -157,49 +159,49 @@ function VoluntariosPage() {
                 checked={query.diaSemana.includes('lunes')}
                 onChange={handleDiaSemanaChange}
               />
-              <label className="mr-2">Lunes</label>
+              <label className="mr-2">Lun</label>
               <input
                 type="checkbox"
                 value="martes"
                 checked={query.diaSemana.includes('martes')}
                 onChange={handleDiaSemanaChange}
               />
-              <label className="mr-2">Martes</label>
+              <label className="mr-2">Mar</label>
               <input
                 type="checkbox"
                 value="miercoles"
                 checked={query.diaSemana.includes('miercoles')}
                 onChange={handleDiaSemanaChange}
               />
-              <label className="mr-2">Miércoles</label>
+              <label className="mr-2">Mié</label>
               <input
                 type="checkbox"
                 value="jueves"
                 checked={query.diaSemana.includes('jueves')}
                 onChange={handleDiaSemanaChange}
               />
-              <label className="mr-2">Jueves</label>
+              <label className="mr-2">Jue</label>
               <input
                 type="checkbox"
                 value="viernes"
                 checked={query.diaSemana.includes('viernes')}
                 onChange={handleDiaSemanaChange}
               />
-              <label className="mr-2">Viernes</label>
+              <label className="mr-2">Vie</label>
               <input
                 type="checkbox"
                 value="sabado"
                 checked={query.diaSemana.includes('sabado')}
                 onChange={handleDiaSemanaChange}
               />
-              <label className="mr-2">Sábado</label>
+              <label className="mr-2">Sáb</label>
               <input
                 type="checkbox"
                 value="domingo"
                 checked={query.diaSemana.includes('domingo')}
                 onChange={handleDiaSemanaChange}
               />
-              <label className="mr-2">Domingo</label>
+              <label className="mr-2">Dom</label>
             </div>
           </div>
 
@@ -241,6 +243,27 @@ function VoluntariosPage() {
             </select>
           </div>
 
+          <div className="flex flex-col gap-1 text-wrap items-center">
+            <label
+              htmlFor="activo"
+              className="text-xs text-gray-800 mr-2"
+            >
+              Está activo?
+            </label>
+            <select
+              name="activo"
+              type="text"
+              value={query.activo}
+              onChange={handleChange}
+              className="p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+              id="activo"
+            >
+              <option value={true}>si</option>
+              <option value={false}>no</option>
+              <option value="">todos</option>
+            </select>
+          </div>
+
           <button
             onClick={handleBorrarFiltros}
             className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
@@ -267,7 +290,8 @@ function VoluntariosPage() {
             <th className="hidden md:table-cell w-80 border p-2">Teléfono</th>
             <th className="hidden md:table-cell w-4 text-xs border p-2">Tiene auto</th>
             <th className="hidden md:table-cell w-4 text-xs border p-2">Exp CP</th>
-            <th className="hidden md:table-cell w-40 border p-2">Está activo/a?</th>
+            <th className="hidden md:table-cell w-4 text-xs border p-2">Activo</th>
+            <th className="hidden md:table-cell w-40 border p-2">Está de vacaciones?</th>
             <th className="hidden md:table-cell border p-2">
               Disponibilidad semanal
             </th>
@@ -323,6 +347,10 @@ function VoluntariosPage() {
               </td>
 
               <td className="hidden md:table-cell">
+                {!v.paciente_id && <div>{v.activo === true ? '✅' : '❌'}</div>}
+              </td>
+
+              <td className="hidden md:table-cell">
                 <div>
                   {
                     // v?.fechaBaja !== null ? `Se dio de baja ${v.fechaBaja}`: null
@@ -332,7 +360,7 @@ function VoluntariosPage() {
                     fechaActualEntreFechas(vac.fechaInicio, vac.fechaFin)
                   ) ? (
                     <details className={style.details}>
-                      <summary>Inactivo</summary>
+                      <summary>Si</summary>
                       <div className="bg-white rounded mb-2">
                       <small>
                         hasta el{' '}
@@ -358,7 +386,7 @@ function VoluntariosPage() {
                       </div>
                     </details>
                   ) : (
-                    'Activo'
+                    'No'
                   )}
                 </div>
               </td>

@@ -38,6 +38,7 @@ const FormularioVoluntarioId = () => {
     fechaBaja: '',
     tieneAuto: '',
     experienciaCP: '',
+    activo: '',
   });
 
   const handleSubmit = async (e) => {
@@ -121,7 +122,10 @@ const FormularioVoluntarioId = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    const newValue = type === 'checkbox' ? checked : value;
+    const newValue = type === 'checkbox' ? checked : (name === 'activo' ? value === 'true' : value);
+
+    // const newValue = type === 'checkbox' ? checked : value;
+    // const newValue = name === 'activo' ? value === 'true' : value;
 
     if (name === 'diaSemana' || name === 'horaInicio' || name === 'horaFin') {
       setFormData((prevData) => ({
@@ -179,6 +183,19 @@ const FormularioVoluntarioId = () => {
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
+        </label>
+
+        <label className="block mb-2">
+          Está activo:
+          <select
+            name="activo"
+            value={formData.activo}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          >
+            <option value='true'>Si</option>
+            <option value='false'>no</option>
+          </select>
         </label>
 
         <label>

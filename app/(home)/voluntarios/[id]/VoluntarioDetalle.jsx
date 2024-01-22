@@ -35,7 +35,7 @@ async function VoluntarioDetalle({ params }) {
   return (
     <div className="flex flex-col">
       <h2 className="my-2 w-full md:w-1/2 text-lg text-center self-center font-semibold bg-purple-100 text-md p-2 rounded-lg border">
-        {v?.nombre} {v?.apellido}
+        {v?.nombre} {v?.apellido} ({v?.activo ? "activo" : "inactivo"})
       </h2>
 
       {/* <details>
