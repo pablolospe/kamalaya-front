@@ -69,20 +69,19 @@ function VoluntariosPage() {
       const voluntarioData = await voluntarios(query);
       let pacienteData = [];
 
-      if (showPacientes) {
-        pacienteData = await pacientes(query);
-      }
+      if (showPacientes) pacienteData = await pacientes(query);
+
 
       const combinedData = voluntarioData?.concat(pacienteData);
 
       setVoluntariosData(combinedData);
-      console.log(combinedData);
     }
     fetchData();
   }, [query, voluntarios, pacientes, showPacientes]);
 
   return (
     <div className="flex flex-col gap-2">
+
       {/* //////////////// MAPA //////////////// */}
 
       <details className="bg-gray-100 gap-4 p-4 rounded-lg">
@@ -91,6 +90,7 @@ function VoluntariosPage() {
       </details>
 
       {/* //////////////// FILTROS //////////////// */}
+      
       <details open className="bg-gray-100 gap-4 p-4 rounded-lg">
         <summary className="hover:font-semibold cursor-pointer">
           FILTROS
