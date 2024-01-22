@@ -16,52 +16,63 @@ function PacientesPage() {
     apellido: '',
     localidad: '',
     hobbies: '',
-    orderBy: '',
   });
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setQuery((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }
+  // Definir el estado para el campo de ordenación
+  const [sortField, setSortField] = useState(null);
+  const [sortOrder, setSortOrder] = useState('');
 
+  const onSort = (field) => {
+    // Si se hace clic en el mismo campo, cambiar el orden
+    // De lo contrario, ordenar en orden ascendente
+    if (field === sortField) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortOrder('asc');
+    }
+  };
+  
   useEffect(() => {
     async function fetchData() {
       if (session) {
         const pacienteData = await pacientes(query, session.user.accessToken);
-        setPacientesData(pacienteData);
+        // Ordenar los datos basado en el sortField y sortOrder
+        let sortedData = pacienteData;
+        if (sortField !== null) {
+          sortedData = sortedData.sort((a, b) =>
+            sortOrder === 'asc'
+              ? a[sortField].localeCompare(b[sortField])
+              : b[sortField].localeCompare(a[sortField])
+          );
+        }
+        setPacientesData(sortedData);
       }
     }
     fetchData();
-  }, [query, session]);
+  }, [query, session, sortField, sortOrder]);
 
   return (
     <div className="flex flex-col gap-2">
+      <h1 className="text-center font-semibold text-xl">PACIENTES</h1>
       <details className="bg-gray-100 gap-4 p-4 rounded-lg">
         <summary className="hover:font-semibold cursor-pointer">MAPA</summary>
         <GoogleMapsView marker={pacientesData} />
       </details>
 
-      <h1 className="text-center font-semibold text-xl">PACIENTES</h1>
 
       <table>
-      <thead>
-        <tr className="bg-gray-100 row-auto">
-          <th className="border p-2">
-            <button name="orderBy" value="nombre" onClick={handleChange}>
-              Nombre ⬇️
-            </button>
-          </th>
-          <th className="border p-2">
-            <button name="orderBy" value="apellido" onClick={handleChange}>
-              Apellido ⬇️
-            </button>
-          </th>
-          <th className="hidden md:table-cell border p-2">Teléfono</th>
-        </tr>
-      </thead>
+        <thead>
+          <tr className="bg-gray-100 row-auto">
+            <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('nombre')}>
+              Nombre {sortField === 'nombre' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
+            </th>
+            <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('apellido')}>
+              Apellido {sortField === 'apellido' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
+            </th>
+            <th className="hidden md:table-cell border p-2">Teléfono</th>
+          </tr>
+        </thead>
 
         <tbody>
           {pacientesData?.map((v) => (
@@ -82,8 +93,7 @@ function PacientesPage() {
               <td>
                 <Link href={`/pacientes/${v.paciente_id}`}>
                   <div className="flex flex-row items-center ml-3 my-1 text-left">
-                   
-                    {v.apellido} 
+                    {v.apellido}
                   </div>
                 </Link>
               </td>
