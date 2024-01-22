@@ -39,8 +39,8 @@ function PacientesPage() {
 
   return (
     <div className="flex flex-col gap-2">
-      <details className={style.details}>
-        <summary className="ml-1 text-md cursor-pointer">Mapa</summary>
+      <details className="bg-gray-100 gap-4 p-4 rounded-lg">
+        <summary className="hover:font-semibold cursor-pointer">MAPA</summary>
         <GoogleMapsView marker={pacientesData} />
       </details>
 
