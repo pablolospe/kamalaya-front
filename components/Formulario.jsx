@@ -1,13 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { URL } from '@/config';
 import GoogleMapsView from './GoogleMapsView';
+// import { emailRegex } from '@/helpers/regex';
+// import { voluntarios } from '@/utils/fetchVoluntarios.js';
 
 const Formulario = () => {
   const router = useRouter();
+  // const [voluntario, setVoluntario] = useState({})
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -32,6 +35,7 @@ const Formulario = () => {
     fechaAlta: "2023-01-01",
     fechaBaja: null,
     tieneAuto: false,
+    activo: true,
     experienciaCP: false,
     Disponibilidades: [{
       diaSemana: "lunes",
@@ -39,6 +43,15 @@ const Formulario = () => {
       horaFin:"16:00"
     }],
   });
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const data = await voluntarios();
+  //     setVoluntario(data);
+  //   }
+  //   fetchData();
+  // }, []);
+  // console.log(voluntario);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,7 +128,25 @@ const Formulario = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
-
+    // Validar la entrada de correo electrónico
+		// if (name === 'email') {
+		// 	const isValidEmail = emailRegex.test(value);
+		// 	setInput({
+		// 		...input,
+		// 		[name]: value,
+		// 		emailError: !isValidEmail,
+		// 		emailErrorMessage: isValidEmail ? '' : 'Ingrese un correo electrónico válido',
+		// 	});
+		// 	if (usuarios.some(u => u.email === value)) {
+		// 		//   const emailExists = true;
+		// 		setInput({
+		// 			...input,
+		// 			[name]: value,
+		// 			emailError: true,
+		// 			emailErrorMessage: `El correo electrónico "${value}" ya está registrado.`,
+		// 		});
+		// 	}
+		// }
     if (name === 'diaSemana' || name === 'horaInicio' || name === 'horaFin') {
       setFormData((prevData) => ({
         ...prevData,
