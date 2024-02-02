@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { URL } from '@/config';
@@ -10,6 +10,8 @@ import GoogleMapsView from './GoogleMapsView';
 
 const Formulario = () => {
   const router = useRouter();
+  const miElementoRef = useRef(null);
+  const [error, setError] = useState("")
   // const [voluntario, setVoluntario] = useState({})
   const [formData, setFormData] = useState({
     nombre: "",
@@ -44,6 +46,11 @@ const Formulario = () => {
     }],
   });
 
+  const irAMiElemento = () => {
+    // Utilizar el ref para acceder al nodo DOM y realizar el scroll
+    miElementoRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+
   // useEffect(() => {
   //   async function fetchData() {
   //     const data = await voluntarios();
@@ -55,6 +62,15 @@ const Formulario = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.lat || !formData.lng) {
+      setError("Por favor, pulse el botón para guardar la ubicación");
+     
+      irAMiElemento()
+     
+      return;
+    }
+    
     const formDataJSON= JSON.stringify(formData)
     console.log(formDataJSON);
 
@@ -298,7 +314,7 @@ const Formulario = () => {
         </label>
       </div>
 
-      <h3 className="mt-4 font-bold text-md text-center">Domicilio</h3>
+      <h3 ref={miElementoRef} className="mt-4 font-bold text-md text-center">Domicilio</h3>
       <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg">
         <div className="flex flex-col md:flex-row justify-between gap-6">
           <label>
@@ -372,6 +388,9 @@ const Formulario = () => {
           </label>
         </div>
           <button className='h-min bg-red-400 p-1 border rounded-md hover:bg-red-500 ease-in-out' onClick={handleClick}>buscar en el mapa</button>
+          
+          {error && <p className="text-red-500 text-center">☝️{error}</p>}
+          
           <GoogleMapsView marker={[formData]} />
       </div>
 
