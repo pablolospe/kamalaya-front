@@ -30,7 +30,7 @@ async function VoluntarioDetalle({ params }) {
   const { id } = params;
   const v = await voluntarioDetalle(id);
   // console.log(id);
-  console.log(v);
+  // console.log(v);
 
   return (
     <div className="flex flex-col">
@@ -263,6 +263,33 @@ async function VoluntarioDetalle({ params }) {
           </div>
           </div>
         </details>
+
+        <details className={style.details}>
+        <summary className="font-bold text-lg text-blue-900 cursor-pointer">Grupo</summary>
+        {v.Grupos[0]
+        ? 
+        <div className="w-full mb-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
+          <div><b>Fecha de inicio: </b> {formatearFecha(v.Grupos[0]?.fechaDeInicio)}</div>
+          <div><b>Dia de la semana: </b> {v.Grupos[0]?.diaSemana}</div>
+          <div><b>Hora de inicio: </b> {v.Grupos[0]?.horaInicio}</div>
+          <div><b>Hora de fin: </b> {v.Grupos[0]?.horaFin}</div>
+          <div><b>Descripcion: </b> {v.Grupos[0]?.descripcion}</div>
+          {/* <div><b>Voluntarios: </b> {v.Grupos[0]?.Voluntarios.map(v=> 
+            
+            <span className="p-2 w-56 font-semibold text-blue-500 rounded-md hover:text-blue-800">
+              <Link href={`/voluntarios/${v.voluntario_id}`}>{v.nombre} {v.apellido} </Link>
+            </span>
+          )}</div> */}
+        </div>
+        : 
+        <div>Este voluntario aún no posee grupo. 
+          <span className="p-2 w-56 font-semibold text-blue-500 rounded-md hover:text-blue-800 border-solid ">
+              <Link href={`/grupos/crear`} >Crear nuevo grupo </Link>
+            </span>
+        </div>
+      }
+        </details>
+
       </div>
 
       <div className='flex flex-col md:flex-row justify-center align-middle m-8 text-center gap-4'>
