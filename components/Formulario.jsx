@@ -24,15 +24,15 @@ const Formulario = () => {
     provincia: "Buenos Aires",
     pais: "Argentina",
     codigoPostal: "1643",
-    lat: "-34.488903", 
-    lng: "-58.49910169999999",
-    telefonoEmergencia: "1199887766",
+    lat: "", 
+    lng: "",
+    telefonoEmergencia: "",
     nombreContactoEmergencia: "Jorge Perez (hijo)",
     genero: "M",
-    profesion_oficio_ocupacion: "Aviador",
-    hobbies_habilidades: "Pesca",
-    fechaDeNacimiento: "1970-01-02",
-    fechaAlta: "2023-01-01",
+    profesion_oficio_ocupacion: "",
+    hobbies_habilidades: "",
+    fechaDeNacimiento: "",
+    fechaAlta: "",
     fechaBaja: null,
     tieneAuto: false,
     activo: true,
@@ -213,6 +213,7 @@ const Formulario = () => {
           <label>
             Fecha de Nacimiento:
             <input
+              required
               type="date"
               name="fechaDeNacimiento"
               value={formData.fechaDeNacimiento}
@@ -422,6 +423,7 @@ const Formulario = () => {
         <label>
           Fecha de Alta:
           <input
+            required
             type="date"
             name="fechaAlta"
             value={formData.fechaAlta}
