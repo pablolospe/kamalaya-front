@@ -24,11 +24,9 @@ function GruposTabla() {
         setError('Hubo un error al obtener los datos de los grupos.');
       }
     }
-
     fetchData();
   }, [query]);
 
-  // console.log(gruposData);
   return (
       <section className="flex flex-col gap-2 overflow-auto">
         <table>
@@ -70,7 +68,7 @@ function GruposTabla() {
                 <td className="table-cell p-2">
                   <BotonBorrarGrupo id={g.grupo_id} />
                 </td>
-                <td className="table-cell p-2">{g.activo ? "Activo" : "Inactivo"}</td>
+                <td className="table-cell p-2">{g.activo ? '✅' : '❌'}</td>
               </tr>
             ))}
           </tbody>
