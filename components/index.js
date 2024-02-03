@@ -2,18 +2,18 @@ export * from './Api';
 export { default as BotonAgregarAntecedenteDeAcompaniamiento } from './BotonAgregarAntecedenteDeAcompaniamiento';
 export { default as BotonAgregarAntecedentePatologico } from './BotonAgregarAntecedentePatologico';
 export { default as BotonAgregarDisponibilidad } from './BotonAgregarDisponibilidad';
-export { default as BotonAgregarDisponibilidad2 } from './BotonAgregarDisponibilidad2';
+
 export { default as BotonAgregarVacaciones } from './BotonAgregarVacaciones';
 export { default as BotonBorrarAntecedenteAcompniamiento } from './BotonBorrarAntecedenteAcompniamiento';
 export { default as BotonBorrarAntecedentePatologico } from './BotonBorrarAntecedentePatologico';
 export { default as BotonBorrarDisponibilidad } from './BotonBorrarDisponibilidad';
 export { default as BotonBorrarVacaciones } from './BotonBorrarVacaciones';
-export { default as CrearGrupo } from './CrearGrupo';
+
 export { default as CrearSeguimiento } from './CrearSeguimiento';
 export { default as Formulario } from './Formulario';
 export { default as FormularioPaciente } from './FormularioPaciente';
 export { default as GoogleMapsView } from './GoogleMapsView';
-export { default as GruposTabla } from './GruposTabla';
+
 export { default as SeguimientosTabla } from './SeguimientosTabla';
 export { default as Sidebar } from './Sidebar';
 // export { default as Voluntarios } from './Voluntarios';
