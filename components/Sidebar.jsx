@@ -166,8 +166,12 @@ function Sidebar() {
                   {label}
                 </div>
               </Link>
+              
             </li>
           ))}
+              <div className="flex md:hidden ">
+                <AppBar />
+              </div>
         </ul>
 
         <div className="hidden md:block">
