@@ -2,6 +2,10 @@ export const formatearNumero = (numero) => {
   return numero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
+export function convertirHora(hora) {
+  return hora.slice(0, -3);
+}
+
 export function formatearNumeroAHora(hora) {
   if (typeof hora !== 'string' || isNaN(hora) ) {
     return 'Formato inválido';

@@ -1,5 +1,5 @@
 import React from 'react'
-import GruposTabla from '@/components/GruposTabla'
+import GruposTabla from './GruposTabla'
 import Link from 'next/link'
 
 async function GruposPage() {

@@ -20,6 +20,7 @@ function CrearGrupo({paciente_id}) {
     paciente_id: '',
     voluntario_id: [],
     descripcion: '',
+    activo: true,
   });
 
   const router = useRouter();

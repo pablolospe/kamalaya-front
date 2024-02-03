@@ -1,5 +1,5 @@
 import React from 'react'
-import CrearGrupo from '@/components/CrearGrupo'
+import CrearGrupo from './CrearGrupo'
 // import GruposTabla from '@/components/GruposTabla'
 
 
