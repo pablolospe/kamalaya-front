@@ -2,6 +2,15 @@ export const formatearNumero = (numero) => {
   return numero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
+export function obtenerFecha(fieldValue) {
+  const date = new Date(fieldValue);
+  const year = date.getUTCFullYear();
+  const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+  const day = date.getUTCDate().toString().padStart(2, '0');
+  console.log(`${year}-${month}-${day}`);
+  return `${year}-${month}-${day}`;
+}
+
 export function convertirHora(hora) {
   return hora.slice(0, -3);
 }

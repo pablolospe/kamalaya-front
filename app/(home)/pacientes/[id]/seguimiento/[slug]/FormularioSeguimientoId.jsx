@@ -7,24 +7,22 @@ import { voluntarios } from '@/utils/fetchVoluntarios';
 import { pacientes } from '@/utils/fetchPacientes';
 import { useParams } from 'next/navigation';
 import Swal from 'sweetalert2';
-import { convertirHora } from '@/utils/formats';
+import { obtenerFecha, formatearFecha } from '@/utils/formats';
 
 function EditarSeguimiento() {
   const { id, slug } = useParams();
-  console.log(id, slug);
   
   const [voluntario1, setVoluntario1] = useState('13');
   const [voluntario2, setVoluntario2] = useState('');
   const [voluntario3, setVoluntario3] = useState('');
   const [voluntariosData, setVoluntariosData] = useState([]);
-  const [grupo, setGrupo] = useState({
-    // seguimiento_id: slug,
-    fecha: '2024-01-01',
-    horaInicio: '10:00',
-    horaFin: '11:00',
-    evolucion: 'bien',
-    llamadaOVisita: 'visita',
-    problemasActualesYNecesidades: 'bien',
+  const [seguimiento, setSeguimiento] = useState({
+    fecha: '',
+    horaInicio: '',
+    horaFin: '',
+    evolucion: '',
+    llamadaOVisita: '',
+    problemasActualesYNecesidades: '',
     ECOG:'',
     paciente_id: +id,
     voluntario_id: [],
@@ -38,40 +36,48 @@ function EditarSeguimiento() {
 
   useEffect(() => {
     async function fetchData() {
-      // const gruposData = await fetchSeguimientoId(id);
+      const seguimientoData = await fetchSeguimientoId(slug);
       // const voluntariosData = await voluntarios(query);
-      // setGrupo(gruposData);
-      // console.log(gruposData);
+      console.log("esteeee"+seguimientoData);
+      console.log(seguimientoData);
+      setSeguimiento(seguimientoData[0]);
       // setVoluntariosData(voluntariosData);
-      // setVoluntario1(gruposData?.Voluntarios[0])
+      // setVoluntario1(seguimientoData?.Voluntarios[0])
       // console.log(voluntario1);
     }
     fetchData();
-  }, [query, setVoluntariosData]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setGrupo((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if (name === 'fecha') {
+      setSeguimiento((prevData) => ({
+        ...prevData,
+        fecha: obtenerFecha(value),
+      }));
+    } else {
+      setSeguimiento((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(grupo);
+    console.log(seguimiento);
 
     const updatedVoluntarioId = [voluntario1, voluntario2, voluntario3].filter(
       (voluntario) => voluntario !== ''
     );
 
-    const grupoToSubmit = {
-      ...grupo,
+    const seguimientoToSubmit = {
+      ...seguimiento,
       voluntario_id: [13,14],
     };
     Swal.fire({
       title: '¿Estás seguro?',
-      text: '¿Quieres modificar este grupo?',
+      text: '¿Quieres modificar este seguimiento?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: 'blue',
@@ -86,7 +92,7 @@ function EditarSeguimiento() {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(grupoToSubmit),
+            body: JSON.stringify(seguimientoToSubmit),
           });
 
           if (response.ok) {
@@ -126,13 +132,13 @@ function EditarSeguimiento() {
       className="flex flex-col align-middle justify-center items-center gap-2 bg-gray-100"
     >
       <h1 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
-        Crear nuevo grupo
+        Editar seguimiento
       </h1>
 
       <div className="flex flex-col md:flex-row justify-evenly align-center max-w-xl gap-8">
         <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
           <div className="flex flex-col justify-evenly align-center max-w-xl gap-4">
-            EN CONTRSUCCION
+            
 {/* 
             <div>
               <label
@@ -199,7 +205,7 @@ function EditarSeguimiento() {
             </div> */}
 
 
-            {/* <label
+            <label
               className="block text-sm font-medium text-gray-900 dark:text-white"
               htmlFor="fecha"
             >
@@ -208,14 +214,14 @@ function EditarSeguimiento() {
             <input
               name="fecha"
               required
-              value={grupo?.fecha}
+              value={seguimiento?.fecha}
               onChange={handleChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               type="date"
               id="fecha"
-            ></input> */}
+            ></input>
 
-{/* 
+
             <div>
               <label
                 className="block text-sm font-medium text-gray-900 dark:text-white"
@@ -226,13 +232,13 @@ function EditarSeguimiento() {
               <select
                 name="horaInicio"
                 required
-                // value={convertirHora(grupo.horaInicio)}
+                value={seguimiento.horaInicio}
                 onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 type="date"
                 id="horaInicio"
               >
-                <option value="">Seleccione hora de inicio</option>
+                
                 <option value="08:00">08:00</option>
                 <option value="09:00">09:00</option>
                 <option value="10:00">10:00</option>
@@ -259,13 +265,13 @@ function EditarSeguimiento() {
               <select
                 name="horaFin"
                 required
-                // value={convertirHora(grupo.horaFin)}
+                value={seguimiento.horaFin}
                 onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 type="date"
                 id="horaFin"
               >
-                <option value="">Seleccione hora de fin</option>
+                
                 <option value="08:00">08:00</option>
                 <option value="09:00">09:00</option>
                 <option value="10:00">10:00</option>
@@ -280,9 +286,72 @@ function EditarSeguimiento() {
                 <option value="19:00">19:00</option>
                 <option value="20:00">20:00</option>
               </select>
-            </div> */}
+            </div>
 
-            {/* <div className="sm:col-span-2">
+            <div>
+              <label
+                className="block text-sm font-medium text-gray-900 dark:text-white"
+                htmlFor="ECOG"
+              >
+                ECOG
+              </label>
+              <select
+                name="ECOG"
+                value={seguimiento.ECOG}
+                onChange={handleChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                type="date"
+                id="ECOG"
+              >
+                <option value="">Elije una opción</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                className="block text-sm font-medium text-gray-900 dark:text-white"
+                htmlFor="llamadaOVisita"
+              >
+                Visita o llamada
+              </label>
+              <select
+                name="llamadaOVisita"
+                required
+                value={seguimiento.llamadaOVisita}
+                onChange={handleChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                type="date"
+                id="llamadaOVisita"
+              >
+                <option value="visita">Visita</option>
+                <option value="llamada">Llamada</option>
+              </select>
+            </div>
+
+            <div className="sm:col-span-2">
+              <label
+                htmlFor="evolucion"
+                className="block text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Evolución
+              </label>
+              <textarea
+                name="evolucion"
+                value={seguimiento?.evolucion}
+                onChange={handleChange}
+                id="evolucion"
+                rows="2"
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Describe la descripcion del seguimiento"
+              ></textarea>
+            </div>
+
+            <div className="sm:col-span-2">
               <label
                 htmlFor="problemasActualesYNecesidades"
                 className="block text-sm font-medium text-gray-900 dark:text-white"
@@ -291,14 +360,14 @@ function EditarSeguimiento() {
               </label>
               <textarea
                 name="problemasActualesYNecesidades"
-                value={grupo?.problemasActualesYNecesidades}
+                value={seguimiento?.problemasActualesYNecesidades}
                 onChange={handleChange}
                 id="problemasActualesYNecesidades"
                 rows="2"
                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Describe la descripcion del grupo"
+                placeholder="Describe la descripcion del seguimiento"
               ></textarea>
-            </div> */}
+            </div>
           </div>
         </div>
 
@@ -307,11 +376,11 @@ function EditarSeguimiento() {
             {/* <p>
               Paciente:{' '}
               {
-                pacientesData.find((p) => p.paciente_id === grupo.paciente_id)
+                pacientesData.find((p) => p.paciente_id === seguimiento.paciente_id)
                   ?.nombre
               }{' '}
               {
-                pacientesData.find((p) => p.paciente_id === grupo.paciente_id)
+                pacientesData.find((p) => p.paciente_id === seguimiento.paciente_id)
                   ?.apellido
               }
             </p>
@@ -351,10 +420,10 @@ function EditarSeguimiento() {
             </p> */}
 
             
-            <p>Fecha de inicio: {grupo?.fecha}</p>
-            {/* <p>Hora de inicio: {convertirHora(grupo.horaInicio)}</p> */}
-            {/* <p>Hora de finalización: {convertirHora(grupo.horaFin)}</p> */}
-            <p>Problemas actuales y necesidades: {grupo?.problemasActualesYNecesidades}</p>
+            <p>Fecha de inicio: {formatearFecha(seguimiento?.fecha)}</p>
+            {/* <p>Hora de inicio: {convertirHora(seguimiento.horaInicio)}</p> */}
+            {/* <p>Hora de finalización: {convertirHora(seguimiento.horaFin)}</p> */}
+            <p>Problemas actuales y necesidades: {seguimiento?.problemasActualesYNecesidades}</p>
           </div>
 
           <section>

@@ -15,7 +15,7 @@ export const seguimientos = async (id, query) => {
     }
   }
 
-  const url = `${URL}/seguimiento/${id}${queryString ? `?${queryString}` : ''}`;
+  const url = `${URL}/seguimiento/paciente/${id}${queryString ? `?${queryString}` : ''}`;
 
   try {
     const response = await fetch(url, { cache: 'no-store' });
