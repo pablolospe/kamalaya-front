@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetchSeguimientoId } from '@/utils/fetchSeguimientoId';
 import { voluntarios } from '@/utils/fetchVoluntarios';
-import { pacientes } from '@/utils/fetchPacientes';
 import { useParams } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { obtenerFecha, formatearFecha } from '@/utils/formats';
@@ -12,7 +11,7 @@ import { obtenerFecha, formatearFecha } from '@/utils/formats';
 function EditarSeguimiento() {
   const { id, slug } = useParams();
   
-  const [voluntario1, setVoluntario1] = useState('13');
+  const [voluntario1, setVoluntario1] = useState('');
   const [voluntario2, setVoluntario2] = useState('');
   const [voluntario3, setVoluntario3] = useState('');
   const [voluntariosData, setVoluntariosData] = useState([]);
@@ -37,13 +36,15 @@ function EditarSeguimiento() {
   useEffect(() => {
     async function fetchData() {
       const seguimientoData = await fetchSeguimientoId(slug);
-      // const voluntariosData = await voluntarios(query);
+      const voluntariosData = await voluntarios(query);
       console.log("esteeee"+seguimientoData);
       console.log(seguimientoData);
       setSeguimiento(seguimientoData[0]);
-      // setVoluntariosData(voluntariosData);
-      // setVoluntario1(seguimientoData?.Voluntarios[0])
-      // console.log(voluntario1);
+      setVoluntariosData(voluntariosData);
+      setVoluntario1(seguimientoData[0]?.Voluntarios[0]?.voluntario_id || '')
+      setVoluntario2(seguimientoData[0]?.Voluntarios[1]?.voluntario_id || '')
+      setVoluntario3(seguimientoData[0]?.Voluntarios[2]?.voluntario_id || '')
+      console.log(seguimientoData[0]?.Voluntarios[0]);
     }
     fetchData();
   }, []);
@@ -67,13 +68,11 @@ function EditarSeguimiento() {
     e.preventDefault();
     console.log(seguimiento);
 
-    const updatedVoluntarioId = [voluntario1, voluntario2, voluntario3].filter(
-      (voluntario) => voluntario !== ''
-    );
+    const updatedVoluntarioId = [voluntario1, voluntario2, voluntario3].filter(voluntario => voluntario !== '');
 
     const seguimientoToSubmit = {
       ...seguimiento,
-      voluntario_id: [13,14],
+      voluntario_id: updatedVoluntarioId,
     };
     Swal.fire({
       title: '¿Estás seguro?',
@@ -139,7 +138,7 @@ function EditarSeguimiento() {
         <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
           <div className="flex flex-col justify-evenly align-center max-w-xl gap-4">
             
-{/* 
+
             <div>
               <label
                 className="block text-sm font-medium text-gray-900 dark:text-white"
@@ -174,7 +173,7 @@ function EditarSeguimiento() {
                 value={voluntario2}
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
               >
-                <option value="">Elige un voluntario</option>
+                <option value=''></option>
                 {voluntariosData?.map((p) => (
                   <option value={p.voluntario_id} key={p.voluntario_id}>
                     {p.nombre} {p.apellido}
@@ -195,14 +194,14 @@ function EditarSeguimiento() {
                 value={voluntario3}
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
               >
-                <option value="">Elige un voluntario</option>
+                <option value=''></option>
                 {voluntariosData?.map((p) => (
                   <option value={p.voluntario_id} key={p.voluntario_id}>
                     {p.nombre} {p.apellido}
                   </option>
                 ))}
               </select>
-            </div> */}
+            </div>
 
 
             <label
@@ -373,19 +372,8 @@ function EditarSeguimiento() {
 
         <div>
           <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
-            {/* <p>
-              Paciente:{' '}
-              {
-                pacientesData.find((p) => p.paciente_id === seguimiento.paciente_id)
-                  ?.nombre
-              }{' '}
-              {
-                pacientesData.find((p) => p.paciente_id === seguimiento.paciente_id)
-                  ?.apellido
-              }
-            </p>
-            <p>
-              Voluntario 1:{' '}
+            <p><b>
+              Voluntario 1:</b>{' '}
               {
                 voluntariosData.find((v) => v.voluntario_id === voluntario1)
                   ?.nombre
@@ -395,8 +383,8 @@ function EditarSeguimiento() {
                   ?.apellido
               }
             </p>
-            <p>
-              Voluntario 2:{' '}
+            <p><b>
+              Voluntario 2:</b>{' '}
               {
                 voluntariosData.find((v) => v.voluntario_id === voluntario2)
                   ?.nombre
@@ -407,8 +395,8 @@ function EditarSeguimiento() {
               }
             </p>
 
-            <p>
-              Voluntario 3:{' '}
+            <p><b>
+              Voluntario 3:</b>{' '}
               {
                 voluntariosData.find((v) => v.voluntario_id === voluntario3)
                   ?.nombre
@@ -417,13 +405,13 @@ function EditarSeguimiento() {
                 voluntariosData.find((v) => v.voluntario_id === voluntario3)
                   ?.apellido
               }
-            </p> */}
+            </p>
 
             
-            <p>Fecha de inicio: {formatearFecha(seguimiento?.fecha)}</p>
-            {/* <p>Hora de inicio: {convertirHora(seguimiento.horaInicio)}</p> */}
-            {/* <p>Hora de finalización: {convertirHora(seguimiento.horaFin)}</p> */}
-            <p>Problemas actuales y necesidades: {seguimiento?.problemasActualesYNecesidades}</p>
+            <p><b>Fecha de inicio:</b> {formatearFecha(seguimiento?.fecha)}</p>
+            <p><b>Hora de inicio:</b> {seguimiento.horaInicio}</p>
+            <p><b>Hora de finalización:</b> {seguimiento.horaFin}</p>
+            <p><b>Problemas actuales y necesidades:</b> {seguimiento?.problemasActualesYNecesidades}</p>
           </div>
 
           <section>
