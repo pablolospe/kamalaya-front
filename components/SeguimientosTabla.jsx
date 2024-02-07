@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { seguimientos } from '@/utils/fetchSeguimientos';
 import Link from 'next/link'
 import { LuUser, LuEdit } from 'react-icons/lu';
+import { formatearFecha } from '@/utils/formats';
+
 
 function SeguimientosTabla({ id }) {
   const [seguimientosData, setSeguimientosData] = useState([]);
@@ -61,7 +63,7 @@ console.log(seguimientosData);
                 <td className="table-cell p-2">{g?.Voluntarios[1]?.nombre} {g.Voluntarios[1]?.apellido}</td>
                 <td className="table-cell p-2">{g?.Voluntarios[2]?.nombre} {g.Voluntarios[2]?.apellido}</td> */}
                 
-                <td className="table-cell p-2">{g.fecha}</td>
+                <td className="table-cell p-2">{formatearFecha(g.fecha)}</td>
                 <td className="table-cell p-2">{g.horaInicio}</td>
                 <td className="table-cell p-2">{g.horaFin}</td>
                 <td className="table-cell p-2">{g.evolucion}</td>
