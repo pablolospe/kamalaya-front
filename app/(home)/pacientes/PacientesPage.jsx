@@ -168,6 +168,7 @@ function PacientesPage() {
               Apellido {sortField === 'apellido' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
             </th>
             <th className="hidden md:table-cell border p-2">Teléfono</th>
+            <th className="hidden md:table-cell border p-2">Dirección</th>
           </tr>
         </thead>
 
@@ -203,6 +204,12 @@ function PacientesPage() {
                   ) : (
                     v.telefono
                   )}
+                </div>
+              </td>
+              <td className="hidden md:table-cell">
+                <div>
+                    <p> {v.calle} {v.numero}</p>
+                    <p> {v.localidad}, {v.provincia}, {v.pais} ({v.codigoPostal})</p>
                 </div>
               </td>
             </tr>
