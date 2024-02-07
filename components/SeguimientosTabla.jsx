@@ -3,6 +3,8 @@
 import { URL } from '@/config';
 import { useEffect, useState } from 'react';
 import { seguimientos } from '@/utils/fetchSeguimientos';
+import Link from 'next/link'
+import { LuUser, LuEdit } from 'react-icons/lu';
 
 function SeguimientosTabla({ id }) {
   const [seguimientosData, setSeguimientosData] = useState([]);
@@ -11,6 +13,8 @@ function SeguimientosTabla({ id }) {
     localidad: '',
     hobbies: '',
   });
+
+console.log(seguimientosData);
 
   useEffect(() => {
     async function fetchData() {
@@ -64,7 +68,13 @@ function SeguimientosTabla({ id }) {
                 <td className="table-cell p-2">{g.problemasActualesYNecesidades}</td>
                 <td className="table-cell p-2">{g.ECOG}</td>
                 <td className="table-cell p-2">{g.llamadaOVisita}</td>
-                <td className="table-cell p-2"></td>
+                <td className="flex justify-center items-center">
+                  <div className="bg-gray-300 hover:bg-gray-400 cursor-pointer p-3 my-1 gap-3 w-11 rounded-lg self-center">
+                    <Link href={`/pacientes/${g.paciente_id}/seguimiento/${g.seguimiento_id}`}>
+                      <LuEdit size={20} />
+                    </Link>
+                  </div>
+              </td>
               </tr>
             ))}
           </tbody>

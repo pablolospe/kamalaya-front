@@ -2,29 +2,32 @@
 import { URL } from '@/config';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { fetchGrupoId } from '@/utils/fetchGrupoId';
+import { fetchSeguimientoId } from '@/utils/fetchSeguimientoId';
 import { voluntarios } from '@/utils/fetchVoluntarios';
 import { pacientes } from '@/utils/fetchPacientes';
 import { useParams } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { convertirHora } from '@/utils/formats';
 
-function EditarGrupo() {
-  const { id } = useParams();
-  const [voluntario1, setVoluntario1] = useState('');
+function EditarSeguimiento() {
+  const { id, slug } = useParams();
+  console.log(id, slug);
+  
+  const [voluntario1, setVoluntario1] = useState('13');
   const [voluntario2, setVoluntario2] = useState('');
   const [voluntario3, setVoluntario3] = useState('');
-  const [pacientesData, setPacientesData] = useState([]);
   const [voluntariosData, setVoluntariosData] = useState([]);
   const [grupo, setGrupo] = useState({
-    diaSemana: '',
-    fechaDeInicio: '',
-    horaInicio: '',
-    horaFin: '',
-    paciente_id: '',
+    // seguimiento_id: slug,
+    fecha: '2024-01-01',
+    horaInicio: '10:00',
+    horaFin: '11:00',
+    evolucion: 'bien',
+    llamadaOVisita: 'visita',
+    problemasActualesYNecesidades: 'bien',
+    ECOG:'',
+    paciente_id: +id,
     voluntario_id: [],
-    descripcion: '',
-    activo: '',
   });
 
   const router = useRouter();
@@ -35,45 +38,28 @@ function EditarGrupo() {
 
   useEffect(() => {
     async function fetchData() {
-      const gruposData = await fetchGrupoId(id);
-      const voluntariosData = await voluntarios(query);
-      const pacienteData = await pacientes(query);
-
-      setGrupo(gruposData);
-      console.log(gruposData);
-      setVoluntariosData(voluntariosData);
-      setVoluntario1(gruposData.Voluntarios[0])
-      console.log(voluntario1);
-      setPacientesData(pacienteData);
+      // const gruposData = await fetchSeguimientoId(id);
+      // const voluntariosData = await voluntarios(query);
+      // setGrupo(gruposData);
+      // console.log(gruposData);
+      // setVoluntariosData(voluntariosData);
+      // setVoluntario1(gruposData?.Voluntarios[0])
+      // console.log(voluntario1);
     }
     fetchData();
   }, [query, setVoluntariosData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if(name==='activo'){
-      const boolValue = JSON.parse(value);
-      setGrupo((prevData) => ({
-        ...prevData,
-        activo: boolValue,
-      }));
-    } else {
     setGrupo((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
-  }
-  };
-
-  const handlePacienteChange = (e) => {
-    setGrupo((prevGrupo) => ({
-      ...prevGrupo,
-      paciente_id: Number(e.target.value),
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(grupo);
 
     const updatedVoluntarioId = [voluntario1, voluntario2, voluntario3].filter(
       (voluntario) => voluntario !== ''
@@ -81,9 +67,8 @@ function EditarGrupo() {
 
     const grupoToSubmit = {
       ...grupo,
-      voluntario_id: updatedVoluntarioId,
+      voluntario_id: [13,14],
     };
-
     Swal.fire({
       title: '¿Estás seguro?',
       text: '¿Quieres modificar este grupo?',
@@ -96,7 +81,7 @@ function EditarGrupo() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`${URL}/grupo/${id}`, {
+          const response = await fetch(`${URL}/seguimiento/${slug}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -106,11 +91,11 @@ function EditarGrupo() {
 
           if (response.ok) {
             Swal.fire({
-              text: 'Grupo creado correctamente',
+              text: 'Seguimiento modificado correctamente',
               icon: 'success',
               confirmButtonColor: 'gray',
               color: 'black',
-            }).then(router.push('/grupos'));
+            }).then(router.push(`/pacientes/${id}`));
 
             console.log('Datos enviados exitosamente');
           } else {
@@ -141,28 +126,14 @@ function EditarGrupo() {
       className="flex flex-col align-middle justify-center items-center gap-2 bg-gray-100"
     >
       <h1 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
-        Editar grupo
+        Crear nuevo grupo
       </h1>
 
       <div className="flex flex-col md:flex-row justify-evenly align-center max-w-xl gap-8">
         <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
           <div className="flex flex-col justify-evenly align-center max-w-xl gap-4">
-            <div>
-              <select
-                onChange={handlePacienteChange}
-                name="paciente_id"
-                value={grupo.paciente_id}
-                className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-              >
-                {/* <option value=""> Elije un paciente </option> */}
-                {pacientesData?.map((p) => (
-                  <option value={p.paciente_id} key={p.paciente_id}>
-                    {p.nombre} {p.apellido}
-                  </option>
-                ))}
-              </select>
-            </div>
-
+            EN CONTRSUCCION
+{/* 
             <div>
               <label
                 className="block text-sm font-medium text-gray-900 dark:text-white"
@@ -225,68 +196,26 @@ function EditarGrupo() {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
 
-            <div>
-              <label
-                className="block text-sm font-medium text-gray-900 dark:text-white"
-                htmlFor="activo"
-              >
-                Está activo?
-              </label>
-              <select
-                name="activo"
-                required
-                value={grupo.activo}
-                onChange={handleChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              >
-                <option value="true">Activo</option>
-                <option value="false">Inactivo</option>
-              </select>
-            </div>
 
-            <label
+            {/* <label
               className="block text-sm font-medium text-gray-900 dark:text-white"
-              htmlFor="fechaDeInicio"
+              htmlFor="fecha"
             >
               Fecha de inicio:
             </label>
             <input
-              name="fechaDeInicio"
+              name="fecha"
               required
-              value={grupo.fechaDeInicio}
+              value={grupo?.fecha}
               onChange={handleChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               type="date"
-              id="fechaDeInicio"
-            ></input>
+              id="fecha"
+            ></input> */}
 
-            <div>
-              <label
-                className="block text-sm font-medium text-gray-900 dark:text-white"
-                htmlFor="diaSemana"
-              >
-                Día de la semana:
-              </label>
-              <select
-                name="diaSemana"
-                required
-                value={grupo.diaSemana}
-                onChange={handleChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              >
-                <option value="">Selecciona un día</option>
-                <option value="lunes">Lunes</option>
-                <option value="martes">Martes</option>
-                <option value="miercoles">Miércoles</option>
-                <option value="jueves">Jueves</option>
-                <option value="viernes">Viernes</option>
-                <option value="sabado">Sábado</option>
-                <option value="domingo">Domingo</option>
-              </select>
-            </div>
-
+{/* 
             <div>
               <label
                 className="block text-sm font-medium text-gray-900 dark:text-white"
@@ -297,7 +226,7 @@ function EditarGrupo() {
               <select
                 name="horaInicio"
                 required
-                value={convertirHora(grupo.horaInicio)}
+                // value={convertirHora(grupo.horaInicio)}
                 onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 type="date"
@@ -330,7 +259,7 @@ function EditarGrupo() {
               <select
                 name="horaFin"
                 required
-                value={convertirHora(grupo.horaFin)}
+                // value={convertirHora(grupo.horaFin)}
                 onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 type="date"
@@ -351,31 +280,31 @@ function EditarGrupo() {
                 <option value="19:00">19:00</option>
                 <option value="20:00">20:00</option>
               </select>
-            </div>
+            </div> */}
 
-            <div className="sm:col-span-2">
+            {/* <div className="sm:col-span-2">
               <label
-                htmlFor="descripcion"
+                htmlFor="problemasActualesYNecesidades"
                 className="block text-sm font-medium text-gray-900 dark:text-white"
               >
-                Descripción
+                Problemas actuales y necesidades
               </label>
               <textarea
-                name="descripcion"
-                value={grupo.descripcion}
+                name="problemasActualesYNecesidades"
+                value={grupo?.problemasActualesYNecesidades}
                 onChange={handleChange}
-                id="descripcion"
+                id="problemasActualesYNecesidades"
                 rows="2"
                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Describe la descripcion del grupo"
               ></textarea>
-            </div>
+            </div> */}
           </div>
         </div>
 
         <div>
           <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
-            <p>
+            {/* <p>
               Paciente:{' '}
               {
                 pacientesData.find((p) => p.paciente_id === grupo.paciente_id)
@@ -419,13 +348,13 @@ function EditarGrupo() {
                 voluntariosData.find((v) => v.voluntario_id === voluntario3)
                   ?.apellido
               }
-            </p>
+            </p> */}
 
-            <p>Día de la semana: {grupo.diaSemana}</p>
-            <p>Fecha de inicio: {grupo.fechaDeInicio}</p>
-            <p>Hora de inicio: {convertirHora(grupo.horaInicio)}</p>
-            <p>Hora de finalización: {convertirHora(grupo.horaFin)}</p>
-            <p>Descripción: {grupo.descripcion}</p>
+            
+            <p>Fecha de inicio: {grupo?.fecha}</p>
+            {/* <p>Hora de inicio: {convertirHora(grupo.horaInicio)}</p> */}
+            {/* <p>Hora de finalización: {convertirHora(grupo.horaFin)}</p> */}
+            <p>Problemas actuales y necesidades: {grupo?.problemasActualesYNecesidades}</p>
           </div>
 
           <section>
@@ -442,4 +371,4 @@ function EditarGrupo() {
   );
 }
 
-export default EditarGrupo;
+export default EditarSeguimiento;
