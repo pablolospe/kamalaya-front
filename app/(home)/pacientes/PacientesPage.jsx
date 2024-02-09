@@ -71,7 +71,7 @@ function PacientesPage() {
 
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="text-center font-semibold text-xl">PACIENTES</h1>
+      {/* <h1 className="text-center font-semibold text-xl">PACIENTES</h1> */}
 
       <details className="bg-gray-100 gap-4 p-4 rounded-lg">
         <summary className="hover:font-semibold cursor-pointer">MAPA</summary>

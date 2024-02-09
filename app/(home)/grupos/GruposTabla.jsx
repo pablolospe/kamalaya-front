@@ -3,6 +3,17 @@ import { useEffect, useState } from 'react';
 import { grupos } from '@/utils/fetchGrupos';
 import Link from 'next/link';
 import BotonBorrarGrupo from '@/app/(home)/grupos/BotonBorrarGrupo';
+import { convertirHora, formatearFecha } from '@/utils/formats';
+
+const diasSemana = {
+  lunes: 'Lunes',
+  martes: 'Martes',
+  miercoles: 'Miércoles',
+  jueves: 'Jueves',
+  viernes: 'Viernes',
+  sabado: 'Sábado',
+  domingo: 'Domingo',
+}
 
 function GruposTabla() {
   const [gruposData, setGruposData] = useState([]);
@@ -28,7 +39,7 @@ function GruposTabla() {
   }, [query]);
 
   return (
-      <section className="flex flex-col gap-2 overflow-auto">
+      <section className="flex flex-col gap-2 overflow-auto text-sm">
         <table>
           <thead>
             <tr className="bg-gray-100 row-auto">
@@ -38,8 +49,8 @@ function GruposTabla() {
               <th className="border p-2 bg-purple-200" >Voluntario<br/> 2</th>
               <th className="border p-2 bg-purple-200" >Voluntario<br/> 3</th>
               <th className="border p-2" >Fecha de inicio</th>
-              <th className="border p-2" >Hora de inicio</th>
-              <th className="border p-2" >Hora de finalización</th>
+              <th className="border p-2" >Desde las</th>
+              <th className="border p-2" >Hasta las</th>
               <th className="border p-2" >Día de la semana</th>
               <th className="border p-2" >Descripción</th>
               <th className="border p-2" >Editar</th>
@@ -59,10 +70,10 @@ function GruposTabla() {
                 <td className="table-cell p-2 text-purple-600">{g?.Voluntarios[1]?.nombre} {g.Voluntarios[1]?.apellido}</td>
                 <td className="table-cell p-2 text-purple-600">{g?.Voluntarios[2]?.nombre} {g.Voluntarios[2]?.apellido}</td>
 
-                <td className="table-cell p-2">{g.fechaDeInicio}</td>
-                <td className="table-cell p-2">{g.horaInicio}</td>
-                <td className="table-cell p-2">{g.horaFin}</td>
-                <td className="table-cell p-2">{g.diaSemana}</td>
+                <td className="table-cell p-2 whitespace-nowrap">{formatearFecha(g.fechaDeInicio)}</td>
+                <td className="table-cell p-2">{convertirHora(g.horaInicio)}</td>
+                <td className="table-cell p-2">{convertirHora(g.horaFin)}</td>
+                <td className="table-cell p-2">{diasSemana[g.diaSemana]}</td>
                 <td className="table-cell p-2">{g.descripcion}</td>
                 <td className="table-cell p-2"><Link href={`/grupos/${g.grupo_id}/editar`}>✏️</Link></td>
                 <td className="table-cell p-2">

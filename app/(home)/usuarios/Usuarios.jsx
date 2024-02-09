@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser, LuEdit } from 'react-icons/lu';
-import style from './page.module.css';
 import { useSession } from 'next-auth/react';
 import { usuarios } from '@/utils/fetchUsuarios';
 

@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import NextImage from 'next/image';
 import { useSession } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 
 const linksAdmin = [
   {
@@ -50,6 +51,8 @@ const linksUser = [
 
 function Sidebar() {
   const { data: session, status } = useSession();
+  const pathname = usePathname();
+  console.log(pathname);
 
   console.log({ session, status });
   const state = session?.user?.role
@@ -140,7 +143,9 @@ function Sidebar() {
             <li key={route}>
               <Link href={route}>
                 <div
-                  className="text-gray-700 text-center font-light hover:text-black"
+                  className={`text-gray-700 text-center text-sm content-center hover:text-black ${
+                    pathname === route ? "text-opacity-90 font-bold shadow-2xl " : "text-opacity-60 font-medium" // Aquí se aplica el estilo condicional
+                  }`}
                   style={{
                     textShadow:
                       '0 0 10px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.4)',
