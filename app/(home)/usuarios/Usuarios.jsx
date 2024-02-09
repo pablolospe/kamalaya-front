@@ -8,16 +8,19 @@ import { usuarios } from '@/utils/fetchUsuarios';
 
 function Ususarios() {
   const { data: session } = useSession();
+  const token = session?.user?.token;
   const [usuariosData, setUsuariosData] = useState([]);
   const [query, setQuery] = useState({
     nombre: '',
     apellido: '',
   });
 
+console.log(token);
+
   useEffect(() => {
     async function fetchData() {
       if (session) {
-        const usuariosData = await usuarios(query, session.user.accessToken);
+        const usuariosData = await usuarios(query, token);
         setUsuariosData(usuariosData);
       }
     }

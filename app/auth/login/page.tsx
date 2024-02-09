@@ -1,6 +1,5 @@
 'use client'
 
-// Importa useRef y useState desde 'react'
 import { useRef, useState } from 'react';
 import { signIn } from 'next-auth/react';
 

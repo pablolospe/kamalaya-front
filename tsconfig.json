@@ -35,7 +35,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "app/auth/AppBar.jsx"  ],
+, "app/auth/AppBar.jsx", "middleware.js"  ],
   "exclude": [
     "node_modules"
   ]
