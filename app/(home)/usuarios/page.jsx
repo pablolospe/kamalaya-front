@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 const UsusariosPage = async () => {
 
   const session = await getServerSession(authOptions)
-
+// console.log(session);
   if(!session || session.user.role !== 'Admin') {
     
     redirect("auth/login")
