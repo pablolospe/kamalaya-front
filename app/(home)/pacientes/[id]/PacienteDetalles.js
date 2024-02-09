@@ -32,9 +32,9 @@ console.log(v);
             <div><b>Cuidador principal</b> {v?.cuidadorPrincipal}</div>
             <div><b>Contacto del cuidador principal</b> {v?.telefonoCuidadorPrincipal}</div>
             <div><b>Insumos prestados</b> {v?.insumosPrestados}</div>
-            <div><b>Supervisor</b> {v?.voluntario_id}</div>
-            <div><b>voluntariosQueAcompañan</b> ...</div>
-            <div><b>Fecha de baja</b> ...</div>
+            <div><b>Supervisor</b> {v?.Voluntario.nombre} {v?.Voluntario.apellido}</div>
+            {/* <div><b>voluntariosQueAcompañan</b>{v?.Grupos?.Voluntarios[0]?.nombre}</div> */}
+            {v?.fechaBaja && <div><b>Fecha de baja</b> {formatearFecha(v?.fechaBaja)}</div>}
           </div>
         </details>
 

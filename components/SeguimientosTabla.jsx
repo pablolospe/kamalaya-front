@@ -32,7 +32,7 @@ console.log(seguimientosData);
   // console.log(seguimientosData);
   return (
       <section className="flex flex-col gap-2 overflow-auto">
-        <table>
+        <table className='text-sm'>
           <thead>
             <tr className="bg-gray-100 row-auto">
               <th className="border p-2" >ID</th>

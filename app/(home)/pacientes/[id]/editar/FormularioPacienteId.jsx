@@ -84,7 +84,6 @@ const FormularioPacienteId = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataJSON = JSON.stringify(formData);
-    // console.log(formDataJSON);
 
     Swal.fire({
       title: '¿Estás seguro?',
@@ -169,7 +168,6 @@ const FormularioPacienteId = () => {
     if (isVoluntarioField && newValue) {
       newValue = Number(newValue);
     }
-
     if (name === 'diaSemana' || name === 'horaInicio' || name === 'horaFin') {
       setFormData((prevData) => ({
         ...prevData,
@@ -200,12 +198,23 @@ const FormularioPacienteId = () => {
       <h3 className="mt-4 font-bold text-md text-center">En Kamalaya</h3>
       <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
         <label>
-          Fecha de Alta:
+          Fecha de alta:
           <input
             required
             type="date"
             name="fechaAlta"
             value={formData.fechaAlta}
+            onChange={handleChange}
+            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+          />
+        </label>
+        
+        <label>
+          Fecha de baja:
+          <input
+            type="date"
+            name="fechaBaja"
+            value={formData.fechaBaja}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />

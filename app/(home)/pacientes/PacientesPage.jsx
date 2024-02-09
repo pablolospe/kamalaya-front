@@ -158,7 +158,7 @@ function PacientesPage() {
       </details>
 
 
-      <table>
+      <table className='text-sm'>
         <thead>
           <tr className="bg-gray-100 row-auto">
             <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('nombre')}>
