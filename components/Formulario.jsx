@@ -20,16 +20,17 @@ const Formulario = () => {
     email: "",
     telefono: "",
     telefono2: "",
-    calle: "Alvear",
-    numero: "123",
-    localidad: "Martinez",
+    calle: "",
+    numero: "",
+    departamento: "",
+    localidad: "",
     provincia: "Buenos Aires",
     pais: "Argentina",
-    codigoPostal: "1643",
+    codigoPostal: "",
     lat: "", 
     lng: "",
     telefonoEmergencia: "",
-    nombreContactoEmergencia: "Jorge Perez (hijo)",
+    nombreContactoEmergencia: "",
     genero: "M",
     profesion_oficio_ocupacion: "",
     hobbies_habilidades: "",
@@ -39,11 +40,11 @@ const Formulario = () => {
     tieneAuto: false,
     activo: true,
     experienciaCP: false,
-    Disponibilidades: [{
-      diaSemana: "lunes",
-      horaInicio:"12:00",
-      horaFin:"16:00"
-    }],
+    // Disponibilidades: [{
+    //   diaSemana: "lunes",
+    //   horaInicio:"12:00",
+    //   horaFin:"16:00"
+    // }],
   });
 
   const irAMiElemento = () => {
@@ -163,17 +164,17 @@ const Formulario = () => {
 		// 		});
 		// 	}
 		// }
-    if (name === 'diaSemana' || name === 'horaInicio' || name === 'horaFin') {
-      setFormData((prevData) => ({
-        ...prevData,
-        Disponibilidades: [ { ...prevData.Disponibilidades[0], [name]: newValue }],
-      }));
-    } else {
+    // if (name === 'diaSemana' || name === 'horaInicio' || name === 'horaFin') {
+    //   setFormData((prevData) => ({
+    //     ...prevData,
+    //     Disponibilidades: [ { ...prevData.Disponibilidades[0], [name]: newValue }],
+    //   }));
+    // } else {
     setFormData((prevData) => ({
       ...prevData,
       [name]: newValue,
     }));
-  }
+  // }
   };
 
   return (
@@ -338,6 +339,17 @@ const Formulario = () => {
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
           </label>
+
+          <label>
+            Departamento:
+            <input
+              type="text"
+              name="departamento"
+              value={formData.departamento}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
         </div>
 
         <div className="flex flex-col md:flex-row justify-between gap-6">
@@ -473,8 +485,8 @@ const Formulario = () => {
         </label>
       </div>
 
-      <h3 className="mt-4 font-bold text-md text-center">Disponibilidad</h3>
-      <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
+      {/* <h3 className="mt-4 font-bold text-md text-center">Disponibilidad</h3> */}
+      {/* <div className="flex flex-col justify-between p-4 gap-2 shadow-lg rounded-lg">
         <label>
           Día de la semana
           <select
@@ -545,7 +557,7 @@ const Formulario = () => {
             <option value="20:00">20:00</option>
           </select>
         </label>
-      </div>
+      </div> */}
 
       <button
         type="submit"
