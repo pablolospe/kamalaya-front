@@ -134,10 +134,10 @@ async function VoluntarioDetalle({ params }) {
             {v?.Disponibilidades?.map((d) => (
               <>
                 <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
-                  {d.diaSemana}, {d.horaInicio}-{d.horaFin}
-                  <br/> {d.acompTelefonico ? 'acompañamiento telefónico':''}
-                  <br/> {d.acompPresencial ? 'acompañamiento presencial':''}
-                  <br/> {d.admisiones ? 'admisiones': ''}
+                  {d.diaSemana} - {d.horaInicio}/{d.horaFin} hs.
+                  <br/> {d.acompTelefonico && '• Acompañamiento telefónico'}
+                  <br/> {d.acompPresencial ? '• Acompañamiento presencial':''}
+                  <br/> {d.admisiones ? '• Admisiones': ''}
                   <BotonBorrarDisponibilidad id={d.disponibilidad_id} />
                 </div>
               </>

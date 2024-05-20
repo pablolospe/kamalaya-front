@@ -219,7 +219,7 @@ function BotonAgregarDisponibilidad(id) {
                     checked={formData.acompTelefonico}
                     onChange={handleCheckboxChange}
                   />
-                  <label className="mr-2">Telefónico</label>
+                  <label className="mr-2">Telefónica</label>
 
                   <input
                     type="checkbox"

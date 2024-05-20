@@ -90,7 +90,7 @@ function VoluntariosPage() {
       </details>
 
       {/* //////////////// FILTROS //////////////// */}
-      
+
       <details open className="bg-gray-100 gap-4 p-4 rounded-lg">
         <summary className="hover:font-semibold cursor-pointer">
           FILTROS
@@ -268,7 +268,7 @@ function VoluntariosPage() {
             onClick={handleBorrarFiltros}
             className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
           >
-            Borrar <br/> filtros
+            Borrar <br /> filtros
           </button>
 
           <button
@@ -356,33 +356,33 @@ function VoluntariosPage() {
                     // v?.fechaBaja !== null ? `Se dio de baja ${v.fechaBaja}`: null
                   }
                   {v?.Vacaciones &&
-                  v.Vacaciones.some((vac) =>
-                    fechaActualEntreFechas(vac.fechaInicio, vac.fechaFin)
-                  ) ? (
+                    v.Vacaciones.some((vac) =>
+                      fechaActualEntreFechas(vac.fechaInicio, vac.fechaFin)
+                    ) ? (
                     <details className={style.details}>
                       <summary>Si</summary>
                       <div className="bg-white rounded mb-2">
-                      <small>
-                        hasta el{' '}
-                        {formatearFecha(
-                          v.Vacaciones.find((vac) =>
-                            fechaActualEntreFechas(
-                              vac.fechaInicio,
-                              vac.fechaFin
-                            )
-                          ).fechaFin
-                        )}
-                        <br />
-                        Motivo:{' '}
-                        {
-                          v.Vacaciones.find((vac) =>
-                            fechaActualEntreFechas(
-                              vac.fechaInicio,
-                              vac.fechaFin
-                            )
-                          ).detalles
-                        }
-                      </small>
+                        <small>
+                          hasta el{' '}
+                          {formatearFecha(
+                            v.Vacaciones.find((vac) =>
+                              fechaActualEntreFechas(
+                                vac.fechaInicio,
+                                vac.fechaFin
+                              )
+                            ).fechaFin
+                          )}
+                          <br />
+                          Motivo:{' '}
+                          {
+                            v.Vacaciones.find((vac) =>
+                              fechaActualEntreFechas(
+                                vac.fechaInicio,
+                                vac.fechaFin
+                              )
+                            ).detalles
+                          }
+                        </small>
                       </div>
                     </details>
                   ) : (
@@ -396,7 +396,12 @@ function VoluntariosPage() {
                   {v?.Disponibilidades?.map((d) => (
                     <span key={d.disponibilidad_id}>
                       {DiaSemanaEnum[d.diaSemana]} &nbsp;
-                      {d.horaInicio}-{d.horaFin} <br />
+                      {d.horaInicio}/{d.horaFin}
+                      <br /> 
+                      {d.acompTelefonico && '•Telefónico'}&nbsp;
+                      {d.acompPresencial && '•Presencial'}&nbsp;
+                      {d.admisiones && '•Admisiones'}
+                      <br /> 
                     </span>
                   ))}
                 </div>
