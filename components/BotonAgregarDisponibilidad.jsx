@@ -13,6 +13,9 @@ function BotonAgregarDisponibilidad(id) {
     diaSemana: '',
     horaInicio: '',
     horaFin: '',
+    acompTelefonico: '',
+    acompPresencial: '',
+    admisiones: false,
   });
 
   const handleChange = (e) => {
@@ -26,6 +29,19 @@ function BotonAgregarDisponibilidad(id) {
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
+
+  const handleCheckboxChange = (e) => {
+    const { name } = e.target;
+    setFormData({
+      ...formData,
+      [name]: !formData[name]
+
+    });
+  };
+
+  // console.log(formData.acompPresencial);
+  // console.log(formData.acompTelefonico);
+  // console.log(formData.admisiones);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -186,10 +202,42 @@ function BotonAgregarDisponibilidad(id) {
                 </div>
               </div>
 
+              <div className="bg-white rounded-md shadow-sm p-2 border border-gray-300">
+                <label className="block mb-1 text-gray-400">Tipo de disponibilidad</label>
+                <div className="flex flex-wrap gap-x-0.5">
+                  <input
+                    type="checkbox"
+                    name='acompPresencial'
+                    checked={formData.acompPresencial}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label className="mr-2">Presencial</label>
+
+                  <input
+                    type="checkbox"
+                    name='acompTelefonico'
+                    checked={formData.acompTelefonico}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label className="mr-2">Telefónico</label>
+
+                  <input
+                    type="checkbox"
+                    name='admisiones'
+                    checked={formData.admisiones}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label className="mr-2">Admisiones</label>
+
+                </div>
+              </div>
+
+              <br/>
+
               <button
                 type="submit"
                 className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                // onClick={(e) => antecedenteAcompaniamiento(e)}
+              // onClick={(e) => antecedenteAcompaniamiento(e)}
               >
                 <svg
                   className="mr-1 -ml-1 w-6 h-6"

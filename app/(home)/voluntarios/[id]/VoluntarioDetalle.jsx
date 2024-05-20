@@ -135,6 +135,9 @@ async function VoluntarioDetalle({ params }) {
               <>
                 <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
                   {d.diaSemana}, {d.horaInicio}-{d.horaFin}
+                  <br/> {d.acompTelefonico ? 'acompañamiento telefónico':''}
+                  <br/> {d.acompPresencial ? 'acompañamiento presencial':''}
+                  <br/> {d.admisiones ? 'admisiones': ''}
                   <BotonBorrarDisponibilidad id={d.disponibilidad_id} />
                 </div>
               </>
@@ -266,7 +269,7 @@ async function VoluntarioDetalle({ params }) {
 
         <details className={style.details}>
         <summary className="font-bold text-lg text-blue-900 cursor-pointer">Grupo</summary>
-        {v.Grupos[0]
+        {v?.Grupos[0]
         ? 
         <div className="w-full mb-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
           <div><b>Fecha de inicio: </b> {formatearFecha(v.Grupos[0]?.fechaDeInicio)}</div>

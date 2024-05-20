@@ -1,9 +1,5 @@
 import { withAuth } from 'next-auth/middleware';
 import { NextResponse } from 'next/server';
-import axios from "axios";
-import { AxiosInterceptor } from './utils/axios.interceptor';
-
-// AxiosInterceptor()
 
 export default withAuth(
   function middleware(req) {
