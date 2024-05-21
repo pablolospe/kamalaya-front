@@ -287,11 +287,11 @@ function VoluntariosPage() {
         <thead>
           <tr className="bg-gray-100 row-auto">
             <th className="border p-2">Nombre</th>
-            <th className="hidden md:table-cell w-80 border p-2">Teléfono</th>
+            <th className="hidden md:table-cell w-28 border p-2">Teléfono</th>
             <th className="hidden md:table-cell w-4 text-xs border p-2">Tiene auto</th>
             <th className="hidden md:table-cell w-4 text-xs border p-2">Exp CP</th>
             <th className="hidden md:table-cell w-4 text-xs border p-2">Activo</th>
-            <th className="hidden md:table-cell w-40 border p-2">Está de vacaciones?</th>
+            <th className="hidden md:table-cell w-4 border p-2">Está de vacaciones?</th>
             <th className="hidden md:table-cell border p-2">
               Disponibilidad semanal
             </th>
