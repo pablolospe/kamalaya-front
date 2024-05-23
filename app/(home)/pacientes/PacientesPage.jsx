@@ -10,6 +10,7 @@ import { pacientes } from '@/utils/fetchPacientes';
 
 function PacientesPage() {
   const { data: session } = useSession();
+  const token = session?.user?.token;
   const [pacientesData, setPacientesData] = useState([]);
   const [query, setQuery] = useState({
     nombre: '',
@@ -53,7 +54,7 @@ function PacientesPage() {
   useEffect(() => {
     async function fetchData() {
       if (session) {
-        const pacienteData = await pacientes(query, session.user.accessToken);
+        const pacienteData = await pacientes(query, token);
         // Ordenar los datos basado en el sortField y sortOrder
         let sortedData = pacienteData;
         if (sortField !== null) {

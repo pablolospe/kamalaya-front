@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link';
 import {
   formatearFecha,
@@ -19,6 +21,7 @@ import {
 import { URL } from '@/config';
 import style from './page.module.css';
 import { voluntarioDetalle } from '@/utils/fetchVoluntarioId';
+import { useSession } from 'next-auth/react';
 
 // const voluntarioDetalle = async (id) => {
 //   return fetch(`${URL}/voluntarios/${id}`, {
@@ -27,9 +30,11 @@ import { voluntarioDetalle } from '@/utils/fetchVoluntarioId';
 // };
 
 async function VoluntarioDetalle({ params }) {
+  const { data: session } = useSession();
+  const token = session?.user?.token;
   const { id } = params;
-  const v = await voluntarioDetalle(id);
-  // console.log(id);
+  const v = await voluntarioDetalle(id, token);
+  console.log(id);
   // console.log(v);
 
   return (

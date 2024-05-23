@@ -13,11 +13,13 @@ import GoogleMapsView from '@/components/GoogleMapsView';
 import style from './page.module.css';
 import { voluntarios } from '@/utils/fetchVoluntarios.js';
 import { pacientes } from '@/utils/fetchPacientes.js';
+import { useSession } from 'next-auth/react';
 
 function VoluntariosPage() {
   const [voluntariosData, setVoluntariosData] = useState([]);
   const [showPacientes, setShowPacientes] = useState(false);
-
+  const { data: session } = useSession();
+  const token = session?.user?.token;
   const [query, setQuery] = useState({
     nombre: '',
     apellido: '',
@@ -66,10 +68,10 @@ function VoluntariosPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const voluntarioData = await voluntarios(query);
+      const voluntarioData = await voluntarios(query, token);
       let pacienteData = [];
 
-      if (showPacientes) pacienteData = await pacientes(query);
+      if (showPacientes) pacienteData = await pacientes(query, token);
 
 
       const combinedData = voluntarioData?.concat(pacienteData);

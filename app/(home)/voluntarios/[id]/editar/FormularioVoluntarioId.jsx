@@ -8,10 +8,13 @@ import GoogleMapsView from '../../../../../components/GoogleMapsView';
 import { voluntarioDetalle } from '@/utils/fetchVoluntarioId';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 const FormularioVoluntarioId = () => {
   const { id } = useParams();
-
+  console.log(id + 'aidiiiiiiiiiii');
+  const { data: session } = useSession();
+  const token = session?.user?.token;
   const router = useRouter();
   const [formData, setFormData] = useState({
     nombre: '',
@@ -47,12 +50,14 @@ const FormularioVoluntarioId = () => {
     console.log(formDataJSON);
 
     try {
+      // console.log(token + 'cascascasca');
       const response = await fetch(
-        `${URL}/voluntarios/${formData?.voluntario_id}`,
+        `${URL}/voluntarios/${id}`,
         {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token, // Asumiendo que el rol es un token
           },
           body: JSON.stringify(formData),
         }
@@ -77,7 +82,7 @@ const FormularioVoluntarioId = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const formData = await voluntarioDetalle(id);
+      const formData = await voluntarioDetalle(id, token);
       setFormData(formData);
     }
     fetchData();
@@ -148,7 +153,7 @@ const FormularioVoluntarioId = () => {
       className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md"
     >
       <Link
-        href={`/voluntarios/${formData.voluntario_id}`}
+        href={`/voluntarios/${formData?.voluntario_id}`}
         className="fixed py-2 px-4 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600 self-end font-semibold"
       >
         &larr;
@@ -168,7 +173,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="text"
             name="nombre"
-            value={formData.nombre}
+            value={formData?.nombre}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -179,7 +184,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="text"
             name="apellido"
-            value={formData.apellido}
+            value={formData?.apellido}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -189,7 +194,7 @@ const FormularioVoluntarioId = () => {
           Está activo:
           <select
             name="activo"
-            value={formData.activo}
+            value={formData?.activo}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           >
@@ -203,7 +208,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="number"
             name="dni"
-            value={formData.dni}
+            value={formData?.dni}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -214,7 +219,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="date"
             name="fechaDeNacimiento"
-            value={formData.fechaDeNacimiento}
+            value={formData?.fechaDeNacimiento}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -224,7 +229,7 @@ const FormularioVoluntarioId = () => {
           Género:
           <select
             name="genero"
-            value={formData.genero}
+            value={formData?.genero}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           >
@@ -239,7 +244,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="text"
             name="profesion_oficio_ocupacion"
-            value={formData.profesion_oficio_ocupacion}
+            value={formData?.profesion_oficio_ocupacion}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -250,7 +255,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="text"
             name="hobbies_habilidades"
-            value={formData.hobbies_habilidades}
+            value={formData?.hobbies_habilidades}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -267,7 +272,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="email"
             name="email"
-            value={formData.email}
+            value={formData?.email}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -278,7 +283,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="number"
             name="telefono"
-            value={formData.telefono}
+            value={formData?.telefono}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -289,7 +294,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="number"
             name="telefono2"
-            value={formData.telefono2}
+            value={formData?.telefono2}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -304,7 +309,7 @@ const FormularioVoluntarioId = () => {
             <input
               type="text"
               name="calle"
-              value={formData.calle}
+              value={formData?.calle}
               onChange={handleChange}
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
@@ -315,7 +320,7 @@ const FormularioVoluntarioId = () => {
             <input
               type="number"
               name="numero"
-              value={formData.numero}
+              value={formData?.numero}
               onChange={handleChange}
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
@@ -328,7 +333,7 @@ const FormularioVoluntarioId = () => {
             <input
               type="text"
               name="localidad"
-              value={formData.localidad}
+              value={formData?.localidad}
               onChange={handleChange}
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
@@ -339,7 +344,7 @@ const FormularioVoluntarioId = () => {
             <input
               type="text"
               name="provincia"
-              value={formData.provincia}
+              value={formData?.provincia}
               onChange={handleChange}
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
@@ -352,7 +357,7 @@ const FormularioVoluntarioId = () => {
             <input
               type="text"
               name="pais"
-              value={formData.pais}
+              value={formData?.pais}
               onChange={handleChange}
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
@@ -363,7 +368,7 @@ const FormularioVoluntarioId = () => {
             <input
               type="number"
               name="codigoPostal"
-              value={formData.codigoPostal}
+              value={formData?.codigoPostal}
               onChange={handleChange}
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
@@ -387,7 +392,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="tel"
             name="telefonoEmergencia"
-            value={formData.telefonoEmergencia}
+            value={formData?.telefonoEmergencia}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -398,7 +403,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="text"
             name="nombreContactoEmergencia"
-            value={formData.nombreContactoEmergencia}
+            value={formData?.nombreContactoEmergencia}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -412,7 +417,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="date"
             name="fechaAlta"
-            value={formData.fechaAlta}
+            value={formData?.fechaAlta}
             onChange={handleChange}
             className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
           />
@@ -421,7 +426,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="checkbox"
             name="tieneAuto"
-            checked={formData.tieneAuto}
+            checked={formData?.tieneAuto}
             onChange={handleChange}
             className="inline-block align-middle mr-2 border rounded-md p-2 focus:ring focus:ring-blue-300"
           />
@@ -432,7 +437,7 @@ const FormularioVoluntarioId = () => {
           <input
             type="checkbox"
             name="experienciaCP"
-            checked={formData.experienciaCP}
+            checked={formData?.experienciaCP}
             onChange={handleChange}
             className="inline-block align-middle mr-2 border rounded-md p-2 focus:ring focus:ring-blue-300"
           />
