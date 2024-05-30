@@ -16,7 +16,7 @@ export function convertirHora(hora) {
 }
 
 export function formatearNumeroAHora(hora) {
-  if (typeof hora !== 'string' || isNaN(hora) ) {
+  if (typeof hora !== 'string' || isNaN(hora)) {
     return 'Formato inválido';
   }
 
@@ -68,19 +68,25 @@ export function fechaActualEntreFechas(fechaInicioStr, fechaFinStr) {
 }
 
 export function formatearNumeroTelefono(numero) {
-  if (typeof(numero)=='string'){
+  if (typeof (numero) == 'string') {
 
     // Eliminar cualquier carácter que no sea un dígito
     const numeroLimpio = numero.replace(/\D/g, '');
-    
+
     // Obtener la longitud del número
     const longitud = numeroLimpio.length;
 
-  // Aplicar el formato (x-xxxx-xxxx)
-  return `${numeroLimpio.slice(0, longitud-8)} ${numeroLimpio.slice(longitud-8, longitud - 4)}-${numeroLimpio.slice(longitud - 4)}`;
-} else{
-  return numero
+    // Aplicar el formato (x-xxxx-xxxx)
+    return `${numeroLimpio.slice(0, longitud - 8)} ${numeroLimpio.slice(longitud - 8, longitud - 4)}-${numeroLimpio.slice(longitud - 4)}`;
+  } else {
+    return numero
+  }
 }
+
+export function capitalizeFirstLetterOfEachWord(string) {
+  return string.split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
 }
 
 export const DiaSemanaEnum = {

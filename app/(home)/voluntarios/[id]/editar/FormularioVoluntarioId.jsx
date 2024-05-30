@@ -12,7 +12,7 @@ import { useSession } from 'next-auth/react';
 
 const FormularioVoluntarioId = () => {
   const { id } = useParams();
-  console.log(id + 'aidiiiiiiiiiii');
+  console.log(id + ' aidiiiiiiiiiii');
   const { data: session } = useSession();
   const token = session?.user?.token;
   const router = useRouter();
@@ -50,14 +50,13 @@ const FormularioVoluntarioId = () => {
     console.log(formDataJSON);
 
     try {
-      // console.log(token + 'cascascasca');
       const response = await fetch(
         `${URL}/voluntarios/${id}`,
         {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token, // Asumiendo que el rol es un token
+            // 'Authorization': 'Bearer ' + token, // Asumiendo que el rol es un token
           },
           body: JSON.stringify(formData),
         }

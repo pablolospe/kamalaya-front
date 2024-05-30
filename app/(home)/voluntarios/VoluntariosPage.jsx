@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
 import {
+  capitalizeFirstLetterOfEachWord,
   fechaActualEntreFechas,
   formatearNumeroTelefono,
   formatearFecha,
@@ -322,7 +323,7 @@ function VoluntariosPage() {
                     <div className="bg-gray-300 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
                       <LuUser size={20} />
                     </div>
-                    {v.nombre} {v.apellido} (
+                    {capitalizeFirstLetterOfEachWord(`${v.nombre} ${v.apellido}`)} (
                     {v.paciente_id ? 'paciente' : 'voluntario'})
                   </div>
                 </Link>

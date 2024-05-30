@@ -1,52 +1,23 @@
-'use client'
+// 'use client'
 
 import Link from 'next/link';
-import {
-  formatearFecha,
-  calcularEdad,
-  formatearNumeroTelefono,
-  formatearNumeroAHora,
-} from '@/utils/formats';
-import {
-  BotonAgregarDisponibilidad,
-  BotonBorrarDisponibilidad,
-  BotonAgregarAntecedenteDeAcompaniamiento,
-  BotonBorrarAntecedenteAcompniamiento,
-  BotonAgregarAntecedentePatologico,
-  BotonBorrarAntecedentePatologico,
-  BotonAgregarVacaciones,
-  BotonBorrarVacaciones,
-  FormularioVoluntarioId,
-} from '@/components';
+import { capitalizeFirstLetterOfEachWord, formatearFecha, calcularEdad, formatearNumeroTelefono, formatearNumeroAHora } from '@/utils/formats';
+import { BotonAgregarDisponibilidad, BotonBorrarDisponibilidad, BotonAgregarAntecedenteDeAcompaniamiento, BotonBorrarAntecedenteAcompniamiento, BotonAgregarAntecedentePatologico, BotonBorrarAntecedentePatologico, BotonAgregarVacaciones, BotonBorrarVacaciones, FormularioVoluntarioId } from '@/components';
 import { URL } from '@/config';
 import style from './page.module.css';
 import { voluntarioDetalle } from '@/utils/fetchVoluntarioId';
-import { useSession } from 'next-auth/react';
-
-// const voluntarioDetalle = async (id) => {
-//   return fetch(`${URL}/voluntarios/${id}`, {
-//     cache: 'no-store',
-//   }).then((res) => res.json());
-// };
 
 async function VoluntarioDetalle({ params }) {
-  const { data: session } = useSession();
-  const token = session?.user?.token;
+  
   const { id } = params;
-  const v = await voluntarioDetalle(id, token);
+  const v = await voluntarioDetalle(id);
   console.log(id);
-  // console.log(v);
 
   return (
     <div className="flex flex-col">
       <h2 className="my-2 w-full md:w-1/2 text-lg text-center self-center font-semibold bg-purple-100 text-md p-2 rounded-lg border">
-        {v?.nombre} {v?.apellido} ({v?.activo ? "activo" : "inactivo"})
+        {capitalizeFirstLetterOfEachWord(`${v.nombre} ${v.apellido}`)} ({v?.activo ? "activo" : "inactivo"})
       </h2>
-
-      {/* <details>
-        <summary className='cursor-pointer text-right'>editar</summary>
-        <FormularioVoluntarioId v={v}/>
-      </details> */}
 
       <div className="flex flex-col md:mx-auto md:w-1/2 p-4 bg-gray-100 rounded-lg shadow-md">
         <details className={style.details}>
@@ -79,8 +50,8 @@ async function VoluntarioDetalle({ params }) {
           <div className="w-full mb-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
             <div>
               <b>Teléfono/contacto de Emergencia: </b>
-              {formatearNumeroTelefono(v?.telefonoEmergencia)} (
-              {v?.nombreContactoEmergencia})
+              {formatearNumeroTelefono(v?.telefonoEmergencia)}
+              ({capitalizeFirstLetterOfEachWord(v?.nombreContactoEmergencia)})
             </div>
             <div>
               <b>Teléfono </b>
@@ -137,15 +108,13 @@ async function VoluntarioDetalle({ params }) {
 
           <div className="w-full mb-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
             {v?.Disponibilidades?.map((d) => (
-              <>
-                <div className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
+                <div key={d.disponibilidad_id} className="flex flex-row justify-between items-center w-full gap-6 mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300">
                   {d.diaSemana} - {d.horaInicio}/{d.horaFin} hs.
                   <br/> {d.acompTelefonico && '• Acompañamiento telefónico'}
                   <br/> {d.acompPresencial ? '• Acompañamiento presencial':''}
                   <br/> {d.admisiones ? '• Admisiones': ''}
                   <BotonBorrarDisponibilidad id={d.disponibilidad_id} />
                 </div>
-              </>
             ))}
             <div className="flex flex-row items-center w-full gap-6 mt-1 p-1 border rounded-md focus:ring focus:ring-blue-300">
               <BotonAgregarDisponibilidad id={id} /> agregar disponibilidad
