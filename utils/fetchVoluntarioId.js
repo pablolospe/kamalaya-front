@@ -1,17 +1,16 @@
 import { URL } from '@/config';
 
-export const voluntarioDetalle = async (id, token) => {
+export const voluntarioDetalle = async (id) => {
   // return fetch(`${URL}/voluntarios/${id}`, {
   //   cache: 'no-store',
   // }).then((res) => res.json());
-   
+   console.log('acá');
   try {
     const response = await fetch(`${URL}/voluntarios/${id}`, {
       method: 'GET', 
       headers: {
-              'Content-Type': 'application/json', // Ajusta esto como necesites
-              'Authorization': 'Bearer ' + token, // Asumiendo que el rol es un token
-              // Añade aquí cualquier otro header que necesites
+              'Content-Type': 'application/json',
+              // 'Authorization': 'Bearer ' + token, // Asumiendo que el rol es un token
             },
           },
       { cache: 'no-store' });
