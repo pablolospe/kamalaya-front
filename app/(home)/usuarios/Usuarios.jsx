@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { LuUser, LuEdit } from 'react-icons/lu';
 import { useSession } from 'next-auth/react';
 import { usuarios } from '@/utils/fetchUsuarios';
+import { capitalizeFirstLetterOfEachWord } from '@/utils/formats';
 
 function Ususarios() {
   const { data: session } = useSession();
@@ -69,7 +70,7 @@ function Ususarios() {
                   <div className="bg-gray-300 p-3 mx-2 gap-3 rounded-lg flex flex-row">
                     <LuUser size={20} />
                   </div>
-                  {v.nombre} {v.apellido}
+                  {capitalizeFirstLetterOfEachWord(`${v?.nombre} ${v?.apellido}`)}
                 </div>
                 {/* </Link> */}
               </td>
