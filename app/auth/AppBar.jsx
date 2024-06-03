@@ -7,17 +7,16 @@ import React from 'react';
 
 function AppBar() {
   const { data: session } = useSession();
-// console.log(session?.user);
+  // console.log(session?.user);
   return (
     <div className="ml-auto dlex gap-2 ">
-      <div className="flex flex-row align-middle content-center items-center gap-2 mt-1 mr-6 bg-gray-100 px-2 py-1 rounded">
-      
-      <Link
-          href={`/usuarios/password`}
-          // className="p-2 w-56 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600"
+      <div className="flex flex-row align-middle content-center items-center gap-2 mt-1 mr-6 bg-gray-100 hover:bg-gray-300 px-2 py-1 rounded">
+
+        <Link
+          href={`/usuarios/password`}       
         >
-          
-        <p className="hover:text-gray-700">{session?.user.nombre} </p>
+
+          <p >{session?.user.nombre} </p>
         </Link>
 
         <button
@@ -26,6 +25,7 @@ function AppBar() {
         >
           Sign out
         </button>
+
       </div>
     </div>
   );
