@@ -14,8 +14,6 @@ function Ususarios() {
     apellido: '',
   });
 
-console.log(token);
-
   useEffect(() => {
     async function fetchData() {
       if (session) {
@@ -36,12 +34,12 @@ console.log(token);
           Generar nuevo usuario
         </Link>
 
-        <Link
+        {/* <Link
           href={`/usuarios/password`}
           className="p-2 w-56 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600"
         >
           Modificar mi contraseña
-        </Link>
+        </Link> */}
         {/* <h1 className="text-center font-semibold text-xl">Usuarios</h1> */}
       </div>
       

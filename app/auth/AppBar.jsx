@@ -1,16 +1,25 @@
 'use client';
 
 import { useSession, signOut, signIn } from 'next-auth/react';
+import Link from 'next/link';
 
 import React from 'react';
 
 function AppBar() {
   const { data: session } = useSession();
-
+// console.log(session?.user);
   return (
     <div className="ml-auto dlex gap-2 ">
       <div className="flex flex-row align-middle content-center items-center gap-2 mt-1 mr-6 bg-gray-100 px-2 py-1 rounded">
-        <p className="hidden sm:block">{session?.user.nombre} </p>
+      
+      <Link
+          href={`/usuarios/password`}
+          // className="p-2 w-56 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600"
+        >
+          
+        <p className="hover:text-gray-700">{session?.user.nombre} </p>
+        </Link>
+
         <button
           className="text-xs sm:text-sm text-red-600 border rounded-md p-1 bg-gray-100 hover:bg-gray-200"
           onClick={() => signOut({ callbackUrl: '/auth/login' })}
@@ -23,6 +32,11 @@ function AppBar() {
 }
 
 export default AppBar;
+
+
+
+
+
 
 // {session?.user ? (
 //   <div className='flex flex-row align-middle content-center items-center gap-2 mt-1 mr-6'>

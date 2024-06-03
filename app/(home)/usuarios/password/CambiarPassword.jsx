@@ -6,35 +6,36 @@ import Swal from 'sweetalert2';
 import { URL } from '@/config';
 import { useParams } from 'next/navigation';
 import { fetchUsuarioId } from '@/utils/fetchUsuarioId'
+import { useSession, signOut } from 'next-auth/react';
 
 const CambiarPassword = () => {
+  const { data: session } = useSession();
   const router = useRouter();
-  const { id } = useParams()
-  const [formData, setFormData] = useState({   
-    nombre:"",
-    apellido:"",
-    email:"",
-    role:"",   
-    password:"",
+  // const { id } = useParams()
+  const [formData, setFormData] = useState({
+    user_id:"",
+    oldPassword: "",
+    newPassword: "",
   });
 
   useEffect(() => {
-    async function fetchData() {
-      const user = await fetchUsuarioId(id)
-      setFormData(user);
+    if (session?.user?.user_id) {
+      setFormData((prevData) => ({
+        ...prevData,
+        user_id: session.user.user_id,
+      }));
     }
-    fetchData();
-  }, [setFormData])
-  
+  }, [session]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formDataJSON= JSON.stringify(formData)
-    console.log(formDataJSON);
+    
+    // console.log(formData);
 
     try {
-      const response = await fetch(`${URL}/users/${id}`, {
-        method: 'PUT',
+      const response = await fetch(`${URL}/users`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -47,10 +48,8 @@ const CambiarPassword = () => {
           icon: 'success',
           confirmButtonColor: 'gray',
           color: 'black',
-        }).then(router.push('/usuarios'))
-        
-        console.log('Datos enviados exitosamente');
-        
+        }).then(() => signOut({ callbackUrl: '/auth/login' }))
+
       } else {
         console.error('Error al enviar los datos');
       }
@@ -60,16 +59,16 @@ const CambiarPassword = () => {
   };
 
   const handleChange = (e) => {
-    
+
     const isVoluntarioField = e.target.name === 'voluntario_id';
-  
+
     let newValue =
       e.target.type === 'checkbox'
         ? e.target.checked
         : isVoluntarioField
-        ? e.target.value || undefined
-        : e.target.value;
-  
+          ? e.target.value || undefined
+          : e.target.value;
+
     if (isVoluntarioField && newValue) {
       newValue = Number(newValue);
     }
@@ -85,72 +84,47 @@ const CambiarPassword = () => {
       className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md"
     >
       <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
-        Modificar usuario
+        Modificar mi contraseña
       </h2>
-      <div>En construcción </div>
-{/* 
+      
+
       <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg">
         <div className="flex flex-col gap-6 justify-evenly">
-          <label>
-            Nombre/s
-            <input
-              type="text"
-              name="nombre"
-              value={formData.nombre}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
 
           <label>
-            Apellido/s
-            <input
-              type="text"
-              name="apellido"
-              value={formData.apellido}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
-
-          <label className="block mb-2">
-            Rol
-            <select
-              required
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            >
-              <option value="">Elije una opcion</option>
-              <option value="Admin">Administrador</option>
-              <option value="User">Usuario</option>
-            </select>
-          </label>
-       
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-          </label>
-
-          <label>
-            Password
+            Contraseña actual
             <input
               type="password"
-              name="password"
-              value={formData.password}
+              name="oldPassword"
+              value={formData?.oldPassword}
               onChange={handleChange}
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
           </label>
+
+          <label>
+            Nueva contraseña
+            <input
+              type="password"
+              name="newPassword"
+              value={formData?.newPassword}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label>
+          
+          {/* <label>
+            Repetir nueva contraseña
+            <input
+              type="password"
+              name="newPassword"
+              value={formData?.newPassword}
+              onChange={handleChange}
+              className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+            />
+          </label> */}
         </div>
-      </div> */}
+      </div>
 
       <button
         type="submit"

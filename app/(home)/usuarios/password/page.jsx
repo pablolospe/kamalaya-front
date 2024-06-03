@@ -3,7 +3,6 @@ import CambiarPassword from './CambiarPassword.jsx'
 function ModificarUsuarioPage() {
   return (
     <>
-    
      <CambiarPassword />
     </>
   )
