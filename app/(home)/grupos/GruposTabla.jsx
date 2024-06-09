@@ -1,21 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { grupos } from '@/utils/fetchGrupos';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import BotonBorrarGrupo from '@/app/(home)/grupos/BotonBorrarGrupo';
-import { convertirHora, formatearFecha, capitalizeFirstLetterOfEachWord } from '@/utils/formats';
-
-const diasSemana = {
-  lunes: 'Lunes',
-  martes: 'Martes',
-  miercoles: 'Miércoles',
-  jueves: 'Jueves',
-  viernes: 'Viernes',
-  sabado: 'Sábado',
-  domingo: 'Domingo',
-}
+import { convertirHora, formatearFecha, capitalizeFirstLetterOfEachWord, DiaSemanaEnum } from '@/utils/formats';
+import { grupos } from '@/utils/fetchGrupos';
 
 function GruposTabla() {
+  const { data: session } = useSession();
+  const token = session?.user?.token;
   const [gruposData, setGruposData] = useState([]);
   const [error, setError] = useState(null);
 
@@ -24,19 +17,16 @@ function GruposTabla() {
     hobbies: '',
   });
 
+
   useEffect(() => {
     async function fetchData() {
-      try {
-        const data = await grupos(query);
+      if (session) {
+        const data = await grupos(query, token);
         setGruposData(data);
-        setError(null);
-      } catch (error) {
-        console.error('Error al obtener los datos de los grupos:', error);
-        setError('Hubo un error al obtener los datos de los grupos.');
       }
     }
     fetchData();
-  }, [query]);
+  }, [query, session, gruposData]);
 
   return (
       <section className="flex flex-col gap-2 overflow-auto text-sm">
@@ -73,7 +63,7 @@ function GruposTabla() {
                 <td className="table-cell p-2 whitespace-nowrap">{formatearFecha(g.fechaDeInicio)}</td>
                 <td className="table-cell p-2">{convertirHora(g.horaInicio)}</td>
                 <td className="table-cell p-2">{convertirHora(g.horaFin)}</td>
-                <td className="table-cell p-2">{diasSemana[g.diaSemana]}</td>
+                <td className="table-cell p-2">{DiaSemanaEnum[g.diaSemana]}</td>
                 <td className="table-cell p-2 text-xs">{g.descripcion}</td>
                 <td className="table-cell p-2"><Link className='p-2 rounded-full hover:bg-gray-300' href={`/grupos/${g.grupo_id}/editar`}>✏️</Link></td>
                 <td className="table-cell p-2">
