@@ -67,8 +67,8 @@ function GruposTabla() {
                 <td className="table-cell p-2 ">{g.grupo_id}</td>
                 <td className="table-cell p-2 text-green-600">{capitalizeFirstLetterOfEachWord(`${g?.Paciente.nombre} ${g.Paciente.apellido}`)}</td>
                 <td className="table-cell p-2 text-purple-600">{capitalizeFirstLetterOfEachWord(`${g?.Voluntarios[0]?.nombre} ${g.Voluntarios[0]?.apellido}`)}</td>
-                <td className="table-cell p-2 text-purple-600">{capitalizeFirstLetterOfEachWord(`${g?.Voluntarios[1]?.nombre} ${g.Voluntarios[1]?.apellido}`)}</td>
-                <td className="table-cell p-2 text-purple-600">{capitalizeFirstLetterOfEachWord(`${g?.Voluntarios[2]?.nombre} ${g.Voluntarios[2]?.apellido}`)}</td>
+                <td className="table-cell p-2 text-purple-600">{g?.Voluntarios[1] ? capitalizeFirstLetterOfEachWord(`${g?.Voluntarios[1]?.nombre} ${g.Voluntarios[1]?.apellido}`) : '-'}</td>
+                <td className="table-cell p-2 text-purple-600">{g?.Voluntarios[2] ? capitalizeFirstLetterOfEachWord(`${g?.Voluntarios[2]?.nombre} ${g.Voluntarios[2]?.apellido}`) : '-'}</td>
 
                 <td className="table-cell p-2 whitespace-nowrap">{formatearFecha(g.fechaDeInicio)}</td>
                 <td className="table-cell p-2">{convertirHora(g.horaInicio)}</td>
