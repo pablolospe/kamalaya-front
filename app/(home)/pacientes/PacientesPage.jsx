@@ -7,6 +7,7 @@ import GoogleMapsView from '@/components/GoogleMapsView';
 import style from './page.module.css';
 import { useSession } from 'next-auth/react';
 import { pacientes } from '@/utils/fetchPacientes';
+import { capitalizeFirstLetterOfEachWord } from '@/utils/formats';
 
 function PacientesPage() {
   const { data: session } = useSession();
@@ -22,7 +23,7 @@ function PacientesPage() {
   // Definir el estado para el campo de ordenación
   const [sortField, setSortField] = useState(null);
   const [sortOrder, setSortOrder] = useState('');
-
+console.log(sortOrder);
   const onSort = (field) => {
     // Si se hace clic en el mismo campo, cambiar el orden
     // De lo contrario, ordenar en orden ascendente
@@ -50,7 +51,7 @@ function PacientesPage() {
     }));
   }
 
-  
+
   useEffect(() => {
     async function fetchData() {
       if (session) {
@@ -153,7 +154,7 @@ function PacientesPage() {
             onClick={handleBorrarFiltros}
             className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
           >
-            Borrar <br/> filtros
+            Borrar <br /> filtros
           </button>
         </div>
       </details>
@@ -162,13 +163,14 @@ function PacientesPage() {
       <table className='text-sm'>
         <thead>
           <tr className="bg-gray-100 row-auto">
-            <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('nombre')}>
-              Nombre {sortField === 'nombre' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
+            <th className='w-1/12'></th>
+            <th className="border p-2 cursor-pointer hover:bg-gray-200 w-1/5" onClick={() => onSort('nombre')}>
+              Nombre {!sortField && 'A-Z'}{sortField === 'nombre' && (sortOrder === 'desc' ? ' ⬆️' : ' ⬇️')}
             </th>
-            <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('apellido')}>
-              Apellido {sortField === 'apellido' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
+            <th className="border p-2 cursor-pointer hover:bg-gray-200 w-1/5" onClick={() => onSort('apellido')}>
+              Apellido {!sortField && 'A-Z'} {sortField === 'apellido' && (sortOrder === 'desc' ? ' ⬆️' : ' ⬇️')}
             </th>
-            <th className="hidden md:table-cell border p-2">Teléfono</th>
+            <th className="hidden md:table-cell border p-2 w-1/5">Teléfono</th>
             <th className="hidden md:table-cell border p-2">Dirección</th>
           </tr>
         </thead>
@@ -181,18 +183,24 @@ function PacientesPage() {
             >
               <td>
                 <Link href={`/pacientes/${v.paciente_id}`}>
-                  <div className="flex flex-row items-center ml-3 my-1 text-left">
-                    <div className="bg-green-200 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
+                  <div className="flex flex-row items-center my-1 mx-2 ">
+                    <div className="bg-green-200 cursor-pointer p-3 rounded-lg flex flex-row">
                       <LuUser size={20} />
                     </div>
-                    {v.nombre}
                   </div>
                 </Link>
               </td>
               <td>
                 <Link href={`/pacientes/${v.paciente_id}`}>
                   <div className="flex flex-row items-center ml-3 my-1 text-left">
-                    {v.apellido}
+                    {capitalizeFirstLetterOfEachWord(v.nombre)}
+                  </div>
+                </Link>
+              </td>
+              <td>
+                <Link href={`/pacientes/${v.paciente_id}`}>
+                  <div className="flex flex-row items-center ml-3 my-1 text-left">
+                    {capitalizeFirstLetterOfEachWord(v.apellido)}
                   </div>
                 </Link>
               </td>
@@ -209,8 +217,8 @@ function PacientesPage() {
               </td>
               <td className="hidden md:table-cell">
                 <div>
-                    <p> {v.calle} {v.numero}</p>
-                    <p> {v.localidad}, {v.provincia}, {v.pais} ({v.codigoPostal})</p>
+                  <p> {v.calle} {v.numero}</p>
+                  <p> {v.localidad}, {v.provincia}, {v.pais} ({v.codigoPostal})</p>
                 </div>
               </td>
             </tr>
