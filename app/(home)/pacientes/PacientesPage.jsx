@@ -163,7 +163,7 @@ console.log(sortOrder);
       <table className='text-sm'>
         <thead>
           <tr className="bg-gray-100 row-auto">
-            <th className='w-1/12'></th>
+            <th className='w-1/12 lg:w-1'></th>
             <th className="border p-2 cursor-pointer hover:bg-gray-200 w-1/5" onClick={() => onSort('nombre')}>
               Nombre {!sortField && 'A-Z'}{sortField === 'nombre' && (sortOrder === 'desc' ? ' ⬆️' : ' ⬇️')}
             </th>
