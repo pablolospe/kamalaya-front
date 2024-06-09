@@ -48,7 +48,7 @@ function BotonBorrarGrupo({ id }) {
 
   return (
     <div>
-      <button onClick={(e) => handleDeleteConfirmation(e)}>
+      <button className='p-2 rounded-full hover:bg-gray-300' onClick={(e) => handleDeleteConfirmation(e)}>
         ❌
       </button>
     </div>
