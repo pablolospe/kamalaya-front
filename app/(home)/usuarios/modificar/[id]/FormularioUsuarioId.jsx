@@ -83,9 +83,7 @@ const FormularioUsuarioId = () => {
       <BotonBack />
       <form
         onSubmit={handleSubmit}
-      // className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md"
       >
-
 
         <div className="flex flex-col md:flex-row justify-evenly align-center max-w-xl gap-8">
           <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
@@ -177,12 +175,7 @@ const FormularioUsuarioId = () => {
           >
             Enviar formulario
           </button>
-          {/* <Link
-            href='/usuarios'
-            className="w-40 mt-4 py-2 px-4 text-center ring-1 bg-red-500 text-white rounded-md hover:bg-red-600"
-          >
-            Cancelar
-          </Link> */}
+         
           <BotonBorrarUsuario id={id} nombre={formData.nombre} apellido={formData.apellido} />
         </div>
 
