@@ -33,6 +33,20 @@ function VoluntariosPage() {
     diaSemana: [],
   });
 
+  const [sortField, setSortField] = useState(null);
+  const [sortOrder, setSortOrder] = useState('');
+
+  const onSort = (field) => {
+    // Si se hace clic en el mismo campo, cambiar el orden
+    // De lo contrario, ordenar en orden ascendente
+    if (field === sortField) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortOrder('asc');
+    }
+  };
+
   function handleBorrarFiltros() {
     setQuery({
       nombre: '',
@@ -77,10 +91,19 @@ function VoluntariosPage() {
 
       const combinedData = voluntarioData?.concat(pacienteData);
 
-      setVoluntariosData(combinedData);
+      let sortedData = combinedData;
+        if (sortField !== null) {
+          sortedData = sortedData.sort((a, b) =>
+            sortOrder === 'asc'
+              ? a[sortField].localeCompare(b[sortField])
+              : b[sortField].localeCompare(a[sortField])
+          );
+        }
+        setVoluntariosData(sortedData);
+      // (combinedData);
     }
     fetchData();
-  }, [query, voluntarios, pacientes, showPacientes]);
+  }, [query, session, sortField, sortOrder, showPacientes]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -289,7 +312,12 @@ function VoluntariosPage() {
       <table className='text-sm'>
         <thead>
           <tr className="bg-gray-100 row-auto">
-            <th className="border p-2">Nombre</th>
+          <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('nombre')}>
+              Nombre {sortField === 'nombre' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
+            </th>
+            <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('apellido')}>
+              Apellido {sortField === 'apellido' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
+            </th>
             <th className="hidden md:table-cell w-28 border p-2">Teléfono</th>
             <th className="hidden md:table-cell w-4 text-xs border p-2">Tiene auto</th>
             <th className="hidden md:table-cell w-4 text-xs border p-2">Exp CP</th>
@@ -323,7 +351,20 @@ function VoluntariosPage() {
                     <div className="bg-gray-300 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
                       <LuUser size={20} />
                     </div>
-                    {capitalizeFirstLetterOfEachWord(`${v.nombre} ${v.apellido}`)} (
+                    {capitalizeFirstLetterOfEachWord(v.nombre)} 
+                  </div>
+                </Link>
+              </td>
+              <td>
+                <Link
+                  href={
+                    !v.paciente_id
+                      ? `/voluntarios/${v.voluntario_id}`
+                      : `/pacientes/${v.paciente_id}`
+                  }
+                >
+                  <div className="flex flex-row items-center ml-3 my-1 text-left">
+                    {capitalizeFirstLetterOfEachWord(v.apellido)} (
                     {v.paciente_id ? 'paciente' : 'voluntario'})
                   </div>
                 </Link>
