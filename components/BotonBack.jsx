@@ -10,7 +10,7 @@ function BotonBack() {
 
         <button
             onClick={()=>router.back()}
-            className="fixed py-2 px-4 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600 self-end font-semibold"
+            className="fixed py-2 px-4 bg-blue-500 text-white text-center font-semibold text-xl rounded-md hover:bg-blue-600 self-end"
         >
             &larr;
         </button>
