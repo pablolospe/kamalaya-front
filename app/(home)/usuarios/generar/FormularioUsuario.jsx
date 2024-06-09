@@ -25,10 +25,9 @@ const FormularioUsuario = () => {
   //     fetchData();
   //   }, [setUsuariosData])
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formDataJSON = JSON.stringify(formData)
+    const formDataJSON = JSON.stringify(formData);
     console.log(formDataJSON);
 
     try {
@@ -46,17 +45,33 @@ const FormularioUsuario = () => {
           icon: 'success',
           confirmButtonColor: 'gray',
           color: 'black',
-        }).then(router.push('/usuarios'))
+        }).then(router.push('/usuarios'));
 
         console.log('Datos enviados exitosamente');
-
       } else {
-        console.error('Error al enviar los datos');
+        const errorData = await response.json(); // Parsea el JSON del cuerpo de la respuesta
+        
+        Swal.fire({
+          title: 'Error',
+          text: errorData.errors,
+          icon: 'error',
+          confirmButtonColor: 'gray',
+          color: 'black',
+        });
       }
     } catch (error) {
-      console.error('Error:', error);
+     
+      // Muestra un Swal de error genérico en caso de error en la solicitud
+      Swal.fire({
+        title: 'Error',
+        text: error,
+        icon: 'error',
+        confirmButtonColor: 'gray',
+        color: 'black',
+      });
     }
   };
+
 
   const handleChange = (e) => {
 
