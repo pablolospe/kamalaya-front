@@ -24,7 +24,7 @@ function EditarSeguimiento() {
     evolucion: '',
     llamadaOVisita: '',
     problemasActualesYNecesidades: '',
-    ECOG:'',
+    ECOG: '',
     paciente_id: +id,
     voluntario_id: [],
   });
@@ -39,7 +39,7 @@ function EditarSeguimiento() {
     async function fetchData() {
       const seguimientoData = await fetchSeguimientoId(slug);
       const voluntarioData = await voluntarios(query, token);
-      
+
       setSeguimiento(seguimientoData[0]);
       setVoluntariosData(voluntarioData);
       setVoluntario1(seguimientoData[0]?.Voluntarios[0]?.voluntario_id || '')
@@ -137,7 +137,7 @@ function EditarSeguimiento() {
       <div className="flex flex-col md:flex-row justify-evenly align-center max-w-xl gap-8">
         <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
           <div className="flex flex-col justify-evenly align-center max-w-xl gap-4">
-            
+
 
             <div>
               <label
@@ -237,7 +237,7 @@ function EditarSeguimiento() {
                 type="date"
                 id="horaInicio"
               >
-                
+
                 <option value="08:00">08:00</option>
                 <option value="09:00">09:00</option>
                 <option value="10:00">10:00</option>
@@ -270,7 +270,7 @@ function EditarSeguimiento() {
                 type="date"
                 id="horaFin"
               >
-                
+
                 <option value="08:00">08:00</option>
                 <option value="09:00">09:00</option>
                 <option value="10:00">10:00</option>
@@ -369,61 +369,16 @@ function EditarSeguimiento() {
             </div>
           </div>
         </div>
-
-        <div>
-          <div className="p-4 md:max-w-3xl gap-2 shadow-lg rounded-lg">
-            <p><b>
-              Voluntario 1:</b>{' '}
-              {
-                voluntariosData?.find((v) => v.voluntario_id === voluntario1)
-                  ?.nombre
-              }{' '}
-              {
-                voluntariosData?.find((v) => v.voluntario_id === voluntario1)
-                  ?.apellido
-              }
-            </p>
-            <p><b>
-              Voluntario 2:</b>{' '}
-              {
-                voluntariosData?.find((v) => v.voluntario_id === voluntario2)
-                  ?.nombre
-              }{' '}
-              {
-                voluntariosData?.find((v) => v.voluntario_id === voluntario2)
-                  ?.apellido
-              }
-            </p>
-
-            <p><b>
-              Voluntario 3:</b>{' '}
-              {
-                voluntariosData?.find((v) => v.voluntario_id === voluntario3)
-                  ?.nombre
-              }{' '}
-              {
-                voluntariosData?.find((v) => v.voluntario_id === voluntario3)
-                  ?.apellido
-              }
-            </p>
-
-            
-            <p><b>Fecha de inicio:</b> {formatearFecha(seguimiento?.fecha)}</p>
-            <p><b>Hora de inicio:</b> {seguimiento.horaInicio}</p>
-            <p><b>Hora de finalización:</b> {seguimiento.horaFin}</p>
-            <p><b>Problemas actuales y necesidades:</b> {seguimiento?.problemasActualesYNecesidades}</p>
-          </div>
-
-          <section>
-            <button
-              type="submit"
-              className="mt-4 py-2 px-4 w-full bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            >
-              Enviar formulario
-            </button>
-          </section>
-        </div>
       </div>
+      
+      <section>
+        <button
+          type="submit"
+          className="mt-4 py-2 px-4 w-full bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        >
+          Enviar formulario
+        </button>
+      </section>
     </form>
   );
 }
