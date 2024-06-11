@@ -3,6 +3,7 @@ import { URL } from '@/config';
 import Link from 'next/link'
 import SeguimientosTabla from '@/components/SeguimientosTabla'
 import style from './page.module.css';
+import { capitalizeFirstLetterOfEachWord } from '@/utils/formats';
 
 const pacienteDetalle = async (id) => {
   return fetch(`${URL}/paciente/${id}`, {
@@ -17,7 +18,7 @@ console.log(v);
   return (
     <div className='flex flex-col'>
       <h2 className="my-2 w-full md:w-1/2 text-lg text-center self-center font-semibold bg-green-100 text-md p-2 rounded-lg border">
-        {v?.nombre} {v?.apellido}
+        {capitalizeFirstLetterOfEachWord(`${v?.nombre} ${v?.apellido}`)}
       </h2>
 
       <div className="flex flex-col md:mx-auto md:w-1/2 p-4 bg-gray-100 rounded-lg shadow-md">
@@ -29,10 +30,10 @@ console.log(v);
 
           <div className="w-full mb-2 p-2 bg-white rounded-md focus:ring focus:ring-blue-300">
             <div><b>Fecha de alta</b> {formatearFecha(v?.fechaAlta)}</div>  
-            <div><b>Cuidador principal</b> {v?.cuidadorPrincipal}</div>
+            <div><b>Cuidador principal</b> {capitalizeFirstLetterOfEachWord(v?.cuidadorPrincipal)}</div>
             <div><b>Contacto del cuidador principal</b> {v?.telefonoCuidadorPrincipal}</div>
             <div><b>Insumos prestados</b> {v?.insumosPrestados}</div>
-            <div><b>Supervisor</b> {v?.Voluntario.nombre} {v?.Voluntario.apellido}</div>
+            <div><b>Supervisor</b> {capitalizeFirstLetterOfEachWord(`${v?.Voluntario.nombre} ${v?.Voluntario.apellido}`)}</div>
             {/* <div><b>voluntariosQueAcompañan</b>{v?.Grupos?.Voluntarios[0]?.nombre}</div> */}
             {v?.fechaBaja && <div><b>Fecha de baja</b> {formatearFecha(v?.fechaBaja)}</div>}
           </div>
@@ -46,7 +47,7 @@ console.log(v);
               {v?.genero === 'M' ? 'Masculino' : v?.genero === 'F' ? 'Femenino' : 'otro'}
             </div>
 
-            <div><b>Fecha de nacimiento: </b> {formatearFecha(v?.fechaDeNacimiento)} </div>
+            <div><b>Fecha de nacimiento </b> {formatearFecha(v?.fechaDeNacimiento)} </div>
               
             <div> <b>Edad</b> {calcularEdad(v?.fechaDeNacimiento)} años </div>
             
@@ -56,7 +57,7 @@ console.log(v);
             <div><b>Dirección </b> {v?.calle} {v?.numero},  {v?.localidad}</div>
             <div>{v?.provincia}, {v?.pais}({v?.codigoPostal})</div>
             <div><b>Obra social </b> {v?.obraSocial}</div>
-            <div><b>Ocupacion /Profesion / Hobbie:</b> {v?.ocupacionProfesionHobbie}</div>
+            <div><b>Ocupacion /Profesion / Hobbie</b> {v?.ocupacionProfesionHobbie}</div>
             <div><b>Situacion economica </b> {v?.situacionEconomica}</div>
             <div><b>Situacion habitacional </b> {v?.situacionHabitacional}</div>
             <div><b>Recursos disponibles</b> {v?.recursosDisponibles}</div>
@@ -73,7 +74,7 @@ console.log(v);
             <div><b>Quien deriva </b> {v?.quienDeriva}</div>
             <div><b>Contacto de {v?.quienDeriva} (tel, mail) </b> {v?.contactoQuienDeriva}</div>
             <div><b>Diagnóstico</b> {v?.diagnostico}</div>
-            <div><b>Fecha de diagnóstico: </b> {formatearFecha(v?.fechaDeDiagnostico)} </div>
+            <div><b>Fecha de diagnóstico </b> {formatearFecha(v?.fechaDeDiagnostico)} </div>
             <div><b>Equipo de seguimiento</b> {v?.equipoSeguimiento}</div>
             <div><b>Enfermedad actual</b> {v?.enfermedadActual}</div>
             <div><b>ECOG basal</b> {v?.ECOGbasal}</div>
