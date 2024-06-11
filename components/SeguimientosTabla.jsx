@@ -35,7 +35,7 @@ function SeguimientosTabla({ id }) {
         <thead>
           <tr className="bg-gray-100 row-auto">
             <th className="border p-1" >ID</th>
-            <th className="border p-1" >Voluntarios</th>
+            <th className="border p-1 w-1/6" >Voluntarios</th>
             <th className="border p-1" >Fecha/Hora</th>
             <th className="border p-1" >Evolución</th>
             <th className="border p-1" >Problemas actuales y/o necesidades</th>
@@ -51,22 +51,22 @@ function SeguimientosTabla({ id }) {
             <tr key={g.seguimiento_id}
               className="text-center bg-gray-100 hover:bg-gray-200"
             >
-              <td className="table-cell p-0">{g.seguimiento_id}</td>
-              <td className="table-cell p-0">
+              <td className="table-cell p-1">{g.seguimiento_id}</td>
+              <td className="table-cell p-1">
               {capitalizeFirstLetterOfEachWord(`${g?.Voluntarios[0]?.nombre} ${g.Voluntarios[0]?.apellido}`)} <br/>
                 {g?.Voluntarios[1]?.nombre} {g.Voluntarios[1]?.apellido} <br/>
                 {g?.Voluntarios[2]?.nombre} {g.Voluntarios[2]?.apellido}
               </td>
               
-              <td className="table-cell p-0">
+              <td className="table-cell p-1">
                 {formatearFecha(g?.fecha)} <hr />
                 {g?.horaInicio} a {g?.horaFin}
               </td>
 
-              <td className="table-cell p-0">{g?.evolucion}</td>
-              <td className="table-cell p-0">{g?.problemasActualesYNecesidades}</td>
-              <td className="table-cell p-0 text-sm">{g?.ECOG}</td>
-              <td className="table-cell p-0 text-sm">{g?.llamadaOVisita}</td>
+              <td className="table-cell p-1">{g?.evolucion}</td>
+              <td className="table-cell p-1">{g?.problemasActualesYNecesidades}</td>
+              <td className="table-cell p-1 text-sm">{g?.ECOG}</td>
+              <td className="table-cell p-1 text-sm">{g?.llamadaOVisita}</td>
               <td className="flex justify-center items-center">
                 <div className="bg-gray-300 hover:bg-gray-400 cursor-pointer p-3 my-1 gap-3 w-11 rounded-lg self-center">
                   <Link href={`/pacientes/${g?.paciente_id}/seguimiento/${g?.seguimiento_id}`}>
