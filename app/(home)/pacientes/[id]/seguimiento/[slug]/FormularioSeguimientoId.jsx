@@ -7,10 +7,12 @@ import { voluntarios } from '@/utils/fetchVoluntarios';
 import { useParams } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { obtenerFecha, formatearFecha } from '@/utils/formats';
+import { useSession } from 'next-auth/react';
 
 function EditarSeguimiento() {
+  const { data: session } = useSession();
+  const token = session?.user?.token;
   const { id, slug } = useParams();
-  
   const [voluntario1, setVoluntario1] = useState('');
   const [voluntario2, setVoluntario2] = useState('');
   const [voluntario3, setVoluntario3] = useState('');
@@ -36,11 +38,10 @@ function EditarSeguimiento() {
   useEffect(() => {
     async function fetchData() {
       const seguimientoData = await fetchSeguimientoId(slug);
-      const voluntariosData = await voluntarios(query);
-      console.log("esteeee"+seguimientoData);
-      console.log(seguimientoData);
+      const voluntarioData = await voluntarios(query, token);
+      
       setSeguimiento(seguimientoData[0]);
-      setVoluntariosData(voluntariosData);
+      setVoluntariosData(voluntarioData);
       setVoluntario1(seguimientoData[0]?.Voluntarios[0]?.voluntario_id || '')
       setVoluntario2(seguimientoData[0]?.Voluntarios[1]?.voluntario_id || '')
       setVoluntario3(seguimientoData[0]?.Voluntarios[2]?.voluntario_id || '')
@@ -66,7 +67,6 @@ function EditarSeguimiento() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(seguimiento);
 
     const updatedVoluntarioId = [voluntario1, voluntario2, voluntario3].filter(voluntario => voluntario !== '');
 
@@ -375,22 +375,22 @@ function EditarSeguimiento() {
             <p><b>
               Voluntario 1:</b>{' '}
               {
-                voluntariosData.find((v) => v.voluntario_id === voluntario1)
+                voluntariosData?.find((v) => v.voluntario_id === voluntario1)
                   ?.nombre
               }{' '}
               {
-                voluntariosData.find((v) => v.voluntario_id === voluntario1)
+                voluntariosData?.find((v) => v.voluntario_id === voluntario1)
                   ?.apellido
               }
             </p>
             <p><b>
               Voluntario 2:</b>{' '}
               {
-                voluntariosData.find((v) => v.voluntario_id === voluntario2)
+                voluntariosData?.find((v) => v.voluntario_id === voluntario2)
                   ?.nombre
               }{' '}
               {
-                voluntariosData.find((v) => v.voluntario_id === voluntario2)
+                voluntariosData?.find((v) => v.voluntario_id === voluntario2)
                   ?.apellido
               }
             </p>
@@ -398,11 +398,11 @@ function EditarSeguimiento() {
             <p><b>
               Voluntario 3:</b>{' '}
               {
-                voluntariosData.find((v) => v.voluntario_id === voluntario3)
+                voluntariosData?.find((v) => v.voluntario_id === voluntario3)
                   ?.nombre
               }{' '}
               {
-                voluntariosData.find((v) => v.voluntario_id === voluntario3)
+                voluntariosData?.find((v) => v.voluntario_id === voluntario3)
                   ?.apellido
               }
             </p>

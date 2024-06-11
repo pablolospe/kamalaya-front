@@ -2,14 +2,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
-import {
-  capitalizeFirstLetterOfEachWord,
-  fechaActualEntreFechas,
-  formatearNumeroTelefono,
-  formatearFecha,
-  DiaSemanaEnum,
-  formatearNumeroAHora,
-} from '@/utils/formats';
+import { capitalizeFirstLetterOfEachWord, fechaActualEntreFechas, formatearNumeroTelefono, formatearFecha, DiaSemanaEnum, formatearNumeroAHora } from '@/utils/formats';
 import GoogleMapsView from '@/components/GoogleMapsView';
 import style from './page.module.css';
 import { voluntarios } from '@/utils/fetchVoluntarios.js';
@@ -17,10 +10,10 @@ import { pacientes } from '@/utils/fetchPacientes.js';
 import { useSession } from 'next-auth/react';
 
 function VoluntariosPage() {
-  const [voluntariosData, setVoluntariosData] = useState([]);
-  const [showPacientes, setShowPacientes] = useState(false);
   const { data: session } = useSession();
   const token = session?.user?.token;
+  const [voluntariosData, setVoluntariosData] = useState([]);
+  const [showPacientes, setShowPacientes] = useState(false);
   const [query, setQuery] = useState({
     nombre: '',
     apellido: '',
@@ -87,7 +80,6 @@ function VoluntariosPage() {
       let pacienteData = [];
 
       if (showPacientes) pacienteData = await pacientes(query, token);
-
 
       const combinedData = voluntarioData?.concat(pacienteData);
 

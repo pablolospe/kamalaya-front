@@ -14,7 +14,7 @@ const pacienteDetalle = async (id) => {
 async function PacienteDetalles({ params }) {
   const { id } = params;
   const v = await pacienteDetalle(id);
-console.log(v);
+// console.log(v);
   return (
     <div className='flex flex-col'>
       <h2 className="my-2 w-full md:w-1/2 text-lg text-center self-center font-semibold bg-green-100 text-md p-2 rounded-lg border">

@@ -34,14 +34,6 @@ function Ususarios() {
         >
           Generar nuevo usuario
         </Link>
-
-        {/* <Link
-          href={`/usuarios/password`}
-          className="p-2 w-56 bg-blue-500 text-white text-center rounded-md hover:bg-blue-600"
-        >
-          Modificar mi contraseña
-        </Link> */}
-        {/* <h1 className="text-center font-semibold text-xl">Usuarios</h1> */}
       </div>
       
       <table>
@@ -64,15 +56,14 @@ function Ususarios() {
               <td className="hidden md:table-cell">
                 <div>{v.user_id}</div>
               </td>
+              
               <td>
-                {/* <Link href={`/pacientes/${v.paciente_id}`}> */}
                 <div className="flex flex-row items-center ml-3 my-1 text-left">
                   <div className="bg-gray-300 p-3 mx-2 gap-3 rounded-lg flex flex-row">
                     <LuUser size={20} />
                   </div>
                   {capitalizeFirstLetterOfEachWord(`${v?.nombre} ${v?.apellido}`)}
                 </div>
-                {/* </Link> */}
               </td>
 
               <td className="hidden md:table-cell">
