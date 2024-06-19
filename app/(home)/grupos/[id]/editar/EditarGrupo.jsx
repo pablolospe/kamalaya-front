@@ -9,8 +9,11 @@ import { useParams } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { capitalizeFirstLetterOfEachWord } from '@/utils/formats';
 import BotonBack from '@/components/BotonBack';
+import { useSession } from 'next-auth/react';
 
 function EditarGrupo() {
+  const { data: session } = useSession();
+  const token = session?.user?.token;
   const { id } = useParams();
   const [voluntario1, setVoluntario1] = useState({});
   const [voluntario2, setVoluntario2] = useState({});
@@ -37,8 +40,8 @@ function EditarGrupo() {
   useEffect(() => {
     async function fetchData() {
       const gruposData = await fetchGrupoId(id);
-      const voluntariosData = await voluntarios(query);
-      const pacienteData = await pacientes(query);
+      const voluntariosData = await voluntarios(query, token);
+      const pacienteData = await pacientes(query, token);
 
       setGrupo({
         ...gruposData,
