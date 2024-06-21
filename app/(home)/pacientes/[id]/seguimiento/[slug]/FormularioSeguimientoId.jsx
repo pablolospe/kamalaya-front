@@ -114,27 +114,9 @@ function EditarSeguimiento() {
     });
   };
 
-  const handleVoluntario1Change = (e) => {
-    setVoluntario1(Number(e.target.value));
-  };
-
-  const handleVoluntario2Change = (e) => {
-    setVoluntario2(Number(e.target.value));
-  };
-
-  const handleVoluntario3Change = (e) => {
-    setVoluntario3(Number(e.target.value));
-  };
-
-  // Filtrar voluntarios para que no se repitan
-  const getFilteredVoluntarios = (currentVoluntarioId) => {
-    const selectedVoluntariosIds = [
-      voluntario1?.voluntario_id,
-      voluntario2?.voluntario_id,
-      voluntario3?.voluntario_id,
-    ].filter(id => id !== currentVoluntarioId && id !== undefined);
-
-    return voluntariosData.filter(voluntario => !selectedVoluntariosIds.includes(voluntario.voluntario_id));
+  const filterVoluntarios = (exclude) => {
+    if (!voluntariosData) return []; // Retorna un array vacío si voluntariosData es null o undefined
+    return voluntariosData.filter(v => !exclude.includes(v.voluntario_id));
   };
 
   return (
@@ -159,12 +141,12 @@ function EditarSeguimiento() {
                 </label>
                 <select
                   required
-                  onChange={handleVoluntario1Change}
+                  onChange={(e) => setVoluntario1(Number(e.target.value))}
                   value={voluntario1}
                   className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
                 >
                   <option value="">Elige un voluntario</option>
-                  {voluntariosData?.map((p) => (
+                  {filterVoluntarios([voluntario2, voluntario3]).map((p) => (
                     <option value={p.voluntario_id} key={p.voluntario_id}>
                       {capitalizeFirstLetterOfEachWord(`${p.nombre}`)} {capitalizeFirstLetterOfEachWord(`${p.apellido}`)}
                     </option>
@@ -180,12 +162,12 @@ function EditarSeguimiento() {
                   Voluntario 2
                 </label>
                 <select
-                  onChange={handleVoluntario2Change}
+                  onChange={(e) => setVoluntario2(Number(e.target.value))}
                   value={voluntario2}
                   className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
                 >
                   <option value=''></option>
-                  {voluntariosData?.map((p) => (
+                  {filterVoluntarios([voluntario1, voluntario3]).map((p) => (
                     <option value={p.voluntario_id} key={p.voluntario_id}>
                       {capitalizeFirstLetterOfEachWord(`${p.nombre}`)} {capitalizeFirstLetterOfEachWord(`${p.apellido}`)}
                     </option>
@@ -201,12 +183,12 @@ function EditarSeguimiento() {
                   Voluntario 3
                 </label>
                 <select
-                  onChange={handleVoluntario3Change}
+                  onChange={(e) => setVoluntario3(Number(e.target.value))}
                   value={voluntario3}
                   className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
                 >
                   <option value=''></option>
-                  {voluntariosData?.map((p) => (
+                  {filterVoluntarios([voluntario1, voluntario2]).map((p) => (
                     <option value={p.voluntario_id} key={p.voluntario_id}>
                       {capitalizeFirstLetterOfEachWord(`${p.nombre}`)} {capitalizeFirstLetterOfEachWord(`${p.apellido}`)}
                     </option>
@@ -238,71 +220,40 @@ function EditarSeguimiento() {
               ></input>
 
 
-              <div>
+              <div className="col-span-1">
                 <label
-                  className="block text-sm font-medium text-gray-900 dark:text-white"
                   htmlFor="horaInicio"
+                  className="block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Hora de inicio:
+                  Hora de inicio
                 </label>
-                <select
+                <input
                   name="horaInicio"
                   required
                   value={seguimiento.horaInicio}
                   onChange={handleChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  type="date"
-                  id="horaInicio"
-                >
-
-                  <option value="08:00">08:00</option>
-                  <option value="09:00">09:00</option>
-                  <option value="10:00">10:00</option>
-                  <option value="11:00">11:00</option>
-                  <option value="12:00">12:00</option>
-                  <option value="13:00">13:00</option>
-                  <option value="14:00">14:00</option>
-                  <option value="15:00">15:00</option>
-                  <option value="16:00">16:00</option>
-                  <option value="17:00">17:00</option>
-                  <option value="18:00">18:00</option>
-                  <option value="19:00">19:00</option>
-                  <option value="20:00">20:00</option>
-                </select>
+                  type="time"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                />
               </div>
 
-              <div>
+              <div className="col-span-1">
                 <label
-                  className="block text-sm font-medium text-gray-900 dark:text-white"
                   htmlFor="horaFin"
+                  className="block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Hora de fin:
+                  Hora de fin
                 </label>
-                <select
+                <input
                   name="horaFin"
                   required
                   value={seguimiento.horaFin}
                   onChange={handleChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  type="date"
-                  id="horaFin"
-                >
-
-                  <option value="08:00">08:00</option>
-                  <option value="09:00">09:00</option>
-                  <option value="10:00">10:00</option>
-                  <option value="11:00">11:00</option>
-                  <option value="12:00">12:00</option>
-                  <option value="13:00">13:00</option>
-                  <option value="14:00">14:00</option>
-                  <option value="15:00">15:00</option>
-                  <option value="16:00">16:00</option>
-                  <option value="17:00">17:00</option>
-                  <option value="18:00">18:00</option>
-                  <option value="19:00">19:00</option>
-                  <option value="20:00">20:00</option>
-                </select>
+                  type="time"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                />
               </div>
+
             </div>
           </div>
         </div>
