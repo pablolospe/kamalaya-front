@@ -3,16 +3,18 @@ import { URL } from '@/config';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { voluntarios } from '@/utils/fetchVoluntarios';
-import { pacientes } from '@/utils/fetchPacientes';
 import Swal from 'sweetalert2';
+import { useSession } from 'next-auth/react';
+import { capitalizeFirstLetterOfEachWord } from '@/utils/formats';
 
 function CrearSeguimiento({ params }) {
+  const { data: session } = useSession();
+  const token = session?.user?.token;
   const { id } = params;
-  // console.log(params);
+
   const [voluntario1, setVoluntario1] = useState('');
   const [voluntario2, setVoluntario2] = useState('');
   const [voluntario3, setVoluntario3] = useState('');
-  // const [pacientesData, setPacientesData] = useState([]);
   const [voluntariosData, setVoluntariosData] = useState([]);
   const [seguimiento, setSeguimiento] = useState({
     fecha: '',
@@ -34,7 +36,7 @@ function CrearSeguimiento({ params }) {
 
   useEffect(() => {
     async function fetchData() {
-      const voluntariosData = await voluntarios(query);
+      const voluntariosData = await voluntarios(query, token);
 
       setVoluntariosData(voluntariosData);
     }
@@ -49,25 +51,18 @@ function CrearSeguimiento({ params }) {
     }));
   };
 
-  // const handlePacienteChange = (e) => {
-  //   setSeguimiento((prevSeguimiento) => ({
-  //     ...prevSeguimiento,
-  //     paciente_id: Number(e.target.value),
-  //   }));
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedVoluntarioId = [voluntario1, voluntario2, voluntario3].filter(
-      (voluntario) => voluntario !== ''
-    );
+    const updatedVoluntarioId = [voluntario1, voluntario2, voluntario3].map(
+      (voluntario) => voluntario?.voluntario_id
+    ).filter((id) => id !== undefined);
 
     const seguimientoToSubmit = {
       ...seguimiento,
       voluntario_id: updatedVoluntarioId,
     };
-    
+    console.log(seguimientoToSubmit);
     Swal.fire({
       title: '¿Estás seguro?',
       text: '¿Quieres ingresar este seguimiento?',
@@ -107,17 +102,21 @@ function CrearSeguimiento({ params }) {
 })
 };
 
-  const handleVoluntario1Change = (e) => {
-    setVoluntario1(Number(e.target.value));
-  };
 
-  const handleVoluntario2Change = (e) => {
-    setVoluntario2(Number(e.target.value));
-  };
+const handleVoluntarioChange = (setVoluntario) => (e) => {
+  const selectedVoluntario = voluntariosData.find(v => v.voluntario_id === Number(e.target.value));
+  setVoluntario(selectedVoluntario);
+};
 
-  const handleVoluntario3Change = (e) => {
-    setVoluntario3(Number(e.target.value));
-  };
+const getFilteredVoluntarios = (currentVoluntarioId) => {
+  const selectedVoluntariosIds = [
+    voluntario1?.voluntario_id,
+    voluntario2?.voluntario_id,
+    voluntario3?.voluntario_id,
+  ].filter(id => id !== currentVoluntarioId && id !== undefined);
+
+  return voluntariosData.filter(voluntario => !selectedVoluntariosIds.includes(voluntario.voluntario_id));
+};
 
   return (
     <form
@@ -154,30 +153,15 @@ function CrearSeguimiento({ params }) {
               >
                 Hora de inicio:
               </label>
-              <select
+              <input
                 name="horaInicio"
                 required
                 value={seguimiento.horaInicio}
                 onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                type="date"
+                type="time"
                 id="horaInicio"
-              >
-                <option value="">Seleccione hora de inicio</option>
-                <option value="08:00">08:00</option>
-                <option value="09:00">09:00</option>
-                <option value="10:00">10:00</option>
-                <option value="11:00">11:00</option>
-                <option value="12:00">12:00</option>
-                <option value="13:00">13:00</option>
-                <option value="14:00">14:00</option>
-                <option value="15:00">15:00</option>
-                <option value="16:00">16:00</option>
-                <option value="17:00">17:00</option>
-                <option value="18:00">18:00</option>
-                <option value="19:00">19:00</option>
-                <option value="20:00">20:00</option>
-              </select>
+              />
             </div>
 
             <div>
@@ -187,31 +171,16 @@ function CrearSeguimiento({ params }) {
               >
                 Hora de fin:
               </label>
-              <select
+              <input
                 name="horaFin"
                 required
                 value={seguimiento.horaFin}
                 onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                type="date"
+                type="time"
                 id="horaFin"
                 min={seguimiento.horaInicio}
-              >
-                <option value="">Seleccione hora de fin</option>
-                <option value="08:00">08:00</option>
-                <option value="09:00">09:00</option>
-                <option value="10:00">10:00</option>
-                <option value="11:00">11:00</option>
-                <option value="12:00">12:00</option>
-                <option value="13:00">13:00</option>
-                <option value="14:00">14:00</option>
-                <option value="15:00">15:00</option>
-                <option value="16:00">16:00</option>
-                <option value="17:00">17:00</option>
-                <option value="18:00">18:00</option>
-                <option value="19:00">19:00</option>
-                <option value="20:00">20:00</option>
-              </select>
+              />
             </div>
 
             <div>
@@ -300,14 +269,14 @@ function CrearSeguimiento({ params }) {
               </label>
               <select
                 required
-                onChange={handleVoluntario1Change}
-                value={voluntario1}
+                onChange={handleVoluntarioChange(setVoluntario1)}
+                value={voluntario1.voluntario_id || ''}
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
               >
                 <option value="">Elige un voluntario</option>
-                {voluntariosData?.map((p) => (
+                {getFilteredVoluntarios(voluntario1.voluntario_id)?.map((p) => (
                   <option value={p.voluntario_id} key={p.voluntario_id}>
-                    {p.nombre} {p.apellido}
+                    {capitalizeFirstLetterOfEachWord(`${p.nombre} ${p.apellido}`)}
                   </option>
                 ))}
               </select>
@@ -321,14 +290,14 @@ function CrearSeguimiento({ params }) {
                 Voluntario 2
               </label>
               <select
-                onChange={handleVoluntario2Change}
-                value={voluntario2}
+                onChange={handleVoluntarioChange(setVoluntario2)}
+                value={voluntario2.voluntario_id || ''}
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
               >
                 <option value="">Elige un voluntario</option>
-                {voluntariosData?.map((p) => (
+                {getFilteredVoluntarios(voluntario2.voluntario_id)?.map((p) => (
                   <option value={p.voluntario_id} key={p.voluntario_id}>
-                    {p.nombre} {p.apellido}
+                    {capitalizeFirstLetterOfEachWord(`${p.nombre} ${p.apellido}`)}
                   </option>
                 ))}
               </select>
@@ -342,14 +311,14 @@ function CrearSeguimiento({ params }) {
                 Voluntario 3
               </label>
               <select
-                onChange={handleVoluntario3Change}
-                value={voluntario3}
+                onChange={handleVoluntarioChange(setVoluntario3)}
+                value={voluntario3.voluntario_id || ''}
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
               >
                 <option value="">Elige un voluntario</option>
-                {voluntariosData?.map((p) => (
+                {getFilteredVoluntarios(voluntario3.voluntario_id)?.map((p) => (
                   <option value={p.voluntario_id} key={p.voluntario_id}>
-                    {p.nombre} {p.apellido}
+                    {capitalizeFirstLetterOfEachWord(`${p.nombre} ${p.apellido}`)}
                   </option>
                 ))}
               </select>

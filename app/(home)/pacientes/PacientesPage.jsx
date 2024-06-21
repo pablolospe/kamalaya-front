@@ -17,13 +17,12 @@ function PacientesPage() {
     nombre: '',
     apellido: '',
     localidad: '',
-    // hobbies: '',
   });
 
   // Definir el estado para el campo de ordenación
   const [sortField, setSortField] = useState(null);
   const [sortOrder, setSortOrder] = useState('');
-console.log(sortOrder);
+
   const onSort = (field) => {
     // Si se hace clic en el mismo campo, cambiar el orden
     // De lo contrario, ordenar en orden ascendente
@@ -117,38 +116,6 @@ console.log(sortOrder);
               placeholder="Localidad..."
             />
           </div>
-
-          {/* <div>
-            <input
-              name="profesion_oficio_ocupacion"
-              type="text"
-              value={query.profesion_oficio_ocupacion}
-              onChange={handleChange}
-              className="w-full py-2 px-4 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-              placeholder="Profesión / oficio / ocupación..."
-            />
-          </div> */}
-
-          {/* <div className="flex flex-col gap-1 text-wrap items-center">
-            <label
-              htmlFor="activo"
-              className="text-xs text-gray-800 mr-2"
-            >
-              Está activo?
-            </label>
-            <select
-              name="activo"
-              type="text"
-              value={query.activo}
-              onChange={handleChange}
-              className="p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-              id="activo"
-            >
-              <option value={true}>si</option>
-              <option value={false}>no</option>
-              <option value="">todos</option>
-            </select>
-          </div> */}
 
           <button
             onClick={handleBorrarFiltros}

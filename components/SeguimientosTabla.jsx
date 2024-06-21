@@ -9,8 +9,6 @@ import { useSession } from 'next-auth/react';
 
 function SeguimientosTabla({ id }) {
   const { data: session } = useSession();
-  const userRole = session?.user?.role;
-  console.log(userRole);
 
   const [seguimientosData, setSeguimientosData] = useState([]);
 

@@ -16,7 +16,7 @@ const pacienteDetalle = async (id) => {
 
 async function PacienteDetalles({ params }) {
   const session = await getServerSession(authOptions);
-  // console.log(session.user.role);
+  
   const { id } = params;
   const v = await pacienteDetalle(id);
 
@@ -131,7 +131,7 @@ async function PacienteDetalles({ params }) {
             Editar paciente
           </Link> : null
         }
-        
+
       </div>
 
       <SeguimientosTabla id={id} />

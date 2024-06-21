@@ -109,23 +109,9 @@ function CrearGrupo({ paciente_id }) {
     });
   };
 
-
-
   const handleVoluntarioChange = (setVoluntario) => (e) => {
     const selectedVoluntario = voluntariosData.find(v => v.voluntario_id === Number(e.target.value));
     setVoluntario(selectedVoluntario);
-  };
-
-  const handleVoluntario1Change = (e) => {
-    setVoluntario1(Number(e.target.value));
-  };
-
-  const handleVoluntario2Change = (e) => {
-    setVoluntario2(Number(e.target.value));
-  };
-
-  const handleVoluntario3Change = (e) => {
-    setVoluntario3(Number(e.target.value));
   };
 
   const getFilteredVoluntarios = (currentVoluntarioId) => {
