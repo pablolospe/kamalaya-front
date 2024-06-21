@@ -3,15 +3,15 @@ import { NextResponse } from 'next/server';
 
 export default withAuth(
   function middleware(req) {
-    const protectedRoutes = ['/usuarios', 'grupos', '/ingreso/voluntario'];
-    const token = req?.nextauth?.token?.token
-    // console.log(token);
+    const protectedRoutes = ['/usuarios', '/grupos', '/ingreso/voluntario'];
+    const role = req?.nextauth?.token?.role
+    // console.log(req.nextauth.token?.role);
 
     const allowedRoles = ['User', 'Admin'];
     
     if (
       protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route)) &&
-      !allowedRoles.includes(req.nextauth.token?.role)
+      role !== 'Admin'
       ) {
         return NextResponse.rewrite(new URL("/auth/login?message=Not authorized!", req.url));
       }

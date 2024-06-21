@@ -1,16 +1,15 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '../../../pages/api/auth/[...nextauth]';
 import Usuarios from './Usuarios.jsx'
-import { redirect } from 'next/navigation';
+// import { authOptions } from '../../../pages/api/auth/[...nextauth]';
+// import { getServerSession } from 'next-auth';
+// import { redirect } from 'next/navigation';
 
 const UsusariosPage = async () => {
+  // const session = await getServerSession(authOptions)
 
-  const session = await getServerSession(authOptions)
-// console.log(session);
-  if(!session || session.user.role !== 'Admin') {
+  // if(!session || session.user.role !== 'Admin') {
     
-    redirect("auth/login")
-  }
+  //   redirect("auth/login")
+  // }
   
   return (
     <div className="flex flex-col gap-2">
