@@ -68,13 +68,15 @@ function EditarSeguimiento() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const updatedVoluntarioId = [voluntario1, voluntario2, voluntario3].filter(voluntario => voluntario !== '');
-
+  
+    const updatedVoluntarioId = [voluntario1, voluntario2, voluntario3]
+      .filter(voluntario => voluntario !== '' && voluntario !== 0);
+  
     const seguimientoToSubmit = {
       ...seguimiento,
       voluntario_id: updatedVoluntarioId,
     };
+  
     Swal.fire({
       title: '¿Estás seguro?',
       text: '¿Quieres modificar este seguimiento?',
@@ -94,15 +96,15 @@ function EditarSeguimiento() {
             },
             body: JSON.stringify(seguimientoToSubmit),
           });
-
+  
           if (response.ok) {
             Swal.fire({
               text: 'Seguimiento modificado correctamente',
               icon: 'success',
               confirmButtonColor: 'gray',
               color: 'black',
-            }).then(router.push(`/pacientes/${id}`));
-
+            }).then(() => router.push(`/pacientes/${id}`));
+  
             console.log('Datos enviados exitosamente');
           } else {
             console.error('Error al enviar los datos');
