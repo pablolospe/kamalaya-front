@@ -5,8 +5,7 @@ export default withAuth(
   function middleware(req) {
     const protectedRoutes = ['/usuarios', 'grupos', '/ingreso/voluntario'];
     const token = req?.nextauth?.token?.token
-    console.log(token);
-    
+    // console.log(token);
 
     const allowedRoles = ['User', 'Admin'];
     
