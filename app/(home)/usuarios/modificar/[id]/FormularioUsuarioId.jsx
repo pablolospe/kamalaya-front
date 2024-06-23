@@ -5,11 +5,13 @@ import { useRouter, useParams } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { URL } from '@/config';
 import { fetchUsuarioId } from '@/utils/fetchUsuarioId'
-import Link from 'next/link';
 import BotonBack from '@/components/BotonBack';
 import BotonBorrarUsuario from './BotonBorrarUsuario.jsx'
+import { useSession } from 'next-auth/react';
 
 const FormularioUsuarioId = () => {
+  const { data: session } = useSession();
+  const token = session?.user?.token;
   const router = useRouter();
   const { id } = useParams();
   const [formData, setFormData] = useState({
@@ -22,7 +24,7 @@ const FormularioUsuarioId = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const user = await fetchUsuarioId(id);
+      const user = await fetchUsuarioId(id, token);
       setFormData({
         nombre: user.nombre || "",
         apellido: user.apellido || "",
@@ -81,6 +83,7 @@ const FormularioUsuarioId = () => {
       </h2>
 
       <BotonBack />
+      
       <form
         onSubmit={handleSubmit}
       >
@@ -93,6 +96,7 @@ const FormularioUsuarioId = () => {
                 <label>
                   Nombre/s
                   <input
+                    required
                     type="text"
                     name="nombre"
                     value={formData.nombre}
@@ -106,6 +110,7 @@ const FormularioUsuarioId = () => {
                 <label>
                   Apellido/s
                   <input
+                    required
                     type="text"
                     name="apellido"
                     value={formData.apellido}
@@ -152,6 +157,7 @@ const FormularioUsuarioId = () => {
               <label>
                 Password
                 <input
+                  required
                   type="password"
                   name="password"
                   value={formData.password}
