@@ -11,6 +11,7 @@ import BotonBack from '@/components/BotonBack.jsx'
 
 const CambiarPassword = () => {
   const { data: session } = useSession();
+  const token = session?.user?.token;
   const router = useRouter();
   // const { id } = useParams()
   const [formData, setFormData] = useState({
@@ -39,6 +40,7 @@ const CambiarPassword = () => {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
         },
         body: JSON.stringify(formData),
       });
