@@ -191,7 +191,7 @@ function EditarGrupo() {
                   value={voluntario1.voluntario_id || ''}
                   className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
                 >
-                  <option value="">Elige un voluntario</option>
+                  {/* <option value="">Elige un voluntario</option> */}
                   {getFilteredVoluntarios(voluntario1.voluntario_id).map((p) => (
                     <option value={p.voluntario_id} key={p.voluntario_id}>
                       {capitalizeFirstLetterOfEachWord(`${p.nombre} ${p.apellido}`)}
