@@ -12,11 +12,6 @@ export default function Home() {
           <LuUsers size={40} />
         </Link>
 
-        <Link href="/ingreso/voluntario" className="flex flex-row items-center w-40 py-2 px-4 bg-gray-200 rounded-md hover:bg-gray-300 shadow-2xl">
-          <span>Ingresar un nuevo voluntario</span>
-          <LuUserPlus size={45} />
-        </Link>
-
         <Link href="/pacientes" className="flex flex-row items-center w-40 py-2 px-4 bg-gray-200 rounded-md hover:bg-gray-300 shadow-2xl">
           <span>Ver todos los pacientes</span>
           <LuUser size={40} />
