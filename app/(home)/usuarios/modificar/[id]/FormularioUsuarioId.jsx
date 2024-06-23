@@ -39,13 +39,14 @@ const FormularioUsuarioId = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataJSON = JSON.stringify(formData);
-    console.log(formDataJSON);
+    // console.log(formDataJSON);
 
     try {
       const response = await fetch(`${URL}/users/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
         },
         body: formDataJSON,
       });
@@ -83,7 +84,7 @@ const FormularioUsuarioId = () => {
       </h2>
 
       <BotonBack />
-      
+
       <form
         onSubmit={handleSubmit}
       >
