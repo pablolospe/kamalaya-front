@@ -5,8 +5,11 @@ import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { URL } from '@/config';
 import BotonBack from '@/components/BotonBack';
+import { useSession } from 'next-auth/react';
 
 const FormularioUsuario = () => {
+  const { data: session } = useSession();
+  const token = session?.user?.token;
   const router = useRouter();
   //   const [usuariosData, setUsuariosData] = useState();
   const [formData, setFormData] = useState({
@@ -35,6 +38,7 @@ const FormularioUsuario = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          // 'Authorization': 'Bearer ' + token,
         },
         body: JSON.stringify(formData),
       });

@@ -30,16 +30,16 @@ const FormularioUsuarioId = () => {
         apellido: user.apellido || "",
         email: user.email || "",
         role: user.role || "",
-        password: "", // No deberías obtener el password del usuario
+        password: "",
       });
     }
     fetchData();
   }, [id]);
 
+  console.log(formData.role);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataJSON = JSON.stringify(formData);
-    // console.log(formDataJSON);
 
     try {
       const response = await fetch(`${URL}/users/${id}`, {
