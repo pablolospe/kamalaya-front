@@ -1,5 +1,33 @@
 import { URL } from '@/config';
 
+export const pacientes = async (query, token) => {
+  const queryString = new URLSearchParams();
+  
+  for (const key in query) {
+    if (Array.isArray(query[key])) {
+      query[key].forEach((value) => {
+        queryString.append(`${key}[]`, value);
+      });
+    } else {
+      if (query[key] !== '') {
+        queryString.append(key, query[key]);
+      }
+    }
+  }
+  
+  const url = `${URL}/paciente${queryString ? `?${queryString}` : ''}`;
+
+  const response = await fetch(url, {
+    cache: 'no-store',
+    headers: {
+      authorization: `bearer ${token}`
+    }
+  });
+  return response.json();
+};
+
+
+
 // export const pacientes = async (query) => {
 //   const queryString = new URLSearchParams();
 
@@ -29,31 +57,3 @@ import { URL } from '@/config';
 //     return null;
 //   }
 // };
-
-
-export const pacientes = async (query, token) => {
-  const queryString = new URLSearchParams();
-
-  for (const key in query) {
-    if (Array.isArray(query[key])) {
-      query[key].forEach((value) => {
-        queryString.append(`${key}[]`, value);
-      });
-    } else {
-      if (query[key] !== '') {
-        queryString.append(key, query[key]);
-      }
-    }
-  }
-
-  const url = `${URL}/paciente${queryString ? `?${queryString}` : ''}`;
-
-  const response = await fetch(url, {
-    cache: 'no-store',
-    headers: {
-      authorization: `bearer ${token}`
-    }
-  });
-  return response.json();
-};
-

@@ -1,7 +1,6 @@
 import { URL } from '@/config';
 
 export const fetchSeguimientoId = async (id) => {
-// console.log(id);
   const url = `${URL}/seguimiento/${id}`
 
   try {

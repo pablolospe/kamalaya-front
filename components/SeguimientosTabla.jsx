@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react';
 
 function SeguimientosTabla({ id }) {
   const { data: session } = useSession();
+  const token = session?.user?.token;
 
   const [seguimientosData, setSeguimientosData] = useState([]);
 
@@ -18,12 +19,9 @@ function SeguimientosTabla({ id }) {
   });
 
   useEffect(() => {
-    async function fetchData() {
-      // if (session) {
-      const seguimientosData = await seguimientos(id, query);
-
+    async function fetchData() {      
+      const seguimientosData = await seguimientos(id, query, token);
       setSeguimientosData(seguimientosData);
-      // }
     }
     fetchData();
   }, [query]);

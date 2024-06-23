@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuUser } from 'react-icons/lu';
@@ -49,7 +50,6 @@ function PacientesPage() {
       [name]: value,
     }));
   }
-
 
   useEffect(() => {
     async function fetchData() {

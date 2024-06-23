@@ -19,11 +19,10 @@ export const usuarios = async (query, token) => {
 
   try {
     const response = await fetch(url, {
-      method: 'GET', // opcional, GET es el método por defecto
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json', // Ajusta esto como necesites
-        'Authorization': 'Bearer ' + token, // Asumiendo que el rol es un token
-        // Añade aquí cualquier otro header que necesites
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
       },
       cache: 'no-store' });
     if (!response.ok) {
