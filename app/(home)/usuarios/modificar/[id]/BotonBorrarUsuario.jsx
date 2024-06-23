@@ -3,9 +3,12 @@
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import { URL } from '@/config';
+import { useSession } from 'next-auth/react';
 
 function BotonBorrarUsuario({ id, nombre, apellido }) {
     const router = useRouter();
+    const { data: session } = useSession();
+    const token = session?.user?.token;
 
     const handleDeleteConfirmation = async (e) => {
         e.preventDefault();
@@ -36,6 +39,7 @@ function BotonBorrarUsuario({ id, nombre, apellido }) {
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json',
+                                    'Authorization': 'Bearer ' + token,
                                 },
                             });
 
