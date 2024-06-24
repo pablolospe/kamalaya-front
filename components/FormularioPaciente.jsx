@@ -6,8 +6,13 @@ import Swal from 'sweetalert2';
 import { URL } from '@/config';
 import GoogleMapsView from './GoogleMapsView';
 import { voluntarios } from '@/utils/fetchVoluntarios';
+import { useSession } from 'next-auth/react';
+import { capitalizeFirstLetterOfEachWord } from '@/utils/formats';
 
 const FormularioPaciente = () => {
+  const { data: session } = useSession();
+  const token = session?.user?.token;
+  const query = ''
   const router = useRouter();
   const miElementoRef = useRef(null);
   const [error, setError] = useState("")
@@ -17,21 +22,19 @@ const FormularioPaciente = () => {
   fechaAlta: "",
   fechaBaja: "",
   cuidadorPrincipal: "",
-  telefonoCuidadorPrincipal: "987654321",
-  insumosPrestados: "Pulmotor",
+  telefonoCuidadorPrincipal: "",
+  insumosPrestados: "",
         
-  nombre: "Mirta",
-  apellido: "Lagrande",
+  nombre: "",
+  apellido: "",
   genero: "",
   fechaDeNacimiento: "1920-06-21",
-  dni: "87654321",
+  dni: "",
   email: "",
-  telefono: "98765432",
-  telefono2: "987654321",
+  telefono: "",
+  telefono2: "",
   lat:"",
   lng:"",
-  // lat:"-34.4972274",
-  // lng:"-58.496132",
   calle:"Paraná",
   numero:"1234",
   localidad:"Martinez",
@@ -39,7 +42,7 @@ const FormularioPaciente = () => {
   pais:"Argentina",
   codigoPostal: "1640",
       
-  obraSocial: "IOMA",
+  obraSocial: "",
   ocupacionProfesionHobbie: "",
   situacionEconomica: "",
   situacionHabitacional: "",
@@ -50,7 +53,7 @@ const FormularioPaciente = () => {
   fechaDeDiagnostico: "",
   enfermedadActual: "",
   ECOGbasal: "",
-  antecedentesEnfermedadesPrevias: "un toco",
+  antecedentesEnfermedadesPrevias: "",
   medicacionActual: "",
   equipoSeguimiento: "",
         
@@ -72,12 +75,11 @@ const FormularioPaciente = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const voluntariosData = await voluntarios();
+      const voluntariosData = await voluntarios(query, token);
       setVoluntariosData(voluntariosData);
     }
     fetchData();
   }, [setVoluntariosData])
-  // console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -207,7 +209,10 @@ const FormularioPaciente = () => {
           >
             <option value="">Elige un voluntario</option>
             {voluntariosData?.map(v=>
-              <option key={v.voluntario_id} value={v.voluntario_id}>{v.nombre} {v.apellido}</option>
+              <option key={v?.voluntario_id} value={v?.voluntario_id}>
+                {/* {v.nombre} {v.apellido} */}
+                {capitalizeFirstLetterOfEachWord(`${v?.nombre} ${v?.apellido}`)}
+                </option>
             )}
           </select>
         </label>

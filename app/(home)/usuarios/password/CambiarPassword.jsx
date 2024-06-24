@@ -33,8 +33,6 @@ const CambiarPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // console.log(formData);
-
     try {
       const response = await fetch(`${URL}/users`, {
         method: 'PATCH',
