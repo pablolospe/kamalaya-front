@@ -47,6 +47,10 @@ const linksUser = [
     label: 'ingreso paciente',
     route: '/ingreso/paciente',
   },
+  {
+    label: 'grupos',
+    route: '/grupos',
+  },
 ];
 
 function Sidebar() {
