@@ -36,6 +36,7 @@ function PacientesPage() {
   };
 
   function handleBorrarFiltros() {
+    setSortField(null)
     setQuery({
       nombre: '',
       apellido: '',

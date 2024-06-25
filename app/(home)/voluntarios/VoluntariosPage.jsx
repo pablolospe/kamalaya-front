@@ -41,6 +41,7 @@ function VoluntariosPage() {
   };
 
   function handleBorrarFiltros() {
+    setSortField(null)
     setQuery({
       nombre: '',
       apellido: '',
@@ -107,7 +108,7 @@ function VoluntariosPage() {
         <GoogleMapsView marker={voluntariosData} />
       </details>
 
-      {/* //////////////// FILTROS //////////////// */}
+      {/* //////////////// FILTROS1 //////////////// */}
 
       <details open className="bg-gray-100 gap-4 p-4 rounded-lg">
         <summary className="hover:font-semibold cursor-pointer">
@@ -305,10 +306,10 @@ function VoluntariosPage() {
         <thead>
           <tr className="bg-gray-100 row-auto">
             <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('nombre')}>
-              Nombre {sortField === 'nombre' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
+              Nombre {!sortField && 'A-Z'}{sortField === 'nombre' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
             </th>
             <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('apellido')}>
-              Apellido {sortField === 'apellido' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
+              Apellido {!sortField && 'A-Z'}{sortField === 'apellido' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
             </th>
             <th className="hidden md:table-cell w-28 border p-2">Teléfono</th>
             <th className="hidden md:table-cell w-4 text-xs border p-2">Tiene auto</th>
