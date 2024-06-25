@@ -80,44 +80,45 @@ const CambiarPassword = () => {
   };
 
   return (
-    <div className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
+    <div className="mx-4 mt-20" >
+      <div className="flex flex-col items-center md:mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
 
-      <BotonBack />
+        <BotonBack />
 
-      <form
-        onSubmit={handleSubmit}
-      >
-        <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
-          Modificar mi contraseña
-        </h2>
+        <form
+          onSubmit={handleSubmit}
+        >
+          <h2 className="m-2 text-lg font-bold text-md p-2 rounded-lg border">
+            Modificar mi contraseña
+          </h2>
 
 
-        <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg">
-          <div className="flex flex-col gap-6 justify-evenly">
+          <div className="flex flex-col md:max-w-3xl p-4 gap-2 shadow-lg rounded-lg">
+            <div className="flex flex-col gap-6 justify-evenly">
 
-            <label>
-              Contraseña actual
-              <input
-                type="password"
-                name="oldPassword"
-                value={formData?.oldPassword}
-                onChange={handleChange}
-                className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-              />
-            </label>
+              <label>
+                Contraseña actual
+                <input
+                  type="password"
+                  name="oldPassword"
+                  value={formData?.oldPassword}
+                  onChange={handleChange}
+                  className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+                />
+              </label>
 
-            <label>
-              Nueva contraseña
-              <input
-                type="password"
-                name="newPassword"
-                value={formData?.newPassword}
-                onChange={handleChange}
-                className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-              />
-            </label>
+              <label>
+                Nueva contraseña
+                <input
+                  type="password"
+                  name="newPassword"
+                  value={formData?.newPassword}
+                  onChange={handleChange}
+                  className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+                />
+              </label>
 
-            {/* <label>
+              {/* <label>
             Repetir nueva contraseña
             <input
               type="password"
@@ -127,16 +128,17 @@ const CambiarPassword = () => {
               className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
             />
           </label> */}
+            </div>
           </div>
-        </div>
 
-        <button
-          type="submit"
-          className="w-40 mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        >
-          Enviar formulario
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="w-40 mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          >
+            Enviar formulario
+          </button>
+        </form>
+      </ div>
     </ div>
   );
 };

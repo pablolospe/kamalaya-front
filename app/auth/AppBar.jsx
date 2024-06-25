@@ -13,7 +13,7 @@ function AppBar() {
       <div className="flex flex-row align-middle content-center items-center gap-2 mt-1 mr-6 bg-gray-100 hover:bg-gray-300 px-2 py-1 rounded">
 
         <Link
-          href={`/usuarios/password`}       
+          href={`/password`}       
         >
 
           <p >{session?.user.nombre} </p>
