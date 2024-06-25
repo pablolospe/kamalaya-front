@@ -8,7 +8,7 @@ function LoginPage() {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         // Usa el valor actual de los estados email y pass en la llamada a signIn
         const result = await signIn("credentials", {

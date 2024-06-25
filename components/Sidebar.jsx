@@ -51,11 +51,8 @@ const linksUser = [
 
 function Sidebar() {
   const { data: session, status } = useSession();
-  const pathname = usePathname();
-  // console.log(pathname);
-
-  // console.log({ session, status });
   const state = session?.user?.role
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
