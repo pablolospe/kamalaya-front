@@ -84,14 +84,14 @@ function VoluntariosPage() {
       const combinedData = voluntarioData?.concat(pacienteData);
 
       let sortedData = combinedData;
-        if (sortField !== null) {
-          sortedData = sortedData.sort((a, b) =>
-            sortOrder === 'asc'
-              ? a[sortField].localeCompare(b[sortField])
-              : b[sortField].localeCompare(a[sortField])
-          );
-        }
-        setVoluntariosData(sortedData);
+      if (sortField !== null) {
+        sortedData = sortedData.sort((a, b) =>
+          sortOrder === 'asc'
+            ? a[sortField].localeCompare(b[sortField])
+            : b[sortField].localeCompare(a[sortField])
+        );
+      }
+      setVoluntariosData(sortedData);
       // (combinedData);
     }
     fetchData();
@@ -304,7 +304,7 @@ function VoluntariosPage() {
       <table className='text-sm'>
         <thead>
           <tr className="bg-gray-100 row-auto">
-          <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('nombre')}>
+            <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('nombre')}>
               Nombre {sortField === 'nombre' && (sortOrder === 'desc' ? '⬆️' : '⬇️')}
             </th>
             <th className="border p-2 cursor-pointer hover:bg-gray-200" onClick={() => onSort('apellido')}>
@@ -331,36 +331,54 @@ function VoluntariosPage() {
                   : 'text-center bg-green-50 hover:bg-green-100'
               }
             >
-              <td>
-                <Link
-                  href={
-                    !v.paciente_id
-                      ? `/voluntarios/${v.voluntario_id}`
-                      : `/pacientes/${v.paciente_id}`
-                  }
-                >
-                  <div className="flex flex-row items-center ml-3 my-1 text-left">
-                    <div className="bg-gray-300 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
-                      <LuUser size={20} />
+              {session?.user?.role === 'Admin' ?
+                <td>
+                  <Link
+                    href={
+                      !v.paciente_id
+                        ? `/voluntarios/${v.voluntario_id}`
+                        : `/pacientes/${v.paciente_id}`
+                    }
+                  >
+                    <div className="flex flex-row items-center ml-3 my-1 text-left">
+                      <div className="bg-gray-300 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
+                        <LuUser size={20} />
+                      </div>
+                      {capitalizeFirstLetterOfEachWord(v.nombre)}
                     </div>
-                    {capitalizeFirstLetterOfEachWord(v.nombre)} 
+                  </Link>
+                </td>
+                :
+                <div className="flex flex-row items-center ml-3 my-1 text-left">
+                  <div className="bg-gray-300 cursor-pointer p-3 mx-2 gap-3 rounded-lg flex flex-row">
+                    <LuUser size={20} />
                   </div>
-                </Link>
-              </td>
-              <td>
-                <Link
-                  href={
-                    !v.paciente_id
-                      ? `/voluntarios/${v.voluntario_id}`
-                      : `/pacientes/${v.paciente_id}`
-                  }
-                >
+                  {capitalizeFirstLetterOfEachWord(v.nombre)}
+                </div>
+
+              }
+
+              {session?.user?.role === 'Admin' ?
+                <td>
+                  <Link
+                    href={
+                      !v.paciente_id
+                        ? `/voluntarios/${v.voluntario_id}`
+                        : `/pacientes/${v.paciente_id}`
+                    }
+                  >
+                    <div className="flex flex-row items-center ml-3 my-1 text-left">
+                      {capitalizeFirstLetterOfEachWord(v.apellido)}
+                    </div>
+                  </Link>
+                </td>
+                :
+                <td>
                   <div className="flex flex-row items-center ml-3 my-1 text-left">
-                    {capitalizeFirstLetterOfEachWord(v.apellido)} (
-                    {v.paciente_id ? 'paciente' : 'voluntario'})
+                    {capitalizeFirstLetterOfEachWord(v.apellido)}
                   </div>
-                </Link>
-              </td>
+                </td>
+              }
               <td className="hidden md:table-cell">
                 <div>
                   {v.telefono2 ? (
@@ -433,11 +451,11 @@ function VoluntariosPage() {
                     <span key={d.disponibilidad_id}>
                       {DiaSemanaEnum[d.diaSemana]} &nbsp;
                       {d.horaInicio}/{d.horaFin}
-                      <br /> 
+                      <br />
                       {d.acompTelefonico && '•Telefónico'}&nbsp;
                       {d.acompPresencial && '•Presencial'}&nbsp;
                       {d.admisiones && '•Admisiones'}
-                      <br /> 
+                      <br />
                     </span>
                   ))}
                 </div>
