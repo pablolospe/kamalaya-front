@@ -114,7 +114,7 @@ function VoluntariosPage() {
         <summary className="hover:font-semibold cursor-pointer">
           FILTROS
         </summary>
-        <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-4 p-4 rounded-lg ">
+        <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-2 p-2 rounded-lg ">
           <div>
             <input
               name="nombre"
@@ -147,6 +147,33 @@ function VoluntariosPage() {
             />
           </div>
 
+
+          <button
+            onClick={handleBorrarFiltros}
+            className="h-11 px-3 text-xs bg-gray-500 text-white rounded-md hover:bg-gray-600"
+          >
+            Borrar <br /> filtros
+          </button>
+
+          <button
+            onClick={() =>
+              setShowPacientes((prevShowPacientes) => !prevShowPacientes)
+            }
+            className="h-11 px-3 text-xs bg-gray-500 text-white rounded-md hover:bg-gray-600"
+          >
+            {!showPacientes ? 'Ver pacientes' : 'Ocultar pacientes'}
+          </button>
+        </div>
+      </details>
+
+      {/* //////////////// MAS FILTROS //////////////// */}
+
+      <details className="bg-gray-100 gap-4 p-4 rounded-lg">
+        <summary className="hover:font-semibold cursor-pointer">
+          MÁS FILTROS
+        </summary>
+        <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-end bg-gray-100 gap-2 p-2 rounded-lg ">
+
           <div>
             <input
               name="profesion_oficio_ocupacion"
@@ -169,60 +196,6 @@ function VoluntariosPage() {
             />
           </div>
 
-          <div className="bg-white rounded-md shadow-sm p-2 border border-gray-300">
-            <label className="block mb-1 text-gray-400">Disponibilidad</label>
-            <div className="flex flex-wrap gap-x-0.5">
-              <input
-                type="checkbox"
-                value="lunes"
-                checked={query.diaSemana.includes('lunes')}
-                onChange={handleDiaSemanaChange}
-              />
-              <label className="mr-2">Lun</label>
-              <input
-                type="checkbox"
-                value="martes"
-                checked={query.diaSemana.includes('martes')}
-                onChange={handleDiaSemanaChange}
-              />
-              <label className="mr-2">Mar</label>
-              <input
-                type="checkbox"
-                value="miercoles"
-                checked={query.diaSemana.includes('miercoles')}
-                onChange={handleDiaSemanaChange}
-              />
-              <label className="mr-2">Mié</label>
-              <input
-                type="checkbox"
-                value="jueves"
-                checked={query.diaSemana.includes('jueves')}
-                onChange={handleDiaSemanaChange}
-              />
-              <label className="mr-2">Jue</label>
-              <input
-                type="checkbox"
-                value="viernes"
-                checked={query.diaSemana.includes('viernes')}
-                onChange={handleDiaSemanaChange}
-              />
-              <label className="mr-2">Vie</label>
-              <input
-                type="checkbox"
-                value="sabado"
-                checked={query.diaSemana.includes('sabado')}
-                onChange={handleDiaSemanaChange}
-              />
-              <label className="mr-2">Sáb</label>
-              <input
-                type="checkbox"
-                value="domingo"
-                checked={query.diaSemana.includes('domingo')}
-                onChange={handleDiaSemanaChange}
-              />
-              <label className="mr-2">Dom</label>
-            </div>
-          </div>
 
           <div className="flex flex-col gap-1 items-center">
             <label htmlFor="tieneAuto" className="text-xs text-gray-800 mr-2">
@@ -283,21 +256,75 @@ function VoluntariosPage() {
             </select>
           </div>
 
+          <div className="mt-2 flex flex-col text-wrap items-center">
+          <div className="bg-white rounded-md shadow-sm p-2 border border-gray-300">
+            <label               
+            className="text-xs text-gray-800"
+            >Disponibilidad</label>
+
+            <div className="flex flex-wrap gap-x-0.5">
+              <input
+                type="checkbox"
+                value="lunes"
+                checked={query.diaSemana.includes('lunes')}
+                onChange={handleDiaSemanaChange}
+              />
+              <label className="mr-2">Lun</label>
+              <input
+                type="checkbox"
+                value="martes"
+                checked={query.diaSemana.includes('martes')}
+                onChange={handleDiaSemanaChange}
+              />
+              <label className="mr-2">Mar</label>
+              <input
+                type="checkbox"
+                value="miercoles"
+                checked={query.diaSemana.includes('miercoles')}
+                onChange={handleDiaSemanaChange}
+              />
+              <label className="mr-2">Mié</label>
+              <input
+                type="checkbox"
+                value="jueves"
+                checked={query.diaSemana.includes('jueves')}
+                onChange={handleDiaSemanaChange}
+              />
+              <label className="mr-2">Jue</label>
+              <input
+                type="checkbox"
+                value="viernes"
+                checked={query.diaSemana.includes('viernes')}
+                onChange={handleDiaSemanaChange}
+              />
+              <label className="mr-2">Vie</label>
+              <input
+                type="checkbox"
+                value="sabado"
+                checked={query.diaSemana.includes('sabado')}
+                onChange={handleDiaSemanaChange}
+              />
+              <label className="mr-2">Sáb</label>
+              <input
+                type="checkbox"
+                value="domingo"
+                checked={query.diaSemana.includes('domingo')}
+                onChange={handleDiaSemanaChange}
+              />
+              <label className="mr-2">Dom</label>
+            </div>
+          </div>
+          </div>
+
+          {/* 
           <button
             onClick={handleBorrarFiltros}
             className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
           >
             Borrar <br /> filtros
-          </button>
+          </button> */}
 
-          <button
-            onClick={() =>
-              setShowPacientes((prevShowPacientes) => !prevShowPacientes)
-            }
-            className="h-14 p-3 text-xs bg-gray-500 text-white rounded-lg hover:bg-gray-600"
-          >
-            {!showPacientes ? 'Ver pacientes' : 'Ocultar pacientes'}
-          </button>
+
         </div>
       </details>
 

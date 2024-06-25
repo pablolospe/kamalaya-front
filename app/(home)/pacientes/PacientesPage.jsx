@@ -84,7 +84,7 @@ function PacientesPage() {
         <summary className="hover:font-semibold cursor-pointer">
           FILTROS
         </summary>
-        <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-4 p-4 rounded-lg ">
+        <div className="flex flex-wrap flex-col md:flex-row md:justify-evenly md:items-center bg-gray-100 gap-2 p-2 rounded-lg ">
           <div>
             <input
               name="nombre"
