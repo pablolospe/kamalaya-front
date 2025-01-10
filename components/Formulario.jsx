@@ -185,7 +185,7 @@ const Formulario = () => {
       <div
         className='md:w-[60%] lg:w-[45%] flex flex-col items-center '
       >
-        <h2 className="my-2 w-full md:w-1/2 text-lg text-center self-center font-semibold bg-purple-100 text-md p-2 rounded-lg border">
+        <h2 className="my-2 w-full text-lg text-center self-center font-semibold bg-purple-100 text-md p-2 rounded-lg border">
           Ingreso de voluntario
         </h2>
         <br></br>
