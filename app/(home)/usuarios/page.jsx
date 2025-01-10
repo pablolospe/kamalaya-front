@@ -13,7 +13,8 @@ const UsusariosPage = async () => {
   
   return (
     <div className="flex flex-col gap-2">
-      <Usuarios />
+      Usuarios 
+      {/* <Usuarios /> */}
     </div>
   );
 }
