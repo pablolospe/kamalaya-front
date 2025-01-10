@@ -5,8 +5,8 @@ import { signIn } from 'next-auth/react';
 
 function LoginPage() {
     // Utiliza useState para manejar el estado del email y la contraseña
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
+    const [email, setEmail] = useState('pablolospennato@gmail.com');
+    const [pass, setPass] = useState('123');
 
     const onSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
@@ -33,7 +33,7 @@ function LoginPage() {
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}  // Corrige el valor de la propiedad value
                         placeholder='pablolospennato@gmail.com'
-                    />
+                        />
                 </label>
                 <label htmlFor="pass">Password:  &nbsp;
                     <input
@@ -41,6 +41,7 @@ function LoginPage() {
                         // Utiliza setPass para actualizar el estado de la contraseña
                         onChange={(e) => setPass(e.target.value)}
                         type='password'
+                        placeholder='123'
                     />
                 </label>
                 <button
