@@ -21,11 +21,16 @@ function LoginPage() {
 
     return (
         <form
-            className='flex justify-center items-center h-screen bg-gradient-to-br from-purple-300 to-green-300'
+            className='flex justify-center items-center h-screen bg-gradient-to-br from-blue-300 to-sky-600'
+            // className='flex justify-center items-center h-screen bg-gradient-to-br from-purple-300 to-green-300'
         >
             <div
                 className='px-7 py-4 shadow bg-white rounded-md flex flex-col gap-2'
-            >
+                >
+                <br />
+                <h1 className='text-blue-700'>SlowLife: </h1>
+                <h2 className='text-red-600'>Aguarde unos instantes para que la app inicie...</h2>
+                <br />
                 <label htmlFor="email">Email:  &nbsp;
                     <input
                         className='w-full p-2 border rounded-md'
